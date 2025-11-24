@@ -37,6 +37,18 @@ class TextStyles {
     fontFamily: 'Outfit',
     color: Colors.white,
   );
+  static TextStyle font15BrownW200 = TextStyle(
+    fontSize: 15.sp,
+    fontWeight: FontWeight.w200,
+    fontFamily: 'Outfit',
+    color: ColorManager.brounColor,
+  );
+  static TextStyle font13BrownW400 = TextStyle(
+    fontSize: 13.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Outfit',
+    color: ColorManager.brounColor,
+  );
 
   /// Styles in my order screen
   static TextStyle font13OrderColorW300 = TextStyle(
