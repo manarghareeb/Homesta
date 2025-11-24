@@ -11,4 +11,5 @@ class ColorManager {
   static const Color thirdColor = Color(0xFFB19470);
   static const Color backGroungColor = Color(0xFFFAF0E6);
   static const Color brounColor = Color(0xFF76453B);
+  static const Color greenColor = Color(0xFF43766C);
 }

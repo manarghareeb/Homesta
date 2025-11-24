@@ -6,6 +6,7 @@ import 'package:homesta/features/authentication/presentation/views/forget_passwo
 import 'package:homesta/features/authentication/presentation/views/login_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/signup_screen.dart';
 import 'package:homesta/features/home/presentation/views/home.dart';
+import 'package:homesta/features/home/presentation/views/product_details_screen.dart';
 
 abstract class AppRouter {
   static final loginScreen = '/loginScreen';
@@ -14,6 +15,7 @@ abstract class AppRouter {
   static final editProfileScreen = '/editProfileScreen';
   static final myOrderScreen = '/myOrderScreen';
   static final helpCenterScreen = '/helpCenterScreen';
+  static final productDetailsScreen = '/productDetailsScreen';
 
   static final route = GoRouter(
     routes: [
@@ -41,6 +43,10 @@ abstract class AppRouter {
       GoRoute(
         path: helpCenterScreen,
         builder: (context, state) => const HelpCenterScreen(),
+      ),
+      GoRoute(
+        path: productDetailsScreen,
+        builder: (context, state) => const ProductDetailsScreen(),
       ),
     ],
   );
