@@ -49,6 +49,13 @@ class TextStyles {
     fontFamily: 'Outfit',
     color: ColorManager.brounColor,
   );
+   static TextStyle font14MainColorW400 = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Outfit',
+    color: ColorManager.mainColor,
+  );
+
 
   /// Styles in my order screen
   static TextStyle font13OrderColorW300 = TextStyle(
