@@ -8,6 +8,11 @@ import 'package:homesta/features/authentication/presentation/views/signup_screen
 import 'package:homesta/features/home/presentation/views/home.dart';
 import 'package:homesta/features/home/presentation/views/product_details_screen.dart';
 
+import '../../features/account/presentation/views/account_screen.dart';
+import '../../features/cart/presentation/views/cart_screen.dart';
+import '../../features/categories/presentation/views/categories_screen.dart';
+import '../../features/search/presentation/views/search_screen.dart';
+
 abstract class AppRouter {
   static final loginScreen = '/loginScreen';
   static final signUpScreen = '/signUpScreen';
@@ -16,10 +21,17 @@ abstract class AppRouter {
   static final myOrderScreen = '/myOrderScreen';
   static final helpCenterScreen = '/helpCenterScreen';
   static final productDetailsScreen = '/productDetailsScreen';
+  static final categoryScreen = '/CategoriesScreen()';
+  static final homeScreen = '/HomeView()';
+  static final searchScreen = '/SearchScreen()';
+  static final cartScreen = '/CartScreen()';
+  static final accountScreen = '/AccountScreen()';
+
 
   static final route = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) => HomeView()),
+      GoRoute(path: '/', builder: (context, state) => CategoriesScreen()),
+     // GoRoute(path: '/', builder: (context, state) => HomeView()),
       GoRoute(
         path: loginScreen,
         builder: (context, state) => const LoginScreen(),
@@ -47,6 +59,22 @@ abstract class AppRouter {
       GoRoute(
         path: productDetailsScreen,
         builder: (context, state) => const ProductDetailsScreen(),
+      ),
+      GoRoute(
+        path: homeScreen,
+        builder: (context, state) => const HomeView(),
+      ),
+      GoRoute(
+        path: searchScreen,
+        builder: (context, state) => const SearchScreen(),
+      ),
+      GoRoute(
+        path: cartScreen,
+        builder: (context, state) => const CartScreen(),
+      ),
+      GoRoute(
+        path: accountScreen,
+        builder: (context, state) => const AccountScreen(),
       ),
     ],
   );
