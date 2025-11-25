@@ -4,6 +4,7 @@ import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 import 'package:homesta/features/account/presentation/widgets/gender_selector.dart';
+import 'package:homesta/features/account/presentation/widgets/photo_profile.dart';
 import 'package:homesta/features/account/presentation/widgets/text_and_text_field.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -14,7 +15,8 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  final TextEditingController nameController = TextEditingController();
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController birthDateController = TextEditingController();
@@ -22,26 +24,29 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: CustomAppBarWidget(text: 'My Profile'),
+      appBar: CustomAppBarWidget(
+        text: 'Edit Profile',
+        textColor: ColorManager.blackColor,
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CircleAvatar(
-                radius: 80.r,
-                backgroundColor: ColorManager.mainColor,
-              ),
-              SizedBox(height: 8.h),
-              Text('Madison Smith', style: TextStyles.font16BlackRegular),
-              Text('ID: 25030024', style: TextStyles.font16BlackRegular),
-              SizedBox(height: 16.h),
+              const PhotoProfile(),
+              SizedBox(height: 24.h),
               TextAndTextField(
-                controller: nameController,
-                hintText: 'Full Name',
+                controller: firstNameController,
+                hintText: 'Fist Name',
                 textInputType: TextInputType.name,
-                text: 'Full Name',
+                text: 'First Name',
+              ),
+              TextAndTextField(
+                controller: lastNameController,
+                hintText: 'Last Name',
+                textInputType: TextInputType.name,
+                text: 'Last Name',
               ),
               TextAndTextField(
                 controller: emailController,
@@ -55,12 +60,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 textInputType: TextInputType.phone,
                 text: 'Mobile Number',
               ),
-              TextAndTextField(
-                controller: birthDateController,
-                hintText: 'Date of birth',
-                textInputType: TextInputType.datetime,
-                text: 'Date of birth',
-              ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -71,8 +70,61 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ),
                 ],
               ),
+              SizedBox(height: 8.h),
               const GenderSelector(),
-              SizedBox(height: 40.h,),
+              SizedBox(height: 16.h),
+              TextAndTextField(
+                controller: emailController,
+                hintText: 'Tax Identification Number',
+                textInputType: TextInputType.emailAddress,
+                text: 'Tax Identification Number',
+              ),
+              TextAndTextField(
+                controller: emailController,
+                hintText: 'Tax Identification Country',
+                textInputType: TextInputType.emailAddress,
+                text: 'Tax Identification Country',
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'ID',
+                    style: TextStyles.font18BlackW500.copyWith(fontSize: 16.sp),
+                    textAlign: TextAlign.start,
+                  ),
+                ],
+              ),
+              SizedBox(height: 8.h),
+              TextFormField(
+                controller: emailController,
+                decoration: InputDecoration(
+                  hintStyle: TextStyles.font16GreyRegular,
+                  hintText: '1559 000 7788 8DER',
+                  filled: true,
+                  fillColor: ColorManager.iconTextFieldColor.withOpacity(0.5),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.r),
+                    borderSide: BorderSide.none
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.r),
+                    borderSide: BorderSide.none
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.r),
+                    borderSide: BorderSide.none
+                  ),
+                ),
+              ),
+              SizedBox(height: 16.h),
+              TextAndTextField(
+                controller: emailController,
+                hintText: 'Ib street orogun ibadan',
+                textInputType: TextInputType.emailAddress,
+                text: 'Residential Address',
+              ),
+              SizedBox(height: 40.h),
             ],
           ),
         ),

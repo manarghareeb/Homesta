@@ -21,13 +21,14 @@ class OptionTile extends StatelessWidget {
       elevation: 0,
       child: ListTile(
         leading: CircleAvatar(
-          backgroundColor: ColorManager.mainColor,
+          backgroundColor: Colors.white,
           child: Icon(icon, color: ColorManager.blackColor),
         ),
         title: Text(
           label,
           style: TextStyles.font16BlackRegular
         ),
+        trailing: Icon(Icons.arrow_forward_ios, size: 16),
         onTap: onTap,
       ),
     );

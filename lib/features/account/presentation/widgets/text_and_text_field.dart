@@ -28,32 +28,35 @@ class TextAndTextField extends StatelessWidget {
           style: TextStyles.font18BlackW500.copyWith(fontSize: 16.sp),
           textAlign: TextAlign.start,
         ),
+        SizedBox(height: 8.h),
         TextFormField(
           controller: controller,
           keyboardType: textInputType,
-          style: TextStyles.font16GreyRegular.copyWith(
-            color: ColorManager.buttonColor,
-          ),
+          style: TextStyles.font16GreyRegular,
           validator: validator,
           decoration: InputDecoration(
             hintText: hintText,
-            filled: true,
-            fillColor: ColorManager.mainColor,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
-              borderSide: BorderSide.none,
+              borderSide: BorderSide(
+                color: ColorManager.iconTextFieldColor,
+              )
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
-              borderSide: BorderSide.none,
+              borderSide: BorderSide(
+                color: ColorManager.iconTextFieldColor,
+              )
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
-              borderSide: BorderSide.none,
-            ),
+              borderSide: BorderSide(
+                color: ColorManager.iconTextFieldColor,
+              )
+              ),
           ),
         ),
-        SizedBox(height: 24.h,),
+        SizedBox(height: 16.h,),
       ],
     );
   }

@@ -12,25 +12,26 @@ class PhotoProfile extends StatelessWidget {
     return Stack(
       children: [
         CircleAvatar(
-          radius: 80.r,
-          backgroundColor: ColorManager.buttonColor,
+          backgroundImage: const AssetImage('assets/images/image 1.png'),
+          radius: 60.r,
+          backgroundColor: ColorManager.brounColor,
         ),
         Positioned(
           bottom: 0,
-          right: 8,
+          right: 5,
           child: GestureDetector(
             onTap: () {},
             child: Container(
-              width: 40.w,
-              height: 40.h,
+              width: 35.w,
+              height: 35.h,
               decoration: BoxDecoration(
-                color: ColorManager.mainColor,
+                color: ColorManager.buttonColor,
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.camera_alt_outlined,
-                color: ColorManager.greyColor,
-                size: 22.sp,
+                color: Colors.white,
+                size: 21.sp,
               ),
             ),
           ),
