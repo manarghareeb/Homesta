@@ -1,10 +1,142 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:homesta/core/theming/colors.dart';
+import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
+import 'package:homesta/features/categories/presentation/widgets/category_item.dart';
+import '../widgets/custom_bottom_nav_bar.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
 
-class CategoriesScreen extends StatelessWidget {
+class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({super.key});
 
   @override
+  State<CategoriesScreen> createState() => _CategoriesScreenState();
+}
+
+class _CategoriesScreenState extends State<CategoriesScreen> {
+  late stt.SpeechToText _speech;
+  bool _isListening = false;
+  final TextEditingController _searchController = TextEditingController();
+
+  final List<Map<String, String>> _allCategories = [
+    {'title': 'Electrical Appliances', 'image': 'assets/images/electrical.png'},
+    {'title': 'Bedrooms', 'image': 'assets/images/bedroom.png'},
+    {'title': 'Living Room', 'image': 'assets/images/livingroom.png'},
+    {'title': 'Kitchen', 'image': 'assets/images/kitchen.png'},
+    {'title': 'Medical Devices', 'image': 'assets/images/medical.png'},
+    {'title': 'Home Tools', 'image': 'assets/images/tools.png'},
+  ];
+
+  List<Map<String, String>> _filteredCategories = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _filteredCategories = _allCategories;
+    _searchController.addListener(_filterCategories);
+    _speech = stt.SpeechToText();
+  }
+
+  void _filterCategories() {
+    final query = _searchController.text.toLowerCase();
+    setState(() {
+      _filteredCategories = _allCategories.where((category) {
+        return category['title']!.toLowerCase().contains(query);
+      }).toList();
+    });
+  }
+
+  void _listen() async {
+    if (!_isListening) {
+      bool available = await _speech.initialize(
+        onStatus: (val) {
+          debugPrint('Speech status: $val');
+          setState(() => _isListening = val == 'listening');
+        },
+        onError: (val) {
+          debugPrint('Speech error: $val');
+          setState(() => _isListening = false);
+        },
+      );
+
+      if (available) {
+        setState(() => _isListening = true);
+        _speech.listen(
+          onResult: (val) {
+            setState(() {
+              _searchController.text = val.recognizedWords;
+              _filterCategories();
+            });
+          },
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Voice recognition not available')),
+        );
+      }
+    } else {
+      setState(() => _isListening = false);
+      _speech.stop();
+    }
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    _speech.stop();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: const CustomAppBarWidget(
+        text: 'Category',
+        backgroundColor: Colors.white,
+        textColor: ColorManager.buttonColor,
+      ),
+      backgroundColor: Colors.white,
+      body: Padding(
+        padding: EdgeInsets.all(16.w),
+        child: Column(
+          children: [
+            // 🔍 شريط البحث مع ميكروفون
+            TextField(
+              controller: _searchController,
+              decoration: InputDecoration(
+                hintText: 'Search ..',
+                prefixIcon: const Icon(Icons.search),
+                suffixIcon: IconButton(
+                  icon: Icon(_isListening ? Icons.mic : Icons.mic_none),
+                  onPressed: _listen,
+                ),
+                filled: true,
+                fillColor: ColorManager.mainColor,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+            ),
+            SizedBox(height: 20.h),
+
+            // 📜 قائمة الفئات المفلترة
+            Expanded(
+              child: ListView.builder(
+                itemCount: _filteredCategories.length,
+                itemBuilder: (context, index) {
+                  final category = _filteredCategories[index];
+                  return CategoryItem(
+                    title: category['title']!,
+                    imagePath: category['image']!,
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: const CustomBottomNavBar(currentIndex: 2),
+    );
   }
 }
