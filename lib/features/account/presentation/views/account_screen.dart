@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/styles.dart';
-import 'package:homesta/features/account/presentation/widgets/icon_text_button.dart';
 import 'package:homesta/features/account/presentation/widgets/logout_and_cancel.dart';
+import 'package:homesta/features/account/presentation/widgets/name_and_edit_profile_section.dart';
 import 'package:homesta/features/account/presentation/widgets/option_tile.dart';
 import 'package:homesta/features/account/presentation/widgets/photo_profile.dart';
 
@@ -20,61 +20,46 @@ class AccountScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         title: Text(
           'My Profile',
-          style: TextStyles.font24ButtonColorW500.copyWith(fontSize: 20),
+          style: TextStyles.font18BlackW500.copyWith(fontSize: 20.sp),
         ),
         centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {
-              GoRouter.of(context).push(AppRouter.editProfileScreen);
+            
             },
-            icon: Icon(Icons.edit),
+            icon: Icon(Icons.settings_outlined, size: 24.w),
           ),
         ],
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const PhotoProfile(),
-              SizedBox(height: 8.h),
-              Text('Madison Smith', style: TextStyles.font16BlackRegular),
-              Text('ID: 25030024', style: TextStyles.font16BlackRegular),
-              SizedBox(height: 16.h),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  IconTextButton(
-                    icon: Icons.person_outlined,
-                    label: 'Profile',
-                    isActive: true,
-                    onTap: () {},
-                  ),
-                  IconTextButton(
-                    icon: Icons.favorite_border,
-                    label: 'Wish list',
-                    onTap: () {},
-                  ),
-                  IconTextButton(
-                    icon: Icons.list_alt,
-                    label: 'My order',
-                    onTap: () {
-                      GoRouter.of(context).push(AppRouter.myOrderScreen);
-                    },
-                  ),
+                  const PhotoProfile(),
+                  SizedBox(width: 24.w),
+                  const NameAndEditProfileSection(),
                 ],
               ),
               SizedBox(height: 24.h),
               OptionTile(
-                icon: Icons.key,
-                label: 'Privacy Policy',
+                icon: Icons.list_alt,
+                label: 'My order',
                 onTap: () {},
               ),
               OptionTile(
-                icon: Icons.payment,
-                label: 'Payment Methods',
+                icon: Icons.favorite_border,
+                label: 'collections',
+                onTap: () {},
+              ),
+              OptionTile(
+                icon: Icons.language_outlined,
+                label: 'Language',
                 onTap: () {},
               ),
               OptionTile(
@@ -83,17 +68,45 @@ class AccountScreen extends StatelessWidget {
                 onTap: () {},
               ),
               OptionTile(
-                icon: Icons.settings_outlined,
-                label: 'Settings',
+                icon: Icons.lock_outline,
+                label: 'Password',
+                onTap: () {},
+              ),
+              OptionTile(
+                icon: Icons.receipt_long_outlined,
+                label: 'Taxes',
+                onTap: () {},
+              ),
+              OptionTile(
+                icon: Icons.account_balance_wallet_outlined,
+                label: 'Fund wallet',
+                onTap: () {},
+              ),
+              OptionTile(
+                icon: Icons.swap_horiz,
+                label: 'Transactions',
+                onTap: () {},
+              ),
+              OptionTile(
+                icon: Icons.payment,
+                label: 'Payment',
+                onTap: () {},
+              ),
+              OptionTile(
+                icon: Icons.accessibility_new_outlined,
+                label: 'Accessibility',
                 onTap: () {},
               ),
               OptionTile(
                 icon: Icons.help_outline,
-                label: 'Help',
+                label: 'Help Center',
                 onTap: () {
                   GoRouter.of(context).push(AppRouter.helpCenterScreen);
                 },
               ),
+              SizedBox(height: 40.h),
+              const Divider(),
+              SizedBox(height: 8.h),
               OptionTile(
                 icon: Icons.logout,
                 label: 'Logout',
