@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     buttonText: 'Log in',
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        GoRouter.of(context).push(AppRouter.signUpScreen);
+                        GoRouter.of(context).push(AppRouter.homeScreen);
                       }
                     },
                   ),

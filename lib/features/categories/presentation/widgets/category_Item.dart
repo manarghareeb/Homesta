@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:homesta/core/theming/styles.dart';
-import 'package:homesta/features/home/presentation/views/product_details_screen.dart';
 
 class CategoryItem extends StatefulWidget {
   final String title;
   final String imagePath;
 
-  const CategoryItem({
-    super.key,
-    required this.title,
-    required this.imagePath,
-  });
+  const CategoryItem({super.key, required this.title, required this.imagePath});
 
   @override
   State<CategoryItem> createState() => _CategoryItemState();
@@ -28,10 +24,8 @@ class _CategoryItemState extends State<CategoryItem> {
       },
       onTapUp: (_) {
         setState(() => _isPressed = false);
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => const ProductDetailsScreen()),
-        );
+        //GoRouter.of(context).push(AppRouter.categorySectionScreen);
+        GoRouter.of(context).push('/categorySection/${widget.title}');
       },
       onTapCancel: () {
         setState(() => _isPressed = false);
@@ -56,26 +50,20 @@ class _CategoryItemState extends State<CategoryItem> {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              // الصورة الخلفية
               ClipRRect(
                 borderRadius: BorderRadius.circular(12.r),
-                child: Image.asset(
-                  widget.imagePath,
-                  fit: BoxFit.cover,
-                ),
+                child: Image.asset(widget.imagePath, fit: BoxFit.cover),
               ),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12.r),
-                  color: Colors.black.withOpacity(0.4), // transparency
+                  color: Colors.black.withOpacity(0.4), 
                 ),
               ),
-              // النص في الوسط
               Center(
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-                  decoration: BoxDecoration(
-                  ),
+                  decoration: BoxDecoration(),
                   child: Text(
                     widget.title,
                     style: TextStyles.font16WhiteW500,

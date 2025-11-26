@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
-import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
+import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/features/categories/presentation/widgets/category_item.dart';
-import '../widgets/custom_bottom_nav_bar.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class CategoriesScreen extends StatefulWidget {
@@ -90,24 +89,33 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBarWidget(
-        text: 'Category',
+      appBar: AppBar(
+        title: Text('Categories', style: TextStyles.font24ButtonColorW500),
+        centerTitle: true,
         backgroundColor: Colors.white,
-        textColor: ColorManager.buttonColor,
+        surfaceTintColor: Colors.white,
       ),
       backgroundColor: Colors.white,
       body: Padding(
         padding: EdgeInsets.all(16.w),
         child: Column(
           children: [
-            // 🔍 شريط البحث مع ميكروفون
             TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                hintText: 'Search ..',
-                prefixIcon: const Icon(Icons.search),
+                hintText: 'Search',
+                hintStyle: TextStyles.font14MainColorW400.copyWith(
+                  color: ColorManager.iconTextFieldColor,
+                ),
+                prefixIcon: Icon(
+                  Icons.search, 
+                  color: ColorManager.iconTextFieldColor,
+                ),
                 suffixIcon: IconButton(
-                  icon: Icon(_isListening ? Icons.mic : Icons.mic_none),
+                  icon: Icon(
+                    _isListening ? Icons.mic : Icons.mic_none, 
+                    color: ColorManager.iconTextFieldColor,
+                  ),
                   onPressed: _listen,
                 ),
                 filled: true,
@@ -119,8 +127,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               ),
             ),
             SizedBox(height: 20.h),
-
-            // 📜 قائمة الفئات المفلترة
             Expanded(
               child: ListView.builder(
                 itemCount: _filteredCategories.length,
@@ -136,7 +142,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: const CustomBottomNavBar(currentIndex: 2),
     );
   }
 }
