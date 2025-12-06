@@ -6,6 +6,7 @@ import 'package:homesta/features/authentication/presentation/views/forget_passwo
 import 'package:homesta/features/authentication/presentation/views/login_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/signup_screen.dart';
 import 'package:homesta/features/categories/presentation/views/category_section_screen.dart';
+import 'package:homesta/features/checkout/presentation/views/checkout_screen.dart';
 import 'package:homesta/features/home/presentation/views/home.dart';
 import 'package:homesta/features/home/presentation/views/product_details_screen.dart';
 import 'package:homesta/features/onboarding/presentation/views/onboarding_screen.dart';
@@ -22,13 +23,14 @@ abstract class AppRouter {
   static final myOrderScreen = '/myOrderScreen';
   static final helpCenterScreen = '/helpCenterScreen';
   static final productDetailsScreen = '/productDetailsScreen';
-  static final categoryScreen = '/CategoriesScreen()';
-  static final homeScreen = '/HomeView()';
-  static final searchScreen = '/SearchScreen()';
-  static final cartScreen = '/CartScreen()';
-  static final accountScreen = '/AccountScreen()';
+  static final categoryScreen = '/categoriesScreen';
+  static final homeScreen = '/homeView';
+  static final searchScreen = '/searchScreen';
+  static final cartScreen = '/sartScreen';
+  static final accountScreen = '/accountScreen';
   //static final categorySectionScreen = '/categorySectionScreen';
   static const String categorySectionScreen = '/categorySection/:title';
+  static final checkoutScreen = '/checkoutScreen';
 
 
   static final route = GoRouter(
@@ -83,12 +85,16 @@ abstract class AppRouter {
         builder: (context, state) => const CategorySectionScreen(title: '',),
       ),*/
       GoRoute(
-      path: '/categorySection/:title',
-      builder: (context, state) {
-        final title = state.pathParameters['title']!;
-        return CategorySectionScreen(title: title);
-      },
-    ),
+        path: '/categorySection/:title',
+        builder: (context, state) {
+          final title = state.pathParameters['title']!;
+          return CategorySectionScreen(title: title);
+        },
+      ),
+      GoRoute(
+        path: checkoutScreen,
+        builder: (context, state) => const CheckoutScreen(),
+      ),
     ],
   );
 }
