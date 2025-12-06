@@ -90,7 +90,9 @@ class AccountScreen extends StatelessWidget {
               OptionTile(
                 icon: Icons.payment,
                 label: 'Payment',
-                onTap: () {},
+                onTap: () {
+                  GoRouter.of(context).push(AppRouter.checkoutScreen);
+                },
               ),
               OptionTile(
                 icon: Icons.accessibility_new_outlined,
@@ -109,7 +111,7 @@ class AccountScreen extends StatelessWidget {
               SizedBox(height: 8.h),
               OptionTile(
                 icon: Icons.logout,
-                label: 'Logout',
+                label: 'Log Out',
                 onTap: () {
                   bottomSheet(context);
                 },
