@@ -54,19 +54,30 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('John Doe', style: TextStyles.font14OrderColorW400,),
+                    Text('John Doe', style: TextStyles.font14BlackColorW400,),
                     Row(
                       children: [
-                        Icon(Icons.location_on_outlined, size: 14.w, color: ColorManager.orderColor,),
+                        Icon(
+                          Icons.location_on_outlined, 
+                          size: 14.w, 
+                          color: ColorManager.blackColor,
+                        ),
                         SizedBox(width: 4.w),
-                        Text('Cairo, Egypt', style: TextStyles.font14OrderColorW400,),
+                        Text('Cairo, Egypt', style: TextStyles.font14BlackColorW400,),
                       ],
                     ),
                     Row(
                       children: [
-                        Icon(Icons.timer_sharp, size: 14.w, color: ColorManager.orderColor,),
+                        Icon(
+                          Icons.timer_sharp, 
+                          size: 14.w, 
+                          color: ColorManager.blackColor,
+                        ),
                         SizedBox(width: 4.w),
-                        Text(' Nov 23 – 22:00', style: TextStyles.font14OrderColorW400,),
+                        Text(
+                          ' Nov 23 – 22:00', 
+                          style: TextStyles.font14BlackColorW400,
+                        ),
                       ],
                     ),
                   ],
@@ -84,7 +95,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
                   child: Text(
                     'Adult/ A. Category/C Block',
-                    style: TextStyles.font14OrderColorW400,
+                    style: TextStyles.font14BlackColorW400,
                     selectionColor: ColorManager.mainColor,
                   ),
                 ),
@@ -97,7 +108,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
                   child: Text(
                     'x1',
-                    style: TextStyles.font14OrderColorW400,
+                    style: TextStyles.font14BlackColorW400,
                     selectionColor: ColorManager.mainColor,
                   ),
                 ),

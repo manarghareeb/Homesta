@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';import 'package:homesta/core/theming/colors.dart';
+import 'package:go_router/go_router.dart';
+import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 
 class CustomAppBarWidget extends StatelessWidget
     implements PreferredSizeWidget {
   const CustomAppBarWidget({
-    super.key, 
-    required this.text, 
-    this.actions, 
-    this.backgroundColor = Colors.white, 
+    super.key,
+    required this.text,
+    this.actions,
+    this.backgroundColor = Colors.white,
     this.textColor = ColorManager.buttonColor,
   });
   final String text;
@@ -36,8 +37,9 @@ class CustomAppBarWidget extends StatelessWidget
       ),
       title: Text(
         text,
-        style: TextStyles.font24ButtonColorW500.copyWith(
-          fontSize: 20, color: textColor,
+        style: TextStyles.font24BlackColorW500.copyWith(
+          fontSize: 20,
+          color: textColor,
         ),
       ),
       centerTitle: true,

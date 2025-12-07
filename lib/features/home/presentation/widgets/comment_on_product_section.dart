@@ -43,7 +43,7 @@ class CommentOnProductSection extends StatelessWidget {
                     SizedBox(height: 4.h),
                     Text(
                       'Wooow it’s very nice and suitable to my living room.I recommended it to anyone who wants to buy it.', 
-                      style: TextStyles.font12OrderColorW400.copyWith(
+                      style: TextStyles.font12GreyColorW400.copyWith(
                         color: ColorManager.blackColor,
                       )),
                   ],
@@ -59,14 +59,10 @@ class CommentOnProductSection extends StatelessWidget {
                 children: [
                   Icon(Icons.thumb_up_outlined, color: ColorManager.greyColor, size: 16.sp),
                   SizedBox(width: 8.w),
-                  Text('Helpful(10)', style: TextStyles.font12OrderColorW400.copyWith(
-                    color: ColorManager.greyColor,
-                  )),
+                  Text('Helpful(10)', style: TextStyles.font12GreyColorW400),
                 ],
               ),
-              Text('Nov.20 .2025', style: TextStyles.font12OrderColorW400.copyWith(
-                color: ColorManager.greyColor,
-              )),
+              Text('Nov.20 .2025', style: TextStyles.font12GreyColorW400),
             ],
           ),
         ],

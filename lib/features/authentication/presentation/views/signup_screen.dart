@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homesta/core/routing/app_router.dart';
-import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
 import 'package:homesta/core/widgets/custom_text_field_widget.dart';
-import 'package:homesta/features/authentication/presentation/widgets/already_have_account.dart';
-import 'package:homesta/features/authentication/presentation/widgets/arrow_back_widget.dart';
+import 'package:homesta/features/authentication/presentation/widgets/agree_terms_and_privacy.dart';
+import 'package:homesta/features/authentication/presentation/widgets/auth_navigation_text.dart';
+import 'package:homesta/features/authentication/presentation/widgets/checkbox_widget.dart';
 import 'package:homesta/features/authentication/presentation/widgets/continue_with.dart';
 import 'package:homesta/features/authentication/presentation/widgets/social_media_button.dart';
+import 'package:homesta/features/authentication/presentation/widgets/title_to_text_field.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -23,6 +24,15 @@ class _SignupScreenState extends State<SignupScreen> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  bool isChecked = false;
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    passwordController.dispose();
+    emailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,48 +40,76 @@ class _SignupScreenState extends State<SignupScreen> {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 30.w, horizontal: 16.h),
+          padding: EdgeInsets.symmetric(vertical: 16.w, horizontal: 16.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const ArrowBackWidget(),
-              SizedBox(height: 30.h),
-              Text('Register', style: TextStyles.font24ButtonColorW500),
-              Text(
-                'Create your New account',
-                style: TextStyles.font16GreyRegular.copyWith(fontSize: 13.sp),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      GoRouter.of(context).pop();
+                    },
+                    icon: Icon(Icons.arrow_back_ios, size: 16.sp),
+                  ),
+                ],
               ),
-              SizedBox(height: 40.h),
+              SizedBox(height: 16.h),
+              Text('Sign Up', style: TextStyles.font24BlackColorW500),
+              SizedBox(height: 8.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 52.5.w),
+                child: Text(
+                  'Fill your information below or register with your social account.',
+                  style: TextStyles.font14GreyColorW400,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              SizedBox(height: 24.h),
               Form(
                 key: formKey,
                 child: Column(
                   children: [
+                    const TitleToTextField(title: 'First Name'),
+                    SizedBox(height: 8.h),
                     CustomTextFieldWidget(
                       controller: nameController,
-                      hintText: 'Full Name',
+                      hintText: 'Enter First Name',
                       textInputType: TextInputType.name,
-                      title: 'Full Name',
-                      prefixIcon: Icon(
-                        Icons.person_outline,
-                        color: ColorManager.iconTextFieldColor,
-                      ),
+                      title: 'Enter First Name',
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Please enter your full name";
+                          return "Please enter your first name";
                         }
                         return null;
                       },
                     ),
-                    SizedBox(height: 16.h),
+                    SizedBox(height: 24.h),
+                    const TitleToTextField(title: 'Last Name'),
+                    SizedBox(height: 8.h),
                     CustomTextFieldWidget(
+                      controller: nameController,
+                      hintText: 'Enter Last Name',
+                      textInputType: TextInputType.name,
+                      title: 'Enter Last Name',
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Please enter your last name";
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 24.h),
+                    const TitleToTextField(title: 'Email'),
+                    SizedBox(height: 8.h),
+                    CustomTextFieldWidget(
+                      suffixIcon: Icons.check,
                       controller: emailController,
-                      hintText: 'Email',
+                      hintText: 'User@gmail.com',
                       textInputType: TextInputType.emailAddress,
-                      title: 'Email',
-                      prefixIcon: Icon(
-                        Icons.email_outlined,
-                        color: ColorManager.iconTextFieldColor,
-                      ),
+                      title: 'Enter Email',
+                      prefixIcon: Icons.email_outlined,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter your Email';
@@ -81,21 +119,19 @@ class _SignupScreenState extends State<SignupScreen> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 16.h),
+                    SizedBox(height: 24.h),
+                    const TitleToTextField(title: 'Password'),
+                    SizedBox(height: 8.h),
                     CustomTextFieldWidget(
                       controller: passwordController,
-                      hintText: 'Password',
+                      hintText: 'Enter Password',
                       textInputType: TextInputType.text,
-                      title: 'Password',
-                      prefixIcon: Icon(
-                        Icons.lock_outline,
-                        color: ColorManager.iconTextFieldColor,
-                      ),
+                      title: 'Enter Password',
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Enter your password";
-                        } else if (value.length < 6) {
-                          return "Password must be at least 6 characters";
+                        } else if (value.length < 8) {
+                          return "Password must be at least 8 characters";
                         }
                         return null;
                       },
@@ -103,6 +139,13 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ],
                 ),
+              ),
+              SizedBox(height: 8.h),
+              Row(
+                children: [
+                  const CheckboxWidget(),
+                  const AgreeTermsAndPrivacy(),
+                ],
               ),
               SizedBox(height: 24.h),
               CustomButtonWidget(
@@ -113,12 +156,18 @@ class _SignupScreenState extends State<SignupScreen> {
                   }
                 },
               ),
-              SizedBox(height: 40.h),
+              SizedBox(height: 16.h),
               const ContinueWith(),
               SizedBox(height: 16.h),
               const SocialMediaButton(),
-              SizedBox(height: 35.h),
-              const AlreadyHaveAccount(),
+              SizedBox(height: 16.h),
+              AuthNavigationText(
+                text: 'Already have a account?',
+                textButton: ' Sign In',
+                onTap: () {
+                  GoRouter.of(context).push(AppRouter.loginScreen);
+                },
+              ),
             ],
           ),
         ),

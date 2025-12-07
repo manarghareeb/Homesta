@@ -17,28 +17,28 @@ class SocialMediaButton extends StatelessWidget {
           },
           child: SvgPicture.asset(
             'assets/images/material-icon-theme_google.svg',
-            width: 24.w,
-            height: 24.h,
+            width: 32.w,
+            height: 32.h,
           ),
         ),
-        SizedBox(width: 70.w),
+        SizedBox(width: 48.w),
         InkWell(
           onTap: () {
           },
           child: SvgPicture.asset(
             'assets/images/logos_facebook.svg',
-            width: 24.w,
-            height: 24.h,
+            width: 32.w,
+            height: 32.h,
           ),
         ),
-        SizedBox(width: 70.w),
+        SizedBox(width: 48.w),
         InkWell(
           onTap: () {
           },
           child: SvgPicture.asset(
             'assets/images/Vector.svg',
-            width: 24.w,
-            height: 24.h,
+            width: 32.w,
+            height: 32.h,
           ),
         ),
       ],

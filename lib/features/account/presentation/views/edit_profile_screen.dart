@@ -102,18 +102,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   hintStyle: TextStyles.font16GreyRegular,
                   hintText: '1559 000 7788 8DER',
                   filled: true,
-                  fillColor: ColorManager.iconTextFieldColor.withOpacity(0.5),
+                  fillColor: ColorManager.lightGreyColor.withOpacity(0.5),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.r),
-                    borderSide: BorderSide.none
+                    borderSide: BorderSide.none,
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.r),
-                    borderSide: BorderSide.none
+                    borderSide: BorderSide.none,
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.r),
-                    borderSide: BorderSide.none
+                    borderSide: BorderSide.none,
                   ),
                 ),
               ),

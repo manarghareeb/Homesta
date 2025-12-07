@@ -12,9 +12,9 @@ class ContinueWith extends StatelessWidget {
       children: [
         Expanded(
           child: Divider(
-            thickness: 2,
+            thickness: 1,
             color: Color(0xFFE0DFDF),
-            endIndent: 6,
+            endIndent: 8,
           ),
         ),
         Text(
@@ -23,9 +23,9 @@ class ContinueWith extends StatelessWidget {
         ),
         Expanded(
           child: Divider(
-            thickness: 2,
+            thickness: 1,
             color:Color(0xFFE0DFDF),
-            indent: 6,
+            indent: 8,
           ),
         ),
       ],

@@ -8,7 +8,7 @@ class TextStyles {
     fontSize: 18.sp,
     fontWeight: FontWeight.w500,
     color: ColorManager.blackColor,
-    fontFamily: 'Outfit'
+    fontFamily: 'Outfit',
   );
   // style for grey text
   static TextStyle font16GreyRegular = TextStyle(
@@ -24,11 +24,11 @@ class TextStyles {
     color: ColorManager.blackColor,
   );
   // style for ButtonColor text
-  static TextStyle font24ButtonColorW500 = TextStyle(
+  static TextStyle font24BlackColorW500 = TextStyle(
     fontSize: 24.sp,
     fontWeight: FontWeight.w500,
     fontFamily: 'Outfit',
-    color: ColorManager.buttonColor,
+    color: ColorManager.blackColor,
   );
   // style for text Button text
   static TextStyle font16WhiteW500 = TextStyle(
@@ -49,16 +49,44 @@ class TextStyles {
     fontFamily: 'Outfit',
     color: ColorManager.brounColor,
   );
-   static TextStyle font14MainColorW400 = TextStyle(
+  static TextStyle font14MainColorW400 = TextStyle(
     fontSize: 14.sp,
     fontWeight: FontWeight.w400,
     fontFamily: 'Outfit',
     color: ColorManager.mainColor,
   );
+  static TextStyle font14GreyColorW400 = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Outfit',
+    color: ColorManager.greyColor,
+  );
 
+  static TextStyle font12GreyColorW400 = TextStyle(
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Outfit',
+    color: ColorManager.greyColor,
+  );
+
+  static TextStyle font14BlackColorW400 = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Outfit',
+    color: ColorManager.blackColor,
+  );
+
+  static TextStyle font16PrimaryColorW400Underline = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Outfit',
+    color: ColorManager.primaryColor,
+    decoration: TextDecoration.underline,
+    decorationColor: ColorManager.primaryColor,
+  );
 
   /// Styles in my order screen
-  static TextStyle font13OrderColorW300 = TextStyle(
+  /*static TextStyle font13OrderColorW300 = TextStyle(
     fontSize: 13.sp,
     fontWeight: FontWeight.w300,
     fontFamily: 'League Spartan',
@@ -75,5 +103,5 @@ class TextStyles {
     fontWeight: FontWeight.w400,
     fontFamily: 'League Spartan',
     color: ColorManager.orderColor,
-  );
+  );*/
 }

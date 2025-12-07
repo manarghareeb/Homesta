@@ -13,7 +13,7 @@ class CustomTextFieldWidget extends StatefulWidget {
     this.validator,
     required this.title,
     this.suffixIcon,
-    required this.prefixIcon,
+    this.prefixIcon,
   });
 
   final TextEditingController controller;
@@ -23,7 +23,7 @@ class CustomTextFieldWidget extends StatefulWidget {
   final String? Function(String?)? validator;
   final String title;
   final IconData? suffixIcon;
-  final Widget prefixIcon;
+  final IconData? prefixIcon;
 
   @override
   State<CustomTextFieldWidget> createState() => _CustomTextFieldWidgetState();
@@ -40,31 +40,44 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
       obscureText: widget.obscureText == true ? isObscured : false,
       validator: widget.validator,
       style: TextStyles.font16GreyRegular.copyWith(
-        color: ColorManager.buttonColor
+        color: ColorManager.buttonColor,
       ),
       decoration: InputDecoration(
-        prefixIcon: widget.prefixIcon,
+        prefixIcon:
+            widget.prefixIcon != null
+                ? Icon(widget.prefixIcon, color: ColorManager.lightGreyColor)
+                : null,
         hintText: widget.hintText,
-        filled: true,
-        fillColor: ColorManager.mainColor,
+        hintStyle: TextStyles.font14GreyColorW400,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.r),
-          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(15.r),
+          borderSide: BorderSide(
+            color: ColorManager.lightGreyColor,
+            style: BorderStyle.solid,
+          ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.r),
-          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(15.r),
+          borderSide: BorderSide(
+            color: ColorManager.lightGreyColor,
+            style: BorderStyle.solid,
+          ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.r),
-          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(15.r),
+          borderSide: BorderSide(
+            color: ColorManager.lightGreyColor,
+            style: BorderStyle.solid,
+          ),
         ),
         suffixIcon:
             widget.obscureText == true
                 ? IconButton(
                   icon: Icon(
-                    isObscured ? Icons.visibility_off_outlined : Icons.visibility_outlined,
-                    color: ColorManager.iconTextFieldColor,
+                    isObscured
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility_outlined,
+                    color: ColorManager.lightGreyColor,
                   ),
                   onPressed: () {
                     setState(() {
@@ -75,7 +88,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
                 : (widget.suffixIcon != null
                     ? Icon(
                       widget.suffixIcon,
-                      color: ColorManager.iconTextFieldColor,
+                      color: ColorManager.lightGreyColor,
                     )
                     : null),
       ),

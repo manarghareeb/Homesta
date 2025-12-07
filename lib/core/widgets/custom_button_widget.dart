@@ -14,7 +14,7 @@ class CustomButtonWidget extends StatelessWidget {
     return TextButton(
       onPressed: onPressed,
       style: TextButton.styleFrom(
-        backgroundColor: ColorManager.buttonColor,
+        backgroundColor: ColorManager.primaryColor,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         minimumSize: Size(double.infinity, 48.w),
         shape: RoundedRectangleBorder(

@@ -39,9 +39,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   void _filterCategories() {
     final query = _searchController.text.toLowerCase();
     setState(() {
-      _filteredCategories = _allCategories.where((category) {
-        return category['title']!.toLowerCase().contains(query);
-      }).toList();
+      _filteredCategories =
+          _allCategories.where((category) {
+            return category['title']!.toLowerCase().contains(query);
+          }).toList();
     });
   }
 
@@ -90,7 +91,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Categories', style: TextStyles.font24ButtonColorW500),
+        title: Text('Categories', style: TextStyles.font24BlackColorW500),
         centerTitle: true,
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
@@ -105,16 +106,16 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               decoration: InputDecoration(
                 hintText: 'Search',
                 hintStyle: TextStyles.font14MainColorW400.copyWith(
-                  color: ColorManager.iconTextFieldColor,
+                  color: ColorManager.lightGreyColor,
                 ),
                 prefixIcon: Icon(
-                  Icons.search, 
-                  color: ColorManager.iconTextFieldColor,
+                  Icons.search,
+                  color: ColorManager.lightGreyColor,
                 ),
                 suffixIcon: IconButton(
                   icon: Icon(
-                    _isListening ? Icons.mic : Icons.mic_none, 
-                    color: ColorManager.iconTextFieldColor,
+                    _isListening ? Icons.mic : Icons.mic_none,
+                    color: ColorManager.lightGreyColor,
                   ),
                   onPressed: _listen,
                 ),
