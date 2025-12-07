@@ -117,7 +117,7 @@ class _CategorySectionScreenState extends State<CategorySectionScreen> {
                         SizedBox(height: 4.h),
                         Text(
                           '40.00\$',
-                          style: TextStyles.font12OrderColorW400.copyWith(
+                          style: TextStyles.font12GreyColorW400.copyWith(
                             color: ColorManager.brounColor,
                             fontSize: 12.sp,
                           ),

@@ -96,7 +96,7 @@ class ProductDetailsScreen extends StatelessWidget {
                               : index == 1
                               ? ColorManager.brounColor
                               : index == 2
-                              ? ColorManager.orderColor
+                              ? ColorManager.thirdColor
                               : ColorManager.greyColor,
                     ),
                   );

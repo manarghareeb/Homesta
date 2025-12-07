@@ -38,25 +38,19 @@ class TextAndTextField extends StatelessWidget {
             hintText: hintText,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
-              borderSide: BorderSide(
-                color: ColorManager.iconTextFieldColor,
-              )
+              borderSide: BorderSide(color: ColorManager.lightGreyColor),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
-              borderSide: BorderSide(
-                color: ColorManager.iconTextFieldColor,
-              )
+              borderSide: BorderSide(color: ColorManager.lightGreyColor),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
-              borderSide: BorderSide(
-                color: ColorManager.iconTextFieldColor,
-              )
-              ),
+              borderSide: BorderSide(color: ColorManager.lightGreyColor),
+            ),
           ),
         ),
-        SizedBox(height: 16.h,),
+        SizedBox(height: 16.h),
       ],
     );
   }

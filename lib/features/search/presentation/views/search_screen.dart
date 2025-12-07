@@ -48,7 +48,7 @@ class SearchScreen extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.camera_alt_outlined,
-                        color: ColorManager.iconTextFieldColor,
+                        color: ColorManager.lightGreyColor,
                         size: 20.sp,
                       ),
                       SizedBox(width: 7.w),

@@ -2,9 +2,12 @@ import 'package:go_router/go_router.dart';
 import 'package:homesta/features/account/presentation/views/edit_profile_screen.dart';
 import 'package:homesta/features/account/presentation/views/help_center_screen.dart';
 import 'package:homesta/features/account/presentation/views/my_order_screen.dart';
+import 'package:homesta/features/authentication/presentation/views/add_new_password_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/forget_password_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/login_screen.dart';
+import 'package:homesta/features/authentication/presentation/views/set_new_password_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/signup_screen.dart';
+import 'package:homesta/features/authentication/presentation/views/verification_screen.dart';
 import 'package:homesta/features/categories/presentation/views/category_section_screen.dart';
 import 'package:homesta/features/checkout/presentation/views/checkout_screen.dart';
 import 'package:homesta/features/home/presentation/views/home.dart';
@@ -31,7 +34,9 @@ abstract class AppRouter {
   //static final categorySectionScreen = '/categorySectionScreen';
   static const String categorySectionScreen = '/categorySection/:title';
   static final checkoutScreen = '/checkoutScreen';
-
+  static final addNewPasswordScreen = '/addNewPasswordScreen';
+  static final setNewPasswordScreen = '/setNewPasswordScreen';
+  static final verficationScreen = '/verificationScreen';
 
   static final route = GoRouter(
     routes: [
@@ -64,10 +69,7 @@ abstract class AppRouter {
         path: productDetailsScreen,
         builder: (context, state) => const ProductDetailsScreen(),
       ),
-      GoRoute(
-        path: homeScreen,
-        builder: (context, state) => const HomeView(),
-      ),
+      GoRoute(path: homeScreen, builder: (context, state) => const HomeView()),
       GoRoute(
         path: searchScreen,
         builder: (context, state) => const SearchScreen(),
@@ -94,6 +96,18 @@ abstract class AppRouter {
       GoRoute(
         path: checkoutScreen,
         builder: (context, state) => const CheckoutScreen(),
+      ),
+      GoRoute(
+        path: addNewPasswordScreen,
+        builder: (context, state) => const AddNewPasswordScreen(),
+      ),
+      GoRoute(
+        path: setNewPasswordScreen,
+        builder: (context, state) => const SetNewPasswordScreen(),
+      ),
+      GoRoute(
+        path: verficationScreen,
+        builder: (context, state) => const VerificationScreen(),
       ),
     ],
   );

@@ -5,23 +5,25 @@ import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
 import 'package:homesta/core/widgets/custom_text_field_widget.dart';
-import 'package:homesta/features/authentication/presentation/widgets/auth_navigation_text.dart';
 import 'package:homesta/features/authentication/presentation/widgets/title_to_text_field.dart';
 
-class ForgetPasswordScreen extends StatefulWidget {
-  const ForgetPasswordScreen({super.key});
+class SetNewPasswordScreen extends StatefulWidget {
+  const SetNewPasswordScreen({super.key});
 
   @override
-  State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
+  State<SetNewPasswordScreen> createState() => _SetNewPasswordScreenState();
 }
 
-class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
-  final TextEditingController controller = TextEditingController();
+class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
-    controller.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -47,44 +49,56 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 ],
               ),
               SizedBox(height: 16.h),
-              Text('Forget Password?', style: TextStyles.font24BlackColorW500),
+              Text(
+                'Set New Password',
+                style: TextStyles.font24BlackColorW500,
+              ),
               SizedBox(height: 8.h),
               Text(
-                'Don’t worry , we’ll send you reset instructions.',
+                'Must be at least 8 character',
                 style: TextStyles.font14GreyColorW400,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 56.h),
-              TitleToTextField(title: 'Email'),
-              SizedBox(height: 8.h),
+              TitleToTextField(title: 'Password'),
+              SizedBox(height: 8.h,),
               CustomTextFieldWidget(
-                suffixIcon: Icons.check,
-                controller: controller,
-                hintText: 'User@gmail.com',
-                textInputType: TextInputType.emailAddress,
-                title: 'Enter Email',
-                prefixIcon: Icons.email_outlined,
+                controller: passwordController,
+                hintText: 'Enter Password',
+                textInputType: TextInputType.text,
+                title: 'Enter Password',
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your Email';
-                  } else if (value.contains("@gmail.com") == false) {
-                    return 'this email is not valid "missing @gmail.com"';
+                  if (value!.isEmpty) {
+                    return "Enter your password";
+                  } else if (value.length < 8) {
+                    return "Password must be at least 8 characters";
                   }
                   return null;
                 },
+                obscureText: true,
+              ),
+              SizedBox(height: 16.h),
+              TitleToTextField(title: 'Confirm Password'),
+              SizedBox(height: 8.h,),
+              CustomTextFieldWidget(
+                controller: confirmPasswordController,
+                hintText: 'Enter Password',
+                textInputType: TextInputType.text,
+                title: 'Enter Password',
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Enter your password";
+                  } else if (value.length < 8) {
+                    return "Password must be at least 8 characters";
+                  }
+                  return null;
+                },
+                obscureText: true,
               ),
               SizedBox(height: 32.h),
               CustomButtonWidget(
-                buttonText: 'Submit',
+                buttonText: 'Reset Password',
                 onPressed: () {
-                  GoRouter.of(context).push(AppRouter.addNewPasswordScreen);
-                },
-              ),
-              SizedBox(height: 16.h),
-              AuthNavigationText(
-                text: 'Remember Password?',
-                textButton: ' Sign In',
-                onTap: () {
                   GoRouter.of(context).push(AppRouter.loginScreen);
                 },
               ),
