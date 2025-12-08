@@ -120,7 +120,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   onPressed: _listen,
                 ),
                 filled: true,
-                fillColor: ColorManager.mainColor,
+                fillColor: ColorManager.searchColor,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.r),
                   borderSide: BorderSide.none,

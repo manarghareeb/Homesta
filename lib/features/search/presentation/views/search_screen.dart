@@ -1,78 +1,143 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
-import 'package:homesta/core/theming/styles.dart';
-import 'package:homesta/features/search/presentation/widgets/popular_search_section.dart';
-import 'package:homesta/features/search/presentation/widgets/recent_search_section.dart';
-import 'package:homesta/features/search/presentation/widgets/search_section.dart';
+import 'package:homesta/features/search/presentation/widgets/search_empty_state.dart';
+import 'package:homesta/features/search/presentation/widgets/search_populated_state.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
+import '../../../../core/theming/styles.dart';
 
-class SearchScreen extends StatelessWidget {
+
+
+
+class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
+
+  @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
+  late stt.SpeechToText _speech;
+  bool _isListening = false;
+  bool get _isSearching => _searchController.text.isNotEmpty;
+  final TextEditingController _searchController = TextEditingController();
+
+  final List<Map<String, String>> _allCategories = [
+    {'title': 'Electrical Appliances', 'image': 'assets/images/electrical.png'},
+    {'title': 'Bedrooms', 'image': 'assets/images/bedroom.png'},
+    {'title': 'Living Room', 'image': 'assets/images/livingroom.png'},
+    {'title': 'Kitchen', 'image': 'assets/images/kitchen.png'},
+    {'title': 'Medical Devices', 'image': 'assets/images/medical.png'},
+    {'title': 'Home Tools', 'image': 'assets/images/tools.png'},
+  ];
+
+  List<Map<String, String>> _filteredCategories = [];
+
+
+  @override
+  void initState() {
+    super.initState();
+    _filteredCategories = _allCategories;
+    _searchController.addListener(_filterCategories);
+    _speech = stt.SpeechToText();
+  }
+
+  void _filterCategories() {
+    final query = _searchController.text.toLowerCase();
+    setState(() {
+      _filteredCategories =
+          _allCategories.where((category) {
+            return category['title']!.toLowerCase().contains(query);
+          }).toList();
+    });
+  }
+
+  void _listen() async {
+    if (!_isListening) {
+      bool available = await _speech.initialize(
+        onStatus: (val) {
+          debugPrint('Speech status: $val');
+          setState(() => _isListening = val == 'listening');
+        },
+        onError: (val) {
+          debugPrint('Speech error: $val');
+          setState(() => _isListening = false);
+        },
+      );
+
+      if (available) {
+        setState(() => _isListening = true);
+        _speech.listen(
+          onResult: (val) {
+            setState(() {
+              _searchController.text = val.recognizedWords;
+              _filterCategories();
+            });
+          },
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Voice recognition not available')),
+        );
+      }
+    } else {
+      setState(() => _isListening = false);
+      _speech.stop();
+    }
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    _speech.stop();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Search', style: TextStyles.font24BlackColorW500),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        surfaceTintColor: Colors.white,
+      ),
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
+      body: Padding(
+        padding: EdgeInsets.all(16.w),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SearchSection(),
-            SizedBox(height: 32.h),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Recent search', style: TextStyles.font15BrownW200),
-                      InkWell(
-                        onTap: () {},
-                        child: Text(
-                          'Clear All',
-                          style: TextStyles.font15BrownW200,
-                        ),
-                      ),
-                    ],
+            TextField(
+              controller: _searchController,
+              decoration: InputDecoration(
+                hintText: 'Search',
+                hintStyle: TextStyles.font14MainColorW400.copyWith(
+                  color: ColorManager.lightGreyColor,
+                ),
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: ColorManager.lightGreyColor,
+                ),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _isListening ? Icons.mic : Icons.mic_none,
+                    color: ColorManager.lightGreyColor,
                   ),
-                  SizedBox(height: 16.h),
-                  const RecentSearchSection(),
-                  SizedBox(height: 32.h),
-                  Text('Popular search', style: TextStyles.font15BrownW200),
-                  SizedBox(height: 16.h),
-                  const PopularSearchSection(),
-                  SizedBox(height: 35.h),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.camera_alt_outlined,
-                        color: ColorManager.lightGreyColor,
-                        size: 20.sp,
-                      ),
-                      SizedBox(width: 7.w),
-                      Text('Camera Search', style: TextStyles.font15BrownW200),
-                    ],
-                  ),
-                  SizedBox(height: 29.h),
-                  Wrap(
-                    spacing: 16.w,
-                    runSpacing: 8.h,
-                    children: List.generate(
-                      4,
-                      (index) => Container(
-                        height: 120.h,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12.r),
-                        ),
-                        child: Image.asset('assets/images/image 3.png'),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 32.h),
-                ],
+                  onPressed: _listen,
+                ),
+                filled: true,
+                fillColor: ColorManager.searchColor,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                  borderSide: BorderSide.none,
+                ),
               ),
+            ),
+            SizedBox(height: 20.h),
+            Expanded(
+              child: _isSearching
+                  ? const SearchPopulatedState()
+                  : const SearchEmptyState(),
             ),
           ],
         ),

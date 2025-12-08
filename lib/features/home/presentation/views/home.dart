@@ -8,6 +8,8 @@ import 'package:homesta/features/categories/presentation/views/categories_screen
 import 'package:homesta/features/home/presentation/views/home_screen.dart';
 import 'package:homesta/features/search/presentation/views/search_screen.dart';
 
+
+
 class HomeView extends StatefulWidget {
   const HomeView({super.key, this.initialIndex = 0});
   final int initialIndex;
