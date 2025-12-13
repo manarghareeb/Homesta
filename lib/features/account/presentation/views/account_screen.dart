@@ -8,6 +8,8 @@ import 'package:homesta/features/account/presentation/widgets/name_and_edit_prof
 import 'package:homesta/features/account/presentation/widgets/option_tile.dart';
 import 'package:homesta/features/account/presentation/widgets/photo_profile.dart';
 
+
+
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
 
@@ -65,7 +67,9 @@ class AccountScreen extends StatelessWidget {
               OptionTile(
                 icon: Icons.notifications_outlined,
                 label: 'Notification',
-                onTap: () {},
+                onTap: () {
+                  GoRouter.of(context).push(AppRouter.notificationScreen);
+                },
               ),
               OptionTile(
                 icon: Icons.lock_outline,
