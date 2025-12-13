@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
 
+import '../../../../core/theming/styles.dart';
+
 class SearchPopulatedState extends StatelessWidget {
   const SearchPopulatedState({super.key});
 
@@ -15,13 +17,13 @@ class SearchPopulatedState extends StatelessWidget {
           children: [
             Text(
               'Recent Searches',
-              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+              style: TextStyles.font18BoldBlackW500,
             ),
             TextButton(
               onPressed: () {},
               child: Text(
                 'Clear',
-                style: TextStyle(fontSize: 14.sp, color: ColorManager.buttonColor),
+                style: TextStyle(fontSize: 13.sp, color: ColorManager.lightGreyColor),
               ),
             ),
           ],
@@ -41,7 +43,7 @@ class SearchPopulatedState extends StatelessWidget {
         // 🔥 Popular Category
         Text(
           'Popular Category',
-          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+          style: TextStyles.font18BoldBlackW500,
         ),
         SizedBox(height: 12.h),
         Column(
@@ -54,13 +56,9 @@ class SearchPopulatedState extends StatelessWidget {
               .toList(),
         ),
         SizedBox(height: 24.h),
-
-        // 🎯 Suggested Category
-        // 🎯 Suggested Category
-        // 🎯 Suggested Category
         Text(
           'Suggested Category',
-          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+          style: TextStyles.font18BoldBlackW500,
         ),
         SizedBox(height: 12.h),
         Column(
