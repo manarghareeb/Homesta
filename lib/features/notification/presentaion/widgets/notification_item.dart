@@ -35,7 +35,7 @@ class NotificationItem extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 8.h),
       padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
-        color: isNew ? const Color(0xFFE6E7EF) : Color(0xB5D4D4DA),
+        color: isNew ? const Color(0xFFF0F3FF) : Color(0xFFF6F6F6),
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
@@ -53,7 +53,7 @@ class NotificationItem extends StatelessWidget {
             width: 36.w,
             height: 36.w,
             decoration: BoxDecoration(
-              color: isNew ? ColorManager.buttonColor : Colors.grey,
+              color: isNew ? ColorManager.primaryColor : Colors.grey,
               shape: BoxShape.circle,
             ),
             child: Icon(

@@ -17,6 +17,7 @@ import 'package:homesta/features/onboarding/presentation/views/onboarding_screen
 
 import '../../features/account/presentation/views/account_screen.dart';
 import '../../features/cart/presentation/views/cart_screen.dart';
+import '../../features/notification/presentaion/views/notification_empty_screen.dart';
 import '../../features/search/presentation/views/search_screen.dart';
 
 abstract class AppRouter {
