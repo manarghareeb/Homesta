@@ -25,14 +25,14 @@ class NotificationEmptyScreen extends StatelessWidget {
               'assets/images/notification_icon.png',
               width: 151.w,
               height: 149.w,
-              color: Color(0xB5D4D4DA), // لو بدك تلونها
+              color: Color(0xFFF0F3FF), // لو بدك تلونها
             ),
             SizedBox(height: 10.h),
             Image.asset(
               'assets/images/notification_icon_alt.png',
               width: 44.13.w,
               height: 12.47.w,
-              color: Color(0xB5D4D4DA), // لو بدك تلونها
+              color: Color(0xFFF0F3FF), // لو بدك تلونها
             ),
             SizedBox(height: 20.h),
             Text(
