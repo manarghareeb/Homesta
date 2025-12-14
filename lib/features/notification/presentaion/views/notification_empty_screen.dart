@@ -20,19 +20,18 @@ class NotificationEmptyScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // ✅ استبدال الأيقونة بصورة من الأصول
             Image.asset(
               'assets/images/notification_icon.png',
               width: 151.w,
               height: 149.w,
-              color: Color(0xFFF0F3FF), // لو بدك تلونها
+              color: Color(0xFFF0F3FF),
             ),
             SizedBox(height: 10.h),
             Image.asset(
               'assets/images/notification_icon_alt.png',
               width: 44.13.w,
               height: 12.47.w,
-              color: Color(0xFFF0F3FF), // لو بدك تلونها
+              color: Color(0xFFF0F3FF),
             ),
             SizedBox(height: 20.h),
             Text(
