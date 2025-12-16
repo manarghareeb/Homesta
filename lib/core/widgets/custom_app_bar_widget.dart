@@ -29,7 +29,7 @@ class CustomAppBarWidget extends StatelessWidget
         icon: Icon(
           Icons.arrow_back_ios,
           size: 16,
-          color: ColorManager.greyColor,
+          color: ColorManager.blackColor,
         ),
         onPressed: () {
           GoRouter.of(context).pop();
@@ -37,10 +37,7 @@ class CustomAppBarWidget extends StatelessWidget
       ),
       title: Text(
         text,
-        style: TextStyles.font24BlackColorW500.copyWith(
-          fontSize: 20,
-          color: textColor,
-        ),
+        style: TextStyles.font20BlackColorW500,
       ),
       centerTitle: true,
       actions: actions,

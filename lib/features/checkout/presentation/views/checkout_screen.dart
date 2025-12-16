@@ -43,7 +43,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               ),
               child: Text(
                 '10sn',
-                style: TextStyles.font13BrownW400.copyWith(
+                style: TextStyles.font13BlackW500.copyWith(
                   color: ColorManager.blackColor,
                 ),
               ),
@@ -112,7 +112,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     ),
                     child: Text(
                       'Adult / A. Category / C Block',
-                      style: TextStyles.font13BrownW400.copyWith(
+                      style: TextStyles.font13BlackW500.copyWith(
                         color: ColorManager.blackColor,
                       ),
                     ),
@@ -129,7 +129,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     ),
                     child: Text(
                       'x1',
-                      style: TextStyles.font13BrownW400.copyWith(
+                      style: TextStyles.font13BlackW500.copyWith(
                         color: ColorManager.blackColor,
                       ),
                     ),
@@ -396,7 +396,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         Expanded(
           child: Text(
             text,
-            style: TextStyles.font13BrownW400.copyWith(
+            style: TextStyles.font13BlackW500.copyWith(
               color: ColorManager.blackColor,
             ),
           ),

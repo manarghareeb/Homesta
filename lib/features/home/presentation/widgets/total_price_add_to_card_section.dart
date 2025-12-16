@@ -16,17 +16,19 @@ class TotalPriceAndAddToCardSection extends StatelessWidget {
       children: [
         Column(
           children: [
-            Text('Total Price', style: TextStyles.font16BlackRegular),
+            Text('Total Price', style: TextStyles.font14BlackColorW400),
             SizedBox(height: 8.h),
-            Text('\$129.00', style: TextStyles.font16BlackRegular),
+            Text('\$129.00', style: TextStyles.font16BlackRegular.copyWith(
+              color: ColorManager.thirdColor
+            )),
           ],
         ),
         Container(
           height: 48.h,
-          width: 170.w,
+          width: 168.w,
           decoration: BoxDecoration(
-            color: ColorManager.buttonColor,
-            borderRadius: BorderRadius.circular(10.r),
+            color: ColorManager.primaryColor,
+            borderRadius: BorderRadius.circular(15.r),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
