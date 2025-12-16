@@ -30,6 +30,13 @@ class TextStyles {
     fontFamily: 'Outfit',
     color: ColorManager.blackColor,
   );
+  // style for Title/Title 1 Med text
+  static TextStyle font20BlackColorW500 = TextStyle(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'Outfit',
+    color: ColorManager.blackColor,
+  );
   // style for text Button text
   static TextStyle font16WhiteW500 = TextStyle(
     fontSize: 16.sp,
@@ -83,6 +90,13 @@ class TextStyles {
     color: ColorManager.primaryColor,
     decoration: TextDecoration.underline,
     decorationColor: ColorManager.primaryColor,
+  );
+  // style for Bold text
+  static TextStyle font18BoldBlackW500 = TextStyle(
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w700,
+    color: ColorManager.blackColor,
+    fontFamily: 'Outfit',
   );
 
   /// Styles in my order screen

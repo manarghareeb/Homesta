@@ -12,10 +12,12 @@ import 'package:homesta/features/categories/presentation/views/category_section_
 import 'package:homesta/features/checkout/presentation/views/checkout_screen.dart';
 import 'package:homesta/features/home/presentation/views/home.dart';
 import 'package:homesta/features/home/presentation/views/product_details_screen.dart';
+import 'package:homesta/features/notification/presentaion/views/notification.dart';
 import 'package:homesta/features/onboarding/presentation/views/onboarding_screen.dart';
 
 import '../../features/account/presentation/views/account_screen.dart';
 import '../../features/cart/presentation/views/cart_screen.dart';
+import '../../features/notification/presentaion/views/notification_empty_screen.dart';
 import '../../features/search/presentation/views/search_screen.dart';
 
 abstract class AppRouter {
@@ -31,6 +33,7 @@ abstract class AppRouter {
   static final searchScreen = '/searchScreen';
   static final cartScreen = '/sartScreen';
   static final accountScreen = '/accountScreen';
+  static final notificationScreen = '/notificationScreen';
   //static final categorySectionScreen = '/categorySectionScreen';
   static const String categorySectionScreen = '/categorySection/:title';
   static final checkoutScreen = '/checkoutScreen';
@@ -40,7 +43,7 @@ abstract class AppRouter {
 
   static final route = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) => OnboardingScreen()),
+      GoRoute(path: '/', builder: (context, state) => HomeView()),
       GoRoute(
         path: loginScreen,
         builder: (context, state) => const LoginScreen(),
@@ -108,6 +111,10 @@ abstract class AppRouter {
       GoRoute(
         path: verficationScreen,
         builder: (context, state) => const VerificationScreen(),
+      ),
+      GoRoute(
+        path: notificationScreen,
+        builder: (context, state) => const NotificationScreen(),
       ),
     ],
   );
