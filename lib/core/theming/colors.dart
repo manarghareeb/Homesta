@@ -15,4 +15,6 @@ class ColorManager {
   static const Color brounColor = Color(0xFF76453B);
   static const Color greenColor = Color(0xFF43766C);
   static const Color redColor = Color(0xFFE41F1F);
+
+  static get startchatColor => null;
 }
