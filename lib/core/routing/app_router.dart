@@ -9,6 +9,7 @@ import 'package:homesta/features/authentication/presentation/views/set_new_passw
 import 'package:homesta/features/authentication/presentation/views/signup_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/verification_screen.dart';
 import 'package:homesta/features/categories/presentation/views/category_section_screen.dart';
+import 'package:homesta/features/chat/chatscreen.dart';
 import 'package:homesta/features/checkout/presentation/views/checkout_screen.dart';
 import 'package:homesta/features/home/presentation/views/home.dart';
 import 'package:homesta/features/home/presentation/views/product_details_screen.dart';
@@ -40,6 +41,7 @@ abstract class AppRouter {
   static final addNewPasswordScreen = '/addNewPasswordScreen';
   static final setNewPasswordScreen = '/setNewPasswordScreen';
   static final verficationScreen = '/verificationScreen';
+  static final chatScreen = '/chatScreen';
 
   static final route = GoRouter(
     routes: [
@@ -85,6 +87,11 @@ abstract class AppRouter {
         path: accountScreen,
         builder: (context, state) => const AccountScreen(),
       ),
+      GoRoute(
+        path: chatScreen,
+        builder: (context, state) => const ChatScreen(),
+      ),
+
       /*GoRoute(
         path: categorySectionScreen,
         builder: (context, state) => const CategorySectionScreen(title: '',),

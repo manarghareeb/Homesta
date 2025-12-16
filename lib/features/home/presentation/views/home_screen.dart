@@ -8,16 +8,13 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextButton(
-            onPressed: () {
-              GoRouter.of(context).push(AppRouter.productDetailsScreen);
-            },
-            child: Text('Product Details Screen'),
-          ),
-        ],
+      body: const Center(child: Text('Home Screen')),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.push(AppRouter.chatScreen);
+        },
+        child: const Icon(Icons.chat),
       ),
     );
   }
