@@ -16,17 +16,23 @@ class ProductDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBarWidget(
-        backgroundColor: ColorManager.mainColor,
-        textColor: ColorManager.brounColor,
+        backgroundColor: ColorManager.soLightGreyColor,
+        textColor: ColorManager.blackColor,
         text: 'Product Details',
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.favorite_outline),
+            icon: CircleAvatar(
+              backgroundColor: Colors.white,
+              child: const Icon(
+                Icons.favorite_outline, 
+                color: ColorManager.primaryColor,
+              ),
+            ),
           ),
         ],
       ),
-      backgroundColor: ColorManager.mainColor,
+      backgroundColor: ColorManager.soLightGreyColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -36,16 +42,16 @@ class ProductDetailsScreen extends StatelessWidget {
               Image.asset('assets/images/chair.png'),
               SizedBox(height: 24.h),
               Wrap(
-                spacing: 24.w,
-                runSpacing: 8.h,
+                spacing: 20.w,
+                runSpacing: 10.h,
                 children: List.generate(4, (index) {
                   return Container(
                     height: 70.h,
-                    width: 70.w,
+                    width: 68.w,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5.r),
                       color: Colors.white,
-                      border: Border.all(color: ColorManager.brounColor),
+                      border: Border.all(color: ColorManager.thirdColor),
                     ),
                     child: Image.asset('assets/images/chair.png'),
                   );
@@ -55,12 +61,12 @@ class ProductDetailsScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Modern Chair', style: TextStyles.font18BlackW500),
+                  Text('Modern Chair', style: TextStyles.font16BlackRegular),
                   Row(
                     children: [
                       Icon(Icons.star, color: Color(0xFFFFCC00), size: 20.sp),
-                      SizedBox(width: 2.w),
-                      Text('4.9', style: TextStyles.font18BlackW500),
+                      SizedBox(width: 3.w),
+                      Text('4.9', style: TextStyles.font14BlackColorW400),
                     ],
                   ),
                 ],
@@ -68,13 +74,13 @@ class ProductDetailsScreen extends StatelessWidget {
               SizedBox(height: 16.h),
               RichText(
                 text: TextSpan(
-                  text: 'Select Color :',
+                  text: 'Select Color : ',
                   style: TextStyles.font18BlackW500,
                   children: [
                     TextSpan(
                       text: 'Green',
                       style: TextStyles.font18BlackW500.copyWith(
-                        color: ColorManager.greenColor,
+                        color: ColorManager.primaryColor,
                       ),
                     ),
                   ],
@@ -92,9 +98,9 @@ class ProductDetailsScreen extends StatelessWidget {
                       shape: BoxShape.circle,
                       color:
                           index == 0
-                              ? ColorManager.greenColor
+                              ? ColorManager.primaryColor
                               : index == 1
-                              ? ColorManager.brounColor
+                              ? ColorManager.blackColor
                               : index == 2
                               ? ColorManager.thirdColor
                               : ColorManager.greyColor,
@@ -103,25 +109,27 @@ class ProductDetailsScreen extends StatelessWidget {
                 }),
               ),
               SizedBox(height: 16.h),
-              Text('Product Details ', style: TextStyles.font16GreyRegular),
-              SizedBox(height: 16.h),
+              Text('Product Details ', style: TextStyles.font16BlackRegular.copyWith(
+                fontWeight: FontWeight.w500
+              )),
+              SizedBox(height: 8.h),
               Text(
                 'Lorem ipsum dolor sit amet consectetur. Nec aliquam morbi lacus habitasse amet. Nunc dui dictum facilisi faucibus amet sitaliquam morbi lacus habitasse amet. Nunc dui dictum facilisi faucibus amet sit',
-                style: TextStyles.font16GreyRegular,
+                style: TextStyles.font14GreyColorW400,
               ),
               SizedBox(height: 24.h),
               const TotalPriceAndAddToCardSection(),
-              SizedBox(height: 24.h),
-              const ReviewsAndViewAllSection(),
+              SizedBox(height: 8.h),
+              //const ReviewsAndViewAllSection(),
               SizedBox(height: 16.h),
               const ProductRatingSection(),
               SizedBox(height: 24.h,),
               const CommentOnProductSection(),
               SizedBox(height: 16.h),
               Text('Suggest For You', style: TextStyles.font18BlackW500.copyWith(
-                color: ColorManager.brounColor
+                color: ColorManager.primaryColor
               )),
-              SizedBox(height: 16.h),
+              SizedBox(height: 8.h),
               const SuggestForYouSection(),
               SizedBox(height: 32.h),
             ],

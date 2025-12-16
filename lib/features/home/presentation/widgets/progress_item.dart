@@ -22,7 +22,7 @@ class ProgressItem extends StatelessWidget {
       children: [
         Text(
           label,
-          style: TextStyles.font14MainColorW400,
+          style: TextStyles.font14soLightGreyColorW400,
         ),
         SizedBox(height: 3.h),
         Row(
@@ -31,8 +31,8 @@ class ProgressItem extends StatelessWidget {
               width: 50.w,
               child: LinearProgressIndicator(
                 value: value,
-                color: ColorManager.buttonColor,
-                backgroundColor: ColorManager.mainColor,
+                color: ColorManager.primaryColor,
+                backgroundColor: ColorManager.soLightGreyColor,
                 minHeight: 5.h,
                 borderRadius: BorderRadius.circular(8.r),
               ),
@@ -40,7 +40,7 @@ class ProgressItem extends StatelessWidget {
             SizedBox(width: 8.w),
             Text(
               percentText,
-              style: TextStyles.font14MainColorW400.copyWith(
+              style: TextStyles.font14soLightGreyColorW400.copyWith(
                 fontSize: 13.sp,
               ),
             ),

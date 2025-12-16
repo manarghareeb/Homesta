@@ -50,11 +50,11 @@ class TextStyles {
     fontFamily: 'Outfit',
     color: ColorManager.brounColor,
   );
-  static TextStyle font13BrownW400 = TextStyle(
+  static TextStyle font13BlackW500 = TextStyle(
     fontSize: 13.sp,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w500,
     fontFamily: 'Outfit',
-    color: ColorManager.brounColor,
+    color: ColorManager.blackColor,
   );
   static TextStyle font14MainColorW400 = TextStyle(
     fontSize: 14.sp,
@@ -81,6 +81,13 @@ class TextStyles {
     fontWeight: FontWeight.w400,
     fontFamily: 'Outfit',
     color: ColorManager.blackColor,
+  );
+
+  static TextStyle font14soLightGreyColorW400 = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Outfit',
+    color: ColorManager.soLightGreyColor,
   );
 
   static TextStyle font16PrimaryColorW400Underline = TextStyle(

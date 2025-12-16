@@ -42,6 +42,7 @@ abstract class AppRouter {
   static final setNewPasswordScreen = '/setNewPasswordScreen';
   static final verficationScreen = '/verificationScreen';
   static final chatScreen = '/chatScreen';
+  static final emptyNotificationScreen = '/emptyNotificationScreen';
 
   static final route = GoRouter(
     routes: [
@@ -91,11 +92,6 @@ abstract class AppRouter {
         path: chatScreen,
         builder: (context, state) => const ChatScreen(),
       ),
-
-      /*GoRoute(
-        path: categorySectionScreen,
-        builder: (context, state) => const CategorySectionScreen(title: '',),
-      ),*/
       GoRoute(
         path: '/categorySection/:title',
         builder: (context, state) {
@@ -122,6 +118,10 @@ abstract class AppRouter {
       GoRoute(
         path: notificationScreen,
         builder: (context, state) => const NotificationScreen(),
+      ),
+      GoRoute(
+        path: emptyNotificationScreen,
+        builder: (context, state) => const NotificationEmptyScreen(),
       ),
     ],
   );

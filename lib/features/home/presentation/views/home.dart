@@ -7,20 +7,17 @@ import 'package:homesta/features/cart/presentation/views/cart_screen.dart';
 import 'package:homesta/features/categories/presentation/views/categories_screen.dart';
 import 'package:homesta/features/home/presentation/views/home_screen.dart';
 import 'package:homesta/features/search/presentation/views/search_screen.dart';
-import 'package:homesta/features/notification/presentaion/views/notification.dart';
 
-import '../../../notification/presentaion/views/notification_empty_screen.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({super.key, this.initialIndex = 0});
-  final int initialIndex;
+  const HomeView({super.key});
 
   @override
   State<HomeView> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeView> {
-  late int index;
+  int index = 0;
   List<Widget> screens = [
     const HomeScreen(),
     const SearchScreen(),
@@ -30,42 +27,8 @@ class _HomeScreenState extends State<HomeView> {
   ];
 
   @override
-  void initState() {
-    super.initState();
-    index = widget.initialIndex;
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: index == 0
-          ? AppBar(
-        title: Text(
-          'Home',
-          style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
-        ),
-        backgroundColor: Colors.white,
-        surfaceTintColor: Colors.white,
-        elevation: 0,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.notifications_none,
-                color: ColorManager.buttonColor),
-            onPressed: () {
-              final bool hasNotifications = true; // أو حسب البيانات من السيرفر/الـ API
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => hasNotifications
-                      ? const NotificationScreen()
-                      : const NotificationEmptyScreen(),
-                ),
-              );
-            },
-          ),
-        ],
-      )
-          : null,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         elevation: 20,

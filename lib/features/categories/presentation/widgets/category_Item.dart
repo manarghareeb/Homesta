@@ -36,27 +36,20 @@ class _CategoryItemState extends State<CategoryItem> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 150),
           margin: EdgeInsets.only(bottom: 16.h),
-          height: 120.h,
+          height: 142.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.r),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(_isPressed ? 0.1 : 0.25),
-                blurRadius: _isPressed ? 4 : 8,
-                offset: Offset(0, _isPressed ? 2 : 4),
-              ),
-            ],
           ),
           child: Stack(
             fit: StackFit.expand,
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.circular(12.r),
+                borderRadius: BorderRadius.circular(15.r),
                 child: Image.asset(widget.imagePath, fit: BoxFit.cover),
               ),
               Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.r),
+                  borderRadius: BorderRadius.circular(15.r),
                   color: Colors.black.withOpacity(0.4), 
                 ),
               ),
