@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
-import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
-import 'package:homesta/features/account/presentation/widgets/gender_selector.dart';
+import 'package:homesta/core/widgets/custom_button_widget.dart';
+import 'package:homesta/features/account/presentation/widgets/gender_and_birthday_selector.dart';
 import 'package:homesta/features/account/presentation/widgets/photo_profile.dart';
+import 'package:homesta/features/account/presentation/widgets/selected_country.dart';
 import 'package:homesta/features/account/presentation/widgets/text_and_text_field.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -20,6 +21,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController birthDateController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,92 +40,48 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               SizedBox(height: 24.h),
               TextAndTextField(
                 controller: firstNameController,
-                hintText: 'Fist Name',
+                hintText: 'Maram',
                 textInputType: TextInputType.name,
-                text: 'First Name',
+                textLabel: 'First Name',
               ),
               TextAndTextField(
                 controller: lastNameController,
-                hintText: 'Last Name',
+                hintText: 'Elamly',
                 textInputType: TextInputType.name,
-                text: 'Last Name',
+                textLabel: 'Last Name',
               ),
               TextAndTextField(
                 controller: emailController,
-                hintText: 'Email',
+                hintText: 'manarahmed@gmail.com',
                 textInputType: TextInputType.emailAddress,
-                text: 'Email',
+                textLabel: 'Email',
               ),
               TextAndTextField(
                 controller: phoneController,
-                hintText: 'Mobile Number',
+                hintText: '0806 123 7890',
                 textInputType: TextInputType.phone,
-                text: 'Mobile Number',
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Gender',
-                    style: TextStyles.font18BlackW500.copyWith(fontSize: 16.sp),
-                    textAlign: TextAlign.start,
-                  ),
-                ],
+                textLabel: 'Mobile Number',
               ),
               SizedBox(height: 8.h),
-              const GenderSelector(),
+              const GenderAndBirthdaySelector(),
+              SizedBox(height: 16.h),
+              const SelectedCountry(),
               SizedBox(height: 16.h),
               TextAndTextField(
                 controller: emailController,
-                hintText: 'Tax Identification Number',
+                hintText: '123 Main Street, Spring',
                 textInputType: TextInputType.emailAddress,
-                text: 'Tax Identification Number',
-              ),
-              TextAndTextField(
-                controller: emailController,
-                hintText: 'Tax Identification Country',
-                textInputType: TextInputType.emailAddress,
-                text: 'Tax Identification Country',
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'ID',
-                    style: TextStyles.font18BlackW500.copyWith(fontSize: 16.sp),
-                    textAlign: TextAlign.start,
-                  ),
-                ],
-              ),
-              SizedBox(height: 8.h),
-              TextFormField(
-                controller: emailController,
-                decoration: InputDecoration(
-                  hintStyle: TextStyles.font16GreyRegular,
-                  hintText: '1559 000 7788 8DER',
-                  filled: true,
-                  fillColor: ColorManager.lightGreyColor.withOpacity(0.5),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.r),
-                    borderSide: BorderSide.none,
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.r),
-                    borderSide: BorderSide.none,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.r),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
+                textLabel: 'Address',
               ),
               SizedBox(height: 16.h),
               TextAndTextField(
                 controller: emailController,
-                hintText: 'Ib street orogun ibadan',
+                hintText: '09021',
                 textInputType: TextInputType.emailAddress,
-                text: 'Residential Address',
+                textLabel: 'Zip Code',
               ),
+              SizedBox(height: 32.h),
+              CustomButtonWidget(buttonText: 'Save Changes', onPressed: () {}),
               SizedBox(height: 40.h),
             ],
           ),

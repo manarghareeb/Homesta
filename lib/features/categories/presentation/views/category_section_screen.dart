@@ -18,9 +18,9 @@ class _CategorySectionScreenState extends State<CategorySectionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManager.mainColor,
+      backgroundColor: ColorManager.soLightGreyColor,
       appBar: CustomAppBarWidget(
-        backgroundColor: ColorManager.mainColor,
+        backgroundColor: ColorManager.soLightGreyColor,
         textColor: ColorManager.brounColor,
         text: widget.title,
       ),
@@ -71,7 +71,7 @@ class _CategorySectionScreenState extends State<CategorySectionScreen> {
                               favorites[index]
                                   ? Icons.favorite
                                   : Icons.favorite_border,
-                              color: ColorManager.brounColor,
+                              color: ColorManager.thirdColor,
                               size: 18.sp,
                             ),
                           ),
@@ -90,7 +90,7 @@ class _CategorySectionScreenState extends State<CategorySectionScreen> {
                             ),
                             child: CircleAvatar(
                               radius: 18.r,
-                              backgroundColor: ColorManager.brounColor,
+                              backgroundColor: ColorManager.thirdColor,
                               child: Icon(
                                 Icons.add,
                                 color: Colors.white,
@@ -111,14 +111,14 @@ class _CategorySectionScreenState extends State<CategorySectionScreen> {
                         Text(
                           'Serving Boards',
                           style: TextStyles.font18BlackW500.copyWith(
-                            fontSize: 13.sp,
+                            fontSize: 12.sp,
                           ),
                         ),
                         SizedBox(height: 4.h),
                         Text(
                           '40.00\$',
                           style: TextStyles.font12GreyColorW400.copyWith(
-                            color: ColorManager.brounColor,
+                            color: ColorManager.thirdColor,
                             fontSize: 12.sp,
                           ),
                         ),

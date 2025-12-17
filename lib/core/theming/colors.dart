@@ -9,7 +9,6 @@ class ColorManager {
   static const Color lightGreyColor = Color(0xFFB3B3B3);
   static const Color greyColor = Color(0xFFA4A7AE);
   static const Color blackColor = Color(0xFF0E0E0E);
-  //static const Color orderColor = Color(0xFF4B4544);
   static const Color thirdColor = Color(0xFFB19470);
   static const Color backGroungColor = Color(0xFFFAF0E6);
   static const Color brounColor = Color(0xFF76453B);
