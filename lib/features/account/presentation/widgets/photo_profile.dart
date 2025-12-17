@@ -25,13 +25,13 @@ class PhotoProfile extends StatelessWidget {
               width: 35.w,
               height: 35.h,
               decoration: BoxDecoration(
-                color: ColorManager.buttonColor,
+                color: Colors.white,
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.camera_alt_outlined,
-                color: Colors.white,
-                size: 21.sp,
+                color: ColorManager.primaryColor,
+                size: 20.sp,
               ),
             ),
           ),
