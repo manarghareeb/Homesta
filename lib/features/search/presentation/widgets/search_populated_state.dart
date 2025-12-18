@@ -15,15 +15,15 @@ class SearchPopulatedState extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              'Recent Searches',
-              style: TextStyles.font18BoldBlackW500,
-            ),
+            Text('Recent Searches', style: TextStyles.font18BoldBlack),
             TextButton(
               onPressed: () {},
               child: Text(
                 'Clear',
-                style: TextStyle(fontSize: 13.sp, color: ColorManager.lightGreyColor),
+                style: TextStyle(
+                  fontSize: 13.sp,
+                  color: ColorManager.lightGreyColor,
+                ),
               ),
             ),
           ],
@@ -31,35 +31,35 @@ class SearchPopulatedState extends StatelessWidget {
         SizedBox(height: 8.h),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: ['Chair', 'Cooker', 'Mirror']
-              .map((item) => ListTile(
-            leading: const Icon(Icons.access_time, size: 20),
-            title: Text(item),
-          ))
-              .toList(),
+          children:
+              ['Chair', 'Cooker', 'Mirror']
+                  .map(
+                    (item) => ListTile(
+                      leading: const Icon(Icons.access_time, size: 20),
+                      title: Text(item),
+                    ),
+                  )
+                  .toList(),
         ),
         SizedBox(height: 24.h),
 
         // 🔥 Popular Category
-        Text(
-          'Popular Category',
-          style: TextStyles.font18BoldBlackW500,
-        ),
+        Text('Popular Category', style: TextStyles.font18BlackW500),
         SizedBox(height: 12.h),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: ['Bedrooms', 'Living Room', 'Kitchen', 'Home Tools']
-              .map((title) => ListTile(
-            leading: const Icon(Icons.search, size: 20),
-            title: Text(title),
-          ))
-              .toList(),
+          children:
+              ['Bedrooms', 'Living Room', 'Kitchen', 'Home Tools']
+                  .map(
+                    (title) => ListTile(
+                      leading: const Icon(Icons.search, size: 20),
+                      title: Text(title),
+                    ),
+                  )
+                  .toList(),
         ),
         SizedBox(height: 24.h),
-        Text(
-          'Suggested Category',
-          style: TextStyles.font18BoldBlackW500,
-        ),
+        Text('Suggested Category', style: TextStyles.font18BlackW500),
         SizedBox(height: 12.h),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,10 +81,7 @@ class SearchPopulatedState extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.r),
         color: Colors.black.withAlpha(5),
-        image: DecorationImage(
-          image: AssetImage(imagePath),
-          fit: BoxFit.cover,
-        ),
+        image: DecorationImage(image: AssetImage(imagePath), fit: BoxFit.cover),
       ),
       padding: EdgeInsets.all(12.w),
       alignment: Alignment.center,

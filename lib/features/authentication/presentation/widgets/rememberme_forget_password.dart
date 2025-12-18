@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homesta/core/routing/app_router.dart';
-import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/features/authentication/presentation/widgets/checkbox_widget.dart';
 
@@ -38,9 +37,7 @@ class _RememberMeAndForgetPasswordState
           clipBehavior: Clip.none,
           child: Text(
             'Forget Password?',
-            style: TextStyles.font14BlackColorW400.copyWith(
-              color: ColorManager.primaryColor
-            )
+            style: TextStyles.font14PrimaryColorW400
           ),
         ),
       ],

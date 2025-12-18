@@ -51,7 +51,7 @@ class CommentOnProductSection extends StatelessWidget {
                             5,
                             (index) => Icon(
                               Icons.star,
-                              color: const Color(0xFFFFCC00),
+                              color: ColorManager.yellowColor,
                               size: 15.sp,
                             ),
                           ),

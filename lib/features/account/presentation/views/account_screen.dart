@@ -66,7 +66,7 @@ class AccountScreen extends StatelessWidget {
                 icon: Icons.payment,
                 label: 'Payment Account',
                 onTap: () {
-                  GoRouter.of(context).push(AppRouter.checkoutScreen);
+                  //GoRouter.of(context).push(AppRouter.paymentMethodScreen);
                 },
               ),
               OptionTile(icon: Icons.list_alt, label: 'My Order', onTap: () {}),

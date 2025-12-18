@@ -33,7 +33,7 @@ class TextStyles {
   // style for Title/Title 1 Med text
   static TextStyle font20BlackColorW500 = TextStyle(
     fontSize: 20.sp,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w500,
     fontFamily: 'Outfit',
     color: ColorManager.blackColor,
   );
@@ -68,19 +68,31 @@ class TextStyles {
     fontFamily: 'Outfit',
     color: ColorManager.greyColor,
   );
+  static TextStyle font14BlackColorW400 = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Outfit',
+    color: ColorManager.blackColor,
+  );
+  static TextStyle font14ThirdColorW400 = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Outfit',
+    color: ColorManager.thirdColor,
+  );
+
+  static TextStyle font14PrimaryColorW400 = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Outfit',
+    color: ColorManager.primaryColor,
+  );
 
   static TextStyle font12GreyColorW400 = TextStyle(
     fontSize: 12.sp,
     fontWeight: FontWeight.w400,
     fontFamily: 'Outfit',
     color: ColorManager.greyColor,
-  );
-
-  static TextStyle font14BlackColorW400 = TextStyle(
-    fontSize: 14.sp,
-    fontWeight: FontWeight.w400,
-    fontFamily: 'Outfit',
-    color: ColorManager.blackColor,
   );
 
   static TextStyle font14soLightGreyColorW400 = TextStyle(
@@ -99,30 +111,10 @@ class TextStyles {
     decorationColor: ColorManager.primaryColor,
   );
   // style for Bold text
-  static TextStyle font18BoldBlackW500 = TextStyle(
+  static TextStyle font18BoldBlack = TextStyle(
     fontSize: 18.sp,
     fontWeight: FontWeight.w700,
     color: ColorManager.blackColor,
     fontFamily: 'Outfit',
   );
-
-  /// Styles in my order screen
-  /*static TextStyle font13OrderColorW300 = TextStyle(
-    fontSize: 13.sp,
-    fontWeight: FontWeight.w300,
-    fontFamily: 'League Spartan',
-    color: ColorManager.orderColor,
-  );
-  static TextStyle font14OrderColorW400 = TextStyle(
-    fontSize: 14.sp,
-    fontWeight: FontWeight.w400,
-    fontFamily: 'League Spartan',
-    color: ColorManager.orderColor,
-  );
-  static TextStyle font12OrderColorW400 = TextStyle(
-    fontSize: 12.sp,
-    fontWeight: FontWeight.w400,
-    fontFamily: 'League Spartan',
-    color: ColorManager.orderColor,
-  );*/
 }

@@ -51,9 +51,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
               ),
               Text(
                 'example@gmail.com', 
-                style: TextStyles.font14MainColorW400.copyWith(
-                  color: ColorManager.primaryColor
-                ),
+                style: TextStyles.font14PrimaryColorW400,
               ),
               SizedBox(height: 56.h),
               TitleToTextField(title: 'Code'),
