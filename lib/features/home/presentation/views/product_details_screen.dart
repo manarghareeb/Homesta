@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
+import 'package:homesta/core/widgets/custom_button_widget.dart';
 import 'package:homesta/features/home/presentation/widgets/comment_on_product_section.dart';
 import 'package:homesta/features/home/presentation/widgets/product_rating_section.dart';
 import 'package:homesta/features/home/presentation/widgets/reviews_and_view_all_section.dart';
@@ -25,7 +28,7 @@ class ProductDetailsScreen extends StatelessWidget {
             icon: CircleAvatar(
               backgroundColor: Colors.white,
               child: const Icon(
-                Icons.favorite_outline, 
+                Icons.favorite_outline,
                 color: ColorManager.primaryColor,
               ),
             ),
@@ -64,7 +67,11 @@ class ProductDetailsScreen extends StatelessWidget {
                   Text('Modern Chair', style: TextStyles.font16BlackRegular),
                   Row(
                     children: [
-                      Icon(Icons.star, color: Color(0xFFFFCC00), size: 20.sp),
+                      Icon(
+                        Icons.star,
+                        color: ColorManager.yellowColor,
+                        size: 20.sp,
+                      ),
                       SizedBox(width: 3.w),
                       Text('4.9', style: TextStyles.font14BlackColorW400),
                     ],
@@ -109,9 +116,12 @@ class ProductDetailsScreen extends StatelessWidget {
                 }),
               ),
               SizedBox(height: 16.h),
-              Text('Product Details ', style: TextStyles.font16BlackRegular.copyWith(
-                fontWeight: FontWeight.w500
-              )),
+              Text(
+                'Product Details ',
+                style: TextStyles.font16BlackRegular.copyWith(
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
               SizedBox(height: 8.h),
               Text(
                 'Lorem ipsum dolor sit amet consectetur. Nec aliquam morbi lacus habitasse amet. Nunc dui dictum facilisi faucibus amet sitaliquam morbi lacus habitasse amet. Nunc dui dictum facilisi faucibus amet sit',
@@ -123,14 +133,24 @@ class ProductDetailsScreen extends StatelessWidget {
               //const ReviewsAndViewAllSection(),
               SizedBox(height: 16.h),
               const ProductRatingSection(),
-              SizedBox(height: 24.h,),
+              SizedBox(height: 24.h),
               const CommentOnProductSection(),
               SizedBox(height: 16.h),
-              Text('Suggest For You', style: TextStyles.font18BlackW500.copyWith(
-                color: ColorManager.primaryColor
-              )),
+              Text(
+                'Suggest For You',
+                style: TextStyles.font18BlackW500.copyWith(
+                  color: ColorManager.primaryColor,
+                ),
+              ),
               SizedBox(height: 8.h),
               const SuggestForYouSection(),
+              SizedBox(height: 32.h),
+              CustomButtonWidget(
+                buttonText: 'Checkout',
+                onPressed: () {
+                  GoRouter.of(context).push(AppRouter.checkoutScreen);
+                },
+              ),
               SizedBox(height: 32.h),
             ],
           ),

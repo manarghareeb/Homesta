@@ -36,7 +36,7 @@ class ProductRatingSection extends StatelessWidget {
                 children: List.generate(5, (index) {
                   return Icon(
                     Icons.star,
-                    color: Color(0xFFFFCC00),
+                    color: ColorManager.yellowColor,
                     size: 20.sp,
                   );
                 }),

@@ -3,16 +3,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
-import 'package:homesta/features/checkout/presentation/views/payment_success__screen.dart';
+import 'package:homesta/features/payment/presentation/views/payment_success__screen.dart';
 
-class CheckoutScreen extends StatefulWidget {
-  const CheckoutScreen({super.key});
+class PaymentMethodScreen extends StatefulWidget {
+  const PaymentMethodScreen({super.key});
 
   @override
-  State<CheckoutScreen> createState() => _CheckoutScreenState();
+  State<PaymentMethodScreen> createState() => _PaymentMethodScreenState();
 }
 
-class _CheckoutScreenState extends State<CheckoutScreen> {
+class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
   String selectedPaymentMethod = 'credit_card';
 
   final TextEditingController cardHolderController = TextEditingController();
@@ -39,7 +39,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 minimumSize: Size(42.w, 24.h),
                 maximumSize: Size(42.w, 24.h),
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                backgroundColor: ColorManager.mainColor,
+                backgroundColor: ColorManager.soLightGreyColor,
               ),
               child: Text(
                 '10sn',
@@ -107,7 +107,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       vertical: 6.h,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.grey.shade200,
+                      color: ColorManager.soLightGreyColor,
                       borderRadius: BorderRadius.circular(10.r),
                     ),
                     child: Text(
@@ -124,7 +124,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       vertical: 6.h,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.grey.shade200,
+                      color: ColorManager.soLightGreyColor,
                       borderRadius: BorderRadius.circular(10.r),
                     ),
                     child: Text(
@@ -372,7 +372,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       decoration: InputDecoration(
         hintText: hint,
         filled: true,
-        fillColor: Colors.grey.shade100,
+        fillColor: ColorManager.soLightGreyColor,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.r),
           borderSide: BorderSide.none,

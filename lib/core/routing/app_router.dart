@@ -8,9 +8,11 @@ import 'package:homesta/features/authentication/presentation/views/login_screen.
 import 'package:homesta/features/authentication/presentation/views/set_new_password_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/signup_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/verification_screen.dart';
+import 'package:homesta/features/cart/presentation/views/withlist_screen.dart';
 import 'package:homesta/features/categories/presentation/views/category_section_screen.dart';
 import 'package:homesta/features/chat/chatscreen.dart';
-import 'package:homesta/features/checkout/presentation/views/checkout_screen.dart';
+import 'package:homesta/features/payment/presentation/views/payment_method_screen.dart';
+import 'package:homesta/features/home/presentation/views/checkout_screen.dart';
 import 'package:homesta/features/home/presentation/views/home.dart';
 import 'package:homesta/features/home/presentation/views/product_details_screen.dart';
 import 'package:homesta/features/notification/presentaion/views/notification.dart';
@@ -43,6 +45,8 @@ abstract class AppRouter {
   static final verficationScreen = '/verificationScreen';
   static final chatScreen = '/chatScreen';
   static final emptyNotificationScreen = '/emptyNotificationScreen';
+  static final withlistScreen = '/withlistScreen';
+  static final paymentMethodScreen = '/paymentMethodScreen';
 
   static final route = GoRouter(
     routes: [
@@ -85,6 +89,10 @@ abstract class AppRouter {
         builder: (context, state) => const CartScreen(),
       ),
       GoRoute(
+        path: withlistScreen,
+        builder: (context, state) => const WithlistScreen(),
+      ),
+      GoRoute(
         path: accountScreen,
         builder: (context, state) => const AccountScreen(),
       ),
@@ -100,8 +108,8 @@ abstract class AppRouter {
         },
       ),
       GoRoute(
-        path: checkoutScreen,
-        builder: (context, state) => const CheckoutScreen(),
+        path: paymentMethodScreen,
+        builder: (context, state) => const PaymentMethodScreen(),
       ),
       GoRoute(
         path: addNewPasswordScreen,
@@ -122,6 +130,10 @@ abstract class AppRouter {
       GoRoute(
         path: emptyNotificationScreen,
         builder: (context, state) => const NotificationEmptyScreen(),
+      ),
+      GoRoute(
+        path: checkoutScreen,
+        builder: (context, state) => const CheckoutScreen(),
       ),
     ],
   );
