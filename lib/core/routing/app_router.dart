@@ -1,7 +1,10 @@
 import 'package:go_router/go_router.dart';
+import 'package:homesta/features/account/presentation/views/contact_us_screen.dart';
 import 'package:homesta/features/account/presentation/views/edit_profile_screen.dart';
+import 'package:homesta/features/account/presentation/views/faqs_screen.dart';
 import 'package:homesta/features/account/presentation/views/help_center_screen.dart';
 import 'package:homesta/features/account/presentation/views/my_order_screen.dart';
+import 'package:homesta/features/account/presentation/views/setting_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/add_new_password_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/forget_password_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/login_screen.dart';
@@ -47,6 +50,10 @@ abstract class AppRouter {
   static final emptyNotificationScreen = '/emptyNotificationScreen';
   static final withlistScreen = '/withlistScreen';
   static final paymentMethodScreen = '/paymentMethodScreen';
+  static final contactUsScreen = '/contactUsScreen';
+  static final fAQsScreen = '/fAQsScreen';
+  static final settingScreen = '/settingScreen';
+
 
   static final route = GoRouter(
     routes: [
@@ -134,6 +141,18 @@ abstract class AppRouter {
       GoRoute(
         path: checkoutScreen,
         builder: (context, state) => const CheckoutScreen(),
+      ),
+      GoRoute(
+        path: settingScreen,
+        builder: (context, state) => const SettingScreen(),
+      ),
+      GoRoute(
+        path: contactUsScreen,
+        builder: (context, state) => const ContactUsScreen(),
+      ),
+      GoRoute(
+        path: fAQsScreen,
+        builder: (context, state) => const FAQsScreen(),
       ),
     ],
   );

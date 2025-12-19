@@ -87,6 +87,12 @@ class TextStyles {
     fontFamily: 'Outfit',
     color: ColorManager.primaryColor,
   );
+  static TextStyle font14WhiteColorW400 = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Outfit',
+    color: Colors.white,
+  );
 
   static TextStyle font12GreyColorW400 = TextStyle(
     fontSize: 12.sp,
