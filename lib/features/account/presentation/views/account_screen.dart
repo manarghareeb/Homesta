@@ -93,7 +93,9 @@ class AccountScreen extends StatelessWidget {
               OptionTile(
                 icon: Icons.settings_outlined,
                 label: 'Setting',
-                onTap: () {},
+                onTap: () {
+                  GoRouter.of(context).push(AppRouter.settingScreen);
+                },
               ),
               OptionTile(
                 icon: Icons.logout,
