@@ -2,18 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
+import 'package:homesta/features/home/presentation/widgets/count_container.dart';
 
-class YourCardItem extends StatefulWidget {
+class YourCardItem extends StatelessWidget {
   const YourCardItem({super.key});
 
   @override
-  State<YourCardItem> createState() => _YourCardItemState();
-}
-
-class _YourCardItemState extends State<YourCardItem> {
-  @override
   Widget build(BuildContext context) {
-    int quantity = 1;
+    
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.h),
       child: Row(
@@ -48,36 +44,7 @@ class _YourCardItemState extends State<YourCardItem> {
                   ),
                 ),
                 SizedBox(height: 12.h),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.r),
-                    border: Border.all(color: ColorManager.lightGreyColor),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          if (quantity > 1) setState(() => quantity--);
-                        },
-                        child: Icon(Icons.remove, size: 18.sp),
-                      ),
-                      SizedBox(width: 8.w),
-                      Text(
-                        quantity.toString(),
-                        style: TextStyles.font13BlackW500.copyWith(
-                          fontSize: 15.sp,
-                        ),
-                      ),
-                      SizedBox(width: 8.w),
-                      GestureDetector(
-                        onTap: () => setState(() => quantity++),
-                        child: Icon(Icons.add, size: 18.sp),
-                      ),
-                    ],
-                  ),
-                ),
+                const CountContainer(),
               ],
             ),
           ),

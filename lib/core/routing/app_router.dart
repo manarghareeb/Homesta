@@ -8,7 +8,7 @@ import 'package:homesta/features/authentication/presentation/views/login_screen.
 import 'package:homesta/features/authentication/presentation/views/set_new_password_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/signup_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/verification_screen.dart';
-import 'package:homesta/features/cart/presentation/views/withlist_screen.dart';
+import 'package:homesta/features/cart/presentation/views/wishlist_screen.dart';
 import 'package:homesta/features/categories/presentation/views/category_section_screen.dart';
 import 'package:homesta/features/chat/chatscreen.dart';
 import 'package:homesta/features/payment/presentation/views/payment_method_screen.dart';
@@ -90,7 +90,7 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: withlistScreen,
-        builder: (context, state) => const WithlistScreen(),
+        builder: (context, state) => const WishlistScreen(),
       ),
       GoRoute(
         path: accountScreen,

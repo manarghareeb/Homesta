@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 
-class ReviewsAndViewAllSection extends StatelessWidget {
-  const ReviewsAndViewAllSection({
+class ProductTitleWithRating extends StatelessWidget {
+  const ProductTitleWithRating({
     super.key,
   });
 
@@ -13,21 +13,16 @@ class ReviewsAndViewAllSection extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          'Reviews',
-          style: TextStyles.font18BlackW500.copyWith(
-            color: ColorManager.thirdColor,
-          ),
-        ),
+        Text('Modern Chair', style: TextStyles.font16BlackRegular),
         Row(
           children: [
-            Text('View All', style: TextStyles.font16GreyRegular),
-            SizedBox(width: 4.w),
             Icon(
-              Icons.arrow_downward_sharp,
+              Icons.star,
+              color: ColorManager.yellowColor,
               size: 20.sp,
-              color: ColorManager.greyColor,
             ),
+            SizedBox(width: 3.w),
+            Text('4.9', style: TextStyles.font14BlackColorW400),
           ],
         ),
       ],

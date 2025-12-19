@@ -6,8 +6,8 @@ import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/features/cart/presentation/widgets/product_item.dart';
 
-class WithlistScreen extends StatelessWidget {
-  const WithlistScreen({super.key});
+class WishlistScreen extends StatelessWidget {
+  const WishlistScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
