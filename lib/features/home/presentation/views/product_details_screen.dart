@@ -5,12 +5,17 @@ import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
-import 'package:homesta/core/widgets/custom_button_widget.dart';
 import 'package:homesta/features/home/presentation/widgets/comment_on_product_section.dart';
+import 'package:homesta/features/home/presentation/widgets/count_container.dart';
+import 'package:homesta/features/home/presentation/widgets/product_description_section.dart';
+import 'package:homesta/features/home/presentation/widgets/product_image_galary_section.dart';
 import 'package:homesta/features/home/presentation/widgets/product_rating_section.dart';
+import 'package:homesta/features/home/presentation/widgets/product_title_with_rating.dart';
 import 'package:homesta/features/home/presentation/widgets/reviews_and_view_all_section.dart';
+import 'package:homesta/features/home/presentation/widgets/select_color_section.dart';
 import 'package:homesta/features/home/presentation/widgets/suggest_for_you_section.dart';
 import 'package:homesta/features/home/presentation/widgets/total_price_add_to_card_section.dart';
+import 'package:homesta/features/payment/presentation/widgets/payment_action_buttons.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   const ProductDetailsScreen({super.key});
@@ -42,95 +47,36 @@ class ProductDetailsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset('assets/images/chair.png'),
-              SizedBox(height: 24.h),
-              Wrap(
-                spacing: 20.w,
-                runSpacing: 10.h,
-                children: List.generate(4, (index) {
-                  return Container(
-                    height: 70.h,
-                    width: 68.w,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.r),
-                      color: Colors.white,
-                      border: Border.all(color: ColorManager.thirdColor),
-                    ),
-                    child: Image.asset('assets/images/chair.png'),
-                  );
-                }),
-              ),
-              SizedBox(height: 24.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Modern Chair', style: TextStyles.font16BlackRegular),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.star,
-                        color: ColorManager.yellowColor,
-                        size: 20.sp,
-                      ),
-                      SizedBox(width: 3.w),
-                      Text('4.9', style: TextStyles.font14BlackColorW400),
-                    ],
-                  ),
+              const ProductImageGallerySection(
+                mainImage: 'assets/images/chair.png',
+                thumbnails: [
+                  'assets/images/chair.png',
+                  'assets/images/chair.png',
+                  'assets/images/chair.png',
+                  'assets/images/chair.png',
                 ],
               ),
-              SizedBox(height: 16.h),
-              RichText(
-                text: TextSpan(
-                  text: 'Select Color : ',
-                  style: TextStyles.font18BlackW500,
-                  children: [
-                    TextSpan(
-                      text: 'Green',
-                      style: TextStyles.font18BlackW500.copyWith(
-                        color: ColorManager.primaryColor,
-                      ),
-                    ),
-                  ],
-                ),
-                textAlign: TextAlign.start,
-              ),
-              SizedBox(height: 8.h),
-              Wrap(
-                spacing: 8.w,
-                children: List.generate(4, (index) {
-                  return Container(
-                    height: 24.h,
-                    width: 24.w,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color:
-                          index == 0
-                              ? ColorManager.primaryColor
-                              : index == 1
-                              ? ColorManager.blackColor
-                              : index == 2
-                              ? ColorManager.thirdColor
-                              : ColorManager.greyColor,
-                    ),
-                  );
-                }),
-              ),
-              SizedBox(height: 16.h),
-              Text(
-                'Product Details ',
-                style: TextStyles.font16BlackRegular.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              SizedBox(height: 8.h),
-              Text(
-                'Lorem ipsum dolor sit amet consectetur. Nec aliquam morbi lacus habitasse amet. Nunc dui dictum facilisi faucibus amet sitaliquam morbi lacus habitasse amet. Nunc dui dictum facilisi faucibus amet sit',
-                style: TextStyles.font14GreyColorW400,
-              ),
               SizedBox(height: 24.h),
-              const TotalPriceAndAddToCardSection(),
+              const ProductTitleWithRating(),
+              SizedBox(height: 24.h),
+              const ProductDescriptionSection(),
+              SizedBox(height: 16.h),
+              SelectColorSection(
+                selectedColorName: 'Green',
+                onColorSelected: (color) {
+                  print('Selected color: $color');
+                },
+              ),
+              SizedBox(height: 16.h),
+              CountContainer(
+                padding: EdgeInsets.symmetric(
+                  vertical: 7.4.h,
+                  horizontal: 11.5.w,
+                ),
+              ),
+              //const TotalPriceAndAddToCardSection(),
               SizedBox(height: 8.h),
-              //const ReviewsAndViewAllSection(),
+              const ReviewsAndViewAllSection(),
               SizedBox(height: 16.h),
               const ProductRatingSection(),
               SizedBox(height: 24.h),
@@ -145,15 +91,19 @@ class ProductDetailsScreen extends StatelessWidget {
               SizedBox(height: 8.h),
               const SuggestForYouSection(),
               SizedBox(height: 32.h),
-              CustomButtonWidget(
-                buttonText: 'Checkout',
-                onPressed: () {
-                  GoRouter.of(context).push(AppRouter.checkoutScreen);
-                },
-              ),
-              SizedBox(height: 32.h),
             ],
           ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+        child: PaymentActionButtons(
+          leftText: 'Add to Cart',
+          rightText: 'Buy Now',
+          onLeftPressed: () {},
+          onRightPressed: () {
+            GoRouter.of(context).push(AppRouter.checkoutScreen);
+          },
         ),
       ),
     );

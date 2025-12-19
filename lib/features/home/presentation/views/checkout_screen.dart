@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
+import 'package:homesta/core/widgets/custom_button_widget.dart';
 import 'package:homesta/features/home/presentation/widgets/order_summary_in_checkout.dart';
 import 'package:homesta/features/home/presentation/widgets/payment_method_selector.dart';
 import 'package:homesta/features/home/presentation/widgets/your_card_item.dart';
@@ -80,7 +83,24 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   color: ColorManager.aliceBlue,
                   borderRadius: BorderRadius.circular(16.r),
                 ),
-                child: const OrderSummaryInCheckout(),
+                child: Column(
+                  children: [
+                    const OrderSummaryInCheckout(),
+                    SizedBox(height: 24.h),
+        CustomButtonWidget(
+          buttonText: 'Place Order',
+          onPressed: () {
+            GoRouter.of(context).push(AppRouter.paymentMethodScreen);
+          },
+        ),
+        SizedBox(height: 8.h),
+        Text(
+          'By placing your order, you agree to our terms and conditions',
+          style: TextStyles.font14GreyColorW400,
+          textAlign: TextAlign.center,
+        ),
+                  ],
+                ),
               ),
             ],
           ),

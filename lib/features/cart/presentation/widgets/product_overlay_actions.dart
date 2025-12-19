@@ -58,9 +58,12 @@ class ProductOverlayActionsSection extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: onDeletePressed,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: ColorManager.soLightGreyColor,
+                    backgroundColor: ColorManager.soLightGreyColor.withOpacity(0),
                     padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 8.h),
                     shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: ColorManager.redColor
+                      ),
                       borderRadius: BorderRadius.circular(10.r),
                     ),
                   ),
