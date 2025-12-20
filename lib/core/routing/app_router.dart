@@ -22,6 +22,9 @@ import 'package:homesta/features/notification/presentaion/views/notification.dar
 import 'package:homesta/features/onboarding/presentation/views/onboarding_screen.dart';
 
 import '../../features/account/presentation/views/account_screen.dart';
+import '../../features/account/presentation/views/add_review.dart';
+import '../../features/account/presentation/views/invoice.dart';
+import '../../features/account/presentation/views/track_your_order.dart';
 import '../../features/cart/presentation/views/cart_screen.dart';
 import '../../features/notification/presentaion/views/notification_empty_screen.dart';
 import '../../features/search/presentation/views/search_screen.dart';
@@ -53,7 +56,10 @@ abstract class AppRouter {
   static final contactUsScreen = '/contactUsScreen';
   static final fAQsScreen = '/fAQsScreen';
   static final settingScreen = '/settingScreen';
-
+  static const String trackOrder = '/trackOrder';
+  static const String invoice = '/invoice';
+  static const String cancelOrder = '/cancelOrder';
+  static const String addReview = '/addReview';
 
   static final route = GoRouter(
     routes: [
@@ -153,6 +159,22 @@ abstract class AppRouter {
       GoRoute(
         path: fAQsScreen,
         builder: (context, state) => const FAQsScreen(),
+      ),
+      GoRoute(
+        path: myOrderScreen,
+        builder: (context, state) => const MyOrderScreen(),
+      ),
+      GoRoute(
+        path: trackOrder,
+        builder: (context, state) => const TrackOrderScreen(),
+      ),
+      GoRoute(
+        path: invoice,
+        builder: (context, state) => const InvoiceScreen(),
+      ),
+      GoRoute(
+        path: addReview,
+        builder: (context, state) => const AddReviewScreen(),
       ),
     ],
   );

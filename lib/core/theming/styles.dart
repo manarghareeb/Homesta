@@ -10,6 +10,12 @@ class TextStyles {
     color: ColorManager.blackColor,
     fontFamily: 'Outfit',
   );
+  static TextStyle font15BlackW500 = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Outfit',
+    color: ColorManager.blackColor,
+  );
   // style for grey text
   static TextStyle font16GreyRegular = TextStyle(
     fontSize: 16.sp,
@@ -17,9 +23,21 @@ class TextStyles {
     fontFamily: 'Outfit',
     color: ColorManager.greyColor,
   );
+  static TextStyle font14BlackColorW500 = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Outfit',
+    color: ColorManager.blackColor,
+  );
   static TextStyle font16BlackRegular = TextStyle(
     fontSize: 16.sp,
     fontWeight: FontWeight.w400,
+    fontFamily: 'Outfit',
+    color: ColorManager.blackColor,
+  );
+  static TextStyle font16BlackW500 = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w500,
     fontFamily: 'Outfit',
     color: ColorManager.blackColor,
   );
