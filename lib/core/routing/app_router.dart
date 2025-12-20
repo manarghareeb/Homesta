@@ -1,9 +1,13 @@
 import 'package:go_router/go_router.dart';
 import 'package:homesta/features/account/presentation/views/contact_us_screen.dart';
+import 'package:homesta/features/account/presentation/views/customer_support_screen.dart';
 import 'package:homesta/features/account/presentation/views/edit_profile_screen.dart';
 import 'package:homesta/features/account/presentation/views/faqs_screen.dart';
 import 'package:homesta/features/account/presentation/views/help_center_screen.dart';
+import 'package:homesta/features/account/presentation/views/logout_screen.dart';
 import 'package:homesta/features/account/presentation/views/my_order_screen.dart';
+import 'package:homesta/features/account/presentation/views/payment_account_screen.dart';
+import 'package:homesta/features/account/presentation/views/privacy_policy_screen.dart';
 import 'package:homesta/features/account/presentation/views/setting_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/add_new_password_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/forget_password_screen.dart';
@@ -60,6 +64,10 @@ abstract class AppRouter {
   static const String invoice = '/invoice';
   static const String cancelOrder = '/cancelOrder';
   static const String addReview = '/addReview';
+  static final logoutScreen = '/logoutScreen';
+  static final customerSupportScreen = '/customerSupportScreen';
+  static final paymentAccountScreen = '/paymentAccountScreen';
+  static final privacyPolicyScreen = '/privacyPolicyScreen';
 
   static final route = GoRouter(
     routes: [
@@ -175,6 +183,20 @@ abstract class AppRouter {
       GoRoute(
         path: addReview,
         builder: (context, state) => const AddReviewScreen(),
+        path: logoutScreen,
+        builder: (context, state) => const LogoutScreen(),
+      ),
+      GoRoute(
+        path: privacyPolicyScreen,
+        builder: (context, state) => const PrivacyPolicyScreen(),
+      ),
+      GoRoute(
+        path: customerSupportScreen,
+        builder: (context, state) => const CustomerSupportScreen(),
+      ),
+      GoRoute(
+        path: paymentAccountScreen,
+        builder: (context, state) => const PaymentAccountScreen(),
       ),
     ],
   );

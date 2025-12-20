@@ -66,7 +66,7 @@ class AccountScreen extends StatelessWidget {
                 icon: Icons.payment,
                 label: 'Payment Account',
                 onTap: () {
-                  //GoRouter.of(context).push(AppRouter.paymentMethodScreen);
+                  GoRouter.of(context).push(AppRouter.paymentAccountScreen);
                 },
               ),
               OptionTile(
@@ -86,13 +86,13 @@ class AccountScreen extends StatelessWidget {
                 label: 'Password Manager',
                 onTap: () {},
               ),
-              OptionTile(
+              /*OptionTile(
                 icon: Icons.help_outline,
                 label: 'Help Center',
                 onTap: () {
                   GoRouter.of(context).push(AppRouter.helpCenterScreen);
                 },
-              ),
+              ),*/
               SizedBox(height: 8.h),
               const Divider(),
               SizedBox(height: 24.h),
@@ -107,7 +107,8 @@ class AccountScreen extends StatelessWidget {
                 icon: Icons.logout,
                 label: 'Log Out',
                 onTap: () {
-                  bottomSheet(context);
+                  //bottomSheet(context);
+                  GoRouter.of(context).push(AppRouter.logoutScreen);
                 },
               ),
             ],

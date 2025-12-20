@@ -35,6 +35,12 @@ class TextStyles {
     fontFamily: 'Outfit',
     color: ColorManager.blackColor,
   );
+  static TextStyle font16DeepGeyColorRegular = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Outfit',
+    color: ColorManager.deepGreyColor,
+  );
   static TextStyle font16BlackW500 = TextStyle(
     fontSize: 16.sp,
     fontWeight: FontWeight.w500,

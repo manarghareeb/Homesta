@@ -7,12 +7,14 @@ class OptionTile extends StatelessWidget {
   final IconData icon;
   final String label;
   final Function() onTap;
+  final Widget? trailing;
 
   const OptionTile({
     super.key,
     required this.icon,
     required this.label,
     required this.onTap,
+    this.trailing,
   });
 
   @override
@@ -34,7 +36,7 @@ class OptionTile extends StatelessWidget {
               child: Icon(icon, color: ColorManager.blackColor),
             ),
             title: Text(label, style: TextStyles.font16BlackRegular),
-            trailing: Icon(Icons.arrow_forward_ios, size: 16),
+            trailing: trailing ?? Icon(Icons.arrow_forward_ios, size: 16),
             onTap: onTap,
           ),
         ),
