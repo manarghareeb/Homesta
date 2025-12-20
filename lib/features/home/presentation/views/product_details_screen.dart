@@ -102,7 +102,7 @@ class ProductDetailsScreen extends StatelessWidget {
           rightText: 'Buy Now',
           onLeftPressed: () {},
           onRightPressed: () {
-            GoRouter.of(context).push(AppRouter.checkoutScreen);
+            GoRouter.of(context).push(AppRouter.orderFlowScreen);
           },
         ),
       ),
