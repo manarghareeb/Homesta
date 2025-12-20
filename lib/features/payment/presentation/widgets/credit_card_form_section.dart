@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_text_field_widget.dart';
+import 'package:homesta/features/authentication/presentation/widgets/title_to_text_field.dart';
 
 class CreditCardFormSection extends StatelessWidget {
   const CreditCardFormSection({
@@ -23,9 +24,9 @@ class CreditCardFormSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 24.h),
-        Text(
-          'Card Holder Name',
-          style: TextStyles.font14BlackColorW400,
+        TitleToTextField(
+          title: 'Card Holder Name', 
+          //textStyle: TextStyles.font14BlackColorW400,
         ),
         SizedBox(height: 8.h),
         CustomTextFieldWidget(
@@ -35,7 +36,10 @@ class CreditCardFormSection extends StatelessWidget {
           title: '',
         ),
         SizedBox(height: 16.h),
-        Text('Card Number', style: TextStyles.font14BlackColorW400),
+        TitleToTextField(
+          title: 'Card Number', 
+          //textStyle: TextStyles.font14BlackColorW400,
+        ),
         SizedBox(height: 8.h),
         CustomTextFieldWidget(
           controller: cardNumberController,
@@ -50,7 +54,10 @@ class CreditCardFormSection extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Expiry Date', style: TextStyles.font14BlackColorW400),
+                  TitleToTextField(
+                    title: 'Expiry Date', 
+                    //textStyle: TextStyles.font14BlackColorW400,
+                  ),
                   SizedBox(height: 8.h),
                   CustomTextFieldWidget(
                     controller: expiryDateController,
@@ -66,7 +73,10 @@ class CreditCardFormSection extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('CVV', style: TextStyles.font14BlackColorW400),
+                  TitleToTextField(
+                    title: 'CVV', 
+                    //textStyle: TextStyles.font14BlackColorW400,
+                  ),
                   SizedBox(height: 8.h),
                   CustomTextFieldWidget(
                     controller: cvvController,

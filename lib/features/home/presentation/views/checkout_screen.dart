@@ -18,7 +18,6 @@ class CheckoutScreen extends StatefulWidget {
 }
 
 class _CheckoutScreenState extends State<CheckoutScreen> {
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +30,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 16.h, bottom: 24.h),
+          padding: EdgeInsets.only(
+            left: 16.w,
+            right: 16.w,
+            top: 16.h,
+            bottom: 24.h,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -87,18 +91,20 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   children: [
                     const OrderSummaryInCheckout(),
                     SizedBox(height: 24.h),
-        CustomButtonWidget(
-          buttonText: 'Place Order',
-          onPressed: () {
-            GoRouter.of(context).push(AppRouter.paymentMethodScreen);
-          },
-        ),
-        SizedBox(height: 8.h),
-        Text(
-          'By placing your order, you agree to our terms and conditions',
-          style: TextStyles.font14GreyColorW400,
-          textAlign: TextAlign.center,
-        ),
+                    CustomButtonWidget(
+                      buttonText: 'Place Order',
+                      onPressed: () {
+                        GoRouter.of(
+                          context,
+                        ).push(AppRouter.paymentMethodScreen);
+                      },
+                    ),
+                    SizedBox(height: 8.h),
+                    Text(
+                      'By placing your order, you agree to our terms and conditions',
+                      style: TextStyles.font14GreyColorW400,
+                      textAlign: TextAlign.center,
+                    ),
                   ],
                 ),
               ),
