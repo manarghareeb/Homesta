@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
 import 'package:homesta/core/widgets/custom_text_field_widget.dart';
+import 'package:homesta/features/account/presentation/widgets/selected_country.dart';
 import 'package:homesta/features/authentication/presentation/widgets/title_to_text_field.dart';
 
 class ShippingView extends StatefulWidget {
@@ -155,21 +156,7 @@ class _ShippingViewState extends State<ShippingView> {
               ),
               SizedBox(width: 16.w),
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TitleToTextField(
-                      title: 'Country', 
-                    ),
-                    SizedBox(height: 8.h),
-                    CustomTextFieldWidget(
-                      controller: countryController,
-                      hintText: 'Egypt',
-                      textInputType: TextInputType.number,
-                      title: '',
-                    ),
-                  ],
-                ),
+                child: const SelectedCountry(),
               ),
             ],
           ),

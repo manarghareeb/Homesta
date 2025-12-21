@@ -6,7 +6,7 @@ import 'package:homesta/features/account/presentation/views/faqs_screen.dart';
 import 'package:homesta/features/account/presentation/views/help_center_screen.dart';
 import 'package:homesta/features/account/presentation/views/logout_screen.dart';
 import 'package:homesta/features/account/presentation/views/my_order_screen.dart';
-import 'package:homesta/features/account/presentation/views/payment_account_screen.dart';
+import 'package:homesta/features/payment/presentation/views/payment_account_screen.dart';
 import 'package:homesta/features/account/presentation/views/privacy_policy_screen.dart';
 import 'package:homesta/features/account/presentation/views/setting_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/add_new_password_screen.dart';
@@ -17,19 +17,15 @@ import 'package:homesta/features/authentication/presentation/views/signup_screen
 import 'package:homesta/features/authentication/presentation/views/verification_screen.dart';
 import 'package:homesta/features/cart/presentation/views/wishlist_screen.dart';
 import 'package:homesta/features/categories/presentation/views/category_section_screen.dart';
-import 'package:homesta/features/chat/chatscreen.dart';
-import 'package:homesta/features/home/presentation/views/order_flow_screen.dart';
-import 'package:homesta/features/payment/presentation/views/payment_method_screen.dart';
-import 'package:homesta/features/home/presentation/views/checkout_screen.dart';
+import 'package:homesta/features/chat/presentation/views/chatscreen.dart';
+import 'package:homesta/features/order/presentation/views/order_flow_screen.dart';
 import 'package:homesta/features/home/presentation/views/home.dart';
-import 'package:homesta/features/home/presentation/views/product_details_screen.dart';
+import 'package:homesta/features/product/presentation/views/product_details_screen.dart';
 import 'package:homesta/features/notification/presentaion/views/notification.dart';
-import 'package:homesta/features/onboarding/presentation/views/onboarding_screen.dart';
-
 import '../../features/account/presentation/views/account_screen.dart';
 import '../../features/account/presentation/views/add_review.dart';
 import '../../features/account/presentation/views/invoice.dart';
-import '../../features/account/presentation/views/track_your_order.dart';
+import '../../features/account/presentation/views/track_your_order_screen.dart';
 import '../../features/cart/presentation/views/cart_screen.dart';
 import '../../features/notification/presentaion/views/notification_empty_screen.dart';
 import '../../features/search/presentation/views/search_screen.dart';
@@ -50,14 +46,12 @@ abstract class AppRouter {
   static final notificationScreen = '/notificationScreen';
   //static final categorySectionScreen = '/categorySectionScreen';
   static const String categorySectionScreen = '/categorySection/:title';
-  static final checkoutScreen = '/checkoutScreen';
   static final addNewPasswordScreen = '/addNewPasswordScreen';
   static final setNewPasswordScreen = '/setNewPasswordScreen';
   static final verficationScreen = '/verificationScreen';
   static final chatScreen = '/chatScreen';
   static final emptyNotificationScreen = '/emptyNotificationScreen';
   static final withlistScreen = '/withlistScreen';
-  static final paymentMethodScreen = '/paymentMethodScreen';
   static final contactUsScreen = '/contactUsScreen';
   static final fAQsScreen = '/fAQsScreen';
   static final settingScreen = '/settingScreen';
@@ -131,10 +125,6 @@ abstract class AppRouter {
         },
       ),
       GoRoute(
-        path: paymentMethodScreen,
-        builder: (context, state) => const PaymentMethodScreen(),
-      ),
-      GoRoute(
         path: addNewPasswordScreen,
         builder: (context, state) => const AddNewPasswordScreen(),
       ),
@@ -155,10 +145,6 @@ abstract class AppRouter {
         builder: (context, state) => const NotificationEmptyScreen(),
       ),
       GoRoute(
-        path: checkoutScreen,
-        builder: (context, state) => const CheckoutScreen(),
-      ),
-      GoRoute(
         path: settingScreen,
         builder: (context, state) => const SettingScreen(),
       ),
@@ -176,7 +162,7 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: trackOrder,
-        builder: (context, state) => const TrackOrderScreen(),
+        builder: (context, state) => const TrackYourOrderScreen(),
       ),
       GoRoute(
         path: invoice,
@@ -201,6 +187,10 @@ abstract class AppRouter {
       GoRoute(
         path: orderFlowScreen,
         builder: (context, state) => const OrderFlowScreen(),
+      ),
+      GoRoute(
+        path: logoutScreen,
+        builder: (context, state) => const LogoutScreen(),
       ),
     ],
   );

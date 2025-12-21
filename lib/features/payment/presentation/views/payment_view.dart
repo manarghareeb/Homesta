@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
-import 'package:homesta/features/account/presentation/views/payment_account_screen.dart';
+import 'package:homesta/features/payment/presentation/views/payment_account_screen.dart';
 
 class PaymentView extends StatelessWidget {
   final VoidCallback onNext;

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
-import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
-import 'package:homesta/features/home/presentation/views/cart_view.dart';
-import 'package:homesta/features/home/presentation/views/order_successfully_screen.dart';
-import 'package:homesta/features/home/presentation/views/payment_view.dart';
-import 'package:homesta/features/home/presentation/views/shipping_view.dart';
-import 'package:homesta/features/home/presentation/views/summary_view.dart';
+import 'package:homesta/features/cart/presentation/views/cart_view.dart';
+import 'package:homesta/features/order/presentation/views/order_successfully_screen.dart';
+import 'package:homesta/features/payment/presentation/views/payment_view.dart';
+import 'package:homesta/features/order/presentation/views/shipping_view.dart';
+import 'package:homesta/features/order/presentation/views/summary_view.dart';
 
 class OrderFlowScreen extends StatefulWidget {
   const OrderFlowScreen({super.key});
@@ -56,7 +55,7 @@ class _OrderFlowScreenState extends State<OrderFlowScreen> {
         child: Column(
           children: [
             SizedBox(
-              height: 100.h,
+              height: 70.h,
               child: Column(
                 children: [
                   Row(

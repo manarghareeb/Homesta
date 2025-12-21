@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:homesta/core/theming/colors.dart';
-import 'package:homesta/features/chatmassage/widgets/chat_bubble.dart';
-import 'package:homesta/features/chatmassage/widgets/next.dart';
-import 'package:homesta/models/chat_message.dart';
+import 'package:homesta/features/chat/presentation/widgets/chat_bubble.dart';
+import 'package:homesta/features/chat/presentation/widgets/next.dart';
+import 'package:homesta/features/chat/data/models/chat_message.dart';
 
 class chat_mass_Screen extends StatefulWidget {
   const chat_mass_Screen({super.key});

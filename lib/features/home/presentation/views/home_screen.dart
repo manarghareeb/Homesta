@@ -28,6 +28,15 @@ class HomeScreen extends StatelessWidget {
               GoRouter.of(context).push(AppRouter.emptyNotificationScreen);
             },
           ),
+          IconButton(
+            icon: Icon(
+              Icons.notifications_off_outlined,
+              color: ColorManager.buttonColor,
+            ),
+            onPressed: () {
+              GoRouter.of(context).push(AppRouter.notificationScreen);
+            },
+          ),
         ],
       ),
       body: Center(

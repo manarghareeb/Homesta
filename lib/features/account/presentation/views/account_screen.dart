@@ -3,8 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/styles.dart';
-import 'package:homesta/features/account/presentation/widgets/logout_and_cancel.dart';
-import 'package:homesta/features/account/presentation/widgets/name_and_edit_profile_section.dart';
 import 'package:homesta/features/account/presentation/widgets/option_tile.dart';
 import 'package:homesta/features/account/presentation/widgets/photo_profile.dart';
 
@@ -86,13 +84,6 @@ class AccountScreen extends StatelessWidget {
                 label: 'Password Manager',
                 onTap: () {},
               ),
-              /*OptionTile(
-                icon: Icons.help_outline,
-                label: 'Help Center',
-                onTap: () {
-                  GoRouter.of(context).push(AppRouter.helpCenterScreen);
-                },
-              ),*/
               SizedBox(height: 8.h),
               const Divider(),
               SizedBox(height: 24.h),
@@ -107,7 +98,6 @@ class AccountScreen extends StatelessWidget {
                 icon: Icons.logout,
                 label: 'Log Out',
                 onTap: () {
-                  //bottomSheet(context);
                   GoRouter.of(context).push(AppRouter.logoutScreen);
                 },
               ),
@@ -115,17 +105,6 @@ class AccountScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  void bottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      backgroundColor: Colors.transparent,
-      barrierColor: Color(0xFFB19470).withOpacity(0.6),
-      context: context,
-      builder: (BuildContext context) {
-        return const LogOutAndCancel();
-      },
     );
   }
 }

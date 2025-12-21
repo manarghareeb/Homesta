@@ -15,7 +15,7 @@ class SendMessageButton extends StatelessWidget {
       children: [
         SizedBox(
           width: 122.w,
-          height: 48,
+          height: 48.h,
           child: ElevatedButton(
             onPressed: () {},
             style: ElevatedButton.styleFrom(
@@ -37,5 +37,3 @@ class SendMessageButton extends StatelessWidget {
     );
   }
 }
-
-
