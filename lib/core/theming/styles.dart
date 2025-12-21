@@ -74,6 +74,12 @@ class TextStyles {
     fontFamily: 'Outfit',
     color: ColorManager.brounColor,
   );
+  static TextStyle font13BlackColorW400 = TextStyle(
+    fontSize: 13.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Outfit',
+    color: ColorManager.blackColor,
+  );
   static TextStyle font13BlackW500 = TextStyle(
     fontSize: 13.sp,
     fontWeight: FontWeight.w500,

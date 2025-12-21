@@ -4,8 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
-import 'package:homesta/core/widgets/custom_button_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../../../../core/widgets/custom_button_widget.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -17,134 +18,140 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController controller = PageController();
   int index = 0;
-  bool isLastPage = false;
 
   final List<Map<String, String>> pages = [
     {
-      'image': 'assets/images/image 1.png',
-      'text': '“EveryThing your home needs – In one place”',
+      'image': 'assets/images/onboarding1.png',
+      'title': 'Build your unique dining room look',
+      'subtitle': 'Personlize your room the way you want. Now\n eat at a table that is both stylish and well fit\n with your way.',
+      'button': 'Skip →',
     },
     {
-      'image': 'assets/images/image 2.png',
-      'text': '“Kitchen, Furniture, Electronics – All in Homesta”',
+      'image': 'assets/images/onboarding2.png',
+      'title': 'Weave your own kind of living room',
+      'subtitle': 'Add different colors to your personal space. Try\n exotic furnitures and play with the color pallet\n create your style !',
+      'button': 'Skip →',
     },
     {
-      'image': 'assets/images/image 3.png',
-      'text': '“Easy Shopping for every corner of your home”',
-    },
-    {
-      'image': 'assets/images/image 4.png',
-      'text': '“Your Home From A–Z IN Homesta”',
+      'image': 'assets/images/onboarding3.png',
+      'title': 'Try aesthetics, bring\n light to your place',
+      'subtitle': 'Feel like having an aesthetic vibe? Do not just think, add\n your favourite, compare items with your wishlist and\n add magic to that vibe to your life.',
+      'button': 'Explore →',
     },
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManager.mainColor,
+      backgroundColor: Colors.white,
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.h, vertical: 16.w),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  index > 0
-                      ? IconButton(
-                        icon: Icon(
-                          Icons.arrow_back_ios_new_rounded,
-                          color: Color(0xFF43766C),
-                          size: 15.sp,
-                        ),
-                        onPressed: () {
-                          controller.previousPage(
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.easeInOut,
-                          );
-                        },
-                      )
-                      : SizedBox(width: 48.w),
-                  TextButton(
-                    onPressed: () {
-                      GoRouter.of(context).push(AppRouter.loginScreen);
-                    },
-                    child: Text(
-                      'Skip',
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        color: ColorManager.blackColor,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Expanded(
-                child: PageView.builder(
-                  controller: controller,
-                  itemCount: pages.length,
-                  onPageChanged: (pageIndex) {
-                    setState(() {
-                      index = pageIndex;
-                      isLastPage = pageIndex == pages.length - 1;
-                    });
-                  },
-                  itemBuilder: (context, index) {
-                    final page = pages[index];
-                    return Column(
+        child: Column(
+          children: [
+            Expanded(
+              child: PageView.builder(
+                controller: controller,
+                itemCount: pages.length,
+                onPageChanged: (pageIndex) {
+                  setState(() {
+                    index = pageIndex;
+                  });
+                },
+                itemBuilder: (context, index) {
+                  final page = pages[index];
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: 16.w),
+                    child: Column(
                       children: [
-                        SizedBox(height: 10.h),
+
+                        /// صورة الغرفة
                         Expanded(
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20.r),
+                            borderRadius: BorderRadius.only(
+                                bottomRight: Radius.circular(240.r)),
                             child: Image.asset(
                               page['image']!,
                               fit: BoxFit.cover,
+                              width: double.infinity,
                             ),
                           ),
                         ),
                         SizedBox(height: 20.h),
-                        SmoothPageIndicator(
-                          controller: controller,
-                          count: pages.length,
-                          effect: ScaleEffect(
-                            activeDotColor: ColorManager.buttonColor,
-                            dotColor: ColorManager.secondColor,
-                            dotHeight: 8.h,
-                            dotWidth: 8.w,
+
+                        Column(
+                          children: [
+
+                            /// العنوان الرئيسي
+                            Text(
+                              page['title']!, // النص الرئيسي
+                              textAlign: TextAlign.center,
+                              style: TextStyles.font18BlackW500,
+                            ),
+                            SizedBox(height: 12.h),
+
+                            /// النص الفرعي
+                            Text(
+                              page['subtitle']!, // النص الفرعي
+                              textAlign: TextAlign.center,
+                              style: TextStyles.font13BlackColorW400,
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 30.h),
+
+                        /// الصف السفلي: المؤشر على الشمال والزر على اليمين
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.w),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+
+                              /// المؤشر على الجهة الشمال
+                              SmoothPageIndicator(
+                                controller: controller,
+                                count: pages.length,
+                                effect: ScaleEffect(
+                                  activeDotColor: ColorManager.buttonColor,
+                                  dotColor: ColorManager.lightGreyColor,
+                                  dotHeight: 8.h,
+                                  dotWidth: 8.w,
+                                ),
+                              ),
+
+                               /// الزر على الجهة اليمين
+                              pages[index]['button'] == 'Explore →'
+                                  ? SizedBox(
+                                width: 120.w, // حجم مناسب للزر
+                                child: CustomButtonWidget(
+                                  buttonText: pages[index]['button']!,
+                                  onPressed: () {
+                                    GoRouter.of(context).push(AppRouter.loginScreen);
+                                  },
+                                  isPrimary: true, // يخلي النص أبيض والخلفية ملونة
+                                ),
+                              )
+                                  : TextButton(
+                                onPressed: () {
+                                  controller.nextPage(
+                                    duration: const Duration(milliseconds: 400),
+                                    curve: Curves.easeInOut,
+                                  );
+                                },
+                                child: Text(
+                                  pages[index]['button']!,
+                                  style: TextStyles.font18BlackW500,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        SizedBox(height: 50.h),
-                        Text(
-                          page['text']!,
-                          textAlign: TextAlign.center,
-                          style: TextStyles.font18BlackW500,
-                        ),
-                        SizedBox(height: 70.h),
-                        CustomButtonWidget(
-                          buttonText: isLastPage ? 'Get Started' : 'Next', 
-                          onPressed: () {
-                              if (isLastPage) {
-                                GoRouter.of(
-                                  context,
-                                ).push(AppRouter.loginScreen);
-                              } else {
-                                controller.nextPage(
-                                  duration: const Duration(milliseconds: 400),
-                                  curve: Curves.easeInOut,
-                                );
-                              }
-                            },
-                        ),
-                        SizedBox(height: 20.h),
+
                       ],
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
