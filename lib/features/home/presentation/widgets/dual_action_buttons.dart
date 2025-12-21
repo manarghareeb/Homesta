@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 
-class PaymentActionButtons extends StatelessWidget {
-  const PaymentActionButtons({
+class DualActionButtons extends StatelessWidget {
+  const DualActionButtons({
     super.key,
     required this.leftText,
     required this.rightText,

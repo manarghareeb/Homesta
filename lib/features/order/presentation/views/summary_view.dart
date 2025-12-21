@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
-import 'package:homesta/features/home/presentation/widgets/order_summary_in_checkout.dart';
-import 'package:homesta/features/home/presentation/widgets/your_card_item.dart';
+import 'package:homesta/features/order/presentation/widgets/order_summary_in_checkout.dart';
+import 'package:homesta/features/cart/presentation/widgets/your_card_item.dart';
 
 class SummaryView extends StatelessWidget {
   final VoidCallback onNext;

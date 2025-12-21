@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:homesta/features/chatmassage/chat_messag_screen.dart';
-import 'widgets/AIImageSection.dart';
-import 'widgets/ChatHeaderBubble.dart';
-import 'widgets/StartChatButton.dart' show StartChatButton;
-import 'widgets/TitleSection.dart';
+import 'package:homesta/features/chat/presentation/views/chat_messag_screen.dart';
+import 'package:homesta/features/chat/presentation/widgets/AIImageSection.dart';
+import 'package:homesta/features/chat/presentation/widgets/ChatHeaderBubble.dart';
+import 'package:homesta/features/chat/presentation/widgets/StartChatButton.dart';
+import 'package:homesta/features/chat/presentation/widgets/TitleSection.dart';
+//import '../../widgets/StartChatButton.dart' show StartChatButton;
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});

@@ -5,17 +5,16 @@ import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
-import 'package:homesta/features/home/presentation/widgets/comment_on_product_section.dart';
+import 'package:homesta/features/product/presentation/widgets/comment_on_product_section.dart';
 import 'package:homesta/features/home/presentation/widgets/count_container.dart';
-import 'package:homesta/features/home/presentation/widgets/product_description_section.dart';
-import 'package:homesta/features/home/presentation/widgets/product_image_galary_section.dart';
-import 'package:homesta/features/home/presentation/widgets/product_rating_section.dart';
-import 'package:homesta/features/home/presentation/widgets/product_title_with_rating.dart';
-import 'package:homesta/features/home/presentation/widgets/reviews_and_view_all_section.dart';
-import 'package:homesta/features/home/presentation/widgets/select_color_section.dart';
-import 'package:homesta/features/home/presentation/widgets/suggest_for_you_section.dart';
-import 'package:homesta/features/home/presentation/widgets/total_price_add_to_card_section.dart';
-import 'package:homesta/features/payment/presentation/widgets/payment_action_buttons.dart';
+import 'package:homesta/features/product/presentation/widgets/product_description_section.dart';
+import 'package:homesta/features/product/presentation/widgets/product_image_galary_section.dart';
+import 'package:homesta/features/product/presentation/widgets/product_rating_section.dart';
+import 'package:homesta/features/product/presentation/widgets/product_title_with_rating.dart';
+import 'package:homesta/features/product/presentation/widgets/reviews_and_view_all_section.dart';
+import 'package:homesta/features/product/presentation/widgets/select_color_section.dart';
+import 'package:homesta/features/product/presentation/widgets/suggest_for_you_section.dart';
+import 'package:homesta/features/home/presentation/widgets/dual_action_buttons.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   const ProductDetailsScreen({super.key});
@@ -74,7 +73,6 @@ class ProductDetailsScreen extends StatelessWidget {
                   horizontal: 11.5.w,
                 ),
               ),
-              //const TotalPriceAndAddToCardSection(),
               SizedBox(height: 8.h),
               const ReviewsAndViewAllSection(),
               SizedBox(height: 16.h),
@@ -97,7 +95,7 @@ class ProductDetailsScreen extends StatelessWidget {
       ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-        child: PaymentActionButtons(
+        child: DualActionButtons(
           leftText: 'Add to Cart',
           rightText: 'Buy Now',
           onLeftPressed: () {},

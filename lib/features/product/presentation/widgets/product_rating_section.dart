@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
-import 'package:homesta/features/home/presentation/widgets/progress_item.dart';
+import 'package:homesta/features/product/presentation/widgets/progress_item.dart';
 
 class ProductRatingSection extends StatelessWidget {
   const ProductRatingSection({super.key});
