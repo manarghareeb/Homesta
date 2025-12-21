@@ -73,7 +73,7 @@ abstract class AppRouter {
 
   static final route = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) => HomeView()),
+      GoRoute(path: '/', builder: (context, state) => OnboardingScreen()),
       GoRoute(
         path: loginScreen,
         builder: (context, state) => const LoginScreen(),
