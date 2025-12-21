@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:homesta/core/theming/colors.dart';
+import 'package:homesta/core/theming/styles.dart';
+import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
+import 'package:homesta/features/home/presentation/views/cart_view.dart';
+import 'package:homesta/features/home/presentation/views/order_successfully_screen.dart';
+import 'package:homesta/features/home/presentation/views/payment_view.dart';
+import 'package:homesta/features/home/presentation/views/shipping_view.dart';
+import 'package:homesta/features/home/presentation/views/summary_view.dart';
 
 class OrderFlowScreen extends StatefulWidget {
   const OrderFlowScreen({super.key});
@@ -11,93 +19,111 @@ class OrderFlowScreen extends StatefulWidget {
 class _OrderFlowScreenState extends State<OrderFlowScreen> {
   int currentStep = 0;
 
-  final List<String> steps = [
-    "Order",
-    "Location",
-    "Payment",
-    "Summary",
+  final List<String> steps = ["Cart", "Shipping", "Payment", "Summary"];
+
+  final List<IconData> iconSteps = [
+    Icons.shopping_cart_outlined,
+    Icons.local_shipping_outlined,
+    Icons.payment,
+    Icons.summarize_outlined,
   ];
 
-  final List<Widget> screens = [
-    Center(child: Text("🛒 Enter Order Details")),
-    Center(child: Text("📍 Choose Delivery Location")),
-    Center(child: Text("💳 Select Payment Method")),
-    Center(child: Text("✅ Order Summary")),
-  ];
-
-  Color get primaryColor => const Color(0xFF4A90E2);
-  Color get inactiveColor => Colors.grey.shade300;
+  List<Widget> get screens => [
+        CartView(
+          onNext: () => setState(() => currentStep++),
+        ),
+        ShippingView(
+          onBack: () => setState(() => currentStep--),
+          onNext: () => setState(() => currentStep++),
+        ),
+        PaymentView(
+          onBack: () => setState(() => currentStep--),
+          onNext: () => setState(() => currentStep++),
+        ),
+        SummaryView(
+          onBack: () => setState(() => currentStep--),
+          onNext: () => navigateToSuccessScreen(context),
+        ),
+      ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Checkout Process"),
-        centerTitle: true,
-        backgroundColor: primaryColor,
-      ),
+      backgroundColor: Colors.white,
+      appBar: CustomAppBarWidget(text: 'Checkout'),
       body: Padding(
-        padding: EdgeInsets.all(16.w),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
         child: Column(
           children: [
-            // 🔹 Progress Bar with connecting lines
             SizedBox(
-              height: 80.h,
-              child: Stack(
-                alignment: Alignment.center,
+              height: 100.h,
+              child: Column(
                 children: [
-                  // Horizontal Line
-                  Positioned(
-                    top: 24.h,
-                    left: 0,
-                    right: 0,
-                    child: Row(
-                      children: List.generate(steps.length - 1, (index) {
-                        return Expanded(
-                          child: Container(
-                            height: 3.h,
-                            color: index < currentStep
-                                ? primaryColor
-                                : inactiveColor,
-                          ),
-                        );
-                      }),
-                    ),
-                  ),
-
-                  // Step Circles + Labels
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: List.generate(steps.length, (index) {
                       bool isActive = index == currentStep;
                       bool isCompleted = index < currentStep;
-
-                      return Column(
-                        children: [
-                          CircleAvatar(
-                            radius: 18.r,
-                            backgroundColor: isActive || isCompleted
-                                ? primaryColor
-                                : inactiveColor,
-                            child: Text(
-                              '${index + 1}',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
+                      final Color stepColor =
+                          (isActive || isCompleted)
+                              ? ColorManager.primaryColor
+                              : ColorManager.lightGreyColor;
+                      return Expanded(
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 18.r,
+                              backgroundColor: stepColor,
+                              child: Text(
+                                '${index + 1}',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
-                          ),
-                          SizedBox(height: 6.h),
+                            if (index != steps.length - 1) ...[
+                              Expanded(
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 4.w),
+                                  height: 2.h,
+                                  color:
+                                      index < currentStep
+                                          ? ColorManager.primaryColor
+                                          : ColorManager.lightGreyColor,
+                                ),
+                              ),
+                            ],
+                          ],
+                        ),
+                      );
+                    }),
+                  ),
+                  SizedBox(height: 10.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: List.generate(steps.length, (index) {
+                      bool isActive = index == currentStep;
+                      bool isCompleted = index < currentStep;
+                      final Color stepColor =
+                          (isActive || isCompleted)
+                              ? ColorManager.primaryColor
+                              : ColorManager.lightGreyColor;
+                      return Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(iconSteps[index],
+                              color: stepColor, size: 18.sp),
+                          SizedBox(width: 4.w),
                           Text(
                             steps[index],
                             style: TextStyle(
-                              fontSize: 12.sp,
-                              fontWeight: isActive
-                                  ? FontWeight.bold
-                                  : FontWeight.normal,
-                              color: isActive
-                                  ? primaryColor
-                                  : Colors.grey.shade600,
+                              fontSize: 13.sp,
+                              fontWeight:
+                                  (isActive || isCompleted)
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                              color: stepColor,
                             ),
                           ),
                         ],
@@ -107,80 +133,27 @@ class _OrderFlowScreenState extends State<OrderFlowScreen> {
                 ],
               ),
             ),
-
             SizedBox(height: 24.h),
-
-            // 🔹 Step content
             Expanded(
               child: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 300),
                 child: screens[currentStep],
               ),
             ),
-
-            // 🔹 Navigation Buttons
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                if (currentStep > 0)
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() => currentStep--);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.grey.shade400,
-                    ),
-                    child: const Text("Back"),
-                  ),
-                ElevatedButton(
-                  onPressed: () {
-                    if (currentStep < steps.length - 1) {
-                      setState(() => currentStep++);
-                    } else {
-                      showDialog(
-                        context: context,
-                        builder: (_) => AlertDialog(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16.r),
-                          ),
-                          content: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(Icons.check_circle,
-                                  color: primaryColor, size: 60.sp),
-                              SizedBox(height: 12.h),
-                              const Text(
-                                "Order Placed Successfully!",
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                                textAlign: TextAlign.center,
-                              ),
-                              SizedBox(height: 8.h),
-                              ElevatedButton(
-                                onPressed: () => Navigator.pop(context),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: primaryColor,
-                                ),
-                                child: const Text("Done"),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: primaryColor,
-                  ),
-                  child: Text(
-                    currentStep == steps.length - 1 ? "Finish" : "Next",
-                  ),
-                ),
-              ],
-            ),
           ],
         ),
       ),
     );
   }
+
+  void navigateToSuccessScreen(BuildContext context) {
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+      builder: (_) => const OrderSuccessfullyScreen(),
+    ),
+  );
+}
+
+
 }

@@ -185,8 +185,6 @@ abstract class AppRouter {
       GoRoute(
         path: addReview,
         builder: (context, state) => const AddReviewScreen(),
-        path: logoutScreen,
-        builder: (context, state) => const LogoutScreen(),
       ),
       GoRoute(
         path: privacyPolicyScreen,
