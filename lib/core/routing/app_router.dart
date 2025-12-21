@@ -18,6 +18,7 @@ import 'package:homesta/features/authentication/presentation/views/verification_
 import 'package:homesta/features/cart/presentation/views/wishlist_screen.dart';
 import 'package:homesta/features/categories/presentation/views/category_section_screen.dart';
 import 'package:homesta/features/chat/chatscreen.dart';
+import 'package:homesta/features/home/presentation/views/order_flow_screen.dart';
 import 'package:homesta/features/payment/presentation/views/payment_method_screen.dart';
 import 'package:homesta/features/home/presentation/views/checkout_screen.dart';
 import 'package:homesta/features/home/presentation/views/home.dart';
@@ -68,6 +69,7 @@ abstract class AppRouter {
   static final customerSupportScreen = '/customerSupportScreen';
   static final paymentAccountScreen = '/paymentAccountScreen';
   static final privacyPolicyScreen = '/privacyPolicyScreen';
+  static final orderFlowScreen = '/orderFlowScreen';
 
   static final route = GoRouter(
     routes: [
@@ -183,8 +185,6 @@ abstract class AppRouter {
       GoRoute(
         path: addReview,
         builder: (context, state) => const AddReviewScreen(),
-        path: logoutScreen,
-        builder: (context, state) => const LogoutScreen(),
       ),
       GoRoute(
         path: privacyPolicyScreen,
@@ -197,6 +197,10 @@ abstract class AppRouter {
       GoRoute(
         path: paymentAccountScreen,
         builder: (context, state) => const PaymentAccountScreen(),
+      ),
+      GoRoute(
+        path: orderFlowScreen,
+        builder: (context, state) => const OrderFlowScreen(),
       ),
     ],
   );

@@ -14,6 +14,25 @@ class PaymentAccountScreen extends StatefulWidget {
 }
 
 class _PaymentAccountScreenState extends State<PaymentAccountScreen> {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: CustomAppBarWidget(text: 'Payment Method'),
+      body: PaymentWidget(),
+    );
+  }
+}
+
+class PaymentWidget extends StatefulWidget {
+  const PaymentWidget({super.key});
+
+  @override
+  State<PaymentWidget> createState() => _PaymentWidgetState();
+}
+
+class _PaymentWidgetState extends State<PaymentWidget> {
   String selectedPayment = 'Paypal';
   bool addNewCard = false;
 
@@ -25,13 +44,9 @@ class _PaymentAccountScreenState extends State<PaymentAccountScreen> {
       addNewCard = isCardOption && title == 'Add New Credit/ Debit Card';
     });
   }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: CustomAppBarWidget(text: 'Payment Method'),
-      body: Padding(
+    return Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
         child: SingleChildScrollView(
           child: Column(
@@ -93,7 +108,6 @@ class _PaymentAccountScreenState extends State<PaymentAccountScreen> {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }

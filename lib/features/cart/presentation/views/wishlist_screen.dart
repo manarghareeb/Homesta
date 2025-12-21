@@ -39,7 +39,7 @@ class WishlistScreen extends StatelessWidget {
             crossAxisCount: 2,
             mainAxisSpacing: 24.h,
             crossAxisSpacing: 24.w,
-            //childAspectRatio: 1.08.h,
+            childAspectRatio: 1.08.h,
           ),
           itemBuilder: (context, index) {
             bool hasDiscount = index % 2 == 0;
