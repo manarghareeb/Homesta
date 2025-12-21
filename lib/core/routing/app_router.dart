@@ -30,6 +30,7 @@ import '../../features/account/presentation/views/account_screen.dart';
 import '../../features/account/presentation/views/add_review.dart';
 import '../../features/account/presentation/views/invoice.dart';
 import '../../features/account/presentation/views/manage_address_screen.dart';
+import '../../features/account/presentation/views/password_manager_screen.dart';
 import '../../features/account/presentation/views/track_your_order.dart';
 import '../../features/cart/presentation/views/cart_screen.dart';
 import '../../features/notification/presentaion/views/notification_empty_screen.dart';
@@ -72,6 +73,7 @@ abstract class AppRouter {
   static final privacyPolicyScreen = '/privacyPolicyScreen';
   static final orderFlowScreen = '/orderFlowScreen';
   static final manageAddress = '/manageAddress';
+  static final passwordManager = '/passwordManager';
 
   static final route = GoRouter(
     routes: [
@@ -207,6 +209,10 @@ abstract class AppRouter {
       GoRoute(
         path: manageAddress,
         builder: (context, state) => const ManageAddressScreen(),
+      ),
+      GoRoute(
+        path: passwordManager,
+        builder: (context, state) => const UpdatePasswordScreen(),
       ),
     ],
   );
