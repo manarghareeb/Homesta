@@ -81,7 +81,9 @@ class _SettingScreenState extends State<SettingScreen> {
               OptionTile(
                 icon: FontAwesomeIcons.mapLocationDot,
                 label: 'Manage Address',
-                onTap: () {},
+                onTap: () {
+                  GoRouter.of(context).push(AppRouter.manageAddress);
+                },
               ),
               OptionTile(
                 icon: Icons.support_agent_outlined,

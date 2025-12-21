@@ -29,6 +29,7 @@ import 'package:homesta/features/onboarding/presentation/views/onboarding_screen
 import '../../features/account/presentation/views/account_screen.dart';
 import '../../features/account/presentation/views/add_review.dart';
 import '../../features/account/presentation/views/invoice.dart';
+import '../../features/account/presentation/views/manage_address_screen.dart';
 import '../../features/account/presentation/views/track_your_order.dart';
 import '../../features/cart/presentation/views/cart_screen.dart';
 import '../../features/notification/presentaion/views/notification_empty_screen.dart';
@@ -70,10 +71,11 @@ abstract class AppRouter {
   static final paymentAccountScreen = '/paymentAccountScreen';
   static final privacyPolicyScreen = '/privacyPolicyScreen';
   static final orderFlowScreen = '/orderFlowScreen';
+  static final manageAddress = '/manageAddress';
 
   static final route = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) => OnboardingScreen()),
+      GoRoute(path: '/', builder: (context, state) => HomeView()),
       GoRoute(
         path: loginScreen,
         builder: (context, state) => const LoginScreen(),
@@ -201,6 +203,10 @@ abstract class AppRouter {
       GoRoute(
         path: orderFlowScreen,
         builder: (context, state) => const OrderFlowScreen(),
+      ),
+      GoRoute(
+        path: manageAddress,
+        builder: (context, state) => const ManageAddressScreen(),
       ),
     ],
   );
