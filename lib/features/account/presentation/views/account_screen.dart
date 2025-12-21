@@ -84,7 +84,9 @@ class AccountScreen extends StatelessWidget {
               OptionTile(
                 icon: Icons.lock_outline,
                 label: 'Password Manager',
-                onTap: () {},
+                onTap: () {
+                  GoRouter.of(context).push(AppRouter.passwordManager);
+                },
               ),
               /*OptionTile(
                 icon: Icons.help_outline,
