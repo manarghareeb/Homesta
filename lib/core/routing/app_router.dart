@@ -6,6 +6,7 @@ import 'package:homesta/features/account/presentation/views/faqs_screen.dart';
 import 'package:homesta/features/account/presentation/views/help_center_screen.dart';
 import 'package:homesta/features/account/presentation/views/logout_screen.dart';
 import 'package:homesta/features/account/presentation/views/my_order_screen.dart';
+import 'package:homesta/features/account/presentation/views/track_your_order_screen.dart';
 import 'package:homesta/features/payment/presentation/views/payment_account_screen.dart';
 import 'package:homesta/features/account/presentation/views/privacy_policy_screen.dart';
 import 'package:homesta/features/account/presentation/views/setting_screen.dart';
@@ -25,7 +26,6 @@ import 'package:homesta/features/notification/presentaion/views/notification.dar
 import '../../features/account/presentation/views/account_screen.dart';
 import '../../features/account/presentation/views/add_review.dart';
 import '../../features/account/presentation/views/invoice.dart';
-import '../../features/account/presentation/views/track_your_order_screen.dart';
 import '../../features/cart/presentation/views/cart_screen.dart';
 import '../../features/notification/presentaion/views/notification_empty_screen.dart';
 import '../../features/search/presentation/views/search_screen.dart';
@@ -41,7 +41,7 @@ abstract class AppRouter {
   static final categoryScreen = '/categoriesScreen';
   static final homeScreen = '/homeView';
   static final searchScreen = '/searchScreen';
-  static final cartScreen = '/sartScreen';
+  static final cartScreen = '/cartScreen';
   static final accountScreen = '/accountScreen';
   static final notificationScreen = '/notificationScreen';
   //static final categorySectionScreen = '/categorySectionScreen';
@@ -51,7 +51,7 @@ abstract class AppRouter {
   static final verficationScreen = '/verificationScreen';
   static final chatScreen = '/chatScreen';
   static final emptyNotificationScreen = '/emptyNotificationScreen';
-  static final withlistScreen = '/withlistScreen';
+  static final wishlistScreen = '/wishlistScreen';
   static final contactUsScreen = '/contactUsScreen';
   static final fAQsScreen = '/fAQsScreen';
   static final settingScreen = '/settingScreen';
@@ -64,6 +64,8 @@ abstract class AppRouter {
   static final paymentAccountScreen = '/paymentAccountScreen';
   static final privacyPolicyScreen = '/privacyPolicyScreen';
   static final orderFlowScreen = '/orderFlowScreen';
+  static final manageAddress = '/manageAddress';
+  static final passwordManager = '/passwordManager';
 
   static final route = GoRouter(
     routes: [
@@ -106,7 +108,7 @@ abstract class AppRouter {
         builder: (context, state) => const CartScreen(),
       ),
       GoRoute(
-        path: withlistScreen,
+        path: wishlistScreen,
         builder: (context, state) => const WishlistScreen(),
       ),
       GoRoute(
