@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
 import 'package:homesta/features/order/presentation/widgets/order_summary_in_checkout.dart';
 import 'package:homesta/features/cart/presentation/widgets/your_card_item.dart';
+
+import '../../../../core/routing/app_router.dart';
 
 class SummaryView extends StatelessWidget {
   final VoidCallback onNext;
@@ -125,6 +128,7 @@ class SummaryView extends StatelessWidget {
                 Expanded(
                   child: TextButton(
                     onPressed: () {
+                      GoRouter.of(context).push(AppRouter.sellerScreen);
                     },
                     style: TextButton.styleFrom(
                       padding: EdgeInsets.symmetric(vertical: 14.h),

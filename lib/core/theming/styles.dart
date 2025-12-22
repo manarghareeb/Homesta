@@ -16,6 +16,12 @@ class TextStyles {
     fontFamily: 'Outfit',
     color: ColorManager.blackColor,
   );
+  static TextStyle font15BlackW400 = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Outfit',
+    color: ColorManager.blackColor,
+  );
   // style for grey text
   static TextStyle font16GreyRegular = TextStyle(
     fontSize: 16.sp,
