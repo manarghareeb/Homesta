@@ -40,9 +40,9 @@ class CustomDropdownWidget extends StatelessWidget {
       ))
           .toList(),
       onChanged: onChanged,
-      iconEnabledColor: ColorManager.buttonColor, // لون السهم
+      iconEnabledColor: ColorManager.primaryColor, // لون السهم
       style: TextStyles.font14BlackColorW400.copyWith(
-        color: ColorManager.buttonColor, // لون النص المختار
+        color: ColorManager.primaryColor, // لون النص المختار
       ),
       decoration: InputDecoration(
         hintText: hint,
@@ -53,7 +53,7 @@ class CustomDropdownWidget extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15.r),
-          borderSide: BorderSide(color: ColorManager.buttonColor), // لون البوردر عند التركيز
+          borderSide: BorderSide(color: ColorManager.primaryColor), // لون البوردر عند التركيز
         ),
       ),
     );

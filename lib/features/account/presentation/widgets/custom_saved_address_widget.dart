@@ -39,7 +39,7 @@ class SavedAddressWidget extends StatelessWidget {
             ),
           ),
           IconButton(
-            icon: Icon(Icons.edit, color: ColorManager.buttonColor),
+            icon: Icon(Icons.edit, color: ColorManager.primaryColor),
             onPressed: onEdit,
           ),
           IconButton(

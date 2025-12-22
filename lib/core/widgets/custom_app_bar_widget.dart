@@ -10,12 +10,10 @@ class CustomAppBarWidget extends StatelessWidget
     required this.text,
     this.actions,
     this.backgroundColor = Colors.white,
-    this.textColor = ColorManager.buttonColor,
   });
   final String text;
   final List<Widget>? actions;
   final Color backgroundColor;
-  final Color textColor;
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);

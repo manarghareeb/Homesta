@@ -111,9 +111,7 @@ class _SearchScreenState extends State<SearchScreen> {
               controller: _searchController,
               decoration: InputDecoration(
                 hintText: 'Search',
-                hintStyle: TextStyles.font14MainColorW400.copyWith(
-                  color: ColorManager.lightGreyColor,
-                ),
+                hintStyle: TextStyles.font14lightGreyColorW400,
                 prefixIcon: Icon(
                   Icons.search,
                   color: ColorManager.lightGreyColor,
@@ -126,7 +124,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   onPressed: _listen,
                 ),
                 filled: true,
-                fillColor: ColorManager.searchColor,
+                fillColor: ColorManager.soLightGreyColor,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.r),
                   borderSide: BorderSide.none,

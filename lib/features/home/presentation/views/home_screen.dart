@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
           IconButton(
             icon: Icon(
               Icons.notifications_none,
-              color: ColorManager.buttonColor,
+              color: ColorManager.primaryColor,
             ),
             onPressed: () {
               GoRouter.of(context).push(AppRouter.emptyNotificationScreen);
@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
           IconButton(
             icon: Icon(
               Icons.notifications_off_outlined,
-              color: ColorManager.buttonColor,
+              color: ColorManager.primaryColor,
             ),
             onPressed: () {
               GoRouter.of(context).push(AppRouter.notificationScreen);

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
 import 'package:homesta/features/account/presentation/widgets/gender_and_birthday_selector.dart';
@@ -28,7 +27,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       backgroundColor: Colors.white,
       appBar: CustomAppBarWidget(
         text: 'Edit Profile',
-        textColor: ColorManager.blackColor,
       ),
       body: SingleChildScrollView(
         child: Padding(

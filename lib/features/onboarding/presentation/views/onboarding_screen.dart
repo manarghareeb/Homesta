@@ -110,7 +110,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 controller: controller,
                                 count: pages.length,
                                 effect: ScaleEffect(
-                                  activeDotColor: ColorManager.buttonColor,
+                                  activeDotColor: ColorManager.primaryColor,
                                   dotColor: ColorManager.lightGreyColor,
                                   dotHeight: 8.h,
                                   dotWidth: 8.w,

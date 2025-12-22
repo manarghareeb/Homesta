@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeView> {
         type: BottomNavigationBarType.fixed,
         elevation: 20,
         backgroundColor: Colors.white,
-        selectedItemColor: ColorManager.buttonColor,
+        selectedItemColor: ColorManager.primaryColor,
         unselectedItemColor: Colors.grey,
         currentIndex: index,
         onTap: (value) {

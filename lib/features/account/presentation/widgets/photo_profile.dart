@@ -14,7 +14,6 @@ class PhotoProfile extends StatelessWidget {
         CircleAvatar(
           backgroundImage: const AssetImage('assets/images/image 1.png'),
           radius: 60.r,
-          backgroundColor: ColorManager.brounColor,
         ),
         Positioned(
           bottom: 0,

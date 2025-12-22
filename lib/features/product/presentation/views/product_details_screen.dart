@@ -24,7 +24,6 @@ class ProductDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBarWidget(
         backgroundColor: ColorManager.soLightGreyColor,
-        textColor: ColorManager.blackColor,
         text: 'Product Details',
         actions: [
           IconButton(

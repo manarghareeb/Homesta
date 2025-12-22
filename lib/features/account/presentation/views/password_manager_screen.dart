@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homesta/core/routing/app_router.dart';
-import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
 import 'package:homesta/core/widgets/custom_text_field_widget.dart';
 
-class UpdatePasswordScreen extends StatefulWidget {
-  const UpdatePasswordScreen({super.key});
+class PasswordManagerScreen extends StatefulWidget {
+  const PasswordManagerScreen({super.key});
 
   @override
-  State<UpdatePasswordScreen> createState() => _UpdatePasswordScreenState();
+  State<PasswordManagerScreen> createState() => _PasswordManagerScreenState();
 }
 
-class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
+class _PasswordManagerScreenState extends State<PasswordManagerScreen> {
   final currentPasswordController = TextEditingController();
   final newPasswordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -69,10 +68,8 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                   },
                   child: Text(
                     "Forget Password?",
-                    style: TextStyles.font14GreyColorW400.copyWith(
-                      color: ColorManager.buttonColor,
-                      decoration: TextDecoration.underline,
-                      decorationColor: ColorManager.buttonColor,
+                    style: TextStyles.font16PrimaryColorW400Underline.copyWith(
+                      fontSize: 14.sp,
                     ),
                   ),
                 ),
@@ -126,7 +123,8 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                   if (formKey.currentState!.validate()) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                          content: Text("Password Updated Successfully")),
+                        content: Text("Password Updated Successfully"),
+                      ),
                     );
                   }
                 },
@@ -146,14 +144,17 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
         text: TextSpan(
           text: text,
           style: TextStyles.font16BlackRegular,
-          children: required
-              ? [
-            TextSpan(
-              text: " *",
-              style: TextStyles.font14BlackColorW400.copyWith(color: Colors.red),
-            ),
-          ]
-              : [],
+          children:
+              required
+                  ? [
+                    TextSpan(
+                      text: " *",
+                      style: TextStyles.font14BlackColorW400.copyWith(
+                        color: Colors.red,
+                      ),
+                    ),
+                  ]
+                  : [],
         ),
       ),
     );

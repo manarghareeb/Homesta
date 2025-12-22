@@ -45,7 +45,7 @@ class _SelectGenderButtonState extends State<SelectGenderButton> {
                 shape: BoxShape.circle,
                 color:
                     widget.selectedGender == widget.gender
-                        ? ColorManager.buttonColor
+                        ? ColorManager.primaryColor
                         : Colors.white,
                 border: Border.all(
                   color: widget.selectedGender == widget.gender
