@@ -41,7 +41,7 @@ class HelpCategoryWidget extends StatelessWidget {
             ],
             Text(title, style: TextStyles.font16BlackW500, textAlign: TextAlign.center),
             SizedBox(height: 4.h),
-            Text(description, style: TextStyles.font14GreyColorW400, textAlign: TextAlign.center),
+            Text(description, style: TextStyles.font14BlackColorW400, textAlign: TextAlign.center),
           ],
         ),
       ),
