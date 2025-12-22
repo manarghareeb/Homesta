@@ -47,12 +47,12 @@ class HelpCenterScreen extends StatelessWidget {
                 HelpCategoryWidget(
                   imagePath: "assets/images/credit.png",
                   title: "Billing & Payments",
-                  description: "Manage subscription, payment methods, and billing",
+                  description: "Manage subscriptions and payment methods",
                 ),
                 HelpCategoryWidget(
                   imagePath: "assets/images/privacy.png",
                   title: "Security & Privacy",
-                  description: "Keep your data secure and private",
+                  description: "Keep your account safe and secure",
                 ),
                 HelpCategoryWidget(
                   imagePath: "assets/images/setting.png",
@@ -62,12 +62,12 @@ class HelpCenterScreen extends StatelessWidget {
                 HelpCategoryWidget(
                   imagePath: "assets/images/team.png",
                   title: "Team Management",
-                  description: "Collaborate with other team members",
+                  description: "Collaborate with your team members",
                 ),
                 HelpCategoryWidget(
                   imagePath: "assets/images/headphone.png",
                   title: "Technical Support",
-                  description: "Troubleshoot and resolve technical issues",
+                  description: "Troubleshooting and technical issues",
                 ),
               ],
             ),
