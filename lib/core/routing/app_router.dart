@@ -31,6 +31,7 @@ import '../../features/account/presentation/views/add_review.dart';
 import '../../features/account/presentation/views/invoice.dart';
 import '../../features/cart/presentation/views/cart_screen.dart';
 import '../../features/notification/presentaion/views/notification_empty_screen.dart';
+import '../../features/order/presentation/views/seller_screen.dart';
 import '../../features/search/presentation/views/search_screen.dart';
 
 abstract class AppRouter {
@@ -69,10 +70,11 @@ abstract class AppRouter {
   static final orderFlowScreen = '/orderFlowScreen';
   static final manageAddress = '/manageAddress';
   static final passwordManager = '/passwordManager';
+  static final sellerScreen = '/sellerScreen';
 
   static final route = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) => OnboardingScreen()),
+      GoRoute(path: '/', builder: (context, state) => HomeView()),
       GoRoute(
         path: loginScreen,
         builder: (context, state) => const LoginScreen(),
@@ -204,6 +206,10 @@ abstract class AppRouter {
       GoRoute(
         path: passwordManager,
         builder: (context, state) => const UpdatePasswordScreen(),
+      ),
+      GoRoute(
+        path: sellerScreen,
+        builder: (context, state) => const SellerProfileScreen(sellerName: "Ahmad"),
       ),
     ],
   );
