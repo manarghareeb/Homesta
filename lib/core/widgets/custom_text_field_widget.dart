@@ -40,7 +40,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
       obscureText: widget.obscureText == true ? isObscured : false,
       validator: widget.validator,
       style: TextStyles.font16GreyRegular.copyWith(
-        color: ColorManager.buttonColor,
+        color: ColorManager.primaryColor,
       ),
       decoration: InputDecoration(
         prefixIcon:

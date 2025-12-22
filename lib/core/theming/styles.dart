@@ -67,18 +67,11 @@ class TextStyles {
     fontFamily: 'Outfit',
     color: ColorManager.blackColor,
   );
-  // style for text Button text
   static TextStyle font16WhiteW500 = TextStyle(
     fontSize: 16.sp,
     fontWeight: FontWeight.w500,
     fontFamily: 'Outfit',
     color: Colors.white,
-  );
-  static TextStyle font15BrownW200 = TextStyle(
-    fontSize: 15.sp,
-    fontWeight: FontWeight.w200,
-    fontFamily: 'Outfit',
-    color: ColorManager.brounColor,
   );
   static TextStyle font13BlackColorW400 = TextStyle(
     fontSize: 13.sp,
@@ -92,17 +85,23 @@ class TextStyles {
     fontFamily: 'Outfit',
     color: ColorManager.blackColor,
   );
-  static TextStyle font14MainColorW400 = TextStyle(
+  static TextStyle font14lightGreyColorW400 = TextStyle(
     fontSize: 14.sp,
     fontWeight: FontWeight.w400,
     fontFamily: 'Outfit',
-    color: ColorManager.mainColor,
+    color: ColorManager.lightGreyColor,
   );
   static TextStyle font14GreyColorW400 = TextStyle(
     fontSize: 14.sp,
     fontWeight: FontWeight.w400,
     fontFamily: 'Outfit',
     color: ColorManager.greyColor,
+  );
+  static TextStyle font14deepGreyColorW400 = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Outfit',
+    color: ColorManager.deepGreyColor,
   );
   static TextStyle font14BlackColorW400 = TextStyle(
     fontSize: 14.sp,

@@ -23,7 +23,6 @@ class _CategorySectionScreenState extends State<CategorySectionScreen> {
       backgroundColor: ColorManager.soLightGreyColor,
       appBar: CustomAppBarWidget(
         backgroundColor: ColorManager.soLightGreyColor,
-        textColor: ColorManager.brounColor,
         text: widget.title,
       ),
       body: Padding(
