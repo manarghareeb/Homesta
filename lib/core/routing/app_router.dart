@@ -8,7 +8,8 @@ import 'package:homesta/features/account/presentation/views/logout_screen.dart';
 import 'package:homesta/features/account/presentation/views/manage_address_screen.dart';
 import 'package:homesta/features/account/presentation/views/my_order_screen.dart';
 import 'package:homesta/features/account/presentation/views/password_manager_screen.dart';
-import 'package:homesta/features/account/presentation/views/track_your_order_screen.dart';
+import 'package:homesta/features/order/presentation/views/track_order_details_screen.dart';
+import 'package:homesta/features/order/presentation/views/track_your_order_screen.dart';
 import 'package:homesta/features/onboarding/presentation/views/onboarding_screen.dart';
 import 'package:homesta/features/payment/presentation/views/payment_account_screen.dart';
 import 'package:homesta/features/account/presentation/views/privacy_policy_screen.dart';
@@ -69,10 +70,11 @@ abstract class AppRouter {
   static final orderFlowScreen = '/orderFlowScreen';
   static final manageAddress = '/manageAddress';
   static final passwordManager = '/passwordManager';
+  static final trackOrderDetails = '/trackOrderDetails';
 
   static final route = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) => OnboardingScreen()),
+      GoRoute(path: '/', builder: (context, state) => HomeView()),
       GoRoute(
         path: loginScreen,
         builder: (context, state) => const LoginScreen(),
@@ -203,7 +205,11 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: passwordManager,
-        builder: (context, state) => const UpdatePasswordScreen(),
+        builder: (context, state) => const PasswordManagerScreen(),
+      ),
+      GoRoute(
+        path: trackOrderDetails,
+        builder: (context, state) => const TrackOrderDetailsScreen(),
       ),
     ],
   );

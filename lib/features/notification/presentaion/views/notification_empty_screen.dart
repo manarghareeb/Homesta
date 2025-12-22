@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 
@@ -13,7 +12,6 @@ class NotificationEmptyScreen extends StatelessWidget {
       appBar: const CustomAppBarWidget(
         text: 'Notification',
         backgroundColor: Colors.white,
-        textColor: ColorManager.blackColor,
       ),
       backgroundColor: Colors.white,
       body: Center(
