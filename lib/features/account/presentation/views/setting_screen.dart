@@ -109,7 +109,9 @@ class _SettingScreenState extends State<SettingScreen> {
               OptionTile(
                 icon: FontAwesomeIcons.circleQuestion,
                 label: 'Help Center',
-                onTap: () {},
+                onTap: () {
+                  GoRouter.of(context).push(AppRouter.helpCenterScreen);
+                },
               ),
               OptionTile(
                 icon: Icons.privacy_tip_outlined,

@@ -5,35 +5,51 @@ import 'package:homesta/core/theming/styles.dart';
 
 class CustomButtonWidget extends StatelessWidget {
   const CustomButtonWidget({
-    super.key, 
-    required this.buttonText, 
-    required this.onPressed, 
-    this.isPrimary = true, 
+    super.key,
+    required this.buttonText,
+    required this.onPressed,
+    this.isPrimary = true,
+    this.backgroundColor,
+    this.textColor,
+    this.minWidth,
+    this.height,
   });
+
   final String buttonText;
   final VoidCallback onPressed;
   final bool isPrimary;
 
+  /// ألوان اختيارية
+  final Color? backgroundColor;
+  final Color? textColor;
+
+  /// حجم اختياري
+  final double? minWidth;
+  final double? height;
+
   @override
   Widget build(BuildContext context) {
+    final Color bgColor =
+        backgroundColor ?? (isPrimary ? ColorManager.primaryColor : Colors.white);
+    final Color txtColor =
+        textColor ?? (isPrimary ? Colors.white : ColorManager.primaryColor);
+
     return TextButton(
       onPressed: onPressed,
       style: TextButton.styleFrom(
-        backgroundColor: isPrimary ? ColorManager.primaryColor : Colors.white,
+        backgroundColor: bgColor,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        minimumSize: Size(double.infinity, 48.w),
+        minimumSize: Size(minWidth ?? double.infinity, height ?? 48.h),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(25.r),
           side: BorderSide(
-            color: isPrimary ? Colors.transparent : ColorManager.primaryColor
-          )
+            color: isPrimary ? Colors.transparent : ColorManager.primaryColor,
+          ),
         ),
       ),
       child: Text(
-        buttonText, 
-        style: isPrimary ? TextStyles.font16WhiteW500 : TextStyles.font16WhiteW500.copyWith(
-          color: ColorManager.primaryColor,
-        )
+        buttonText,
+        style: TextStyles.font16WhiteW500.copyWith(color: txtColor),
       ),
     );
   }
