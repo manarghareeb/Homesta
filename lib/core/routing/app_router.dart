@@ -5,7 +5,9 @@ import 'package:homesta/features/account/presentation/views/edit_profile_screen.
 import 'package:homesta/features/account/presentation/views/faqs_screen.dart';
 import 'package:homesta/features/account/presentation/views/help_center_screen.dart';
 import 'package:homesta/features/account/presentation/views/logout_screen.dart';
+import 'package:homesta/features/account/presentation/views/manage_address_screen.dart';
 import 'package:homesta/features/account/presentation/views/my_order_screen.dart';
+import 'package:homesta/features/account/presentation/views/password_manager_screen.dart';
 import 'package:homesta/features/account/presentation/views/track_your_order_screen.dart';
 import 'package:homesta/features/onboarding/presentation/views/onboarding_screen.dart';
 import 'package:homesta/features/payment/presentation/views/payment_account_screen.dart';
@@ -194,6 +196,14 @@ abstract class AppRouter {
       GoRoute(
         path: logoutScreen,
         builder: (context, state) => const LogoutScreen(),
+      ),
+      GoRoute(
+        path: manageAddress,
+        builder: (context, state) => const ManageAddressScreen(),
+      ),
+      GoRoute(
+        path: passwordManager,
+        builder: (context, state) => const UpdatePasswordScreen(),
       ),
     ],
   );
