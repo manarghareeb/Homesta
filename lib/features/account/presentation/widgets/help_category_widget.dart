@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/theming/styles.dart';
 
 class HelpCategoryWidget extends StatelessWidget {
@@ -31,7 +32,7 @@ class HelpCategoryWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             if (imagePath != null) ...[
-              Image.asset(
+              SvgPicture.asset(
                 imagePath!,
                 width: 24.w,
                 height: 24.w,

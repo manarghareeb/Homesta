@@ -6,7 +6,7 @@ import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
 import 'package:homesta/core/widgets/custom_text_field_widget.dart';
-import 'package:homesta/features/authentication/presentation/widgets/title_to_text_field.dart';
+import 'package:homesta/core/widgets/title_to_text_field.dart';
 
 class TrackYourOrderScreen extends StatefulWidget {
   const TrackYourOrderScreen({super.key});

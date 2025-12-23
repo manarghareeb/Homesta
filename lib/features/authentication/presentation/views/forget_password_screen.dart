@@ -6,7 +6,7 @@ import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
 import 'package:homesta/core/widgets/custom_text_field_widget.dart';
 import 'package:homesta/features/authentication/presentation/widgets/auth_navigation_text.dart';
-import 'package:homesta/features/authentication/presentation/widgets/title_to_text_field.dart';
+import 'package:homesta/core/widgets/title_to_text_field.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});

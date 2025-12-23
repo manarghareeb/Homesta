@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
+import 'package:homesta/features/home/presentation/views/home.dart';
 import 'package:homesta/features/order/presentation/widgets/order_summary_in_checkout.dart';
 import 'package:homesta/features/cart/presentation/widgets/your_card_item.dart';
 
@@ -45,8 +46,11 @@ class SummaryView extends StatelessWidget {
                   Text('Shipping Address'),
                   Row(
                     children: [
-                      Icon(Icons.location_on_outlined, color: ColorManager.greyColor,),
-                      SizedBox(width: 4.w,),
+                      Icon(
+                        Icons.location_on_outlined,
+                        color: ColorManager.greyColor,
+                      ),
+                      SizedBox(width: 4.w),
                       Text(
                         'Nasr City, Cairo - Egypt',
                         style: TextStyles.font14GreyColorW400,
@@ -83,8 +87,9 @@ class SummaryView extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: 4,
-              separatorBuilder: (context, index) =>
-                  Divider(color: ColorManager.lightGreyColor),
+              separatorBuilder:
+                  (context, index) =>
+                      Divider(color: ColorManager.lightGreyColor),
               itemBuilder: (context, index) => const YourCardItem(),
             ),
             SizedBox(height: 24.h),
@@ -110,7 +115,9 @@ class SummaryView extends StatelessWidget {
               children: [
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: onBack,
+                    onPressed: () {
+                      GoRouter.of(context).push(AppRouter.sellerScreen);
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: ColorManager.thirdColor,
                       padding: EdgeInsets.symmetric(vertical: 14.h),
@@ -128,7 +135,13 @@ class SummaryView extends StatelessWidget {
                 Expanded(
                   child: TextButton(
                     onPressed: () {
-                      GoRouter.of(context).push(AppRouter.sellerScreen);
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomeView(),
+                        ),
+                        (route) => false,
+                      );
                     },
                     style: TextButton.styleFrom(
                       padding: EdgeInsets.symmetric(vertical: 14.h),
