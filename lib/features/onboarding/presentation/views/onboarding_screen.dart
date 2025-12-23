@@ -5,7 +5,6 @@ import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../../../../core/widgets/custom_button_widget.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -62,8 +61,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     padding: EdgeInsets.only(bottom: 16.w),
                     child: Column(
                       children: [
-
-                        /// صورة الغرفة
                         Expanded(
                           child: ClipRRect(
                             borderRadius: BorderRadius.only(
@@ -76,36 +73,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           ),
                         ),
                         SizedBox(height: 20.h),
-
                         Column(
                           children: [
-
-                            /// العنوان الرئيسي
                             Text(
-                              page['title']!, // النص الرئيسي
+                              page['title']!,
                               textAlign: TextAlign.center,
                               style: TextStyles.font18BlackW500,
                             ),
                             SizedBox(height: 12.h),
-
-                            /// النص الفرعي
                             Text(
-                              page['subtitle']!, // النص الفرعي
+                              page['subtitle']!, 
                               textAlign: TextAlign.center,
                               style: TextStyles.font13BlackColorW400,
                             ),
                           ],
                         ),
                         SizedBox(height: 30.h),
-
-                        /// الصف السفلي: المؤشر على الشمال والزر على اليمين
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 16.w),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-
-                              /// المؤشر على الجهة الشمال
                               SmoothPageIndicator(
                                 controller: controller,
                                 count: pages.length,
@@ -115,18 +103,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   dotHeight: 8.h,
                                   dotWidth: 8.w,
                                 ),
-                              ),
-
-                               /// الزر على الجهة اليمين
+                              ),                            
                               pages[index]['button'] == 'Explore →'
                                   ? SizedBox(
-                                width: 120.w, // حجم مناسب للزر
+                                width: 120.w,
                                 child: CustomButtonWidget(
                                   buttonText: pages[index]['button']!,
                                   onPressed: () {
                                     GoRouter.of(context).push(AppRouter.loginScreen);
                                   },
-                                  isPrimary: true, // يخلي النص أبيض والخلفية ملونة
+                                  isPrimary: true, 
                                 ),
                               )
                                   : TextButton(
@@ -144,7 +130,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ],
                           ),
                         ),
-
                       ],
                     ),
                   );
