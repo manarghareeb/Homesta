@@ -18,7 +18,7 @@ class YourCardItem extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(15.r),
             child: Image.asset(
-              'assets/images/image 3.png',
+              'assets/images/image 1.png',
               width: 137.w,
               height: 111.h,
               fit: BoxFit.cover,

@@ -25,10 +25,10 @@ class _MyOrdersScreenState extends State<MyOrderScreen> {
       paymentMethod: "Paypal",
       deliveryDate: "24 April 2024",
       items: [
-        OrderItemModel("Wingback Chair", "Light Brown", "\$320.00", "assets/images/wingback_chair.png"),
-        OrderItemModel("Wooden Sofa Chair", "Grey", "\$180.00", "assets/images/sofa_chair.png"),
+        OrderItemModel("Wingback Chair", "Light Brown", "\$320.00", "assets/images/bar_stool.png"),
+        OrderItemModel("Wooden Sofa Chair", "Grey", "\$180.00", "assets/images/bar_stool.png"),
         OrderItemModel("Bar Stool", "Brown", "\$60.00", "assets/images/bar_stool.png"),
-        OrderItemModel("Brown Bean Bag Chair", "Brown", "\$180.00", "assets/images/bean_bag.png"),
+        OrderItemModel("Brown Bean Bag Chair", "Brown", "\$180.00", "assets/images/bar_stool.png"),
       ],
       status: "Accepted",
       statusMessage: "Your Order has been Accepted",
@@ -40,7 +40,7 @@ class _MyOrdersScreenState extends State<MyOrderScreen> {
       paymentMethod: "Cash",
       deliveryDate: "24 April 2024",
       items: [
-        OrderItemModel("Brown Bean Bag Chair", "Brown", "\$375.00", "assets/images/bean_bag.png"),
+        OrderItemModel("Brown Bean Bag Chair", "Brown", "\$375.00", "assets/images/bar_stool.png"),
       ],
       status: "Delivered",
       statusMessage: "Your Order has been Delivered",

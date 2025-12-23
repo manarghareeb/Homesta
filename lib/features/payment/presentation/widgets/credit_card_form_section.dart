@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/widgets/custom_text_field_widget.dart';
-import 'package:homesta/features/authentication/presentation/widgets/title_to_text_field.dart';
+import 'package:homesta/core/widgets/title_to_text_field.dart';
 
 class CreditCardFormSection extends StatelessWidget {
   const CreditCardFormSection({

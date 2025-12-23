@@ -5,6 +5,7 @@ import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
+import 'package:homesta/features/home/presentation/views/home.dart';
 
 class OrderSuccessfullyScreen extends StatelessWidget {
   const OrderSuccessfullyScreen({super.key});
@@ -89,7 +90,18 @@ class OrderSuccessfullyScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 24.h),
-              CustomButtonWidget(buttonText: 'Back to home', onPressed: () {}),
+              CustomButtonWidget(
+                buttonText: 'Back to home', 
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomeView(),
+                        ),
+                        (route) => false,
+                      );
+                }
+              ),
               SizedBox(height: 16.h),
               CustomButtonWidget(
                 buttonText: 'Track Order',

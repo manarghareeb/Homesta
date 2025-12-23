@@ -64,11 +64,11 @@ class SearchPopulatedState extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildSuggestedItem('Bedrooms', 'assets/images/bedroom.png'),
+            _buildSuggestedItem('Bedrooms', 'assets/images/catrgories_image/bedroom.png'),
             SizedBox(height: 12.h),
-            _buildSuggestedItem('Living Room', 'assets/images/livingroom.png'),
+            _buildSuggestedItem('Living Room', 'assets/images/catrgories_image/livingroom.png'),
             SizedBox(height: 12.h),
-            _buildSuggestedItem('Home Tools', 'assets/images/tools.png'),
+            _buildSuggestedItem('Home Tools', 'assets/images/catrgories_image/tools.png'),
           ],
         ),
       ],

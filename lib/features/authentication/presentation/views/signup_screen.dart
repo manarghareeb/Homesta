@@ -10,7 +10,7 @@ import 'package:homesta/features/authentication/presentation/widgets/auth_naviga
 import 'package:homesta/features/authentication/presentation/widgets/checkbox_widget.dart';
 import 'package:homesta/features/authentication/presentation/widgets/continue_with.dart';
 import 'package:homesta/features/authentication/presentation/widgets/social_media_button.dart';
-import 'package:homesta/features/authentication/presentation/widgets/title_to_text_field.dart';
+import 'package:homesta/core/widgets/title_to_text_field.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});

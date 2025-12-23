@@ -6,9 +6,6 @@ import 'package:homesta/features/search/presentation/widgets/search_populated_st
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import '../../../../core/theming/styles.dart';
 
-
-
-
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
@@ -23,16 +20,30 @@ class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _searchController = TextEditingController();
 
   final List<Map<String, String>> _allCategories = [
-    {'title': 'Electrical Appliances', 'image': 'assets/images/electrical.png'},
-    {'title': 'Bedrooms', 'image': 'assets/images/bedroom.png'},
-    {'title': 'Living Room', 'image': 'assets/images/livingroom.png'},
-    {'title': 'Kitchen', 'image': 'assets/images/kitchen.png'},
-    {'title': 'Medical Devices', 'image': 'assets/images/medical.png'},
-    {'title': 'Home Tools', 'image': 'assets/images/tools.png'},
+    {
+      'title': 'Electrical Appliances',
+      'image': 'assets/images/catrgories_image/electrical.png',
+    },
+    {
+      'title': 'Bedrooms',
+      'image': 'assets/images/catrgories_image/bedroom.png',
+    },
+    {
+      'title': 'Living Room',
+      'image': 'assets/images/catrgories_image/livingroom.png',
+    },
+    {'title': 'Kitchen', 'image': 'assets/images/catrgories_image/kitchen.png'},
+    {
+      'title': 'Medical Devices',
+      'image': 'assets/images/catrgories_image/medical.png',
+    },
+    {
+      'title': 'Home Tools',
+      'image': 'assets/images/catrgories_image/tools.png',
+    },
   ];
 
   List<Map<String, String>> _filteredCategories = [];
-
 
   @override
   void initState() {
@@ -133,9 +144,10 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             SizedBox(height: 20.h),
             Expanded(
-              child: _isSearching
-                  ? const SearchPopulatedState()
-                  : const SearchEmptyState(),
+              child:
+                  _isSearching
+                      ? const SearchPopulatedState()
+                      : const SearchEmptyState(),
             ),
           ],
         ),

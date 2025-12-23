@@ -6,7 +6,7 @@ import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
 import 'package:homesta/features/authentication/presentation/widgets/auth_navigation_text.dart';
-import 'package:homesta/features/authentication/presentation/widgets/title_to_text_field.dart';
+import 'package:homesta/core/widgets/title_to_text_field.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class VerificationScreen extends StatefulWidget {

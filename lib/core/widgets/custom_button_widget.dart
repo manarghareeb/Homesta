@@ -13,11 +13,13 @@ class CustomButtonWidget extends StatelessWidget {
     this.textColor,
     this.minWidth,
     this.height,
+    this.raduis
   });
 
   final String buttonText;
   final VoidCallback onPressed;
   final bool isPrimary;
+  final double? raduis;
 
   /// ألوان اختيارية
   final Color? backgroundColor;
@@ -30,7 +32,8 @@ class CustomButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color bgColor =
-        backgroundColor ?? (isPrimary ? ColorManager.primaryColor : Colors.white);
+        backgroundColor ??
+        (isPrimary ? ColorManager.primaryColor : Colors.white);
     final Color txtColor =
         textColor ?? (isPrimary ? Colors.white : ColorManager.primaryColor);
 
@@ -41,7 +44,7 @@ class CustomButtonWidget extends StatelessWidget {
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         minimumSize: Size(minWidth ?? double.infinity, height ?? 48.h),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(25.r),
+          borderRadius: BorderRadius.circular(raduis ??25.r),
           side: BorderSide(
             color: isPrimary ? Colors.transparent : ColorManager.primaryColor,
           ),

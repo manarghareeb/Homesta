@@ -18,12 +18,12 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   final TextEditingController _searchController = TextEditingController();
 
   final List<Map<String, String>> _allCategories = [
-    {'title': 'Electrical Appliances', 'image': 'assets/images/electrical.png'},
-    {'title': 'Bedrooms', 'image': 'assets/images/bedroom.png'},
-    {'title': 'Living Room', 'image': 'assets/images/livingroom.png'},
-    {'title': 'Kitchen', 'image': 'assets/images/kitchen.png'},
-    {'title': 'Medical Devices', 'image': 'assets/images/medical.png'},
-    {'title': 'Home Tools', 'image': 'assets/images/tools.png'},
+    {'title': 'Electrical Appliances', 'image': 'assets/images/catrgories_image/electrical.png'},
+    {'title': 'Bedrooms', 'image': 'assets/images/catrgories_image/bedroom.png'},
+    {'title': 'Living Room', 'image': 'assets/images/catrgories_image/livingroom.png'},
+    {'title': 'Kitchen', 'image': 'assets/images/catrgories_image/kitchen.png'},
+    {'title': 'Medical Devices', 'image': 'assets/images/catrgories_image/medical.png'},
+    {'title': 'Home Tools', 'image': 'assets/images/catrgories_image/tools.png'},
   ];
 
   List<Map<String, String>> _filteredCategories = [];

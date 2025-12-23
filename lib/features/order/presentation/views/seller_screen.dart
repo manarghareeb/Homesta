@@ -32,7 +32,7 @@ class SellerProfileScreen extends StatelessWidget {
                     SizedBox(width: 12.w),
                     CircleAvatar(
                       radius: 40.r,
-                      backgroundImage: AssetImage("assets/images/seller.png"),
+                      backgroundImage: AssetImage("assets/images/onboarding1.png"),
                     ),
                     SizedBox(width: 12.w),
                     Expanded(
@@ -70,7 +70,7 @@ class SellerProfileScreen extends StatelessWidget {
                     SizedBox(height: 8),
                     ContactRowWidget(imagePath: "assets/images/whatsapp.png", text: "WhatsApp Available"),
                     SizedBox(height: 8),
-                    ContactRowWidget(imagePath: "assets/images/email2.png", text: "sellername@gmail.com"),
+                    ContactRowWidget(imagePath: "assets/images/phone2.png", text: "sellername@gmail.com"),
                     SizedBox(height: 8),
                     ContactRowWidget(imagePath: "assets/images/location.png", text: "Al-Nasr Street, Mohandessin District, Giza"),
                     SizedBox(height: 8),
@@ -156,7 +156,7 @@ class SellerProfileScreen extends StatelessWidget {
                   children: [
                     Text( "Additional Info", style: TextStyles.font20BlackColorW500, ),
                     SizedBox(height: 12.h),
-                    ContactRowWidget(imagePath:"assets/images/calender.png", text:"Years of Experience \n5+ Years"),
+                    ContactRowWidget(imagePath:"assets/images/bag.png", text:"Years of Experience \n5+ Years"),
                     SizedBox(height: 8.h),
                     ContactRowWidget(imagePath:"assets/images/bag.png",text:"Completed Jobs \n320+"),
                     SizedBox(height: 8.h),

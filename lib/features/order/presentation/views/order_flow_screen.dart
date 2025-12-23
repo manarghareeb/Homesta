@@ -27,6 +27,13 @@ class _OrderFlowScreenState extends State<OrderFlowScreen> {
     Icons.summarize_outlined,
   ];
 
+  final List<String> appBarTitles = [
+    "Checkout",
+    "Shipping",
+    "Payment",
+    "Payment"
+  ];
+
   List<Widget> get screens => [
         CartView(
           onNext: () => setState(() => currentStep++),
@@ -49,7 +56,7 @@ class _OrderFlowScreenState extends State<OrderFlowScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: CustomAppBarWidget(text: 'Checkout'),
+      appBar: CustomAppBarWidget(text: appBarTitles[currentStep]),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
         child: Column(
