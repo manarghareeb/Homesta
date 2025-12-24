@@ -12,6 +12,17 @@ class DealsOfDayWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        /// ===== Title =====
+        Row(
+          children: [
+            Text("Deals ", style: TextStyles.font16PrimaryColorW400),
+            Text("of the Day", style: TextStyles.font16BlackW500),
+          ],
+        ),
+
+        SizedBox(height: 20.h),
+
+        /// ===== Deals =====
         _dealItem(image: 'assets/images/chair.png'),
         SizedBox(height: 20.h),
         _dealItem(image: 'assets/images/chair.png'),
@@ -67,6 +78,7 @@ class DealsOfDayWidget extends StatelessWidget {
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
                 style: TextStyles.font14deepGreyColorW400,
                 maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
 
               SizedBox(height: 12.h),
@@ -98,7 +110,7 @@ class DealsOfDayWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15.r),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.08),
+                    color: Colors.black.withOpacity(0.25),
                     blurRadius: 18,
                     offset: const Offset(0, 8),
                   ),
@@ -109,8 +121,8 @@ class DealsOfDayWidget extends StatelessWidget {
 
             /// ===== OFF BADGE =====
             Positioned(
-              top: 12,
-              left: 12,
+              top: 12.h,
+              left: 12.w,
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
                 decoration: BoxDecoration(

@@ -11,11 +11,11 @@ class FlashSaleWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(14.w),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorManager.Grey2Color,
         borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.06),
+            color: Colors.black.withOpacity(0.25),
             blurRadius: 12,
             offset: const Offset(0, 6),
           ),
@@ -27,7 +27,7 @@ class FlashSaleWidget extends StatelessWidget {
           Container(
             height: 200.h,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(18.r),
+              borderRadius: BorderRadius.circular(15.r),
               image: const DecorationImage(
                 image: AssetImage('assets/images/chair.png'),
                 fit: BoxFit.cover,
@@ -36,7 +36,7 @@ class FlashSaleWidget extends StatelessWidget {
             child: Container(
               margin: EdgeInsets.all(10.w),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(14.r),
+                borderRadius: BorderRadius.circular(15.r),
                 border: Border.all(color: Colors.white, width: 2),
               ),
             ),
