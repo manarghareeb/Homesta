@@ -33,9 +33,9 @@ class OptionTile extends StatelessWidget {
         Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.r),
-            side: BorderSide(color: colorBorder ?? ColorManager.lightGreyColor),
+            side: BorderSide(color: colorBorder ?? ColorManager.soLightGreyColor),
           ),
-          color: backgroundColor ?? Colors.white,
+          color: backgroundColor ?? ColorManager.soLightGreyColor,
           elevation: 0,
           child: ListTile(
             leading: _buildLeading(),
