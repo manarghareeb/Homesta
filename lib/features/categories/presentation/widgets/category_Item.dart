@@ -24,8 +24,10 @@ class _CategoryItemState extends State<CategoryItem> {
       },
       onTapUp: (_) {
         setState(() => _isPressed = false);
-        //GoRouter.of(context).push(AppRouter.categorySectionScreen);
-        GoRouter.of(context).push('/categorySection/${widget.title}');
+
+        GoRouter.of(
+          context,
+        ).push('/subCategories/${Uri.encodeComponent(widget.title)}');
       },
       onTapCancel: () {
         setState(() => _isPressed = false);
@@ -37,9 +39,7 @@ class _CategoryItemState extends State<CategoryItem> {
           duration: const Duration(milliseconds: 150),
           margin: EdgeInsets.only(bottom: 16.h),
           height: 142.h,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
-          ),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.r)),
           child: Stack(
             fit: StackFit.expand,
             children: [
@@ -50,7 +50,7 @@ class _CategoryItemState extends State<CategoryItem> {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.r),
-                  color: Colors.black.withOpacity(0.4), 
+                  color: Colors.black.withOpacity(0.4),
                 ),
               ),
               Center(

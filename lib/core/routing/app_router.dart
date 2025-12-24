@@ -31,6 +31,7 @@ import '../../features/account/presentation/views/account_screen.dart';
 import '../../features/account/presentation/views/add_review.dart';
 import '../../features/account/presentation/views/invoice.dart';
 import '../../features/cart/presentation/views/cart_screen.dart';
+import '../../features/categories/presentation/views/SubCategoriesScreen.dart';
 import '../../features/notification/presentaion/views/notification_empty_screen.dart';
 import '../../features/order/presentation/views/seller_screen.dart';
 import '../../features/search/presentation/views/search_screen.dart';
@@ -127,12 +128,32 @@ abstract class AppRouter {
         builder: (context, state) => const ChatScreen(),
       ),
       GoRoute(
-        path: '/categorySection/:title',
+        path: '/subCategories/:categoryName',
         builder: (context, state) {
-          final title = state.pathParameters['title']!;
-          return CategorySectionScreen(title: title);
+          final categoryName = Uri.decodeComponent(
+            state.pathParameters['categoryName']!,
+          );
+
+          return SubCategoriesScreen(categoryName: categoryName);
         },
       ),
+      GoRoute(
+        path: '/categorySection/:categoryName/:subCategoryName',
+        builder: (context, state) {
+          final categoryName = Uri.decodeComponent(
+            state.pathParameters['categoryName']!,
+          );
+          final subCategoryName = Uri.decodeComponent(
+            state.pathParameters['subCategoryName']!,
+          );
+
+          return CategorySectionScreen(
+            title: categoryName,
+            subCategory: subCategoryName,
+          );
+        },
+      ),
+
       GoRoute(
         path: addNewPasswordScreen,
         builder: (context, state) => const AddNewPasswordScreen(),
@@ -215,7 +236,8 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: sellerScreen,
-        builder: (context, state) => const SellerProfileScreen(sellerName: "Ahmad"),
+        builder:
+            (context, state) => const SellerProfileScreen(sellerName: "Ahmad"),
       ),
     ],
   );
