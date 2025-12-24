@@ -27,6 +27,7 @@ import 'package:homesta/features/order/presentation/views/order_flow_screen.dart
 import 'package:homesta/features/home/presentation/views/home.dart';
 import 'package:homesta/features/product/presentation/views/product_details_screen.dart';
 import 'package:homesta/features/notification/presentaion/views/notification.dart';
+import 'package:homesta/features/product/presentation/views/product_details_view.dart';
 import '../../features/account/presentation/views/account_screen.dart';
 import '../../features/account/presentation/views/add_review.dart';
 import '../../features/account/presentation/views/invoice.dart';
@@ -103,7 +104,7 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: productDetailsScreen,
-        builder: (context, state) => const ProductDetailsScreen(),
+        builder: (context, state) => const ProductDetailsView(),
       ),
       GoRoute(path: homeScreen, builder: (context, state) => const HomeView()),
       GoRoute(

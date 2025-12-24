@@ -158,4 +158,10 @@ class TextStyles {
     color: ColorManager.blackColor,
     fontFamily: 'Outfit',
   );
+    static TextStyle font13LightGreyW500 = TextStyle(
+    fontSize: 13,
+    fontWeight: FontWeight.w500,
+    color: ColorManager.lightGreyColor,
+    fontFamily: 'Outfit',
+  );
 }
