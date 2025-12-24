@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
 
+import '../../../../core/theming/styles.dart';
+
 class ProductsTabsWidget extends StatelessWidget {
   const ProductsTabsWidget({super.key});
 
@@ -10,9 +12,14 @@ class ProductsTabsWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Our Products Collections',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        Row(
+          children: [
+            Text("Our", style: TextStyles.font16BlackW500),
+            Text(
+              'Products Collections',
+              style: TextStyles.font16PrimaryColorW400,
+            ),
+          ],
         ),
         SizedBox(height: 12.h),
 

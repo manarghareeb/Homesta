@@ -30,7 +30,7 @@ class ProductCardWidget extends StatelessWidget {
         Container(
           padding: EdgeInsets.all(12.w),
           decoration: BoxDecoration(
-            color: const Color(0xffEDEDED),
+            color: const Color(0xffE0DFDF),
             borderRadius: BorderRadius.circular(20.r),
           ),
           child: Column(
@@ -51,9 +51,9 @@ class ProductCardWidget extends StatelessWidget {
                     child: Column(
                       children: [
                         _iconCircle(Icons.favorite_border),
-                        SizedBox(height: 6.h),
+                        SizedBox(height: 4.h),
                         _iconCircle(Icons.compare_arrows),
-                        SizedBox(height: 6.h),
+                        SizedBox(height: 4.h),
                         _iconCircle(Icons.shopping_cart_outlined),
                       ],
                     ),
@@ -71,7 +71,7 @@ class ProductCardWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(15.r),
                         ),
                         child: const Text(
-                          '05 : 12 : 30 : 25 \n Days   Hours   Mins   Sec',
+                          '05     :    12    :    30    : 25 \n Days   Hours   Mins   Sec',
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.white, fontSize: 11),
                         ),
@@ -85,7 +85,10 @@ class ProductCardWidget extends StatelessWidget {
 
         SizedBox(height: 8.h),
 
-        const Text('Chair', style: TextStyle(fontSize: 12, color: Colors.grey)),
+        const Text(
+          'Chair',
+          style: TextStyle(fontSize: 12, color: ColorManager.blackColor),
+        ),
 
         SizedBox(height: 4.h),
 
@@ -121,7 +124,7 @@ class ProductCardWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
       decoration: BoxDecoration(
-        color: ColorManager.greyColor,
+        color: ColorManager.primaryColor,
         borderRadius: BorderRadius.circular(20.r),
       ),
       child: Text(
@@ -133,12 +136,12 @@ class ProductCardWidget extends StatelessWidget {
 
   Widget _iconCircle(IconData icon) {
     return Container(
-      padding: EdgeInsets.all(6.w),
+      padding: EdgeInsets.all(2.w),
       decoration: const BoxDecoration(
         color: Colors.white,
         shape: BoxShape.circle,
       ),
-      child: Icon(icon, size: 18),
+      child: Icon(icon, size: 16),
     );
   }
 }

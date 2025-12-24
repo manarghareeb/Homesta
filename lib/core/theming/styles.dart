@@ -158,4 +158,10 @@ class TextStyles {
     color: ColorManager.blackColor,
     fontFamily: 'Outfit',
   );
+  static TextStyle font16PrimaryColorW400 = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Outfit',
+    color: ColorManager.primaryColor,
+  );
 }

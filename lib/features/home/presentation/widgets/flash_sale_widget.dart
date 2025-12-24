@@ -47,7 +47,7 @@ class FlashSaleWidget extends StatelessWidget {
           /// ================= Title =================
           const Text(
             'Flash sale !',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
           ),
 
           SizedBox(height: 6.h),
@@ -55,7 +55,7 @@ class FlashSaleWidget extends StatelessWidget {
           /// ================= Subtitle =================
           const Text(
             'Get 25% off - Limited Time Offer!',
-            style: TextStyle(color: Colors.grey),
+            style: TextStyle(color: ColorManager.deepGreyColor, fontSize: 16),
           ),
 
           SizedBox(height: 18.h),
@@ -64,10 +64,10 @@ class FlashSaleWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: const [
-              _TimeItem(value: '04', label: 'Days'),
-              _TimeItem(value: '14', label: 'Hours'),
-              _TimeItem(value: '48', label: 'Minutes'),
-              _TimeItem(value: '18', label: 'Seconds'),
+              _TimeItem(value: '04:', label: 'Days'),
+              _TimeItem(value: '14:', label: 'Hours'),
+              _TimeItem(value: '48:', label: 'Minutes'),
+              _TimeItem(value: '18:', label: 'Seconds'),
             ],
           ),
 
@@ -101,12 +101,15 @@ class _TimeItem extends StatelessWidget {
       children: [
         Text(
           value,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 4.h),
         Text(
           label,
-          style: const TextStyle(fontSize: 12, color: Color(0xff2F5D62)),
+          style: const TextStyle(
+            fontSize: 18,
+            color: ColorManager.primaryColor,
+          ),
         ),
       ],
     );
