@@ -4,51 +4,109 @@ import 'package:go_router/go_router.dart';
 import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 
+// widgets
+import '../widgets/app_bar.dart';
+import '../widgets/home_hero_banner.dart';
+import '../widgets/home_categories.dart';
+import '../widgets/sales_promotions_widget.dart';
+import '../widgets/products_tabs_widget.dart';
+import '../widgets/product_card_widget.dart';
+import '../widgets/flash_sale_widget.dart';
+import '../widgets/deals_of_the_day_widget.dart';
+import '../widgets/discount_banner_widget.dart';
+import '../widgets/trending_sales_section.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Home',
-          style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
-        ),
-        backgroundColor: Colors.white,
-        surfaceTintColor: Colors.white,
-        elevation: 0,
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.notifications_none,
-              color: ColorManager.primaryColor,
+      backgroundColor: const Color(0xffF9F9F9),
+
+      appBar: const HomeAppBar(),
+
+      body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 16.h),
+
+            /// Hero Banner
+            const HomeHeroBanner(),
+            SizedBox(height: 20.h),
+
+            /// Categories
+            const HomeCategories(),
+            SizedBox(height: 24.h),
+
+            /// Sales & Promotions
+            const SalesPromotionsWidget(),
+            SizedBox(height: 24.h),
+
+            /// Products Tabs
+            const ProductsTabsWidget(),
+            SizedBox(height: 16.h),
+
+            /// Products Grid
+            GridView.count(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisCount: 2,
+              crossAxisSpacing: 12.w,
+              mainAxisSpacing: 12.h,
+              childAspectRatio: 0.62,
+              children: const [
+                ProductCardWidget(
+                  imagePath: 'assets/images/chair.png',
+                  title: 'Wooden Sofa Chair',
+                  price: '\$80.00',
+                  oldPrice: '\$160.00',
+                  discount: '50% Off',
+                  rating: 4.9,
+                  showTimer: true,
+                ),
+                ProductCardWidget(
+                  imagePath: 'assets/images/chair.png',
+                  title: 'Circular Sofa Chair',
+                  price: '\$108.00',
+                  oldPrice: '\$120.00',
+                  discount: '10% Off',
+                  rating: 5.0,
+                ),
+              ],
             ),
-            onPressed: () {
-              GoRouter.of(context).push(AppRouter.emptyNotificationScreen);
-            },
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.notifications_off_outlined,
-              color: ColorManager.primaryColor,
-            ),
-            onPressed: () {
-              GoRouter.of(context).push(AppRouter.notificationScreen);
-            },
-          ),
-        ],
-      ),
-      body: Center(
-        child: TextButton(
-          onPressed: () {
-            GoRouter.of(context).push(AppRouter.productDetailsScreen);
-          },
-          child: Text('Product Details'),
+
+            SizedBox(height: 24.h),
+
+            /// Flash Sale
+            const FlashSaleWidget(),
+            SizedBox(height: 24.h),
+
+            /// Deals of the Day
+            const DealsOfDayWidget(),
+            SizedBox(height: 24.h),
+
+            /// Discount Banners
+            const DiscountBannerWidget(),
+            SizedBox(height: 16.h),
+            const DiscountBannerWidget(dark: true),
+            SizedBox(height: 24.h),
+
+            /// Trending & Sales
+            const TrendingSalesSection(title: 'Trending'),
+            SizedBox(height: 24.h),
+            const TrendingSalesSection(title: 'Sales'),
+
+            SizedBox(height: 24.h),
+          ],
         ),
       ),
 
+      // ================= FAB =================
       floatingActionButton: FloatingActionButton(
+        backgroundColor: ColorManager.primaryColor,
         onPressed: () {
           context.push(AppRouter.chatScreen);
         },
