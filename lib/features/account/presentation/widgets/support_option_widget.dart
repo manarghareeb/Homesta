@@ -8,7 +8,8 @@ class SupportOptionWidget extends StatelessWidget {
   final String description;
   final String buttonText;
   final Color color;
-  final String imagePath;
+  final String? imagePath;
+  final IconData? icon;
 
   const SupportOptionWidget({
     super.key,
@@ -16,7 +17,8 @@ class SupportOptionWidget extends StatelessWidget {
     required this.description,
     required this.buttonText,
     required this.color,
-    required this.imagePath,
+    this.imagePath,
+    this.icon,
   });
 
   @override
@@ -28,15 +30,23 @@ class SupportOptionWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-           Column(
+            Column(
               children: [
-                Image.asset( imagePath, width: 30.w, height: 30.w, fit: BoxFit.contain, ),
-                SizedBox(width: 8.w),
+                Container(
+                  width: 40.w,
+                  height: 40.w,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  child: _buildIconOrImage(), // ✅ هنا نعرض إما أيقونة أو صورة
+                ),
+                SizedBox(height: 8.h),
                 Text(title, style: TextStyles.font16BlackW500),
               ],
             ),
             SizedBox(height: 6.h),
-            Text(description, style: TextStyles.font14GreyColorW400),
+            Text(description, style: TextStyles.font14GreyColorW400, textAlign: TextAlign.center),
             SizedBox(height: 8.h),
             Align(
               alignment: Alignment.center,
@@ -53,5 +63,21 @@ class SupportOptionWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+
+  Widget _buildIconOrImage() {
+    if (icon != null) {
+      return Icon(icon, size: 24.sp, color: Colors.black);
+    } else if (imagePath != null) {
+      return Image.asset(
+        imagePath!,
+        width: 20.w,
+        height: 20.w,
+        fit: BoxFit.contain,
+      );
+    } else {
+      return const SizedBox.shrink();
+    }
   }
 }
