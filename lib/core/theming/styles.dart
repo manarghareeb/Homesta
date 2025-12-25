@@ -163,6 +163,7 @@ class TextStyles {
     fontWeight: FontWeight.w400,
     color: ColorManager.primaryColor,
     fontFamily: 'Outfit',
+    );
   static TextStyle font16PrimaryColorW400 = TextStyle(
     fontSize: 16.sp,
     fontWeight: FontWeight.w400,

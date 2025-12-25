@@ -62,7 +62,7 @@ class SubCategoriesScreen extends StatelessWidget {
               height: 48.h,
               padding: EdgeInsets.symmetric(horizontal: 14.w),
               decoration: BoxDecoration(
-                color: ColorManager.Grey2Color,
+                color: ColorManager.soLightGreyColor,
                 borderRadius: BorderRadius.circular(14.r),
               ),
               child: Row(
