@@ -106,11 +106,15 @@ class HomeScreen extends StatelessWidget {
 
       // ================= FAB =================
       floatingActionButton: FloatingActionButton(
-        backgroundColor: ColorManager.primaryColor,
+        backgroundColor: ColorManager.aliceBlue,
+        mini: true,
+        shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.circular(5.r),
+        ),
         onPressed: () {
           context.push(AppRouter.chatScreen);
         },
-        child: const Icon(Icons.chat),
+        child: Icon(Icons.chat, color: ColorManager.blackColor,),
       ),
     );
   }

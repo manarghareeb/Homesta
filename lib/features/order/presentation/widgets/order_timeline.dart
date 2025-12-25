@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 
@@ -9,15 +10,36 @@ class OrderTimeline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final steps = [
-      {'title': 'Order Placed', 'date': '20 Apr 2025\n11:00 AM', 'done': true},
-      {'title': 'Accepted', 'date': '20 Apr 2025\n11:00 AM', 'done': true},
-      {'title': 'In Progress', 'date': 'Expected\n21 Apr 2025', 'done': false},
+      {
+        'title': 'Order Placed',
+        'date': '20 Apr 2025\n11:00 AM',
+        'done': true,
+        'icon': FontAwesomeIcons.clipboardList,
+      },
+      {
+        'title': 'Accepted',
+        'date': '20 Apr 2025\n11:00 AM',
+        'done': true,
+        'icon': FontAwesomeIcons.clipboardList,
+      },
+      {
+        'title': 'In Progress',
+        'date': 'Expected\n21 Apr 2025',
+        'done': false,
+        'icon': FontAwesomeIcons.box,
+      },
       {
         'title': 'On the Way',
         'date': 'Expected\n22,23 Apr 2025',
         'done': false,
+        'icon': Icons.local_shipping,
       },
-      {'title': 'Delivered', 'date': 'Expected\n24 Apr 2025', 'done': false},
+      {
+        'title': 'Delivered',
+        'date': 'Expected\n24 Apr 2025',
+        'done': false,
+        'icon': Icons.home_filled,
+      },
     ];
 
     return Column(
@@ -81,13 +103,13 @@ class OrderTimeline extends StatelessWidget {
                                 ? TextStyles.font14deepGreyColorW400
                                 : TextStyles.font14GreyColorW400,
                       ),
-                      SizedBox(height: 32.h,)
+                      SizedBox(height: 32.h),
                     ],
                   ),
                 ),
               ),
               Icon(
-                Icons.local_shipping_outlined,
+                step['icon'] as IconData? ?? Icons.circle,
                 color:
                     isDone ? ColorManager.primaryColor : ColorManager.greyColor,
               ),

@@ -298,15 +298,15 @@ class OrderCard extends StatelessWidget {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: isTrackOrReview
-                        ? ColorManager.buttonColor
+                        ? ColorManager.primaryColor
                         : Colors.white,
                     foregroundColor: isTrackOrReview
                         ? Colors.white
-                        : (isCancel ? Colors.red : ColorManager.buttonColor),
+                        : (isCancel ? Colors.red : ColorManager.primaryColor),
                     side: BorderSide(
                       color: isTrackOrReview
-                          ? ColorManager.buttonColor
-                          : (isCancel ? Colors.red : ColorManager.buttonColor),
+                          ? ColorManager.primaryColor
+                          : (isCancel ? Colors.red : ColorManager.primaryColor),
                       width: 1.5,
                     ),
                     shape: RoundedRectangleBorder(
@@ -330,7 +330,7 @@ class OrderCard extends StatelessWidget {
                     style: TextStyles.font15BlackW500.copyWith(
                       color: isTrackOrReview
                           ? Colors.white
-                          : (isCancel ? Colors.red : ColorManager.buttonColor),
+                          : (isCancel ? Colors.red : ColorManager.primaryColor),
                     ),
                   ),
                 ),

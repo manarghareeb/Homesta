@@ -158,6 +158,11 @@ class TextStyles {
     color: ColorManager.blackColor,
     fontFamily: 'Outfit',
   );
+  static TextStyle font12PiramyColorW400 = TextStyle(
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w400,
+    color: ColorManager.primaryColor,
+    fontFamily: 'Outfit',
   static TextStyle font16PrimaryColorW400 = TextStyle(
     fontSize: 16.sp,
     fontWeight: FontWeight.w400,

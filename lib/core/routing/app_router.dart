@@ -8,6 +8,8 @@ import 'package:homesta/features/account/presentation/views/logout_screen.dart';
 import 'package:homesta/features/account/presentation/views/manage_address_screen.dart';
 import 'package:homesta/features/account/presentation/views/my_order_screen.dart';
 import 'package:homesta/features/account/presentation/views/password_manager_screen.dart';
+import 'package:homesta/features/chat/data/models/chat_model.dart';
+import 'package:homesta/features/chat/presentation/views/chat_message_screen.dart';
 import 'package:homesta/features/order/presentation/views/track_order_details_screen.dart';
 import 'package:homesta/features/order/presentation/views/track_your_order_screen.dart';
 import 'package:homesta/features/onboarding/presentation/views/onboarding_screen.dart';
@@ -22,7 +24,7 @@ import 'package:homesta/features/authentication/presentation/views/signup_screen
 import 'package:homesta/features/authentication/presentation/views/verification_screen.dart';
 import 'package:homesta/features/cart/presentation/views/wishlist_screen.dart';
 import 'package:homesta/features/categories/presentation/views/category_section_screen.dart';
-import 'package:homesta/features/chat/presentation/views/chatscreen.dart';
+import 'package:homesta/features/chat/presentation/views/chat_screen.dart';
 import 'package:homesta/features/order/presentation/views/order_flow_screen.dart';
 import 'package:homesta/features/home/presentation/views/home.dart';
 import 'package:homesta/features/product/presentation/views/product_details_screen.dart';
@@ -74,10 +76,11 @@ abstract class AppRouter {
   static final passwordManager = '/passwordManager';
   static final sellerScreen = '/sellerScreen';
   static final trackOrderDetails = '/trackOrderDetails';
+  static final chatMessageScreen = '/chatMessageScreen';
 
   static final route = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) => HomeView()),
+      GoRoute(path: '/', builder: (context, state) => ChatScreen()),
       GoRoute(
         path: loginScreen,
         builder: (context, state) => const LoginScreen(),
@@ -238,6 +241,22 @@ abstract class AppRouter {
         path: sellerScreen,
         builder:
             (context, state) => const SellerProfileScreen(sellerName: "Ahmad"),
+      ),
+      GoRoute(
+        path: chatMessageScreen,
+        builder: (context, state) {
+          final chat = state.extra as ChatModel?;
+          if (chat == null) {
+            return ChatMessageScreen(
+              chatTitle: "Default Chat",
+              initialMessages: [],
+            );
+          }
+          return ChatMessageScreen(
+            chatTitle: chat.firstQuestion,
+            initialMessages: chat.messages,
+          );
+        },
       ),
     ],
   );
