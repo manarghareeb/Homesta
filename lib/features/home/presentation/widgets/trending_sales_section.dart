@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:homesta/core/theming/colors.dart';
 import 'trending_sales_card.dart';
 
 class TrendingSalesSection extends StatelessWidget {
@@ -19,7 +20,13 @@ class TrendingSalesSection extends StatelessWidget {
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
             const Spacer(),
-            TextButton(onPressed: () {}, child: const Text('More')),
+            TextButton(
+              onPressed: () {},
+              child: const Text(
+                'More',
+                style: TextStyle(fontSize: 15, color: ColorManager.greyColor),
+              ),
+            ),
           ],
         ),
 

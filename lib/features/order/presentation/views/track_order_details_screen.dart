@@ -90,25 +90,39 @@ class _TrackOrderDetailsScreenState extends State<TrackOrderDetailsScreen> {
                           ),
                         ],
                       ),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          IconButton(
-                            padding: EdgeInsets.zero,
-                            constraints: BoxConstraints(),
-                            icon: Icon(
-                              Icons.delete,
-                              color: ColorManager.primaryColor,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ],
-                      ),
+                      
                     ],
                   ),
                 ),
               ),
+              SizedBox(height: 24.h),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 8.w),
+                decoration: BoxDecoration(
+                  color: ColorManager.primaryColor,
+                  borderRadius: BorderRadius.circular(10.r),
+                ),
+                child: ListTile(
+                  
+                  leading: const Icon(Icons.person_outlined, color: Colors.white,),
+                  title: Text(
+                    'Name',
+                    style: TextStyles.font16WhiteW500,
+                  ),
+                  subtitle:  Text(
+                    'Seller Name',
+                    style: TextStyles.font16WhiteW500,
+                  ),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.phone_outlined, color: Colors.white,),
+                      SizedBox(width: 8.w,),
+                      const Icon(Icons.email_outlined, color: Colors.white,),
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         ),

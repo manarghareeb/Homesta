@@ -7,8 +7,14 @@ import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 
 class CategorySectionScreen extends StatefulWidget {
-  const CategorySectionScreen({super.key, required this.title});
+  const CategorySectionScreen({
+    super.key,
+    required this.title,
+    required this.subCategory,
+  });
+
   final String title;
+  final String subCategory;
 
   @override
   State<CategorySectionScreen> createState() => _CategorySectionScreenState();

@@ -77,7 +77,9 @@ class AccountScreen extends StatelessWidget {
               OptionTile(
                 icon: Icons.favorite_border,
                 label: 'My Collections',
-                onTap: () {},
+                onTap: () {
+                  GoRouter.of(context).push(AppRouter.collectionsScreen);
+                },
               ),
               OptionTile(
                 icon: Icons.lock_outline,

@@ -20,19 +20,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   final List<Map<String, String>> pages = [
     {
-      'image': 'assets/images/onboarding1.png',
+      'image': 'assets/images/onboarding_image/onboarding1.png',
       'title': 'Build your unique dining room look',
       'subtitle': 'Personlize your room the way you want. Now\n eat at a table that is both stylish and well fit\n with your way.',
       'button': 'Skip →',
     },
     {
-      'image': 'assets/images/onboarding2.png',
+      'image': 'assets/images/onboarding_image/onboarding2.png',
       'title': 'Weave your own kind of living room',
       'subtitle': 'Add different colors to your personal space. Try\n exotic furnitures and play with the color pallet\n create your style !',
       'button': 'Skip →',
     },
     {
-      'image': 'assets/images/onboarding3.png',
+      'image': 'assets/images/onboarding_image/onboarding3.png',
       'title': 'Try aesthetics, bring\n light to your place',
       'subtitle': 'Feel like having an aesthetic vibe? Do not just think, add\n your favourite, compare items with your wishlist and\n add magic to that vibe to your life.',
       'button': 'Explore →',
