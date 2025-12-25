@@ -37,6 +37,7 @@ import '../../features/categories/presentation/views/SubCategoriesScreen.dart';
 import '../../features/notification/presentaion/views/notification_empty_screen.dart';
 import '../../features/order/presentation/views/seller_screen.dart';
 import '../../features/search/presentation/views/search_screen.dart';
+import '../../features/shop/presentation/view/shop_screen.dart';
 
 abstract class AppRouter {
   static final loginScreen = '/loginScreen';
@@ -77,10 +78,11 @@ abstract class AppRouter {
   static final sellerScreen = '/sellerScreen';
   static final trackOrderDetails = '/trackOrderDetails';
   static final chatMessageScreen = '/chatMessageScreen';
+  static final filtersScreen = '/filtersScreen';
 
   static final route = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const HomeView()),
+      GoRoute(path: '/', builder: (context, state) => const FiltersScreen()),
       GoRoute(
         path: loginScreen,
         builder: (context, state) => const LoginScreen(),
@@ -130,6 +132,11 @@ abstract class AppRouter {
         path: chatScreen,
         builder: (context, state) => const ChatScreen(),
       ),
+      GoRoute(
+        path: filtersScreen,
+        builder: (context, state) => const FiltersScreen(),
+      ),
+
       GoRoute(
         path: '/subCategories/:categoryName',
         builder: (context, state) {
