@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:homesta/core/theming/colors.dart';
 
 class TrendingSalesCard extends StatelessWidget {
   final String image;
@@ -25,8 +26,8 @@ class TrendingSalesCard extends StatelessWidget {
       width: 170.w,
       padding: EdgeInsets.all(10.w),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16.r),
+        color: ColorManager.Grey2Color,
+        borderRadius: BorderRadius.circular(15.r),
         boxShadow: [
           BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8),
         ],
@@ -37,7 +38,7 @@ class TrendingSalesCard extends StatelessWidget {
           Stack(
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.circular(14.r),
+                borderRadius: BorderRadius.circular(15.r),
                 child: Image.asset(
                   image,
                   height: 110.h,
@@ -55,8 +56,8 @@ class TrendingSalesCard extends StatelessWidget {
                     vertical: 4.h,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xff2F5D62),
-                    borderRadius: BorderRadius.circular(20.r),
+                    color: ColorManager.primaryColor,
+                    borderRadius: BorderRadius.circular(15.r),
                   ),
                   child: Text(
                     badgeText,
@@ -80,7 +81,7 @@ class TrendingSalesCard extends StatelessWidget {
           SizedBox(height: 4.h),
           Row(
             children: [
-              const Icon(Icons.star, color: Colors.amber, size: 16),
+              const Icon(Icons.star, color: ColorManager.yellowColor, size: 16),
               SizedBox(width: 4.w),
               Text(rating.toString()),
             ],
