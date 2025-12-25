@@ -13,5 +13,10 @@ class ColorManager {
   static const Color yellowColor = Color(0xFFFFCC00);
   static const Color aliceBlue = Color(0xFFF0F3FF);
   static const Color deepGreyColor = Color(0xFF4D4A4A);
+<<<<<<< HEAD
+  static const Color whihte = Colors.white;
+
+=======
   static const Color lightGreyIconColor = Color(0xFFE0DFDF);
+>>>>>>> origin/main
 }

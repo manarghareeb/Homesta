@@ -14,8 +14,13 @@ class CustomTextFieldWidget extends StatefulWidget {
     required this.title,
     this.suffixIcon,
     this.prefixIcon,
+    this.fillColor,
+    this.maxLines,
+    this.isFilled,
   });
-
+   final Color? fillColor ;
+   final int ?maxLines;
+   final bool? isFilled;
   final TextEditingController controller;
   final String hintText;
   final TextInputType textInputType;
@@ -35,6 +40,8 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLines: widget.maxLines,
+
       controller: widget.controller,
       keyboardType: widget.textInputType,
       obscureText: widget.obscureText == true ? isObscured : false,
@@ -43,6 +50,9 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
         color: ColorManager.primaryColor,
       ),
       decoration: InputDecoration(
+        fillColor: widget.fillColor,
+        filled:widget.isFilled??false ,
+    
         prefixIcon:
             widget.prefixIcon != null
                 ? Icon(widget.prefixIcon, color: ColorManager.lightGreyColor)
