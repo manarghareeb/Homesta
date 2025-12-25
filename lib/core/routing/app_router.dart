@@ -32,6 +32,7 @@ import 'package:homesta/features/notification/presentaion/views/notification.dar
 import '../../features/account/presentation/views/account_screen.dart';
 import '../../features/account/presentation/views/add_review.dart';
 import '../../features/account/presentation/views/invoice.dart';
+import '../../features/account/presentation/views/my_collections_screen.dart';
 import '../../features/cart/presentation/views/cart_screen.dart';
 import '../../features/categories/presentation/views/SubCategoriesScreen.dart';
 import '../../features/notification/presentaion/views/notification_empty_screen.dart';
@@ -77,6 +78,7 @@ abstract class AppRouter {
   static final sellerScreen = '/sellerScreen';
   static final trackOrderDetails = '/trackOrderDetails';
   static final chatMessageScreen = '/chatMessageScreen';
+  static final collectionsScreen = '/collectionsScreen';
 
   static final route = GoRouter(
     routes: [
@@ -257,6 +259,11 @@ abstract class AppRouter {
             initialMessages: chat.messages,
           );
         },
+      ),
+      GoRoute(
+        path: collectionsScreen,
+        builder:
+            (context, state) => const CollectionsScreen(),
       ),
     ],
   );
