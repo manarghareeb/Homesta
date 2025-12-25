@@ -11,7 +11,7 @@ class FlashSaleWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(14.w),
       decoration: BoxDecoration(
-        color: ColorManager.Grey2Color,
+        color: ColorManager.soLightGreyColor,
         borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           BoxShadow(

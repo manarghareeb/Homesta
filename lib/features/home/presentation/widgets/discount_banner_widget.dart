@@ -14,7 +14,7 @@ class DiscountBannerWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        color: dark ? ColorManager.primaryColor : ColorManager.GreysColor,
+        color: dark ? ColorManager.primaryColor : ColorManager.soLightGreyColor,
         borderRadius: BorderRadius.circular(15.r),
       ),
       child: Row(

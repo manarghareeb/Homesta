@@ -26,7 +26,7 @@ class TrendingSalesCard extends StatelessWidget {
       width: 170.w,
       padding: EdgeInsets.all(10.w),
       decoration: BoxDecoration(
-        color: ColorManager.Grey2Color,
+        color: ColorManager.soLightGreyColor,
         borderRadius: BorderRadius.circular(15.r),
         boxShadow: [
           BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8),
