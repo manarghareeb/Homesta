@@ -10,12 +10,13 @@ final String text;
     return Row(
             spacing: 10,
             children: [
+              SizedBox(width: 0,),
               Stack(
                 clipBehavior: Clip.none,
                 children: [
                   CircleAvatar(
                     backgroundColor: ColorManager.greenColor,
-                    radius: 15,
+                    radius: 13,
                   ),
                   Positioned(
                     top: 3,

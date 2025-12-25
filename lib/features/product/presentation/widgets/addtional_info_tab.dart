@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homesta/features/product/presentation/widgets/explore_product.dart';
 import 'package:homesta/features/product/presentation/widgets/product_specification_table.dart';
 
 
@@ -8,12 +9,13 @@ class AddtionalInfoTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return // لون خلفية الصفحة
-       Padding(
-         padding: const EdgeInsets.all(8.0),
+       SingleChildScrollView(
          child: Column(
          spacing: 20,
            children: [
+            SizedBox(height: 5,),
              const ProductSpecificationTable(),
+             ExploreProduct()
            ],
          ),
        );

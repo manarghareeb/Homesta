@@ -39,7 +39,7 @@ class _AddReviewSectionState extends State<AddReviewSection> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
-      spacing: 5,
+      spacing: 8,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text("Add your Review", style: TextStyles.font16BlackW500),
@@ -72,6 +72,7 @@ class _AddReviewSectionState extends State<AddReviewSection> {
             fillColor: Color(0xFFD9D9D9),
             isFilled: true,
           ),
+          SizedBox(height: 10,),
           CustomButtonWidget(buttonText: "Submit", onPressed: (){},minWidth: 164,raduis: 8,),
       
         ],

@@ -11,15 +11,15 @@ class TapBarWidget extends StatelessWidget {
       indicatorColor: ColorManager.primaryColor,
       labelColor: ColorManager.primaryColor,
       unselectedLabelColor: ColorManager.greyColor,
-      labelStyle: TextStyles.font15BlackW500.copyWith(color: ColorManager.primaryColor),
+      labelStyle: TextStyles.font15BlackW500.copyWith(color: ColorManager.primaryColor,fontSize: 14),
       dividerHeight: 1,
       dividerColor: ColorManager.greyColor,
 
       indicatorWeight: 3,
       tabs: const [
         Tab(text: 'Description',),
-        Tab(text: 'Addtional information'),
-        Tab(text: 'Reviews'),
+        Tab(text: 'Addtional infomation'),
+        Tab(text: 'Review'),
       ],
     );
   }
