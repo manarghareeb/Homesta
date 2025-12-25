@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/features/product/presentation/widgets/rating_star.dart';
+import 'package:homesta/features/product/presentation/widgets/review_photo_list.dart';
 
 class ReviewItem extends StatelessWidget {
   const ReviewItem({super.key});
@@ -31,7 +32,8 @@ class ReviewItem extends StatelessWidget {
             RatingStar(),
             Text("4.8",style: TextStyles.font16BlackRegular,)
           ],
-        )
+        ),
+        ReviewPhotoList()
         ],
       ),
     );

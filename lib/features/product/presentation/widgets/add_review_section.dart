@@ -3,6 +3,7 @@ import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
 import 'package:homesta/core/widgets/custom_text_field_widget.dart';
 import 'package:homesta/core/widgets/title_to_text_field.dart';
+import 'package:homesta/features/product/presentation/widgets/add_photo_or_video.dart';
 
 class AddReviewSection extends StatefulWidget {
   const AddReviewSection({super.key});
@@ -73,6 +74,8 @@ class _AddReviewSectionState extends State<AddReviewSection> {
             isFilled: true,
           ),
           SizedBox(height: 10,),
+          Text("Add photo / video", style: TextStyles.font16BlackW500),
+          AddPhotoOrVideo(),
           CustomButtonWidget(buttonText: "Submit", onPressed: (){},minWidth: 164,raduis: 8,),
       
         ],

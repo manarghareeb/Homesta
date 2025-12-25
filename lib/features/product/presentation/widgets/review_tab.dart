@@ -23,6 +23,7 @@ class _ReviewTabState extends State<ReviewTab> {
               spacing: 5,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+                SizedBox(height: 10,),
           ReviewsAndViewAllSection(isVisible: isVisible,onTap: () {
             setState(() {
               isVisible = !isVisible;
@@ -32,6 +33,7 @@ class _ReviewTabState extends State<ReviewTab> {
             visible: isVisible,
             child: Column(
               children: [
+          
                 Row(
                   children: [
                     Column(
