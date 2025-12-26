@@ -29,14 +29,17 @@ import 'package:homesta/features/order/presentation/views/order_flow_screen.dart
 import 'package:homesta/features/home/presentation/views/home.dart';
 import 'package:homesta/features/product/presentation/views/product_details_screen.dart';
 import 'package:homesta/features/notification/presentaion/views/notification.dart';
+import 'package:homesta/features/product/presentation/views/product_details_view.dart';
 import '../../features/account/presentation/views/account_screen.dart';
 import '../../features/account/presentation/views/add_review.dart';
 import '../../features/account/presentation/views/invoice.dart';
+import '../../features/account/presentation/views/my_collections_screen.dart';
 import '../../features/cart/presentation/views/cart_screen.dart';
 import '../../features/categories/presentation/views/SubCategoriesScreen.dart';
 import '../../features/notification/presentaion/views/notification_empty_screen.dart';
 import '../../features/order/presentation/views/seller_screen.dart';
 import '../../features/search/presentation/views/search_screen.dart';
+import '../../features/shop/presentation/view/shop_screen.dart';
 
 abstract class AppRouter {
   static final loginScreen = '/loginScreen';
@@ -77,6 +80,8 @@ abstract class AppRouter {
   static final sellerScreen = '/sellerScreen';
   static final trackOrderDetails = '/trackOrderDetails';
   static final chatMessageScreen = '/chatMessageScreen';
+  static final filtersScreen = '/filtersScreen';
+  static final collectionsScreen = '/collectionsScreen';
 
   static final route = GoRouter(
     routes: [
@@ -107,7 +112,7 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: productDetailsScreen,
-        builder: (context, state) => const ProductDetailsScreen(),
+        builder: (context, state) => const ProductDetailsView(),
       ),
       GoRoute(path: homeScreen, builder: (context, state) => const HomeView()),
       GoRoute(
@@ -130,6 +135,11 @@ abstract class AppRouter {
         path: chatScreen,
         builder: (context, state) => const ChatScreen(),
       ),
+      GoRoute(
+        path: filtersScreen,
+        builder: (context, state) => const FiltersScreen(),
+      ),
+
       GoRoute(
         path: '/subCategories/:categoryName',
         builder: (context, state) {
@@ -257,6 +267,11 @@ abstract class AppRouter {
             initialMessages: chat.messages,
           );
         },
+      ),
+      GoRoute(
+        path: collectionsScreen,
+        builder:
+            (context, state) => const CollectionsScreen(),
       ),
     ],
   );

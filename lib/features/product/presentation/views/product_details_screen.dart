@@ -73,7 +73,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 8.h),
-              const ReviewsAndViewAllSection(),
+               ReviewsAndViewAllSection(isVisible: false,onTap: (){},),
               SizedBox(height: 16.h),
               const ProductRatingSection(),
               SizedBox(height: 24.h),

@@ -10,8 +10,14 @@ class TextStyles {
     color: ColorManager.blackColor,
     fontFamily: 'Outfit',
   );
+  static TextStyle font15GreyColorW400 = TextStyle(
+    fontSize: 15.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Outfit',
+    color: ColorManager.greyColor,
+  );
   static TextStyle font15BlackW500 = TextStyle(
-    fontSize: 16.sp,
+    fontSize: 15.sp,
     fontWeight: FontWeight.w500,
     fontFamily: 'Outfit',
     color: ColorManager.blackColor,
@@ -158,12 +164,18 @@ class TextStyles {
     color: ColorManager.blackColor,
     fontFamily: 'Outfit',
   );
+    static TextStyle font13LightGreyW500 = TextStyle(
+    fontSize: 13,
+    fontWeight: FontWeight.w500,
+    color: ColorManager.lightGreyColor,
+    fontFamily: 'Outfit',
+  );
   static TextStyle font12PiramyColorW400 = TextStyle(
     fontSize: 12.sp,
     fontWeight: FontWeight.w400,
     color: ColorManager.primaryColor,
     fontFamily: 'Outfit',
-    );
+  );
   static TextStyle font16PrimaryColorW400 = TextStyle(
     fontSize: 16.sp,
     fontWeight: FontWeight.w400,

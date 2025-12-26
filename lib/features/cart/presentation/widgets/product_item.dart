@@ -26,7 +26,8 @@ class ProductItem extends StatefulWidget {
   State<ProductItem> createState() => _ProductItemState();
 }
 
-class _ProductItemState extends State<ProductItem> with SingleTickerProviderStateMixin {
+class _ProductItemState extends State<ProductItem>
+    with SingleTickerProviderStateMixin {
   late AnimationController controller;
   late Animation<Offset> slideAnimation;
   late Animation<double> opacityAnimation;
@@ -35,10 +36,14 @@ class _ProductItemState extends State<ProductItem> with SingleTickerProviderStat
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 300));
-    slideAnimation = Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero).animate(
-      CurvedAnimation(parent: controller, curve: Curves.easeOutCubic),
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
     );
+    slideAnimation = Tween<Offset>(
+      begin: const Offset(0, 1),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(parent: controller, curve: Curves.easeOutCubic));
     opacityAnimation = Tween<double>(begin: 0, end: 1).animate(controller);
   }
 
@@ -61,7 +66,8 @@ class _ProductItemState extends State<ProductItem> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    double discountedPrice = widget.price - (widget.price * widget.discountPercent / 100);
+    double discountedPrice =
+        widget.price - (widget.price * widget.discountPercent / 100);
 
     return GestureDetector(
       onTap: toggleOverlay,
@@ -80,7 +86,10 @@ class _ProductItemState extends State<ProductItem> with SingleTickerProviderStat
                   discountPercent: widget.discountPercent,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 16.h),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 8.w,
+                    vertical: 16.h,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
