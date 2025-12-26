@@ -8,6 +8,7 @@ import 'package:homesta/features/account/presentation/views/logout_screen.dart';
 import 'package:homesta/features/account/presentation/views/manage_address_screen.dart';
 import 'package:homesta/features/account/presentation/views/my_order_screen.dart';
 import 'package:homesta/features/account/presentation/views/password_manager_screen.dart';
+import 'package:homesta/features/cart/presentation/views/empty_cart_screen.dart';
 import 'package:homesta/features/chat/data/models/chat_model.dart';
 import 'package:homesta/features/chat/presentation/views/chat_message_screen.dart';
 import 'package:homesta/features/order/presentation/views/track_order_details_screen.dart';
@@ -27,7 +28,6 @@ import 'package:homesta/features/categories/presentation/views/category_section_
 import 'package:homesta/features/chat/presentation/views/chat_screen.dart';
 import 'package:homesta/features/order/presentation/views/order_flow_screen.dart';
 import 'package:homesta/features/home/presentation/views/home.dart';
-import 'package:homesta/features/product/presentation/views/product_details_screen.dart';
 import 'package:homesta/features/notification/presentaion/views/notification.dart';
 import 'package:homesta/features/product/presentation/views/product_details_view.dart';
 import '../../features/account/presentation/views/account_screen.dart';
@@ -82,6 +82,7 @@ abstract class AppRouter {
   static final chatMessageScreen = '/chatMessageScreen';
   static final filtersScreen = '/filtersScreen';
   static final collectionsScreen = '/collectionsScreen';
+  static final emptyCartScreen = '/emptyCartScreen';
 
   static final route = GoRouter(
     routes: [
@@ -272,6 +273,10 @@ abstract class AppRouter {
         path: collectionsScreen,
         builder:
             (context, state) => const CollectionsScreen(),
+      ),
+      GoRoute(
+        path: emptyCartScreen,
+        builder: (context, state) => const EmptyCartScreen(),
       ),
     ],
   );

@@ -40,7 +40,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      maxLines: widget.maxLines,
+      maxLines: widget.obscureText == true ? 1 : widget.maxLines,
 
       controller: widget.controller,
       keyboardType: widget.textInputType,

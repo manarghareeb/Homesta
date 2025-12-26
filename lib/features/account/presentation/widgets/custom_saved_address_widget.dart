@@ -22,30 +22,31 @@ class SavedAddressWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
-        color: const Color(0xFFF6F6F6),
-        border: Border.all(color: ColorManager.lightGreyColor),
+        color: ColorManager.soLightGreyColor,
         borderRadius: BorderRadius.circular(12.r),
       ),
-      child: Row(
+      child: Column(
         children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(name, style: TextStyles.font16BlackW500),
-                SizedBox(height: 4.h),
-                Text(address, style: TextStyles.font14GreyColorW400),
-              ],
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(name, style: TextStyles.font16BlackW500),
+              GestureDetector(
+                onTap: onDelete,
+                child: Icon(Icons.delete_outline, color: ColorManager.lightGreyColor)
+              ),
+            ],
           ),
-          IconButton(
-            icon: Icon(Icons.edit, color: ColorManager.primaryColor),
-            onPressed: onEdit,
-          ),
-          IconButton(
-            icon: Icon(Icons.delete, color: Colors.red),
-            onPressed: onDelete,
-          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(address, style: TextStyles.font14GreyColorW400),
+              GestureDetector(
+                onTap: onEdit,
+                child: Icon(Icons.edit_outlined, color: ColorManager.lightGreyColor)
+              ),
+            ],
+          )
         ],
       ),
     );

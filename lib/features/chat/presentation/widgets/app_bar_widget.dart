@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
+import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 
@@ -17,7 +19,7 @@ class AppBarWidget extends StatelessWidget {
         SizedBox(width: 16.w),
         GestureDetector(
           onTap: (){
-            Navigator.of(context).pop();
+            GoRouter.of(context).pushReplacement(AppRouter.homeScreen);
           },
           child: Icon(
             FontAwesomeIcons.arrowLeft, 

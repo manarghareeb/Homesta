@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:homesta/core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
 import '../../../../core/widgets/custom_app_bar_widget.dart';
 import '../../../../core/widgets/custom_text_field_widget.dart';
@@ -91,36 +92,48 @@ class HelpCenterScreen extends StatelessWidget {
               label: "How to create your first account",
               subtitle: "Getting Started • 2.5k views • 3 min",
               onTap: () {},
+              backgroundColor: ColorManager.soLightGreyColor,
+              colorBorder: ColorManager.soLightGreyColor,
             ),
             OptionTile(
               imagePath: "assets/images/help_center_images/outline.png",
               label: "Understanding your billing cycle",
               subtitle: "Billing & Payments • 1.8k views • 5 min",
               onTap: () {},
+              backgroundColor: ColorManager.soLightGreyColor,
+              colorBorder: ColorManager.soLightGreyColor,
             ),
             OptionTile(
               imagePath: "assets/images/help_center_images/outline.png",
               label: "Setting up two-factor authentication",
               subtitle: "Security & Privacy • 3.2k views • 4 min",
               onTap: () {},
+              backgroundColor: ColorManager.soLightGreyColor,
+              colorBorder: ColorManager.soLightGreyColor,
             ),
             OptionTile(
               imagePath: "assets/images/help_center_images/outline.png",
               label: "How to reset your password",
               subtitle: "Account Settings • 4.1k views • 2 min",
               onTap: () {},
+              backgroundColor: ColorManager.soLightGreyColor,
+              colorBorder: ColorManager.soLightGreyColor,
             ),
             OptionTile(
               imagePath: "assets/images/help_center_images/outline.png",
               label: "Inviting team members to your workspace",
               subtitle: "Team Management • 1.5k views • 4 min",
               onTap: () {},
+              backgroundColor: ColorManager.soLightGreyColor,
+              colorBorder: ColorManager.soLightGreyColor,
             ),
             OptionTile(
               imagePath: "assets/images/help_center_images/outline.png",
               label: "Troubleshooting connection issues",
               subtitle: "Technical Support • 2.9k views • 2 min",
               onTap: () {},
+              backgroundColor: ColorManager.soLightGreyColor,
+              colorBorder: ColorManager.soLightGreyColor,
             ),
             SizedBox(height: 24.h),
 

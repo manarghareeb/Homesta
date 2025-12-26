@@ -25,7 +25,7 @@ class WishlistScreen extends StatelessWidget {
           IconButton(onPressed: () {}, icon: const Icon(Icons.share)),
           IconButton(
             onPressed: () {
-              GoRouter.of(context).push(AppRouter.cartScreen);
+              GoRouter.of(context).push(AppRouter.emptyCartScreen);
             },
             icon: const Icon(Icons.shopping_cart_outlined),
           ),
