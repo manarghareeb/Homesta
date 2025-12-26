@@ -125,10 +125,7 @@ class MessageBubble extends StatelessWidget {
             ),
             child: Text(
               msg.time,
-              style: TextStyles.font15BlackW400.copyWith(
-                fontSize: 11.sp,
-                color: Colors.grey,
-              ),
+              style: TextStyles.font13BlackColorW400,
             ),
           ),
         ],

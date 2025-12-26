@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:homesta/core/theming/colors.dart';
-import 'package:homesta/core/theming/styles.dart';
-
+/*
 class OptionTile extends StatelessWidget {
   final IconData? icon;            // الأيقونة اختيارية
   final String? imagePath;         // الصورة اختيارية
@@ -51,9 +47,62 @@ class OptionTile extends StatelessWidget {
       ],
     );
   }
+}*/
 
-  /// يبني الـ leading حسب إذا فيه صورة أو أيقونة
-  Widget _buildLeading() {
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:homesta/core/theming/colors.dart';
+import 'package:homesta/core/theming/styles.dart';
+
+class OptionTile extends StatelessWidget {
+  final IconData? icon;
+  final String label;
+  final Function() onTap;
+  final Widget? trailing;
+  final String? subtitle;
+  final String? imagePath;
+  final Color? backgroundColor;
+  final Color? colorBorder;
+
+  const OptionTile({
+    super.key,
+    this.icon,
+    required this.label,
+    required this.onTap,
+    this.trailing,
+    this.subtitle,
+    this.imagePath,
+    this.backgroundColor, 
+    this.colorBorder,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.r),
+            side: BorderSide(
+              color: colorBorder ?? ColorManager.lightGreyColor
+            )
+          ),
+          color: backgroundColor ?? Colors.white,
+          elevation: 0,
+          child: ListTile(
+            leading: buildLeading(),
+            title: Text(label, style: TextStyles.font16BlackRegular),
+            subtitle: subtitle != null ? Text(subtitle!, style: TextStyles.font14GreyColorW400) : null,
+            trailing: trailing ?? Icon(Icons.arrow_forward_ios, size: 16),
+            onTap: onTap,
+          ),
+        ),
+        SizedBox(height: 16,),
+      ],
+    );
+  }
+
+  Widget buildLeading() {
     if (imagePath != null) {
       return CircleAvatar(
         backgroundColor:Color(0xffF6F6F6),
@@ -70,7 +119,7 @@ class OptionTile extends StatelessWidget {
         child: Icon(icon, color: ColorManager.blackColor),
       );
     } else {
-      return const SizedBox.shrink(); // إذا ما فيه لا صورة ولا أيقونة
+      return const SizedBox.shrink();
     }
   }
 }

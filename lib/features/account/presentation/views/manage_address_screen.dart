@@ -40,45 +40,32 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// العناوين المحفوظة
             SavedAddressWidget(
               name: "Bessie Cooper",
               address: "2464 Royal Ln. Mesa, New Jersey 45463",
-              onEdit: () {
-                // هنا منطق التعديل
-              },
-              onDelete: () {
-                // هنا منطق الحذف
-              },
+              onEdit: () {},
+              onDelete: () {},
             ),
             SizedBox(height: 20.h),
             SavedAddressWidget(
               name: "Bessie Cooper",
               address: "2464 Royal Ln. Mesa, New Jersey 45463",
-              onEdit: () {
-                // هنا منطق التعديل
-              },
-              onDelete: () {
-                // هنا منطق الحذف
-              },
+              onEdit: () {},
+              onDelete: () {},
             ),
             SizedBox(height: 20.h),
-
             Text("Add New Address", style: TextStyles.font18BoldBlack),
             SizedBox(height: 16.h),
-
-            /// إضافة عنوان جديد داخل Container خارجي
             Container(
               padding: EdgeInsets.all(16.w),
               decoration: BoxDecoration(
-                color: const Color(0xFFF6F6F6),
+                color: ColorManager.soLightGreyColor,
                 borderRadius: BorderRadius.circular(12.r),
-                border: Border.all(color: ColorManager.lightGreyColor),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 6,
-                    offset: const Offset(0, 3),
+                    color: Colors.black.withOpacity(0.25),
+                    blurRadius: 12,
+                    offset: const Offset(0, 2),
                   ),
                 ],
               ),

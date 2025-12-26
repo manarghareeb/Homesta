@@ -34,7 +34,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
           BoxShadow(
             color: ColorManager.blackColor.withOpacity(0.25),
             offset: Offset(0, 2),
-            blurRadius: 8,
+            blurRadius: 4,
           ),
         ],
       ),

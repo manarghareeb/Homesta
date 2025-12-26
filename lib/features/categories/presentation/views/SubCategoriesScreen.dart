@@ -59,29 +59,40 @@ class SubCategoriesScreen extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              height: 48.h,
-              padding: EdgeInsets.symmetric(horizontal: 14.w),
+              height: 50.h,
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
               decoration: BoxDecoration(
-                color: ColorManager.lightGreyIconColor,
-                borderRadius: BorderRadius.circular(14.r),
+                color: ColorManager.soLightGreyColor,
+                borderRadius: BorderRadius.circular(15.r),
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.search, color: ColorManager.lightGreyColor),
-                  SizedBox(width: 8.w),
+                  const Icon(
+                    Icons.search,
+                    color: ColorManager.lightGreyColor,
+                  ),
+                  SizedBox(width: 12.w),
                   Expanded(
                     child: TextField(
+                      textAlignVertical: TextAlignVertical.center,
                       decoration: InputDecoration(
                         hintText: 'Search',
                         border: InputBorder.none,
+                        isDense: true,
+                        contentPadding: EdgeInsets.symmetric(vertical: 14.h),
                         hintStyle: TextStyles.font14GreyColorW400,
                       ),
                     ),
                   ),
-                  const Icon(
-                    Icons.camera_alt_outlined,
-                    color: ColorManager.lightGreyColor,
+                  SizedBox(width: 8.w),
+                  Container(
+                    padding: EdgeInsets.all(8.w),
+                    child: const Icon(
+                      Icons.camera_alt_outlined,
+                      color: ColorManager.lightGreyColor,
+                    ),
                   ),
+                  SizedBox(width: 8.w),
                   const Icon(
                     Icons.mic_none,
                     color: ColorManager.lightGreyColor,
@@ -89,7 +100,6 @@ class SubCategoriesScreen extends StatelessWidget {
                 ],
               ),
             ),
-
             SizedBox(height: 16.h),
 
             Expanded(

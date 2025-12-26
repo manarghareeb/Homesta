@@ -106,30 +106,24 @@ class _ChatDrawerState extends State<ChatDrawer> {
                 itemCount: chats.length,
                 itemBuilder: (context, index) {
                   final chat = chats[index];
-                  return GestureDetector(
-                    onTap: () {
-                      GoRouter.of(context).push(
-                        AppRouter.chatMessageScreen,
-                        extra: chat,
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0,
-                        vertical: 12.0,
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: ListTile(
+                      dense: true,
+                      contentPadding: EdgeInsets.zero,
+                      onTap: () {
+                        GoRouter.of(context).push(
+                          AppRouter.chatMessageScreen,
+                          extra: chat,
+                        );
+                      },
+                      title: Text(
+                        chat.firstQuestion,
+                        style: TextStyles.font12GreyColorW400.copyWith(
+                          color: ColorManager.blackColor,
+                        ),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            chat.firstQuestion,
-                            style: TextStyles.font12GreyColorW400.copyWith(
-                              color: ColorManager.blackColor,
-                            ),
-                          ),
-                          Icon(Icons.more_vert, size: 20),
-                        ],
-                      ),
+                      trailing: const Icon(Icons.more_vert, size: 20),
                     ),
                   );
                 },
