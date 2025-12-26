@@ -80,15 +80,12 @@ abstract class AppRouter {
   static final sellerScreen = '/sellerScreen';
   static final trackOrderDetails = '/trackOrderDetails';
   static final chatMessageScreen = '/chatMessageScreen';
-<<<<<<< HEAD
   static final filtersScreen = '/filtersScreen';
-=======
   static final collectionsScreen = '/collectionsScreen';
->>>>>>> a1214fecb90c4e1341673353f5c92f097ffc715b
 
   static final route = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const FiltersScreen()),
+      GoRoute(path: '/', builder: (context, state) => const HomeView()),
       GoRoute(
         path: loginScreen,
         builder: (context, state) => const LoginScreen(),
