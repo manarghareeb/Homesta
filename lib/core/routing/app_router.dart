@@ -1,3 +1,4 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homesta/features/account/presentation/views/contact_us_screen.dart';
 import 'package:homesta/features/account/presentation/views/customer_support_screen.dart';
@@ -9,7 +10,9 @@ import 'package:homesta/features/account/presentation/views/manage_address_scree
 import 'package:homesta/features/account/presentation/views/my_order_screen.dart';
 import 'package:homesta/features/account/presentation/views/password_manager_screen.dart';
 import 'package:homesta/features/cart/presentation/views/empty_cart_screen.dart';
-import 'package:homesta/features/chat/data/models/chat_model.dart';
+import 'package:homesta/features/chat/data/models/chat_message_model.dart';
+import 'package:homesta/features/chat/domain/repos/chat_repo.dart';
+import 'package:homesta/features/chat/presentation/cubit/chat/chat_cubit.dart';
 import 'package:homesta/features/chat/presentation/views/chat_message_screen.dart';
 import 'package:homesta/features/order/presentation/views/track_order_details_screen.dart';
 import 'package:homesta/features/order/presentation/views/track_your_order_screen.dart';
@@ -86,7 +89,7 @@ abstract class AppRouter {
 
   static final route = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const HomeView()),
+      GoRoute(path: '/', builder: (context, state) => const ChatScreen()),
       GoRoute(
         path: loginScreen,
         builder: (context, state) => const LoginScreen(),
@@ -256,23 +259,22 @@ abstract class AppRouter {
       GoRoute(
         path: chatMessageScreen,
         builder: (context, state) {
-          final chat = state.extra as ChatModel?;
-          if (chat == null) {
-            return ChatMessageScreen(
-              chatTitle: "Default Chat",
-              initialMessages: [],
-            );
-          }
-          return ChatMessageScreen(
-            chatTitle: chat.firstQuestion,
-            initialMessages: chat.messages,
+          final chat = state.extra as ChatMessageModel?;
+          return BlocProvider(
+            create: (_) {
+              final chatRepo = context.read<ChatRepo>();
+              return ChatCubit(chatRepo);
+            },
+            child: ChatMessageScreen(
+              chatTitle: chat?.firstQuestion ?? "Default Chat",
+              initialMessages: chat?.messages ?? [],
+            ),
           );
         },
       ),
       GoRoute(
         path: collectionsScreen,
-        builder:
-            (context, state) => const CollectionsScreen(),
+        builder: (context, state) => const CollectionsScreen(),
       ),
       GoRoute(
         path: emptyCartScreen,

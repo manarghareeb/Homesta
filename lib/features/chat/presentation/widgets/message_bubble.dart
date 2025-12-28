@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
-import 'package:homesta/features/chat/data/models/chat_message.dart';
+import 'package:homesta/features/chat/data/models/chat_messages_history.dart';
 
 class MessageBubble extends StatelessWidget {
-  final ChatMessage msg;
+  final ChatMessagesHistory msg;
 
   const MessageBubble({super.key, required this.msg});
 
@@ -41,17 +41,18 @@ class MessageBubble extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.all(12.w),
                   decoration: BoxDecoration(
-                    gradient: msg.isUser
-                        ? LinearGradient(
-                            colors: [
-                              ColorManager.startchatColor,
-                              ColorManager.primaryColor,
-                            ],
-                            stops: const [0.0, 0.9],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          )
-                        : null,
+                    gradient:
+                        msg.isUser
+                            ? LinearGradient(
+                              colors: [
+                                ColorManager.startchatColor,
+                                ColorManager.primaryColor,
+                              ],
+                              stops: const [0.0, 0.9],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            )
+                            : null,
                     color: msg.isUser ? null : Colors.white,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(16.r),
@@ -76,9 +77,8 @@ class MessageBubble extends StatelessWidget {
                   child: Text(
                     msg.text,
                     style: TextStyles.font12PiramyColorW400.copyWith(
-                      color: msg.isUser
-                          ? Colors.white
-                          : ColorManager.primaryColor,
+                      color:
+                          msg.isUser ? Colors.white : ColorManager.primaryColor,
                     ),
                   ),
                 ),
@@ -123,10 +123,7 @@ class MessageBubble extends StatelessWidget {
               left: msg.isUser ? 0 : 40.w,
               right: msg.isUser ? 40.w : 0,
             ),
-            child: Text(
-              msg.time,
-              style: TextStyles.font13BlackColorW400,
-            ),
+            child: Text(msg.time, style: TextStyles.font13BlackColorW400),
           ),
         ],
       ),

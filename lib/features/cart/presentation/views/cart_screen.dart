@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:homesta/core/theming/colors.dart';
+import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 import 'package:homesta/features/cart/presentation/widgets/cart_item_widget.dart';
 
@@ -24,12 +26,11 @@ class CartScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //Text('Order Details', style: TextStyles.font18BlackW500),
               ListView.separated(
                 padding: EdgeInsets.symmetric(vertical: 16.h),
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: 3,
+                itemCount: 7,
                 separatorBuilder: (context, index) => SizedBox(height: 24.h),
                 itemBuilder: (context, index) {
                   return CartItemWidget(
@@ -40,22 +41,50 @@ class CartScreen extends StatelessWidget {
                   );
                 },
               ),
-              /*const CouponSection(),
-              SizedBox(height: 24.h),
-              Text('Order Summary', style: TextStyles.font18BlackW500),
-              SizedBox(height: 16.h),
-              Divider(height: 1, color: ColorManager.lightGreyColor),
-              SizedBox(height: 16.h),
-              const OrderSummarySection(),
-              SizedBox(height: 46.h),
-              CustomButtonWidget(
-                buttonText: 'Proceed to Checkout',
-                onPressed: () {},
-              ),*/
             ],
           ),
         ),
       ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+        child: Row(
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Total Price',
+                  style: TextStyles.font16BlackW500,
+                ),
+                Text(
+                  '\$1170',
+                  style: TextStyles.font16BlackW500.copyWith(
+                    color: ColorManager.thirdColor,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(width: 64.w),
+            Expanded(
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: ColorManager.primaryColor,
+                  padding: EdgeInsets.symmetric(vertical: 14.h),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.r),
+                  ),
+                ),
+                child: Text(
+                  'Checkout with Coupon(9)',
+                  textAlign: TextAlign.center,
+                  style: TextStyles.font16WhiteW500,
+                ),
+              ),
+            ),
+          ],
+        ),
+      )
     );
   }
 }

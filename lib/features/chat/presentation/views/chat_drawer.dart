@@ -5,8 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
-import 'package:homesta/features/chat/data/models/chat_message.dart';
-import 'package:homesta/features/chat/data/models/chat_model.dart';
+import 'package:homesta/features/chat/data/models/chat_messages_history.dart';
+import 'package:homesta/features/chat/data/models/chat_message_model.dart';
 import 'package:homesta/features/chat/presentation/widgets/chat_drawer_footer.dart';
 import 'package:homesta/features/chat/presentation/widgets/chat_drawer_header_section.dart';
 
@@ -18,17 +18,17 @@ class ChatDrawer extends StatefulWidget {
 }
 
 class _ChatDrawerState extends State<ChatDrawer> {
-  List<ChatModel> chats = [
-    ChatModel(
+  List<ChatMessageModel> chats = [
+    ChatMessageModel(
       firstQuestion: "Hi, how are you?",
       messages: [
-        ChatMessage(
+        ChatMessagesHistory(
           text: "Hi, how are you?",
           isUser: true,
           sender: "User",
           time: "02:00 PM",
         ),
-        ChatMessage(
+        ChatMessagesHistory(
           text: "I'm fine, thanks.",
           isUser: false,
           sender: "AI",
@@ -36,16 +36,16 @@ class _ChatDrawerState extends State<ChatDrawer> {
         ),
       ],
     ),
-    ChatModel(
+    ChatMessageModel(
       firstQuestion: "What's the weather today?",
       messages: [
-        ChatMessage(
+        ChatMessagesHistory(
           text: "What's the weather today?",
           isUser: true,
           sender: "User",
           time: "10:30 AM",
         ),
-        ChatMessage(
+        ChatMessagesHistory(
           text: "It's sunny.",
           isUser: false,
           sender: "AI",
@@ -53,16 +53,16 @@ class _ChatDrawerState extends State<ChatDrawer> {
         ),
       ],
     ),
-    ChatModel(
+    ChatMessageModel(
       firstQuestion: "Tell me a joke",
       messages: [
-        ChatMessage(
+        ChatMessagesHistory(
           text: "Tell me a joke",
           isUser: true,
           sender: "User",
           time: "04:20 PM",
         ),
-        ChatMessage(
+        ChatMessagesHistory(
           text: "Why did the chicken cross the road?",
           isUser: false,
           sender: "AI",
@@ -112,10 +112,9 @@ class _ChatDrawerState extends State<ChatDrawer> {
                       dense: true,
                       contentPadding: EdgeInsets.zero,
                       onTap: () {
-                        GoRouter.of(context).push(
-                          AppRouter.chatMessageScreen,
-                          extra: chat,
-                        );
+                        GoRouter.of(
+                          context,
+                        ).push(AppRouter.chatMessageScreen, extra: chat);
                       },
                       title: Text(
                         chat.firstQuestion,
