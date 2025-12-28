@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 
-// widgets
 import '../widgets/app_bar.dart';
 import '../widgets/home_hero_banner.dart';
 import '../widgets/home_categories.dart';
@@ -23,98 +22,98 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-
       appBar: const HomeAppBar(),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final isTablet = constraints.maxWidth >= 600;
+          final isDesktop = constraints.maxWidth >= 1000;
 
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 16.h),
+          return SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: isDesktop ? 48.w : 16.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 16.h),
 
-            /// Hero Banner
-            const HomeHeroBanner(),
-            SizedBox(height: 20.h),
+                const HomeHeroBanner(),
+                SizedBox(height: 20.h),
 
-            /// Categories
-            const HomeCategories(),
-            SizedBox(height: 24.h),
+                const HomeCategories(),
+                SizedBox(height: 24.h),
 
-            /// Sales & Promotions
-            const SalesPromotionsWidget(),
-            SizedBox(height: 24.h),
+                const SalesPromotionsWidget(),
+                SizedBox(height: 24.h),
 
-            /// Products Tabs
-            const ProductsTabsWidget(),
-            SizedBox(height: 16.h),
+                const ProductsTabsWidget(),
+                SizedBox(height: 16.h),
 
-            /// Products Grid
-            GridView.count(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              crossAxisCount: 2,
-              crossAxisSpacing: 12.w,
-              mainAxisSpacing: 12.h,
-              childAspectRatio: 0.62,
-              children: const [
-                ProductCardWidget(
-                  imagePath: 'assets/images/chair.png',
-                  title: 'Wooden Sofa Chair',
-                  price: '\$80.00',
-                  oldPrice: '\$160.00',
-                  discount: '50% Off',
-                  rating: 4.9,
-                  showTimer: true,
+                /// 🟢 Responsive Grid
+                GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount:
+                        isDesktop
+                            ? 4
+                            : isTablet
+                            ? 3
+                            : 2,
+                    crossAxisSpacing: 12.w,
+                    mainAxisSpacing: 12.h,
+                    childAspectRatio:
+                        isDesktop
+                            ? 0.75
+                            : isTablet
+                            ? 0.7
+                            : 0.62,
+                  ),
+                  itemCount: 4,
+                  itemBuilder: (context, index) {
+                    return const ProductCardWidget(
+                      imagePath: 'assets/images/chair.png',
+                      title: 'Wooden Sofa Chair',
+                      price: '\$80.00',
+                      oldPrice: '\$160.00',
+                      discount: '50% Off',
+                      rating: 4.9,
+                      showTimer: true,
+                    );
+                  },
                 ),
-                ProductCardWidget(
-                  imagePath: 'assets/images/chair.png',
-                  title: 'Circular Sofa Chair',
-                  price: '\$108.00',
-                  oldPrice: '\$120.00',
-                  discount: '10% Off',
-                  rating: 5.0,
-                ),
+
+                SizedBox(height: 24.h),
+
+                const FlashSaleWidget(),
+                SizedBox(height: 24.h),
+
+                const DealsOfDayWidget(),
+                SizedBox(height: 24.h),
+
+                const DiscountBannerWidget(),
+                SizedBox(height: 16.h),
+                const DiscountBannerWidget(dark: true),
+
+                SizedBox(height: 24.h),
+
+                const TrendingSalesSection(title: 'Trending'),
+                SizedBox(height: 24.h),
+                const TrendingSalesSection(title: 'Sales'),
+
+                SizedBox(height: 32.h),
               ],
             ),
-
-            SizedBox(height: 24.h),
-
-            /// Flash Sale
-            const FlashSaleWidget(),
-            SizedBox(height: 24.h),
-
-            /// Deals of the Day
-            const DealsOfDayWidget(),
-            SizedBox(height: 24.h),
-
-            /// Discount Banners
-            const DiscountBannerWidget(),
-            SizedBox(height: 16.h),
-            const DiscountBannerWidget(dark: true),
-            SizedBox(height: 24.h),
-
-            /// Trending & Sales
-            const TrendingSalesSection(title: 'Trending'),
-            SizedBox(height: 24.h),
-            const TrendingSalesSection(title: 'Sales'),
-
-            SizedBox(height: 24.h),
-          ],
-        ),
+          );
+        },
       ),
 
-      // ================= FAB =================
       floatingActionButton: FloatingActionButton(
         backgroundColor: ColorManager.aliceBlue,
         mini: true,
-        shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.circular(5.r),
-        ),
+        shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(6.r)),
         onPressed: () {
           context.push(AppRouter.chatScreen);
         },
-        child: Icon(Icons.chat, color: ColorManager.blackColor,),
+        child: Icon(Icons.chat, color: ColorManager.blackColor),
       ),
     );
   }

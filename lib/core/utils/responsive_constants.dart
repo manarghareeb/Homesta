@@ -1,36 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ResponsiveConstants {
-  // Screen Size Categories
-  static bool isSmallScreen(BuildContext context) {
-    return MediaQuery.of(context).size.width < 360;
-  }
+  static bool isSmallScreen(BuildContext context) =>
+      MediaQuery.of(context).size.width < 360;
 
-  static bool isMediumScreen(BuildContext context) {
-    return MediaQuery.of(context).size.width >= 360 &&
-        MediaQuery.of(context).size.width < 600;
-  }
+  static bool isMediumScreen(BuildContext context) =>
+      MediaQuery.of(context).size.width >= 360 &&
+      MediaQuery.of(context).size.width < 600;
 
-  static bool isTablet(BuildContext context) {
-    return MediaQuery.of(context).size.width >= 600;
-  }
+  static bool isTablet(BuildContext context) =>
+      MediaQuery.of(context).size.width >= 600 &&
+      MediaQuery.of(context).size.width < 900;
 
-  static bool isLargeTablet(BuildContext context) {
-    return MediaQuery.of(context).size.width >= 800;
-  }
+  static bool isLargeTablet(BuildContext context) =>
+      MediaQuery.of(context).size.width >= 900;
 
-  // Helper function to get scaled value
-  static double getScaledValue(
+  static double responsiveValue(
     BuildContext context, {
-    required double small,
-    required double medium,
+    required double mobile,
     required double tablet,
     double? large,
   }) {
     final width = MediaQuery.of(context).size.width;
-    if (width < 360) return small;
-    if (width < 600) return medium;
-    if (width < 800) return tablet;
-    return large ?? tablet;
+
+    if (width < 600) {
+      return mobile.w;
+    } else if (width < 900) {
+      return tablet.w;
+    } else {
+      return (large ?? tablet).w;
+    }
+  }
+
+  static double fontSize(
+    BuildContext context, {
+    required double mobile,
+    required double tablet,
+    double? large,
+  }) {
+    final width = MediaQuery.of(context).size.width;
+
+    if (width < 600) {
+      return mobile.sp;
+    } else if (width < 900) {
+      return tablet.sp;
+    } else {
+      return (large ?? tablet).sp;
+    }
   }
 }

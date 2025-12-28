@@ -24,99 +24,103 @@ class ProductCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          padding: EdgeInsets.all(12.w),
-          decoration: BoxDecoration(
-            color: const Color(0xffE0DFDF),
-            borderRadius: BorderRadius.circular(20.r),
-          ),
-          child: Column(
-            children: [
-              Stack(
-                children: [
-                  SizedBox(
-                    height: 150.h,
-                    width: double.infinity,
-                    child: Image.asset(imagePath, fit: BoxFit.contain),
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xffE0DFDF),
+        borderRadius: BorderRadius.circular(20.r),
+      ),
+      padding: EdgeInsets.all(10.w),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          /// IMAGE
+          AspectRatio(
+            aspectRatio: 1,
+            child: Stack(
+              children: [
+                Image.asset(imagePath, fit: BoxFit.contain),
+
+                /// Discount badge
+                Positioned(top: 0, left: 0, child: _badge(discount)),
+
+                /// Icons
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: Column(
+                    children: [
+                      _icon(Icons.favorite_border),
+                      SizedBox(height: 6.h),
+                      _icon(Icons.shopping_cart_outlined),
+                    ],
                   ),
+                ),
 
-                  Positioned(top: 0, left: 0, child: _badge(discount)),
-
+                /// Timer
+                if (showTimer)
                   Positioned(
-                    top: 0,
+                    bottom: 0,
+                    left: 0,
                     right: 0,
-                    child: Column(
-                      children: [
-                        _iconCircle(Icons.favorite_border),
-                        SizedBox(height: 4.h),
-                        _iconCircle(Icons.compare_arrows),
-                        SizedBox(height: 4.h),
-                        _iconCircle(Icons.shopping_cart_outlined),
-                      ],
-                    ),
-                  ),
-
-                  if (showTimer)
-                    Positioned(
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 6.h),
-                        decoration: BoxDecoration(
-                          color: ColorManager.primaryColor,
-                          borderRadius: BorderRadius.circular(15.r),
-                        ),
-                        child: const Text(
-                          '05     :    12    :    30    : 25 \n Days   Hours   Mins   Sec',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white, fontSize: 11),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 6.h),
+                      decoration: BoxDecoration(
+                        color: ColorManager.primaryColor,
+                        borderRadius: BorderRadius.circular(14.r),
+                      ),
+                      child: const FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          '05 : 12 : 30 : 25',
+                          style: TextStyle(color: Colors.white),
                         ),
                       ),
                     ),
-                ],
+                  ),
+              ],
+            ),
+          ),
+
+          SizedBox(height: 8.h),
+
+          const Text(
+            'Chair',
+            style: TextStyle(fontSize: 12, color: Colors.black),
+          ),
+
+          SizedBox(height: 4.h),
+
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  title,
+                  style: const TextStyle(fontWeight: FontWeight.w600),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              const Icon(Icons.star, color: Colors.amber, size: 16),
+              Text(rating.toString()),
+            ],
+          ),
+
+          SizedBox(height: 6.h),
+
+          Row(
+            children: [
+              Text(price, style: const TextStyle(fontWeight: FontWeight.bold)),
+              SizedBox(width: 6.w),
+              Text(
+                oldPrice,
+                style: const TextStyle(
+                  color: Colors.grey,
+                  decoration: TextDecoration.lineThrough,
+                ),
               ),
             ],
           ),
-        ),
-
-        SizedBox(height: 8.h),
-
-        const Text(
-          'Chair',
-          style: TextStyle(fontSize: 12, color: ColorManager.blackColor),
-        ),
-
-        SizedBox(height: 4.h),
-
-        Row(
-          children: [
-            Text(title, style: const TextStyle(fontWeight: FontWeight.w600)),
-            const Spacer(),
-            const Icon(Icons.star, color: Colors.amber, size: 16),
-            Text(rating.toString()),
-          ],
-        ),
-
-        SizedBox(height: 6.h),
-
-        Row(
-          children: [
-            Text(price, style: const TextStyle(fontWeight: FontWeight.bold)),
-            SizedBox(width: 6.w),
-            Text(
-              oldPrice,
-              style: const TextStyle(
-                color: Colors.grey,
-                decoration: TextDecoration.lineThrough,
-              ),
-            ),
-          ],
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -134,9 +138,9 @@ class ProductCardWidget extends StatelessWidget {
     );
   }
 
-  Widget _iconCircle(IconData icon) {
+  Widget _icon(IconData icon) {
     return Container(
-      padding: EdgeInsets.all(2.w),
+      padding: EdgeInsets.all(4.w),
       decoration: const BoxDecoration(
         color: Colors.white,
         shape: BoxShape.circle,

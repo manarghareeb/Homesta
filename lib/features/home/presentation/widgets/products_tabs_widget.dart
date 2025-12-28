@@ -9,38 +9,53 @@ class ProductsTabsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final bool isSmall = constraints.maxWidth < 400;
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Our", style: TextStyles.font16BlackW500),
-            Text(
-              'Products Collections',
-              style: TextStyles.font16PrimaryColorW400,
+            Row(
+              children: [
+                Text("Our", style: TextStyles.font16BlackW500),
+                const SizedBox(width: 4),
+                Text(
+                  'Products Collections',
+                  style: TextStyles.font16PrimaryColorW400,
+                ),
+              ],
+            ),
+
+            SizedBox(height: 12.h),
+
+            Wrap(
+              spacing: isSmall ? 12.w : 20.w,
+              runSpacing: 8.h,
+              children: [
+                _tabItem('All Products', false),
+                _tabItem('Latest Product', true),
+                _tabItem('Best Seller', false),
+                _tabItem('Featured', false),
+              ],
             ),
           ],
-        ),
-        SizedBox(height: 12.h),
-
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              _tabItem('All Products', false),
-              _tabItem('Latest Product', true),
-              _tabItem('Best Seller', false),
-              _tabItem('Featured', false),
-            ],
-          ),
-        ),
-      ],
+        );
+      },
     );
   }
 
   Widget _tabItem(String title, bool selected) {
-    return Padding(
-      padding: EdgeInsets.only(right: 20.w),
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.r),
+        color:
+            selected
+                ? ColorManager.primaryColor.withOpacity(0.08)
+                : Colors.transparent,
+      ),
       child: Text(
         title,
         style: TextStyle(

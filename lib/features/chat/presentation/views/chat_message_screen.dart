@@ -16,6 +16,7 @@ class ChatMessageScreen extends StatefulWidget {
     required this.chatTitle,
     required this.initialMessages,
   });
+
   final String chatTitle;
   final List<ChatMessagesHistory> initialMessages;
 
@@ -28,12 +29,6 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
   final TextEditingController controller = TextEditingController();
 
   Color backgroundColor = ColorManager.aliceBlue;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,56 +41,67 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
         });
       },
       body: SafeArea(
-        child: Column(
-          children: [
-            AppBarWidget(
-              openDrawer: () {
-                scaffoldKey.currentState?.openDrawer();
-              },
-            ),
-            SizedBox(height: 32.h),
-            Expanded(
-              child: BlocConsumer<ChatCubit, ChatState>(
-                listener: (context, state) {
-                  if (state is ChatError) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          state.error,
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                        backgroundColor: Colors.red,
-                        behavior: SnackBarBehavior.floating,
-                      ),
-                    );
-                  }
-                },
-                builder: (context, state) {
-                  final messages = context.read<ChatCubit>().messages;
-                  return ListView.builder(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16.w,
-                      vertical: 16.h,
-                    ),
-                    itemCount: messages.length,
-                    itemBuilder: (context, index) {
-                      return MessageBubble(msg: messages[index]);
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final bool isTablet = constraints.maxWidth >= 700;
+
+            return Column(
+              children: [
+                AppBarWidget(
+                  openDrawer: () {
+                    scaffoldKey.currentState?.openDrawer();
+                  },
+                ),
+
+                SizedBox(height: isTablet ? 24.h : 16.h),
+
+                Expanded(
+                  child: BlocConsumer<ChatCubit, ChatState>(
+                    listener: (context, state) {
+                      if (state is ChatError) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(state.error),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
                     },
-                  );
-                },
-              ),
-            ),
-            SendMessageWidget(
-              controller: controller,
-              onSend: () {
-                final message = controller.text.trim();
-                if (message.isNotEmpty) {
-                  context.read<ChatCubit>().sendMessage(message);
-                  controller.clear();
-                }
-              },
-            ),
-          ],
+                    builder: (context, state) {
+                      final messages = context.read<ChatCubit>().messages;
+
+                      return ListView.builder(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 32.w : 16.w,
+                          vertical: 12.h,
+                        ),
+                        itemCount: messages.length,
+                        itemBuilder: (context, index) {
+                          return MessageBubble(msg: messages[index]);
+                        },
+                      );
+                    },
+                  ),
+                ),
+
+                Padding(
+                  padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom,
+                  ),
+                  child: SendMessageWidget(
+                    controller: controller,
+                    onSend: () {
+                      final message = controller.text.trim();
+                      if (message.isNotEmpty) {
+                        context.read<ChatCubit>().sendMessage(message);
+                        controller.clear();
+                      }
+                    },
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );

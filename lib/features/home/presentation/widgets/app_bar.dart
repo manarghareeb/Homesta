@@ -14,17 +14,22 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       surfaceTintColor: Colors.white,
       elevation: 0,
 
-      /// ===== Title =====
       title: Row(
         children: [
-          Image.asset('assets/images/chair.png', height: 30.h),
-          SizedBox(width: 90.w),
-          Text(
-            'Homesta',
-            style: TextStyle(
-              fontSize: 20.sp,
-              fontWeight: FontWeight.bold,
-              color: ColorManager.primaryColor,
+          Image.asset('assets/images/chair.png', height: 28.h),
+
+          SizedBox(width: 8.w),
+
+          Expanded(
+            child: Text(
+              'Homesta',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.bold,
+                color: ColorManager.primaryColor,
+              ),
             ),
           ),
         ],

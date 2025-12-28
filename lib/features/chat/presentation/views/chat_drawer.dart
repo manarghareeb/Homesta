@@ -81,18 +81,20 @@ class _ChatDrawerState extends State<ChatDrawer> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SvgPicture.asset('assets/images/chat_ai_icon.svg'),
+                      SvgPicture.asset(
+                        'assets/images/chat_ai_icon.svg',
+                        width: 32.w,
+                        height: 32.w,
+                      ),
                       IconButton(
-                        icon: Icon(Icons.close),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
+                        icon: Icon(Icons.close, size: 22.sp),
+                        onPressed: () => Navigator.of(context).pop(),
                       ),
                     ],
                   ),
@@ -101,33 +103,33 @@ class _ChatDrawerState extends State<ChatDrawer> {
                 ],
               ),
             ),
+
             Expanded(
               child: ListView.builder(
+                padding: EdgeInsets.symmetric(horizontal: 8.w),
                 itemCount: chats.length,
                 itemBuilder: (context, index) {
                   final chat = chats[index];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: ListTile(
-                      dense: true,
-                      contentPadding: EdgeInsets.zero,
-                      onTap: () {
-                        GoRouter.of(
-                          context,
-                        ).push(AppRouter.chatMessageScreen, extra: chat);
-                      },
-                      title: Text(
-                        chat.firstQuestion,
-                        style: TextStyles.font12GreyColorW400.copyWith(
-                          color: ColorManager.blackColor,
-                        ),
+                  return ListTile(
+                    dense: true,
+                    contentPadding: EdgeInsets.zero,
+                    onTap: () {
+                      GoRouter.of(
+                        context,
+                      ).push(AppRouter.chatMessageScreen, extra: chat);
+                    },
+                    title: Text(
+                      chat.firstQuestion,
+                      style: TextStyles.font12GreyColorW400.copyWith(
+                        color: ColorManager.blackColor,
                       ),
-                      trailing: const Icon(Icons.more_vert, size: 20),
                     ),
+                    trailing: Icon(Icons.more_vert, size: 20.sp),
                   );
                 },
               ),
             ),
+
             const ChatDrawerFooter(),
           ],
         ),
