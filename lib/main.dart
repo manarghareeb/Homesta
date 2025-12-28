@@ -1,9 +1,28 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:homesta/core/api/dio_consumer.dart';
+import 'package:homesta/core/cache/cache_helper.dart';
 import 'package:homesta/core/routing/app_router.dart';
+import 'package:homesta/features/chat/data/repos/chat_repo_impl.dart';
+import 'package:homesta/features/chat/domain/repos/chat_repo.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  CacheHelper.init();
+  final dio = Dio();
+  final apiConsumer = DioConsumer(dio: dio);
+  final chatRepo = ChatRepoImpl(apiConsumer: apiConsumer);
+
+  runApp(
+    MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<ChatRepo>.value(value: chatRepo),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
