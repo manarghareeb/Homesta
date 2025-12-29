@@ -42,8 +42,9 @@ class SalesPromotionsWidget extends StatelessWidget {
                               const Text(
                                 'New Collection',
                                 style: TextStyle(
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.w100,
                                   color: ColorManager.primaryColor,
+                                  fontSize: 18,
                                 ),
                               ),
                               SizedBox(height: 6.h),
@@ -72,7 +73,7 @@ class SalesPromotionsWidget extends StatelessWidget {
                             textColor: Colors.white,
                             minWidth: 80.w,
                             raduis: 15,
-                            height: 50.h,
+                            height: 10.h,
                           ),
                         ],
                       ),
