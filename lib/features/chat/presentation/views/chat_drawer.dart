@@ -18,7 +18,7 @@ class ChatDrawer extends StatefulWidget {
 }
 
 class _ChatDrawerState extends State<ChatDrawer> {
-  List<ChatMessageModel> chats = [
+  final List<ChatMessageModel> chats = [
     ChatMessageModel(
       firstQuestion: "Hi, how are you?",
       messages: [
@@ -53,87 +53,82 @@ class _ChatDrawerState extends State<ChatDrawer> {
         ),
       ],
     ),
-    ChatMessageModel(
-      firstQuestion: "Tell me a joke",
-      messages: [
-        ChatMessagesHistory(
-          text: "Tell me a joke",
-          isUser: true,
-          sender: "User",
-          time: "04:20 PM",
-        ),
-        ChatMessagesHistory(
-          text: "Why did the chicken cross the road?",
-          isUser: false,
-          sender: "AI",
-          time: "04:21 PM",
-        ),
-      ],
-    ),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      backgroundColor: ColorManager.aliceBlue,
-      child: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isSmall = constraints.maxWidth < 360;
+
+        return Drawer(
+          backgroundColor: ColorManager.aliceBlue,
+          child: SafeArea(
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 8.h,
+                  ),
+                  child: Column(
                     children: [
-                      SvgPicture.asset(
-                        'assets/images/chat_ai_icon.svg',
-                        width: 32.w,
-                        height: 32.w,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/images/chat_ai_icon.svg',
+                            height: isSmall ? 24 : 28,
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.close),
+                            onPressed: () => Navigator.pop(context),
+                          ),
+                        ],
                       ),
-                      IconButton(
-                        icon: Icon(Icons.close, size: 22.sp),
-                        onPressed: () => Navigator.of(context).pop(),
-                      ),
+                      SizedBox(height: 16.h),
+                      const ChatDrawerHeaderSection(),
                     ],
                   ),
-                  SizedBox(height: 24.h),
-                  const ChatDrawerHeaderSection(),
-                ],
-              ),
-            ),
+                ),
 
-            Expanded(
-              child: ListView.builder(
-                padding: EdgeInsets.symmetric(horizontal: 8.w),
-                itemCount: chats.length,
-                itemBuilder: (context, index) {
-                  final chat = chats[index];
-                  return ListTile(
-                    dense: true,
-                    contentPadding: EdgeInsets.zero,
-                    onTap: () {
-                      GoRouter.of(
-                        context,
-                      ).push(AppRouter.chatMessageScreen, extra: chat);
+                /// CHAT LIST
+                Expanded(
+                  child: ListView.builder(
+                    padding: EdgeInsets.symmetric(horizontal: 12.w),
+                    itemCount: chats.length,
+                    itemBuilder: (context, index) {
+                      final chat = chats[index];
+                      return ListTile(
+                        dense: true,
+                        contentPadding: EdgeInsets.zero,
+                        onTap: () {
+                          context.push(
+                            AppRouter.chatMessageScreen,
+                            extra: chat,
+                          );
+                        },
+                        title: Text(
+                          chat.firstQuestion,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyles.font12GreyColorW400.copyWith(
+                            fontSize: isSmall ? 12 : 13,
+                            color: ColorManager.blackColor,
+                          ),
+                        ),
+                        trailing: const Icon(Icons.more_vert, size: 20),
+                      );
                     },
-                    title: Text(
-                      chat.firstQuestion,
-                      style: TextStyles.font12GreyColorW400.copyWith(
-                        color: ColorManager.blackColor,
-                      ),
-                    ),
-                    trailing: Icon(Icons.more_vert, size: 20.sp),
-                  );
-                },
-              ),
-            ),
+                  ),
+                ),
 
-            const ChatDrawerFooter(),
-          ],
-        ),
-      ),
+                const ChatDrawerFooter(),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
