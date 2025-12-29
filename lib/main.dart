@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/api/dio_consumer.dart';
 import 'package:homesta/core/cache/cache_helper.dart';
+import 'package:homesta/core/di/service_locator.dart';
 import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/features/chat/data/repos/chat_repo_impl.dart';
@@ -17,7 +18,7 @@ void main() {
   final dio = Dio();
   final apiConsumer = DioConsumer(dio: dio);
   final chatRepo = ChatRepoImpl(apiConsumer: apiConsumer);
-
+initServiceLocator();
   runApp(
     MultiRepositoryProvider(
       providers: [RepositoryProvider<ChatRepo>.value(value: chatRepo)],

@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:homesta/core/api/end_ponits.dart';
 import 'package:homesta/core/theming/styles.dart';
 
 class CategoryItem extends StatefulWidget {
@@ -45,12 +47,19 @@ class _CategoryItemState extends State<CategoryItem> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(15.r),
-                child: Image.asset(widget.imagePath, fit: BoxFit.cover),
+                child: CachedNetworkImage(
+  imageUrl: EndPoint.baseUrl + widget.imagePath,
+  fit: BoxFit.cover,
+  placeholder: (context, url) =>
+      const Center(child: CircularProgressIndicator()),
+  errorWidget: (context, url, error) =>
+      const Icon(Icons.image_not_supported),
+)
               ),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.r),
-                  color: Colors.black.withOpacity(0.4),
+                 color: Colors.black.withOpacity(0.4),
                 ),
               ),
               Center(

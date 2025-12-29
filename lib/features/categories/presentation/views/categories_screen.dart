@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:homesta/core/di/service_locator.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
+import 'package:homesta/features/categories/presentation/cubits/category_cubit/category_cubit.dart';
+import 'package:homesta/features/categories/presentation/widgets/category_bloc_builder.dart';
 import 'package:homesta/features/categories/presentation/widgets/category_item.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
@@ -89,56 +93,48 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Categories', style: TextStyles.font24BlackColorW500),
-        centerTitle: true,
+    return BlocProvider(
+      create: (context) => sl<CategoryCubit>()..getCategories(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Categories', style: TextStyles.font24BlackColorW500),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.white,
+        ),
         backgroundColor: Colors.white,
-        surfaceTintColor: Colors.white,
-      ),
-      backgroundColor: Colors.white,
-      body: Padding(
-        padding: EdgeInsets.all(16.w),
-        child: Column(
-          children: [
-            TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                hintText: 'Search',
-                hintStyle: TextStyles.font14lightGreyColorW400,
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: ColorManager.lightGreyColor,
-                ),
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    _isListening ? Icons.mic : Icons.mic_none,
+        body: Padding(
+          padding: EdgeInsets.all(16.w),
+          child: Column(
+            children: [
+              TextField(
+                controller: _searchController,
+                decoration: InputDecoration(
+                  hintText: 'Search',
+                  hintStyle: TextStyles.font14lightGreyColorW400,
+                  prefixIcon: Icon(
+                    Icons.search,
                     color: ColorManager.lightGreyColor,
                   ),
-                  onPressed: _listen,
-                ),
-                filled: true,
-                fillColor: ColorManager.soLightGreyColor,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.r),
-                  borderSide: BorderSide.none,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _isListening ? Icons.mic : Icons.mic_none,
+                      color: ColorManager.lightGreyColor,
+                    ),
+                    onPressed: _listen,
+                  ),
+                  filled: true,
+                  fillColor: ColorManager.soLightGreyColor,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12.r),
+                    borderSide: BorderSide.none,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 20.h),
-            Expanded(
-              child: ListView.builder(
-                itemCount: _filteredCategories.length,
-                itemBuilder: (context, index) {
-                  final category = _filteredCategories[index];
-                  return CategoryItem(
-                    title: category['title']!,
-                    imagePath: category['image']!,
-                  );
-                },
-              ),
-            ),
-          ],
+              SizedBox(height: 20.h),
+        CategoryBlocBuilder()
+            ],
+          ),
         ),
       ),
     );
