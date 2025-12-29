@@ -21,11 +21,10 @@ void main() {
   runApp(
     MultiRepositoryProvider(
       providers: [RepositoryProvider<ChatRepo>.value(value: chatRepo)],
-      child:   DevicePreview(
-    enabled: !kReleaseMode,
-    builder: (context) => MyApp(), // Wrap your app
-  ),
-
+      child: DevicePreview(
+        enabled: !kReleaseMode,
+        builder: (context) => MyApp(), // Wrap your app
+      ),
     ),
   );
 }
@@ -44,9 +43,9 @@ class MyApp extends StatelessWidget {
         return MediaQuery(
           data: mediaQuery.copyWith(textScaleFactor: scale),
           child: MaterialApp.router(
-                  useInheritedMediaQuery: true,
-      locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
+            useInheritedMediaQuery: true,
+            locale: DevicePreview.locale(context),
+            builder: DevicePreview.appBuilder,
 
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
