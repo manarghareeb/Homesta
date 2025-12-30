@@ -4,6 +4,7 @@ import 'package:homesta/features/categories/data/models/category_model.dart';
 
 abstract class CategoryDataSource {
   Future<List<CategoryModel>> getCategories();
+    Future<List<CategoryModel>> searchCategory(String query);
 }
 class CategoryDataSourceImpl implements CategoryDataSource {
   final ApiConsumer api;
@@ -19,4 +20,14 @@ class CategoryDataSourceImpl implements CategoryDataSource {
  return categories;
   //return categories.map((e) => CategoryModel.fromJson(e)).toList();
      }
+     
+       @override
+       Future<List<CategoryModel>> searchCategory(String query)async {
+        List<CategoryModel> categories=[];
+ final  respose = await api.get("${EndPoint.searchCategory}?Keword=$query");
+ for(var category in respose){
+   categories.add(CategoryModel.fromJson(category));
+ }
+ return categories;
+       }
 }

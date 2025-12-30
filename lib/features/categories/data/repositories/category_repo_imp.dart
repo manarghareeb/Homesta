@@ -21,6 +21,16 @@ return left(e.errModel);
 
     }
     
+      @override
+      Future<Either<ErrorModel, List<CategoryEntity>>> searCategoty(String query)async {
+     try {
+final List<CategoryModel> categories=  await categoryDataSource.searchCategory(query); 
+return right(categories); 
+} on ServerException catch (e) {
+return left(e.errModel);
+}
+      }
+    
     
     }
 

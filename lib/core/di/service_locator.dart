@@ -6,6 +6,7 @@ import 'package:homesta/features/categories/data/datasources/category_data_sourc
 import 'package:homesta/features/categories/data/repositories/category_repo_imp.dart';
 import 'package:homesta/features/categories/domain/repositories/category_repo.dart';
 import 'package:homesta/features/categories/domain/usecases/get_category_use_case.dart';
+import 'package:homesta/features/categories/domain/usecases/search_category_use_case.dart';
 import 'package:homesta/features/categories/presentation/cubits/category_cubit/category_cubit.dart';
 
 final sl = GetIt.instance;
@@ -28,9 +29,11 @@ void initServiceLocator() {
   sl.registerLazySingleton(
     () => GetCategoryUseCase(sl()),
   );
-
+  sl.registerLazySingleton(
+    () => SearchCategoryUseCase(sl()),
+  );
   /// Cubits
   sl.registerFactory(
-    () => CategoryCubit(sl()),
+    () => CategoryCubit(getCategoriesUseCase: sl(),searchCategoryUseCase:  sl()),
   );
 }

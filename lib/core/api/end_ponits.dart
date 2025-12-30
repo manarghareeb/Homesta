@@ -4,6 +4,7 @@ class EndPoint {
   static String signUp = "";
   static String chat = "https://tasabehahmed-chatbot-bert.hf.space/chat";
   static String getAllCategory="api/Category";
+  static String searchCategory = "/api/Category/search";
 
 }
 
