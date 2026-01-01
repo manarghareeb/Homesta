@@ -33,6 +33,7 @@ import 'package:homesta/features/order/presentation/views/order_flow_screen.dart
 import 'package:homesta/features/home/presentation/views/home.dart';
 import 'package:homesta/features/notification/presentaion/views/notification.dart';
 import 'package:homesta/features/product/presentation/views/product_details_view.dart';
+import 'package:homesta/features/splash/presentation/splashscreen.dart';
 import '../../features/account/presentation/views/account_screen.dart';
 import '../../features/account/presentation/views/add_review.dart';
 import '../../features/account/presentation/views/invoice.dart';
@@ -45,6 +46,7 @@ import '../../features/search/presentation/views/search_screen.dart';
 import '../../features/shop/presentation/view/shop_screen.dart';
 
 abstract class AppRouter {
+  static final splashScreen = '/splash';
   static final loginScreen = '/loginScreen';
   static final signUpScreen = '/signUpScreen';
   static final forgetPasswordScreen = '/forgetPasswordScreen';
@@ -88,8 +90,12 @@ abstract class AppRouter {
   static final emptyCartScreen = '/emptyCartScreen';
 
   static final route = GoRouter(
+    initialLocation: splashScreen,
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const HomeView()),
+      GoRoute(
+        path: splashScreen,
+        builder: (context, state) => const SplashScreen(),
+      ),
       GoRoute(
         path: loginScreen,
         builder: (context, state) => const LoginScreen(),

@@ -14,7 +14,7 @@ class ProductsGridWidget extends StatelessWidget {
         crossAxisCount: 2,
         crossAxisSpacing: 12,
         mainAxisSpacing: 12,
-        mainAxisExtent: 360, // ✅ أفضل ارتفاع للكرت
+        mainAxisExtent: 360,
       ),
       itemCount: products.length,
       itemBuilder: (context, index) {
