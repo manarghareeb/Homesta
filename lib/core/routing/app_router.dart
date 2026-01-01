@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:homesta/core/di/service_locator.dart';
 import 'package:homesta/features/account/presentation/views/contact_us_screen.dart';
 import 'package:homesta/features/account/presentation/views/customer_support_screen.dart';
 import 'package:homesta/features/account/presentation/views/edit_profile_screen.dart';
@@ -33,6 +34,8 @@ import 'package:homesta/features/chat/presentation/views/chat_screen.dart';
 import 'package:homesta/features/order/presentation/views/order_flow_screen.dart';
 import 'package:homesta/features/home/presentation/views/home.dart';
 import 'package:homesta/features/notification/presentaion/views/notification.dart';
+import 'package:homesta/features/product/domain/entities/product_entitty.dart';
+import 'package:homesta/features/product/presentation/cubits/review_cubit/review_cubit.dart';
 import 'package:homesta/features/product/presentation/views/product_details_view.dart';
 import '../../features/account/presentation/views/account_screen.dart';
 import '../../features/account/presentation/views/add_review.dart';
@@ -119,7 +122,16 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: productDetailsScreen,
-        builder: (context, state) => const ProductDetailsView(),
+        
+        builder: (context, state) {
+          final  product=state.extra as ProductEntity;
+          return  BlocProvider(
+        
+            create: (context) => sl<ReviewsCubit>()..getReviews(productId: 1),
+          child: const ProductDetailsView());
+        }  
+        
+       
       ),
       GoRoute(path: homeScreen, builder: (context, state) => const HomeView()),
       GoRoute(

@@ -11,10 +11,13 @@ import 'package:homesta/features/categories/domain/usecases/search_category_use_
 import 'package:homesta/features/categories/presentation/cubits/category_cubit/category_cubit.dart';
 import 'package:homesta/features/categories/presentation/cubits/sub_category_cubit.dart/sub_category_cubit.dart';
 import 'package:homesta/features/product/data/data_sources/remote_data_source/product_data_source.dart';
+import 'package:homesta/features/product/data/data_sources/remote_data_source/review_data_source.dart';
 import 'package:homesta/features/product/data/repositories/product_repository_impl.dart';
 import 'package:homesta/features/product/domain/repositories/product_repository.dart';
 import 'package:homesta/features/product/domain/usecases/get_all_product_use_case.dart';
+import 'package:homesta/features/product/domain/usecases/get_product_review_use_case.dart';
 import 'package:homesta/features/product/presentation/cubits/product_cubit.dart';
+import 'package:homesta/features/product/presentation/cubits/review_cubit/review_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -29,13 +32,16 @@ void initServiceLocator() {
     sl.registerLazySingleton<ProductDataSource>(
     () => ProductDataSourceImp( api: sl()),
   );
+      sl.registerLazySingleton<ReviewProductDataSource>(
+    () => ReviewProductDataSourceImp( api: sl()),
+  );
 
   /// Repositories
   sl.registerLazySingleton<CategoryRepo>(
     () => CategoryRepoImp(categoryDataSource: sl()),
   );
   sl.registerLazySingleton<ProductRepository>(
-    () => ProductRepositoryImpl(productDataSource: sl()),
+    () => ProductRepositoryImpl(productDataSource: sl(),reviewDataSource: sl()),
   );
   /// UseCases
   sl.registerLazySingleton(
@@ -50,6 +56,9 @@ void initServiceLocator() {
       sl.registerLazySingleton(
     () => GetSubCategoryUseCase( sl()),
   );
+        sl.registerLazySingleton(
+    () => GetProductReviewUseCase(productRepository:  sl()),
+  );
   /// Cubits
   sl.registerFactory(
     () => CategoryCubit(getCategoriesUseCase: sl(),searchCategoryUseCase:  sl()),
@@ -59,5 +68,8 @@ void initServiceLocator() {
   );
       sl.registerFactory(
     () => SubCategoryCubit(getSubCategoryUseCase:  sl()),
+  );
+        sl.registerFactory(
+    () => ReviewsCubit(  sl()),
   );
 }

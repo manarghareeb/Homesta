@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class RatingStar extends StatefulWidget {
-  const RatingStar({super.key});
-
-  @override
-  State<RatingStar> createState() => _RatingStarState();
-}
-double rating = 3.5;
-
-class _RatingStarState extends State<RatingStar> {
+class RatingStar extends StatelessWidget {
+  const RatingStar({super.key, required this.rating});
+final double rating ;
   @override
   Widget build(BuildContext context) {
     return               Row(

@@ -8,4 +8,5 @@ class EndPoint {
   static String getAllProducts = "api/Product/GetAllProducts";
   static String getProductImages = "api/ProductImages/product";
   static String getSubCategory="api/SubCategory/by-category";
+    static String getProductReviews= "api/Review/product";
 }
