@@ -47,7 +47,6 @@ class HomeScreen extends StatelessWidget {
                 const ProductsTabsWidget(),
                 SizedBox(height: 16.h),
 
-                /// 🟢 Responsive Grid
                 GridView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),

@@ -25,62 +25,94 @@ class ProductCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 260.h, // ✅ يمنع overflow
+      height: 260.h,
       child: Container(
         padding: EdgeInsets.all(10.w),
         decoration: BoxDecoration(
-          color: const Color(0xffE0DFDF),
+          color: Colors.white,
           borderRadius: BorderRadius.circular(20.r),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             /// IMAGE
-            Expanded(
-              flex: 5,
+            Container(
+              height: 200.h,
+              decoration: BoxDecoration(
+                color: ColorManager.lightGreyIconColor,
+                borderRadius: BorderRadius.circular(16.r),
+              ),
               child: Stack(
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(14.r),
+                    borderRadius: BorderRadius.circular(16.r),
                     child: Image.asset(
                       imagePath,
                       width: double.infinity,
+                      height: double.infinity,
                       fit: BoxFit.cover,
                     ),
                   ),
 
                   /// Discount
-                  Positioned(top: 6, left: 6, child: _badge(discount)),
+                  Positioned(
+                    top: 8,
+                    left: 8,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 10.w,
+                        vertical: 5.h,
+                      ),
+                      decoration: BoxDecoration(
+                        color: ColorManager.primaryColor,
+                        borderRadius: BorderRadius.circular(14.r),
+                      ),
+                      child: Text(
+                        discount,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
 
                   /// Icons
                   Positioned(
-                    top: 6,
-                    right: 6,
+                    top: 8,
+                    right: 8,
                     child: Column(
                       children: [
-                        _icon(Icons.favorite_border),
+                        _circleIcon(Icons.favorite_border),
                         SizedBox(height: 6.h),
-                        _icon(Icons.shopping_cart_outlined),
+                        _circleIcon(Icons.shopping_cart_outlined),
                       ],
                     ),
                   ),
 
-                  /// Timer
+                  /// TIMER
                   if (showTimer)
                     Positioned(
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
+                      bottom: 8,
+                      left: 12,
+                      right: 12,
                       child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 4.h),
+                        padding: EdgeInsets.symmetric(
+                          vertical: 6.h,
+                          horizontal: 12.w,
+                        ),
                         decoration: BoxDecoration(
                           color: ColorManager.primaryColor,
-                          borderRadius: BorderRadius.circular(12.r),
+                          borderRadius: BorderRadius.circular(14.r),
                         ),
-                        child: const Text(
-                          '05 : 12 : 30 : 25',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white, fontSize: 11),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: const [
+                            _TimeBox(value: "05", label: "Days"),
+                            _TimeBox(value: "12", label: "Hours"),
+                            _TimeBox(value: "30", label: "Mins"),
+                            _TimeBox(value: "25", label: "Sec"),
+                          ],
                         ),
                       ),
                     ),
@@ -103,26 +135,29 @@ class ProductCardWidget extends StatelessWidget {
             /// RATING
             Row(
               children: [
-                const Icon(Icons.star, color: Colors.amber, size: 14),
+                const Icon(Icons.star, color: Colors.amber, size: 16),
                 SizedBox(width: 4.w),
-                Text(rating.toString(), style: const TextStyle(fontSize: 12)),
+                Text(rating.toString()),
               ],
             ),
 
-            SizedBox(height: 4.h),
+            SizedBox(height: 6.h),
 
             /// PRICE
             Row(
               children: [
                 Text(
                   price,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                  ),
                 ),
                 SizedBox(width: 6.w),
                 Text(
                   oldPrice,
                   style: const TextStyle(
-                    color: Colors.grey,
+                    color: ColorManager.greyColor,
                     decoration: TextDecoration.lineThrough,
                   ),
                 ),
@@ -134,28 +169,40 @@ class ProductCardWidget extends StatelessWidget {
     );
   }
 
-  Widget _badge(String text) {
+  Widget _circleIcon(IconData icon) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 3.h),
-      decoration: BoxDecoration(
-        color: ColorManager.primaryColor,
-        borderRadius: BorderRadius.circular(14.r),
-      ),
-      child: Text(
-        text,
-        style: const TextStyle(color: Colors.white, fontSize: 11),
-      ),
-    );
-  }
-
-  Widget _icon(IconData icon) {
-    return Container(
-      padding: EdgeInsets.all(4.w),
+      padding: EdgeInsets.all(6.w),
       decoration: const BoxDecoration(
         color: Colors.white,
         shape: BoxShape.circle,
       ),
-      child: Icon(icon, size: 16),
+      child: Icon(icon, size: 18),
+    );
+  }
+}
+
+class _TimeBox extends StatelessWidget {
+  final String value;
+  final String label;
+
+  const _TimeBox({required this.value, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          value,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          label,
+          style: const TextStyle(color: Colors.white70, fontSize: 10),
+        ),
+      ],
     );
   }
 }

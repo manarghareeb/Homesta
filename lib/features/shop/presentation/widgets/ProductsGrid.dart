@@ -8,20 +8,23 @@ class ProductsGridWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      itemCount: 6,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+      physics: const BouncingScrollPhysics(),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        mainAxisSpacing: 16.h,
-        crossAxisSpacing: 16.w,
-        childAspectRatio: 0.75,
+        crossAxisSpacing: 12,
+        mainAxisSpacing: 12,
+        mainAxisExtent: 360, // ✅ أفضل ارتفاع للكرت
       ),
+      itemCount: products.length,
       itemBuilder: (context, index) {
+        final item = products[index];
         return ProductCard(
-          title: _products[index]['title'],
-          image: _products[index]['image'],
-          price: _products[index]['price'],
-          oldPrice: _products[index]['oldPrice'],
-          rating: _products[index]['rating'],
+          title: item['title'],
+          image: item['image'],
+          price: item['price'],
+          oldPrice: item['oldPrice'],
+          rating: item['rating'],
         );
       },
     );
@@ -29,7 +32,7 @@ class ProductsGridWidget extends StatelessWidget {
 }
 
 /// dummy data
-final List<Map<String, dynamic>> _products = [
+final List<Map<String, dynamic>> products = [
   {
     'title': 'Toaster',
     'image': 'assets/images/chair.png',

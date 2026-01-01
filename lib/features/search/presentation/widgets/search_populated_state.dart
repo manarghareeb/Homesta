@@ -10,82 +10,85 @@ class SearchPopulatedState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      padding: EdgeInsets.zero,
       children: [
-        // 🔁 Recent Searches
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('Recent Searches', style: TextStyles.font18BoldBlack),
-            TextButton(
-              onPressed: () {},
-              child: Text(
-                'Clear',
-                style: TextStyle(
-                  fontSize: 13.sp,
-                  color: ColorManager.lightGreyColor,
+        /// 🔁 Recent Searches
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 8.h),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Recent Searches', style: TextStyles.font18BoldBlack),
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  'Clear',
+                  style: TextStyle(
+                    fontSize: 13.sp,
+                    color: ColorManager.lightGreyColor,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-        SizedBox(height: 8.h),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children:
-              ['Chair', 'Cooker', 'Mirror']
-                  .map(
-                    (item) => ListTile(
-                      leading: const Icon(Icons.access_time, size: 20),
-                      title: Text(item),
-                    ),
-                  )
-                  .toList(),
+
+        ...['Chair', 'Cooker', 'Mirror'].map(
+          (item) => ListTile(
+            leading: const Icon(Icons.access_time, size: 20),
+            title: Text(item),
+          ),
         ),
+
         SizedBox(height: 24.h),
 
-        // 🔥 Popular Category
+        /// 🔥 Popular Category
         Text('Popular Category', style: TextStyles.font18BlackW500),
         SizedBox(height: 12.h),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children:
-              ['Bedrooms', 'Living Room', 'Kitchen', 'Home Tools']
-                  .map(
-                    (title) => ListTile(
-                      leading: const Icon(Icons.search, size: 20),
-                      title: Text(title),
-                    ),
-                  )
-                  .toList(),
+
+        ...['Bedrooms', 'Living Room', 'Kitchen', 'Home Tools'].map(
+          (title) => ListTile(
+            leading: const Icon(Icons.search, size: 20),
+            title: Text(title),
+          ),
         ),
+
         SizedBox(height: 24.h),
+
+        /// ⭐ Suggested Category
         Text('Suggested Category', style: TextStyles.font18BlackW500),
         SizedBox(height: 12.h),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildSuggestedItem('Bedrooms', 'assets/images/catrgories_image/bedroom.png'),
-            SizedBox(height: 12.h),
-            _buildSuggestedItem('Living Room', 'assets/images/catrgories_image/livingroom.png'),
-            SizedBox(height: 12.h),
-            _buildSuggestedItem('Home Tools', 'assets/images/catrgories_image/tools.png'),
-          ],
+
+        _buildSuggestedItem(
+          'Bedrooms',
+          'assets/images/catrgories_image/bedroom.png',
         ),
+        SizedBox(height: 12.h),
+
+        _buildSuggestedItem(
+          'Living Room',
+          'assets/images/catrgories_image/livingroom.png',
+        ),
+        SizedBox(height: 12.h),
+
+        _buildSuggestedItem(
+          'Home Tools',
+          'assets/images/catrgories_image/tools.png',
+        ),
+
+        SizedBox(height: 20.h),
       ],
     );
   }
 
   Widget _buildSuggestedItem(String title, String imagePath) {
     return Container(
-      width: double.infinity,
+      height: 140.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.r),
-        color: Colors.black.withAlpha(5),
         image: DecorationImage(image: AssetImage(imagePath), fit: BoxFit.cover),
       ),
-      padding: EdgeInsets.all(12.w),
       alignment: Alignment.center,
-      height: 140.h,
       child: Text(
         title,
         style: TextStyle(
@@ -93,11 +96,7 @@ class SearchPopulatedState extends StatelessWidget {
           fontWeight: FontWeight.bold,
           color: Colors.white,
           shadows: [
-            Shadow(
-              color: Colors.black.withAlpha(6),
-              offset: const Offset(0, 1),
-              blurRadius: 4,
-            ),
+            Shadow(color: Colors.black.withOpacity(0.5), blurRadius: 4),
           ],
         ),
       ),

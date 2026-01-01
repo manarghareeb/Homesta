@@ -61,7 +61,7 @@ class HomeCategories extends StatelessWidget {
     required bool selected,
   }) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
       decoration: BoxDecoration(
         color: selected ? Colors.white : ColorManager.thirdColor,
         borderRadius: BorderRadius.circular(18.r),
@@ -79,7 +79,7 @@ class HomeCategories extends StatelessWidget {
             style: TextStyle(
               color: selected ? Colors.black : Colors.white,
               fontWeight: FontWeight.w500,
-              fontSize: 10.sp,
+              fontSize: 16.sp,
             ),
           ),
         ],

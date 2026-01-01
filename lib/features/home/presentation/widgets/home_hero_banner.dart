@@ -39,7 +39,7 @@ class HomeHeroBanner extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.all(16.w),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     /// TEXTS
@@ -51,7 +51,7 @@ class HomeHeroBanner extends StatelessWidget {
                           'Explore Our',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 16,
+                            fontSize: 20,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -59,7 +59,7 @@ class HomeHeroBanner extends StatelessWidget {
                           'Modern',
                           style: TextStyle(
                             color: ColorManager.primaryColor,
-                            fontSize: 16,
+                            fontSize: 20,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -77,30 +77,30 @@ class HomeHeroBanner extends StatelessWidget {
                       ),
                     ),
 
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 25),
 
                     /// BUTTONS (Responsive)
                     Wrap(
-                      spacing: 10,
+                      spacing: 20.w,
                       runSpacing: 6,
                       children: [
                         SizedBox(
-                          height: 36,
+                          height: 40,
                           child: ElevatedButton(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
                               backgroundColor: ColorManager.primaryColor,
                               padding: const EdgeInsets.symmetric(
-                                horizontal: 14,
+                                horizontal: 20,
                               ),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
                             child: const Text(
-                              'Shop Now',
+                              'Shop Now   >',
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 20,
                                 color: Colors.white,
                               ),
                             ),
