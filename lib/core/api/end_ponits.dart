@@ -3,10 +3,9 @@ class EndPoint {
   static String signIn = "";
   static String signUp = "";
   static String chat = "https://tasabehahmed-chatbot-bert.hf.space/chat";
-  static String getAllCategory="api/Category";
-  static String searchCategory = "/api/Category/search";
-    static String getSubCategory = "/api/Category/by-SubCategory";
-    static String getAllProducts="api/Product/GetAllProducts";
- static String getProductImages = "api/ProductImages/product";
+  static String getAllCategory = "api/Category";
+  static String searchCategory = "api/Category/search";
+  static String getAllProducts = "api/Product/GetAllProducts";
+  static String getProductImages = "api/ProductImages/product";
+  static String getSubCategory="api/SubCategory/by-category";
 }
-

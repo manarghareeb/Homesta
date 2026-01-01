@@ -10,6 +10,7 @@ import 'package:homesta/features/account/presentation/views/manage_address_scree
 import 'package:homesta/features/account/presentation/views/my_order_screen.dart';
 import 'package:homesta/features/account/presentation/views/password_manager_screen.dart';
 import 'package:homesta/features/cart/presentation/views/empty_cart_screen.dart';
+import 'package:homesta/features/categories/domain/entities/sub_category_entity.dart';
 import 'package:homesta/features/chat/data/models/chat_message_model.dart';
 import 'package:homesta/features/chat/domain/repos/chat_repo.dart';
 import 'package:homesta/features/chat/presentation/cubit/chat/chat_cubit.dart';
@@ -59,7 +60,9 @@ abstract class AppRouter {
   static final accountScreen = '/accountScreen';
   static final notificationScreen = '/notificationScreen';
   //static final categorySectionScreen = '/categorySectionScreen';
-  static const String categorySectionScreen = '/categorySection/:title';
+  //static const String categorySectionScreen = '/categorySection/:title';
+  //add sub category screen
+    static const String subcategoryScreen = '/subcategoryScreen';
   static final addNewPasswordScreen = '/addNewPasswordScreen';
   static final setNewPasswordScreen = '/setNewPasswordScreen';
   static final verficationScreen = '/verificationScreen';
@@ -145,31 +148,29 @@ abstract class AppRouter {
       ),
 
       GoRoute(
-        path: '/subCategories/:categoryName',
+        path: subcategoryScreen,
         builder: (context, state) {
-          final categoryName = Uri.decodeComponent(
-            state.pathParameters['categoryName']!,
-          );
+ final int id = state.extra! as int;
 
-          return SubCategoriesScreen(categoryName: categoryName);
+          return SubCategoriesScreen(id: id);
         },
       ),
-      GoRoute(
-        path: '/categorySection/:categoryName/:subCategoryName',
-        builder: (context, state) {
-          final categoryName = Uri.decodeComponent(
-            state.pathParameters['categoryName']!,
-          );
-          final subCategoryName = Uri.decodeComponent(
-            state.pathParameters['subCategoryName']!,
-          );
+      // GoRoute(
+      //   path: '/categorySection/:categoryName/:subCategoryName',
+      //   builder: (context, state) {
+      //     final categoryName = Uri.decodeComponent(
+      //       state.pathParameters['categoryName']!,
+      //     );
+      //     final subCategoryName = Uri.decodeComponent(
+      //       state.pathParameters['subCategoryName']!,
+      //     );
 
-          return CategorySectionScreen(
-            title: categoryName,
-            subCategory: subCategoryName,
-          );
-        },
-      ),
+      //     return CategorySectionScreen(
+      //       title: categoryName,
+      //       subCategory: subCategoryName,
+      //     );
+      //   },
+      // ),
 
       GoRoute(
         path: addNewPasswordScreen,

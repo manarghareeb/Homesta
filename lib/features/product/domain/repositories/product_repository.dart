@@ -5,4 +5,5 @@ import 'package:homesta/features/product/domain/entities/product_entitty.dart';
 
 abstract class ProductRepository {
   Future<Either<ErrorModel,List<ProductEntity>>> getAllProducts();
+
 }

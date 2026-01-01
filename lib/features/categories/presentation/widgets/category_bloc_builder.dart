@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:homesta/features/categories/presentation/cubits/category_cubit/category_cubit.dart';
 import 'package:homesta/features/categories/presentation/cubits/category_cubit/category_state.dart';
 import 'package:homesta/features/categories/presentation/widgets/category_item.dart';
+
 import 'package:homesta/features/categories/presentation/widgets/skeltonizer_list.dart';
 
 class CategoryBlocBuilder extends StatelessWidget {
@@ -25,10 +26,7 @@ class CategoryBlocBuilder extends StatelessWidget {
                 itemCount: state.categories.length,
                 itemBuilder: (context, index) {
                   final category = state.categories[index];
-                  return CategoryItem(
-                    title: category.name,
-                    imagePath: category.imagePath,
-                  );
+                  return CategoryItem( categoryEntity:category);
                 },
               );
             }

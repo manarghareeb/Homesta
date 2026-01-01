@@ -6,8 +6,10 @@ import 'package:homesta/features/categories/data/datasources/category_data_sourc
 import 'package:homesta/features/categories/data/repositories/category_repo_imp.dart';
 import 'package:homesta/features/categories/domain/repositories/category_repo.dart';
 import 'package:homesta/features/categories/domain/usecases/get_category_use_case.dart';
+import 'package:homesta/features/categories/domain/usecases/get_sub_category_use_case.dart';
 import 'package:homesta/features/categories/domain/usecases/search_category_use_case.dart';
 import 'package:homesta/features/categories/presentation/cubits/category_cubit/category_cubit.dart';
+import 'package:homesta/features/categories/presentation/cubits/sub_category_cubit.dart/sub_category_cubit.dart';
 import 'package:homesta/features/product/data/data_sources/remote_data_source/product_data_source.dart';
 import 'package:homesta/features/product/data/repositories/product_repository_impl.dart';
 import 'package:homesta/features/product/domain/repositories/product_repository.dart';
@@ -45,11 +47,17 @@ void initServiceLocator() {
     sl.registerLazySingleton(
     () => GetAllProductUseCase(productRepository: sl()),
   );
+      sl.registerLazySingleton(
+    () => GetSubCategoryUseCase( sl()),
+  );
   /// Cubits
   sl.registerFactory(
     () => CategoryCubit(getCategoriesUseCase: sl(),searchCategoryUseCase:  sl()),
   );
     sl.registerFactory(
     () => ProductCubit( sl()),
+  );
+      sl.registerFactory(
+    () => SubCategoryCubit(getSubCategoryUseCase:  sl()),
   );
 }
