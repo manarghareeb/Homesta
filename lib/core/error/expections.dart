@@ -11,19 +11,19 @@ class ServerException implements Exception {
 void handleDioExceptions(DioException e) {
   switch (e.type) {
     case DioExceptionType.connectionTimeout:
-      throw ServerException(errModel: ErrorModel.fromJson(e.response!.data));
+      throw ServerException(errModel: ErrorModel(errorMessage: "Time out",));
     case DioExceptionType.sendTimeout:
-      throw ServerException(errModel: ErrorModel.fromJson(e.response!.data));
+      throw ServerException(errModel: ErrorModel(errorMessage: "send time out"));
     case DioExceptionType.receiveTimeout:
-      throw ServerException(errModel: ErrorModel.fromJson(e.response!.data));
+      throw ServerException(errModel: ErrorModel(errorMessage: "receive time out"));
     case DioExceptionType.badCertificate:
-      throw ServerException(errModel: ErrorModel.fromJson(e.response!.data));
+      throw ServerException(errModel: ErrorModel(errorMessage: "bad certificate"));
     case DioExceptionType.cancel:
-      throw ServerException(errModel: ErrorModel.fromJson(e.response!.data));
+      throw ServerException(errModel: ErrorModel(errorMessage:  'Request was cancelled',));
     case DioExceptionType.connectionError:
-      throw ServerException(errModel: ErrorModel.fromJson(e.response!.data));
+      throw ServerException(errModel: ErrorModel(errorMessage: "No internet connection"));
     case DioExceptionType.unknown:
-      throw ServerException(errModel: ErrorModel.fromJson(e.response!.data));
+      throw ServerException(errModel: ErrorModel(errorMessage: "Something went wrong"));
     case DioExceptionType.badResponse:
       switch (e.response?.statusCode) {
         case 400: // Bad request

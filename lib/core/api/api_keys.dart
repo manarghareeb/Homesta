@@ -11,4 +11,15 @@ class ApiKeys {
   static const String categoryId = 'categoryId';
   static const String name = 'name';
   static const String imagePath = 'imagePath';
+  //product
+  static const String description = 'description';
+  static const String colors = 'colors';
+  static const String price = 'price';
+  static const String rating = 'rating';
+  static const String quantity = 'quantity';
+  static const String discount = 'discount';
+  static const String deliveryTime = 'deliveryTime';
+  static const String subCategoryId = 'subCategoryId';
+  static const String  productId = 'productId';
+  static const String storeId = 'storeId';
 }

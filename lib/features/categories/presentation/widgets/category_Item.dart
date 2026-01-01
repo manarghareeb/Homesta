@@ -1,9 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:homesta/core/api/end_ponits.dart';
 import 'package:homesta/core/theming/styles.dart';
+import 'package:homesta/core/widgets/custom_cached_network_image.dart';
 
 class CategoryItem extends StatefulWidget {
   final String title;
@@ -47,14 +47,7 @@ class _CategoryItemState extends State<CategoryItem> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(15.r),
-                child: CachedNetworkImage(
-  imageUrl: EndPoint.baseUrl + widget.imagePath,
-  fit: BoxFit.cover,
-  placeholder: (context, url) =>
-      const Center(child: CircularProgressIndicator()),
-  errorWidget: (context, url, error) =>
-      const Icon(Icons.image_not_supported),
-)
+                child: CustomCachedNetworkImage(imagePath: widget.imagePath)
               ),
               Container(
                 decoration: BoxDecoration(

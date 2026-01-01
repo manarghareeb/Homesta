@@ -18,7 +18,6 @@ class CategoryDataSourceImpl implements CategoryDataSource {
    categories.add(CategoryModel.fromJson(category));
  }
  return categories;
-  //return categories.map((e) => CategoryModel.fromJson(e)).toList();
      }
      
        @override
