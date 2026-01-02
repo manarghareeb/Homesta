@@ -5,7 +5,7 @@ import 'package:homesta/features/account/presentation/views/customer_support_scr
 import 'package:homesta/features/account/presentation/views/edit_profile_screen.dart';
 import 'package:homesta/features/account/presentation/views/faqs_screen.dart';
 import 'package:homesta/features/account/presentation/views/help_center_screen.dart';
-import 'package:homesta/features/account/presentation/views/logout_screen.dart';
+import 'package:homesta/features/authentication/presentation/views/logout_screen.dart';
 import 'package:homesta/features/account/presentation/views/manage_address_screen.dart';
 import 'package:homesta/features/account/presentation/views/my_order_screen.dart';
 import 'package:homesta/features/account/presentation/views/password_manager_screen.dart';
@@ -89,7 +89,7 @@ abstract class AppRouter {
 
   static final route = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const ChatScreen()),
+      GoRoute(path: '/', builder: (context, state) => const LoginScreen()),
       GoRoute(
         path: loginScreen,
         builder: (context, state) => const LoginScreen(),

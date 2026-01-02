@@ -8,9 +8,13 @@ import 'package:homesta/core/widgets/custom_button_widget.dart';
 import 'package:homesta/features/authentication/presentation/widgets/auth_navigation_text.dart';
 import 'package:homesta/core/widgets/title_to_text_field.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../cubit/auth/auth_cubit.dart';
 
 class VerificationScreen extends StatefulWidget {
-  const VerificationScreen({super.key});
+  const VerificationScreen({super.key, this.email});
+
+  final String? email;
 
   @override
   State<VerificationScreen> createState() => _VerificationScreenState();
@@ -50,7 +54,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 textAlign: TextAlign.center,
               ),
               Text(
-                'example@gmail.com', 
+                widget.email ?? 'example@gmail.com',
                 style: TextStyles.font14PrimaryColorW400,
               ),
               SizedBox(height: 56.h),
@@ -62,7 +66,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 controller: codeController,
                 keyboardType: TextInputType.number,
                 animationType: AnimationType.fade,
-                //cursorColor: ColorManager.primaryColor,
                 enableActiveFill: true,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 pinTheme: PinTheme(
@@ -78,7 +81,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   borderWidth: 2,
                 ),
                 textStyle: TextStyles.font16WhiteW500.copyWith(
-                  color: ColorManager.blackColor
+                  color: ColorManager.blackColor,
                 ),
                 beforeTextPaste: (text) => false,
                 onChanged: (value) {
@@ -89,24 +92,53 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 onCompleted: (value) {
                   currentCode = value;
                 },
-                pastedTextStyle: TextStyle(),
                 hintCharacter: '-',
                 hintStyle: TextStyles.font16WhiteW500.copyWith(
-                  color: ColorManager.blackColor
+                  color: ColorManager.blackColor,
                 ),
               ),
               SizedBox(height: 32.h),
               CustomButtonWidget(
                 buttonText: 'Verify',
                 onPressed: () {
-                  GoRouter.of(context).push(AppRouter.setNewPasswordScreen);
+                  if (currentCode.isNotEmpty) {
+                    GoRouter.of(context).push(
+                      AppRouter.setNewPasswordScreen,
+                      extra: {
+                        "email": widget.email ?? "",
+                        "code": currentCode,
+                      },
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Please enter the code")),
+                    );
+                  }
                 },
               ),
               SizedBox(height: 16.h),
               AuthNavigationText(
                 text: 'Didn’t receive code?',
                 textButton: ' Resend Code',
-                onTap: () {},
+                onTap: () {
+                  if (widget.email != null && widget.email!.isNotEmpty) {
+                    context.read<AuthCubit>().forgetPassword(widget.email!);
+                  }
+                },
+              ),
+              BlocListener<AuthCubit, AuthState>(
+                listener: (context, state) {
+                  if (state is ForgetPasswordSuccess) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(state.response.message)),
+                    );
+                  } else if (state is AuthFailure) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(state.error)),
+                    );
+                  }
+                },
+                child: const SizedBox.shrink(),
               ),
             ],
           ),

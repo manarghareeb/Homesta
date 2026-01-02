@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
+import '../../../../core/routing/app_router.dart';
+import '../cubit/auth/auth_cubit.dart';
 
 class LogoutScreen extends StatelessWidget {
   const LogoutScreen({super.key});
@@ -24,7 +28,9 @@ class LogoutScreen extends StatelessWidget {
             SizedBox(height: 24.h),
             CustomButtonWidget(
               buttonText: 'Continue Shopping',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
             SizedBox(height: 24.h),
             CustomButtonWidget(
@@ -66,11 +72,39 @@ class LogoutConfirmScreen extends StatelessWidget {
             SizedBox(height: 24.h),
             CustomButtonWidget(
               buttonText: 'Cancel',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               isPrimary: false,
             ),
             SizedBox(height: 24.h),
-            CustomButtonWidget(buttonText: 'Logout', onPressed: () {}),
+            BlocConsumer<AuthCubit, AuthState>(
+              listener: (context, state) {
+                if (state is LogoutSuccess) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(state.response.message)),
+                  );
+                  Future.delayed(const Duration(seconds: 1), () {
+                    GoRouter.of(context).pushReplacement(AppRouter.loginScreen);
+                  });
+                } else if (state is AuthFailure) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(state.error)),
+                  );
+                }
+              },
+              builder: (context, state) {
+                if (state is AuthLoading) {
+                  return const CircularProgressIndicator();
+                }
+                return CustomButtonWidget(
+                  buttonText: 'Logout',
+                  onPressed: () {
+                    context.read<AuthCubit>().logout();
+                  },
+                );
+              },
+            )
           ],
         ),
       ),
