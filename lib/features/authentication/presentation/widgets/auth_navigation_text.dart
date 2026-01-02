@@ -8,24 +8,33 @@ class AuthNavigationText extends StatelessWidget {
     required this.textButton,
     required this.onTap,
   });
+
   final String text;
   final String textButton;
-  final Function()? onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(text, style: TextStyles.font16BlackRegular),
-        InkWell(
-          onTap: onTap,
-          child: Text(
-            textButton,
-            style: TextStyles.font16PrimaryColorW400Underline,
+    return Center(
+      child: Wrap(
+        alignment: WrapAlignment.center,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 4,
+        children: [
+          Text(
+            text,
+            style: TextStyles.font16BlackRegular,
+            textAlign: TextAlign.center,
           ),
-        ),
-      ],
+          GestureDetector(
+            onTap: onTap,
+            child: Text(
+              textButton,
+              style: TextStyles.font16PrimaryColorW400Underline,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

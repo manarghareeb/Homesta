@@ -46,7 +46,8 @@ import '../../features/search/presentation/views/search_screen.dart';
 import '../../features/shop/presentation/view/shop_screen.dart';
 
 abstract class AppRouter {
-  static final splashScreen = '/splash';
+  static const String onboardingRoute = '/onboardingScreen';
+  static const String splashScreen = '/splash';
   static final loginScreen = '/loginScreen';
   static final signUpScreen = '/signUpScreen';
   static final forgetPasswordScreen = '/forgetPasswordScreen';
@@ -90,8 +91,13 @@ abstract class AppRouter {
   static final emptyCartScreen = '/emptyCartScreen';
 
   static final route = GoRouter(
-    initialLocation: splashScreen,
+    initialLocation: homeScreen,
     routes: [
+      GoRoute(
+        path: onboardingRoute,
+        builder: (context, state) => const OnboardingScreen(),
+      ),
+
       GoRoute(
         path: splashScreen,
         builder: (context, state) => const SplashScreen(),
