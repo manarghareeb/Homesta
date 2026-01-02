@@ -8,22 +8,43 @@ import 'package:homesta/core/api/dio_consumer.dart';
 import 'package:homesta/core/cache/cache_helper.dart';
 import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/styles.dart';
+
+// Chat
 import 'package:homesta/features/chat/data/repos/chat_repo_impl.dart';
 import 'package:homesta/features/chat/domain/repos/chat_repo.dart';
 
-void main() {
+// Auth
+import 'package:homesta/features/authentication/data/datasources/auth_remote_data_source.dart';
+import 'package:homesta/features/authentication/data/repositories/auth_repository.dart';
+import 'package:homesta/features/authentication/presentation/cubit/auth/auth_cubit.dart';
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  CacheHelper.init();
+  await CacheHelper.init();
+
   final dio = Dio();
   final apiConsumer = DioConsumer(dio: dio);
+
+  // Chat repo
   final chatRepo = ChatRepoImpl(apiConsumer: apiConsumer);
+
+  // Auth repo
+  final authRemoteDataSource = AuthRemoteDataSource(apiConsumer);
+  final authRepo = AuthRepository(authRemoteDataSource);
 
   runApp(
     MultiRepositoryProvider(
-      providers: [RepositoryProvider<ChatRepo>.value(value: chatRepo)],
-      child: DevicePreview(
-        enabled: !kReleaseMode,
-        builder: (context) => MyApp(), // Wrap your app
+      providers: [
+        RepositoryProvider<ChatRepo>.value(value: chatRepo),
+        RepositoryProvider<AuthRepository>.value(value: authRepo),
+      ],
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<AuthCubit>(
+            create: (context) => AuthCubit(authRepo),
+          ),
+        ],
+        child: const MyApp(),
       ),
     ),
   );
@@ -55,13 +76,11 @@ class MyApp extends StatelessWidget {
                 bodyLarge: TextStyles.font16BlackRegular,
                 bodyMedium: TextStyles.font14BlackColorW400,
                 bodySmall: TextStyles.font12GreyColorW400,
-
                 titleLarge: TextStyles.font20BlackColorW500,
                 titleMedium: TextStyles.font18BlackW500,
                 titleSmall: TextStyles.font16BlackW500,
               ),
             ),
-
             routerConfig: AppRouter.route,
           ),
         );
