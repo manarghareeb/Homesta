@@ -3,6 +3,7 @@ import 'package:homesta/features/product/domain/entities/product_entitty.dart';
 
 class ProductModel extends ProductEntity {
   const ProductModel({
+    required super.productId,
     required super.name,
     required super.description,
     required super.colors,
@@ -18,6 +19,7 @@ class ProductModel extends ProductEntity {
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
+productId: json[ApiKeys.productId],
       name: json[ApiKeys.name],
       description: json[ApiKeys.description],
       colors: 

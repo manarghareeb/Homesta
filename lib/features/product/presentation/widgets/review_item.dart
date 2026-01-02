@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/features/product/domain/entities/review_entity.dart';
 import 'package:homesta/features/product/presentation/widgets/rating_star.dart';
-import 'package:homesta/features/product/presentation/widgets/review_photo_list.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class ReviewItem extends StatelessWidget {
@@ -13,6 +13,7 @@ final ReviewEntity review;
     return  Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 5,
         children: [
           Row(
@@ -25,7 +26,9 @@ final ReviewEntity review;
           ),
           Text(review.userName,style: TextStyles.font16BlackRegular,),
           Spacer(),
-          Text(timeago.format(review.reviewDate),style: TextStyles.font16GreyRegular,),
+          SizedBox(
+            width: 111.w,
+            child: Text(timeago.format(review.reviewDate),style: TextStyles.font16GreyRegular,)),
             ],
           ),
           Text(review.comment,style: TextStyles.font14GreyColorW400,),
@@ -35,7 +38,7 @@ final ReviewEntity review;
             Text(review.rating.toString(),style: TextStyles.font16BlackRegular,)
           ],
         ),
-        ReviewPhotoList()
+       // ReviewPhotoList()
         ],
       ),
     );

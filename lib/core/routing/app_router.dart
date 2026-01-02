@@ -127,7 +127,7 @@ abstract class AppRouter {
           final  product=state.extra as ProductEntity;
           return  BlocProvider(
         
-            create: (context) => sl<ReviewsCubit>()..getReviews(productId: 1),
+            create: (context) => sl<ReviewsCubit>()..getReviews(productId: product.productId),
           child: const ProductDetailsView());
         }  
         

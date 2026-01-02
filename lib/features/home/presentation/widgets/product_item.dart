@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/features/product/domain/entities/product_entitty.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class ProductItem extends StatelessWidget {
   const ProductItem({super.key, required this.productEntity});
@@ -113,15 +114,17 @@ class ProductItem extends StatelessWidget {
   }
 
   Widget _badge(String text) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 3.h),
-      decoration: BoxDecoration(
-        color: ColorManager.primaryColor,
-        borderRadius: BorderRadius.circular(14.r),
-      ),
-      child: Text(
-        text,
-        style: const TextStyle(color: Colors.white, fontSize: 11),
+    return Skeleton.leaf(
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 3.h),
+        decoration: BoxDecoration(
+          color: ColorManager.primaryColor,
+          borderRadius: BorderRadius.circular(14.r),
+        ),
+        child: Text(
+          text,
+          style: const TextStyle(color: Colors.white, fontSize: 11),
+        ),
       ),
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:homesta/features/home/presentation/widgets/product_item.dart';
+import 'package:homesta/features/home/presentation/widgets/skeltonizer_grid_view.dart';
 import 'package:homesta/features/product/presentation/cubits/product_cubit.dart';
 import 'package:homesta/features/product/presentation/cubits/product_state.dart';
 
@@ -14,7 +15,7 @@ class ProductBlocBuilder extends StatelessWidget {
       builder: (context,state) {
         if (state is ProductLoading) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: SkeletonizerGridView(),
           );
         }
         else if (state is ProductFailure) {

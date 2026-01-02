@@ -1,4 +1,5 @@
 class ProductEntity {
+  final int productId;
   final String name;
   final String description;
   final List<dynamic> colors;
@@ -12,6 +13,7 @@ class ProductEntity {
   final int storeId;
 
   const ProductEntity({
+    required this.productId,
     required this.name,
     required this.description,
     required this.colors,
