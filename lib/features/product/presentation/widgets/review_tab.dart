@@ -4,7 +4,6 @@ import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/features/product/presentation/widgets/add_review_section.dart';
 import 'package:homesta/features/product/presentation/widgets/all_review_section.dart';
 import 'package:homesta/features/product/presentation/widgets/explore_product.dart';
-import 'package:homesta/features/product/presentation/widgets/rating_star.dart';
 import 'package:homesta/features/product/presentation/widgets/review_list.dart';
 import 'package:homesta/features/product/presentation/widgets/reviews_and_view_all_section.dart';
 

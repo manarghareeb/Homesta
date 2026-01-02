@@ -57,7 +57,7 @@ class ProductDetailsScreen extends StatelessWidget {
               SizedBox(height: 24.h),
               const ProductTitleWithRating(),
               SizedBox(height: 24.h),
-              const ProductDescriptionSection(),
+           //   const ProductDescriptionSection(),
               SizedBox(height: 16.h),
               SelectColorSection(
                 selectedColorName: 'Green',
