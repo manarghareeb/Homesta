@@ -24,128 +24,185 @@ class ProductCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xffE0DFDF),
-        borderRadius: BorderRadius.circular(20.r),
-      ),
-      padding: EdgeInsets.all(10.w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          /// IMAGE
-          AspectRatio(
-            aspectRatio: 1,
-            child: Stack(
-              children: [
-                Image.asset(imagePath, fit: BoxFit.contain),
-
-                /// Discount badge
-                Positioned(top: 0, left: 0, child: _badge(discount)),
-
-                /// Icons
-                Positioned(
-                  top: 0,
-                  right: 0,
-                  child: Column(
-                    children: [
-                      _icon(Icons.favorite_border),
-                      SizedBox(height: 6.h),
-                      _icon(Icons.shopping_cart_outlined),
-                    ],
+    return SizedBox(
+      height: 260.h,
+      child: Container(
+        padding: EdgeInsets.all(10.w),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20.r),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            /// IMAGE
+            Container(
+              height: 200.h,
+              decoration: BoxDecoration(
+                color: ColorManager.lightGreyIconColor,
+                borderRadius: BorderRadius.circular(16.r),
+              ),
+              child: Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(16.r),
+                    child: Image.asset(
+                      imagePath,
+                      width: double.infinity,
+                      height: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ),
 
-                /// Timer
-                if (showTimer)
+                  /// Discount
                   Positioned(
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
+                    top: 8,
+                    left: 8,
                     child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 6.h),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 10.w,
+                        vertical: 5.h,
+                      ),
                       decoration: BoxDecoration(
                         color: ColorManager.primaryColor,
                         borderRadius: BorderRadius.circular(14.r),
                       ),
-                      child: const FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          '05 : 12 : 30 : 25',
-                          style: TextStyle(color: Colors.white),
+                      child: Text(
+                        discount,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
                   ),
+
+                  /// Icons
+                  Positioned(
+                    top: 8,
+                    right: 8,
+                    child: Column(
+                      children: [
+                        _circleIcon(Icons.favorite_border),
+                        SizedBox(height: 6.h),
+                        _circleIcon(Icons.shopping_cart_outlined),
+                      ],
+                    ),
+                  ),
+
+                  /// TIMER
+                  if (showTimer)
+                    Positioned(
+                      bottom: 8,
+                      left: 12,
+                      right: 12,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 6.h,
+                          horizontal: 12.w,
+                        ),
+                        decoration: BoxDecoration(
+                          color: ColorManager.primaryColor,
+                          borderRadius: BorderRadius.circular(14.r),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: const [
+                            _TimeBox(value: "05", label: "Days"),
+                            _TimeBox(value: "12", label: "Hours"),
+                            _TimeBox(value: "30", label: "Mins"),
+                            _TimeBox(value: "25", label: "Sec"),
+                          ],
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+
+            SizedBox(height: 6.h),
+
+            /// TITLE
+            Text(
+              title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontWeight: FontWeight.w600),
+            ),
+
+            SizedBox(height: 4.h),
+
+            /// RATING
+            Row(
+              children: [
+                const Icon(Icons.star, color: Colors.amber, size: 16),
+                SizedBox(width: 4.w),
+                Text(rating.toString()),
               ],
             ),
-          ),
 
-          SizedBox(height: 8.h),
+            SizedBox(height: 6.h),
 
-          const Text(
-            'Chair',
-            style: TextStyle(fontSize: 12, color: Colors.black),
-          ),
-
-          SizedBox(height: 4.h),
-
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  title,
-                  style: const TextStyle(fontWeight: FontWeight.w600),
-                  overflow: TextOverflow.ellipsis,
+            /// PRICE
+            Row(
+              children: [
+                Text(
+                  price,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                  ),
                 ),
-              ),
-              const Icon(Icons.star, color: Colors.amber, size: 16),
-              Text(rating.toString()),
-            ],
-          ),
-
-          SizedBox(height: 6.h),
-
-          Row(
-            children: [
-              Text(price, style: const TextStyle(fontWeight: FontWeight.bold)),
-              SizedBox(width: 6.w),
-              Text(
-                oldPrice,
-                style: const TextStyle(
-                  color: Colors.grey,
-                  decoration: TextDecoration.lineThrough,
+                SizedBox(width: 6.w),
+                Text(
+                  oldPrice,
+                  style: const TextStyle(
+                    color: ColorManager.greyColor,
+                    decoration: TextDecoration.lineThrough,
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _badge(String text) {
+  Widget _circleIcon(IconData icon) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
-      decoration: BoxDecoration(
-        color: ColorManager.primaryColor,
-        borderRadius: BorderRadius.circular(20.r),
-      ),
-      child: Text(
-        text,
-        style: const TextStyle(color: Colors.white, fontSize: 11),
-      ),
-    );
-  }
-
-  Widget _icon(IconData icon) {
-    return Container(
-      padding: EdgeInsets.all(4.w),
+      padding: EdgeInsets.all(6.w),
       decoration: const BoxDecoration(
         color: Colors.white,
         shape: BoxShape.circle,
       ),
-      child: Icon(icon, size: 16),
+      child: Icon(icon, size: 18),
+    );
+  }
+}
+
+class _TimeBox extends StatelessWidget {
+  final String value;
+  final String label;
+
+  const _TimeBox({required this.value, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          value,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          label,
+          style: const TextStyle(color: Colors.white70, fontSize: 10),
+        ),
+      ],
     );
   }
 }

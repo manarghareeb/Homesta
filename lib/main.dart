@@ -1,4 +1,6 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -62,6 +64,10 @@ class MyApp extends StatelessWidget {
         return MediaQuery(
           data: mediaQuery.copyWith(textScaleFactor: scale),
           child: MaterialApp.router(
+            useInheritedMediaQuery: true,
+            locale: DevicePreview.locale(context),
+            builder: DevicePreview.appBuilder,
+
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme: ThemeData(

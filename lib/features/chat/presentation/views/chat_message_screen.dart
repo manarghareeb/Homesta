@@ -29,39 +29,46 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
   final TextEditingController controller = TextEditingController();
 
   Color backgroundColor = ColorManager.aliceBlue;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: backgroundColor,
-      drawer: const ChatDrawer(),
-      onDrawerChanged: (isOpen) {
-        setState(() {
-          backgroundColor = isOpen ? Colors.white : ColorManager.aliceBlue;
-        });
-      },
-      body: SafeArea(
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            final bool isTablet = constraints.maxWidth >= 700;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isSmall = constraints.maxHeight < 700;
 
-            return Column(
+        return Scaffold(
+          key: scaffoldKey,
+          resizeToAvoidBottomInset: true,
+          backgroundColor: backgroundColor,
+          drawer: const ChatDrawer(),
+          onDrawerChanged: (isOpen) {
+            setState(() {
+              backgroundColor = isOpen ? Colors.white : ColorManager.aliceBlue;
+            });
+          },
+          body: SafeArea(
+            child: Column(
               children: [
+                /// APP BAR
                 AppBarWidget(
                   openDrawer: () {
                     scaffoldKey.currentState?.openDrawer();
                   },
                 ),
 
-                SizedBox(height: isTablet ? 24.h : 16.h),
+                SizedBox(height: isSmall ? 12.h : 24.h),
 
+                /// CHAT LIST
                 Expanded(
                   child: BlocConsumer<ChatCubit, ChatState>(
                     listener: (context, state) {
                       if (state is ChatError) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text(state.error),
+                            content: Text(
+                              state.error,
+                              style: const TextStyle(color: Colors.white),
+                            ),
                             backgroundColor: Colors.red,
                           ),
                         );
@@ -71,10 +78,14 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
                       final messages = context.read<ChatCubit>().messages;
 
                       return ListView.builder(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: isTablet ? 32.w : 16.w,
-                          vertical: 12.h,
+                        padding: EdgeInsets.only(
+                          left: 16.w,
+                          right: 16.w,
+                          bottom: 12.h,
                         ),
+                        reverse: false,
+                        keyboardDismissBehavior:
+                            ScrollViewKeyboardDismissBehavior.onDrag,
                         itemCount: messages.length,
                         itemBuilder: (context, index) {
                           return MessageBubble(msg: messages[index]);
@@ -84,6 +95,7 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
                   ),
                 ),
 
+                /// INPUT FIELD
                 Padding(
                   padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -100,10 +112,10 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
                   ),
                 ),
               ],
-            );
-          },
-        ),
-      ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

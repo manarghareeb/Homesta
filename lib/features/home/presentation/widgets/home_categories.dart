@@ -8,7 +8,9 @@ class HomeCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        /// Title
         Row(
           children: [
             const Text(
@@ -25,29 +27,29 @@ class HomeCategories extends StatelessWidget {
             ),
           ],
         ),
+
         SizedBox(height: 12.h),
-        SizedBox(
-          height: 38.h,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: [
-              _chip(
-                title: 'Living Room',
-                imagePath: 'assets/images/chair.png',
-                selected: true,
-              ),
-              _chip(
-                title: 'Sanitary',
-                imagePath: 'assets/images/chair.png',
-                selected: false,
-              ),
-              _chip(
-                title: 'Dining',
-                imagePath: 'assets/images/chair.png',
-                selected: false,
-              ),
-            ],
-          ),
+
+        Wrap(
+          spacing: 10.w,
+          runSpacing: 10.h,
+          children: [
+            _chip(
+              title: 'Living Room',
+              imagePath: 'assets/images/chair.png',
+              selected: true,
+            ),
+            _chip(
+              title: 'Sanitary',
+              imagePath: 'assets/images/chair.png',
+              selected: false,
+            ),
+            _chip(
+              title: 'Dining',
+              imagePath: 'assets/images/chair.png',
+              selected: false,
+            ),
+          ],
         ),
       ],
     );
@@ -59,28 +61,25 @@ class HomeCategories extends StatelessWidget {
     required bool selected,
   }) {
     return Container(
-      margin: EdgeInsets.only(right: 10.w),
-      padding: EdgeInsets.symmetric(horizontal: 12.w),
+      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
       decoration: BoxDecoration(
         color: selected ? Colors.white : ColorManager.thirdColor,
-        borderRadius: BorderRadius.circular(15.r),
+        borderRadius: BorderRadius.circular(18.r),
         boxShadow: [
           BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 6),
         ],
       ),
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Image.asset(imagePath, width: 18.w, height: 18.h),
-
           SizedBox(width: 6.w),
-
-          /// 📝 TEXT
           Text(
             title,
             style: TextStyle(
               color: selected ? Colors.black : Colors.white,
               fontWeight: FontWeight.w500,
-              fontSize: 13.sp,
+              fontSize: 16.sp,
             ),
           ),
         ],

@@ -29,92 +29,98 @@ class ProductCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            height: 120.h,
-            decoration: BoxDecoration(
-              color: ColorManager.soLightGreyColor,
-              borderRadius: BorderRadius.all(Radius.circular(15.r)),
-            ),
-            child: Stack(
-              children: [
-                Center(
-                  child: Image.asset(image, height: 80.h, fit: BoxFit.contain),
-                ),
-                Positioned(
-                  top: 8,
-                  left: 8,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 8.w,
-                      vertical: 4.h,
+          Expanded(
+            flex: 6,
+            child: Container(
+              decoration: BoxDecoration(
+                color: const Color.fromRGBO(246, 246, 246, 1),
+                borderRadius: BorderRadius.circular(16.r),
+              ),
+              child: Stack(
+                children: [
+                  Center(
+                    child: Image.asset(
+                      image,
+                      fit: BoxFit.contain,
+                      height: 90.h,
                     ),
-                    decoration: BoxDecoration(
-                      color: ColorManager.primaryColor,
-                      borderRadius: BorderRadius.circular(15.r),
-                    ),
-                    child: const Text(
-                      '10% Off',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
+                  ),
+
+                  /// DISCOUNT
+                  Positioned(
+                    top: 8,
+                    left: 8,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 8.w,
+                        vertical: 4.h,
+                      ),
+                      decoration: BoxDecoration(
+                        color: ColorManager.primaryColor,
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      child: const Text(
+                        '25% Off',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
 
-          /// 🧾 CONTENT
-          Padding(
-            padding: EdgeInsets.all(10.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: TextStyles.font14BlackColorW400,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    Spacer(),
-                    const Icon(Icons.shopping_cart_outlined, size: 18),
-                  ],
-                ),
-                const SizedBox(height: 4),
+          /// CONTENT
+          Expanded(
+            flex: 4,
+            child: Padding(
+              padding: EdgeInsets.all(10.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyles.font14BlackColorW400,
+                  ),
 
-                Row(
-                  children: [
-                    Text('\$$price', style: TextStyles.font14BlackColorW400),
-                    const SizedBox(width: 6),
-                    Text(
-                      '\$$oldPrice',
-                      style: TextStyle(
-                        decoration: TextDecoration.lineThrough,
-                        color: ColorManager.greyColor,
-                        fontSize: 12,
+                  SizedBox(height: 8.h),
+
+                  Row(
+                    children: [
+                      Text(
+                        '\$${price.toStringAsFixed(2)}',
+                        style: TextStyles.font14BlackColorW400,
                       ),
-                    ),
-                    Spacer(),
-                    const Icon(
-                      Icons.star,
-                      color: ColorManager.yellowColor,
-                      size: 16,
-                    ),
-                    Text(
-                      rating.toString(),
-                      style: TextStyles.font14BlackColorW400,
-                    ),
-                    const Spacer(),
-                  ],
-                ),
-
-                const SizedBox(height: 6),
-              ],
+                      SizedBox(width: 6.w),
+                      Text(
+                        '\$${oldPrice.toStringAsFixed(2)}',
+                        style: const TextStyle(
+                          color: ColorManager.greyColor,
+                          decoration: TextDecoration.lineThrough,
+                          fontSize: 10,
+                        ),
+                      ),
+                      const Spacer(),
+                      const Icon(
+                        Icons.star,
+                        size: 16,
+                        color: ColorManager.yellowColor,
+                      ),
+                      SizedBox(width: 4.w),
+                      Text(
+                        rating.toString(),
+                        style: TextStyles.font14BlackColorW400,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ],

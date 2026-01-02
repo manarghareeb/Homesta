@@ -2,31 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:homesta/core/theming/styles.dart';
 
 class ContinueWith extends StatelessWidget {
-  const ContinueWith({
-    super.key,
-  });
+  const ContinueWith({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      alignment: WrapAlignment.center,
+      spacing: 8,
       children: [
-        Expanded(
-          child: Divider(
-            thickness: 1,
-            color: Color(0xFFE0DFDF),
-            endIndent: 8,
-          ),
+        SizedBox(
+          width: 80,
+          child: Divider(thickness: 1, color: const Color(0xFFE0DFDF)),
         ),
-        Text(
-          'Or Continue With',
-          style: TextStyles.font16BlackRegular,
-        ),
-        Expanded(
-          child: Divider(
-            thickness: 1,
-            color:Color(0xFFE0DFDF),
-            indent: 8,
-          ),
+        Text('Or Continue With', style: TextStyles.font16BlackRegular),
+        SizedBox(
+          width: 80,
+          child: Divider(thickness: 1, color: const Color(0xFFE0DFDF)),
         ),
       ],
     );

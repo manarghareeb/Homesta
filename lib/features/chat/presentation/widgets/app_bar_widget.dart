@@ -13,101 +13,97 @@ class AppBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-        child: Row(
-          children: [
-            /// Back icon
-            GestureDetector(
-              onTap: () {
-                GoRouter.of(context).pushReplacement(AppRouter.homeScreen);
-              },
-              child: Icon(
-                FontAwesomeIcons.arrowLeft,
-                color: ColorManager.primaryColor,
-                size: 18.sp,
-              ),
-            ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isSmall = constraints.maxWidth < 360;
 
-            SizedBox(width: 8.w),
-
-            /// Bot icon
-            CircleAvatar(
-              backgroundColor: ColorManager.primaryColor,
-              radius: 12.sp,
-              child: Icon(
-                FontAwesomeIcons.robot,
-                color: Colors.white,
-                size: 12.sp,
-              ),
-            ),
-
-            SizedBox(width: 8.w),
-
-            /// 🔥 THIS IS THE FIX
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'AI Assistant',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyles.font15BlackW400.copyWith(
-                      color: ColorManager.primaryColor,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.circle, color: Color(0xFF1DC731), size: 8.sp),
-                      SizedBox(width: 4.w),
-                      Text(
-                        'Online',
-                        style: TextStyles.font14PrimaryColorW400,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-
-            /// Right icons
-            Row(
-              children: [
-                Material(
-                  elevation: 6,
-                  shape: const CircleBorder(),
-                  child: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: 12.sp,
-                    child: Icon(
-                      Icons.dark_mode_outlined,
-                      color: Colors.black,
-                      size: 18.sp,
-                    ),
-                  ),
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+          child: Row(
+            children: [
+              /// BACK
+              GestureDetector(
+                onTap: () {
+                  GoRouter.of(context).pushReplacement(AppRouter.homeScreen);
+                },
+                child: Icon(
+                  FontAwesomeIcons.arrowLeft,
+                  color: ColorManager.primaryColor,
+                  size: 18.sp,
                 ),
-                SizedBox(width: 8.w),
+              ),
+
+              SizedBox(width: 8.w),
+
+              /// AVATAR
+              CircleAvatar(
+                backgroundColor: ColorManager.primaryColor,
+                radius: 12.sp,
+                child: Icon(
+                  FontAwesomeIcons.robot,
+                  color: Colors.white,
+                  size: 12.sp,
+                ),
+              ),
+
+              SizedBox(width: 8.w),
+
+              /// TITLE + STATUS
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'AI Assistant',
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyles.font15BlackW400.copyWith(
+                        color: ColorManager.primaryColor,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.circle,
+                          color: const Color(0xFF1DC731),
+                          size: 8.sp,
+                        ),
+                        SizedBox(width: 4.w),
+                        Text(
+                          'Online',
+                          style: TextStyles.font14PrimaryColorW400,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+
+              /// ACTION ICONS (hide on small screens)
+              if (!isSmall) ...[
+                IconButton(
+                  icon: Icon(Icons.dark_mode_outlined),
+                  onPressed: () {},
+                ),
                 Icon(
                   FontAwesomeIcons.message,
                   color: ColorManager.greyColor,
                   size: 18.sp,
                 ),
-                SizedBox(width: 8.w),
-                GestureDetector(
-                  onTap: openDrawer,
-                  child: SvgPicture.asset(
-                    'assets/images/chat_ai_icon.svg',
-                    width: 22.w,
-                  ),
-                ),
               ],
-            ),
-          ],
-        ),
-      ),
+
+              SizedBox(width: 6.w),
+
+              GestureDetector(
+                onTap: openDrawer,
+                child: SvgPicture.asset(
+                  'assets/images/chat_ai_icon.svg',
+                  height: 22.h,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
