@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/api/dio_consumer.dart';
 import 'package:homesta/core/cache/cache_helper.dart';
+import 'package:homesta/core/di/service_locator.dart';
 import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/styles.dart';
 
@@ -32,6 +33,7 @@ void main() async {
   final authRemoteDataSource = AuthRemoteDataSource(apiConsumer);
   final authRepo = AuthRepository(authRemoteDataSource);
 
+initServiceLocator();
   runApp(
     MultiRepositoryProvider(
       providers: [

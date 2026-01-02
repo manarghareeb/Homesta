@@ -22,91 +22,85 @@ class ProductDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManager.soLightGreyColor,
-
       appBar: CustomAppBarWidget(
         backgroundColor: ColorManager.soLightGreyColor,
         text: 'Product Details',
         actions: [
-          IconButton(icon: const Icon(Icons.favorite_border), onPressed: () {}),
-        ],
-      ),
-
-      /// ✅ FIXED BODY
-      body: CustomScrollView(
-        slivers: [
-          SliverPadding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate([
-                const ProductImageGallerySection(
-                  mainImage: 'assets/images/chair.png',
-                  thumbnails: [
-                    'assets/images/chair.png',
-                    'assets/images/chair.png',
-                    'assets/images/chair.png',
-                    'assets/images/chair.png',
-                  ],
-                ),
-
-                SizedBox(height: 24.h),
-                const ProductTitleWithRating(),
-                SizedBox(height: 20.h),
-                const ProductDescriptionSection(),
-                SizedBox(height: 16.h),
-
-                SelectColorSection(
-                  selectedColorName: 'Green',
-                  onColorSelected: (color) {},
-                ),
-
-                SizedBox(height: 16.h),
-                CountContainer(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 8.h,
-                    horizontal: 12.w,
-                  ),
-                ),
-
-                SizedBox(height: 12.h),
-                ReviewsAndViewAllSection(isVisible: false, onTap: () {}),
-
-                SizedBox(height: 16.h),
-                const ProductRatingSection(),
-
-                SizedBox(height: 24.h),
-                const CommentOnProductSection(),
-
-                SizedBox(height: 24.h),
-                Text(
-                  'Suggest For You',
-                  style: TextStyles.font18BlackW500.copyWith(
-                    color: ColorManager.primaryColor,
-                  ),
-                ),
-
-                SizedBox(height: 12.h),
-                const SuggestForYouSection(),
-
-                SizedBox(height: 120.h), // 👈 مساحة للبوتوم بار
-              ]),
+          IconButton(
+            onPressed: () {},
+            icon: CircleAvatar(
+              backgroundColor: Colors.white,
+              child: const Icon(
+                Icons.favorite_outline,
+                color: ColorManager.primaryColor,
+              ),
             ),
           ),
         ],
       ),
-
-      /// ✅ Bottom Fixed Buttons
-      bottomNavigationBar: SafeArea(
+      backgroundColor: ColorManager.soLightGreyColor,
+      body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-          child: DualActionButtons(
-            leftText: 'Add to Cart',
-            rightText: 'Buy Now',
-            onLeftPressed: () {},
-            onRightPressed: () {
-              GoRouter.of(context).push(AppRouter.orderFlowScreen);
-            },
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const ProductImageGallerySection(
+                mainImage: 'assets/images/chair.png',
+                thumbnails: [
+                  'assets/images/chair.png',
+                  'assets/images/chair.png',
+                  'assets/images/chair.png',
+                  'assets/images/chair.png',
+                ],
+              ),
+              SizedBox(height: 24.h),
+              const ProductTitleWithRating(),
+              SizedBox(height: 24.h),
+           //   const ProductDescriptionSection(),
+              SizedBox(height: 16.h),
+              SelectColorSection(
+                selectedColorName: 'Green',
+                onColorSelected: (color) {
+                  print('Selected color: $color');
+                },
+              ),
+              SizedBox(height: 16.h),
+              CountContainer(
+                padding: EdgeInsets.symmetric(
+                  vertical: 7.4.h,
+                  horizontal: 11.5.w,
+                ),
+              ),
+              SizedBox(height: 8.h),
+               ReviewsAndViewAllSection(isVisible: false,onTap: (){},),
+              SizedBox(height: 16.h),
+              const ProductRatingSection(),
+              SizedBox(height: 24.h),
+              const CommentOnProductSection(),
+              SizedBox(height: 16.h),
+              Text(
+                'Suggest For You',
+                style: TextStyles.font18BlackW500.copyWith(
+                  color: ColorManager.primaryColor,
+                ),
+              ),
+              SizedBox(height: 8.h),
+              const SuggestForYouSection(),
+              SizedBox(height: 32.h),
+            ],
           ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+        child: DualActionButtons(
+          leftText: 'Add to Cart',
+          rightText: 'Buy Now',
+          onLeftPressed: () {},
+          onRightPressed: () {
+            GoRouter.of(context).push(AppRouter.orderFlowScreen);
+          },
         ),
       ),
     );

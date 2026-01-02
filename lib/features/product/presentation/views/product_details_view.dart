@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
+import 'package:homesta/features/product/domain/entities/product_entitty.dart';
 import 'package:homesta/features/product/presentation/widgets/addtional_info_tab.dart';
 import 'package:homesta/features/home/presentation/widgets/count_container.dart';
 import 'package:homesta/features/product/presentation/widgets/discription_tab.dart';
@@ -13,8 +14,8 @@ import 'package:homesta/features/product/presentation/widgets/select_color_secti
 import 'package:homesta/features/product/presentation/widgets/tap_bar_widget.dart';
 
 class ProductDetailsView extends StatelessWidget {
-  const ProductDetailsView({super.key});
-
+  const ProductDetailsView({super.key, required this.productEntity});
+final ProductEntity productEntity;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -55,7 +56,7 @@ class ProductDetailsView extends StatelessWidget {
                 SizedBox(height: 24.h),
                 const ProductTitleWithRating(),
                 SizedBox(height: 24.h),
-                const ProductDescriptionSection(),
+                 ProductDescriptionSection(description: productEntity.description,price: productEntity.price.toString(),),
                 SizedBox(height: 16.h),
                 SelectColorSection(
                   selectedColorName: 'Green',

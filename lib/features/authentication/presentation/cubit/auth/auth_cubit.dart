@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:homesta/core/api/api_keys.dart';
 import '../../../../../core/api/end_ponits.dart';
 import '../../../../../core/cache/cache_helper.dart';
 import '../../../data/models/forget_response_model.dart';
@@ -77,7 +78,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoading());
     try {
       final result = await repo.logout();
-      await CacheHelper().removeData(key: ApiKey.token);
+      await CacheHelper().removeData(key: ApiKeys.token);
       emit(LogoutSuccess(result));
     } catch (error) {
       emit(AuthFailure(error.toString()));

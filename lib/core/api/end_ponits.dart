@@ -10,19 +10,10 @@ class EndPoint {
   static String resendConfirmEmail = "api/Auth/ResendEmailConfirmation";
 
 
-}
-
-
-class ApiKey {
-  static String status = "status";
-  static String errorMessage = "message";
-  static String email = "email";
-  static String password = "password";
-  static String token = "token";
-  static String message = "message";
-  static String id = "id";
-  static String name = "name";
-  static String phone = "phone";
-
-
+  static String getAllCategory = "api/Category";
+  static String searchCategory = "api/Category/search";
+  static String getAllProducts = "api/Product/GetAllProducts";
+  static String getProductImages = "api/ProductImages/product";
+  static String getSubCategory="api/SubCategory/by-category";
+    static String getProductReviews= "api/Review/product";
 }

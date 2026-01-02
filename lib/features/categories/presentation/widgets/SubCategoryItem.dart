@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/styles.dart';
+import 'package:homesta/core/widgets/custom_cached_network_image.dart';
 
 class SubCategoryItem extends StatelessWidget {
   final String title;
@@ -24,11 +25,10 @@ class SubCategoryItem extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(12.r),
-              child: Image.asset(
-                image,
+              child: CustomCachedNetworkImage(
+                imagePath: image,
                 height: 56.h,
                 width: 56.w,
-                fit: BoxFit.cover,
               ),
             ),
             SizedBox(width: 14.w),

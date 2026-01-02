@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:homesta/core/di/service_locator.dart';
 import 'package:homesta/features/account/presentation/views/contact_us_screen.dart';
 import 'package:homesta/features/account/presentation/views/customer_support_screen.dart';
 import 'package:homesta/features/account/presentation/views/edit_profile_screen.dart';
@@ -10,6 +11,7 @@ import 'package:homesta/features/account/presentation/views/manage_address_scree
 import 'package:homesta/features/account/presentation/views/my_order_screen.dart';
 import 'package:homesta/features/account/presentation/views/password_manager_screen.dart';
 import 'package:homesta/features/cart/presentation/views/empty_cart_screen.dart';
+import 'package:homesta/features/categories/domain/entities/sub_category_entity.dart';
 import 'package:homesta/features/chat/data/models/chat_message_model.dart';
 import 'package:homesta/features/chat/domain/repos/chat_repo.dart';
 import 'package:homesta/features/chat/presentation/cubit/chat/chat_cubit.dart';
@@ -32,6 +34,8 @@ import 'package:homesta/features/chat/presentation/views/chat_screen.dart';
 import 'package:homesta/features/order/presentation/views/order_flow_screen.dart';
 import 'package:homesta/features/home/presentation/views/home.dart';
 import 'package:homesta/features/notification/presentaion/views/notification.dart';
+import 'package:homesta/features/product/domain/entities/product_entitty.dart';
+import 'package:homesta/features/product/presentation/cubits/review_cubit/review_cubit.dart';
 import 'package:homesta/features/product/presentation/views/product_details_view.dart';
 import 'package:homesta/features/splash/presentation/splashscreen.dart';
 import '../../features/account/presentation/views/account_screen.dart';
@@ -62,7 +66,9 @@ abstract class AppRouter {
   static final accountScreen = '/accountScreen';
   static final notificationScreen = '/notificationScreen';
   //static final categorySectionScreen = '/categorySectionScreen';
-  static const String categorySectionScreen = '/categorySection/:title';
+  //static const String categorySectionScreen = '/categorySection/:title';
+  //add sub category screen
+    static const String subcategoryScreen = '/subcategoryScreen';
   static final addNewPasswordScreen = '/addNewPasswordScreen';
   static final setNewPasswordScreen = '/setNewPasswordScreen';
   static final verficationScreen = '/verificationScreen';
@@ -128,7 +134,17 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: productDetailsScreen,
-        builder: (context, state) => const ProductDetailsView(),
+        
+        builder: (context, state) {
+          final  product=state.extra as ProductEntity;
+          print("product id ${product.productId}");
+          return  BlocProvider(
+        
+            create: (context) => sl<ReviewsCubit>()..getReviews(productId: product.productId),
+          child:  ProductDetailsView(productEntity: product,));
+        }  
+        
+       
       ),
       GoRoute(path: homeScreen, builder: (context, state) => const HomeView()),
       GoRoute(
@@ -157,31 +173,29 @@ abstract class AppRouter {
       ),
 
       GoRoute(
-        path: '/subCategories/:categoryName',
+        path: subcategoryScreen,
         builder: (context, state) {
-          final categoryName = Uri.decodeComponent(
-            state.pathParameters['categoryName']!,
-          );
+ final int id = state.extra! as int;
 
-          return SubCategoriesScreen(categoryName: categoryName);
+          return SubCategoriesScreen(id: id);
         },
       ),
-      GoRoute(
-        path: '/categorySection/:categoryName/:subCategoryName',
-        builder: (context, state) {
-          final categoryName = Uri.decodeComponent(
-            state.pathParameters['categoryName']!,
-          );
-          final subCategoryName = Uri.decodeComponent(
-            state.pathParameters['subCategoryName']!,
-          );
+      // GoRoute(
+      //   path: '/categorySection/:categoryName/:subCategoryName',
+      //   builder: (context, state) {
+      //     final categoryName = Uri.decodeComponent(
+      //       state.pathParameters['categoryName']!,
+      //     );
+      //     final subCategoryName = Uri.decodeComponent(
+      //       state.pathParameters['subCategoryName']!,
+      //     );
 
-          return CategorySectionScreen(
-            title: categoryName,
-            subCategory: subCategoryName,
-          );
-        },
-      ),
+      //     return CategorySectionScreen(
+      //       title: categoryName,
+      //       subCategory: subCategoryName,
+      //     );
+      //   },
+      // ),
 
       GoRoute(
         path: addNewPasswordScreen,
