@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:homesta/core/api/api_keys.dart';
 import 'package:homesta/core/cache/cache_helper.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
@@ -117,7 +118,7 @@ class _AddReviewSectionState extends State<AddReviewSection> {
                   BlocProvider.of<ReviewsCubit>(context).addReview(
                     params: AddReviewParams(
                       productId: widget.productEntity.productId,
-                      userId: "0951da65-f160-412d-93cc-e62e2f1f1452",
+                      userId: CacheHelper().getData(key: ApiKeys.id),
                       storeId: widget.productEntity.storeId,
                       rating: _rating,
                       comment: reviewController.text.trim(),
