@@ -106,6 +106,14 @@ class _AddReviewSectionState extends State<AddReviewSection> {
               CustomButtonWidget(
                 buttonText: "Submit",
                 onPressed: () {
+                  if (_rating == 0) {
+                    showSnackBar(context, "Please select rating");
+                    return;
+                  }
+                  if (reviewController.text.isEmpty) {
+                    showSnackBar(context, "Please enter review");
+                    return;
+                  }
                   BlocProvider.of<ReviewsCubit>(context).addReview(
                     params: AddReviewParams(
                       productId: widget.productEntity.productId,
@@ -128,6 +136,8 @@ class _AddReviewSectionState extends State<AddReviewSection> {
             BlocProvider.of<ReviewsCubit>(
               context,
             ).getReviews(productId: widget.productEntity.productId);
+            _rating=0;
+            reviewController.clear();
           }
           if (state is AddReviewsFailure) {
             showSnackBar(context, state.message);
