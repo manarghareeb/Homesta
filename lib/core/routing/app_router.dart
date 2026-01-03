@@ -11,14 +11,12 @@ import 'package:homesta/features/account/presentation/views/manage_address_scree
 import 'package:homesta/features/account/presentation/views/my_order_screen.dart';
 import 'package:homesta/features/account/presentation/views/password_manager_screen.dart';
 import 'package:homesta/features/cart/presentation/views/empty_cart_screen.dart';
-import 'package:homesta/features/categories/domain/entities/sub_category_entity.dart';
 import 'package:homesta/features/chat/data/models/chat_message_model.dart';
 import 'package:homesta/features/chat/domain/repos/chat_repo.dart';
 import 'package:homesta/features/chat/presentation/cubit/chat/chat_cubit.dart';
 import 'package:homesta/features/chat/presentation/views/chat_message_screen.dart';
 import 'package:homesta/features/order/presentation/views/track_order_details_screen.dart';
 import 'package:homesta/features/order/presentation/views/track_your_order_screen.dart';
-import 'package:homesta/features/onboarding/presentation/views/onboarding_screen.dart';
 import 'package:homesta/features/payment/presentation/views/payment_account_screen.dart';
 import 'package:homesta/features/account/presentation/views/privacy_policy_screen.dart';
 import 'package:homesta/features/account/presentation/views/setting_screen.dart';
@@ -29,7 +27,6 @@ import 'package:homesta/features/authentication/presentation/views/set_new_passw
 import 'package:homesta/features/authentication/presentation/views/signup_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/verification_screen.dart';
 import 'package:homesta/features/cart/presentation/views/wishlist_screen.dart';
-import 'package:homesta/features/categories/presentation/views/category_section_screen.dart';
 import 'package:homesta/features/chat/presentation/views/chat_screen.dart';
 import 'package:homesta/features/order/presentation/views/order_flow_screen.dart';
 import 'package:homesta/features/home/presentation/views/home.dart';
@@ -37,6 +34,11 @@ import 'package:homesta/features/notification/presentaion/views/notification.dar
 import 'package:homesta/features/product/domain/entities/product_entitty.dart';
 import 'package:homesta/features/product/presentation/cubits/review_cubit/review_cubit.dart';
 import 'package:homesta/features/product/presentation/views/product_details_view.dart';
+import 'package:homesta/features/seller/analytics/presentation/views/sales_analytics_screen.dart';
+import 'package:homesta/features/seller/company%20data/presentation/views/company_data_screen.dart';
+import 'package:homesta/features/seller/product/presentation/views/product_form_screen.dart';
+import 'package:homesta/features/seller/product/presentation/views/product_screen.dart';
+import 'package:homesta/features/seller/profile/presentation/views/seller_account_screen.dart';
 import 'package:homesta/features/splash/presentation/splashscreen.dart';
 import '../../features/account/presentation/views/account_screen.dart';
 import '../../features/account/presentation/views/add_review.dart';
@@ -96,14 +98,42 @@ abstract class AppRouter {
   static final collectionsScreen = '/collectionsScreen';
   static final emptyCartScreen = '/emptyCartScreen';
 
+  // Seller Route
+  static final salesAnalyticsScreen = '/salesAnalyticsScreen';
+  static final companyDataScreen = '/companyDataScreen';
+  static final sellerAccountScreen = '/sellerAccountScreen';
+  static final productScreen = '/productScreen';
+  static final productFormScreen = '/productFormScreen';
+
   static final route = GoRouter(
-    initialLocation: loginScreen,
+    initialLocation: onboardingRoute,
     routes: [
       GoRoute(
         path: onboardingRoute,
-        builder: (context, state) => const OnboardingScreen(),
+        builder: (context, state) => const SellerAccountScreen(),
       ),
-
+      // Seller Route
+      GoRoute(
+        path: sellerAccountScreen,
+        builder: (context, state) => const SellerAccountScreen(),
+      ),
+      GoRoute(
+        path: productFormScreen,
+        builder: (context, state) => const ProductFormScreen(),
+      ),
+      GoRoute(
+        path: productScreen,
+        builder: (context, state) => const ProductScreen(),
+      ),
+      GoRoute(
+        path: companyDataScreen,
+        builder: (context, state) => const CompanyDataScreen(),
+      ),
+      GoRoute(
+        path: salesAnalyticsScreen,
+        builder: (context, state) => const SalesAnalyticsScreen(),
+      ),
+      // User Route
       GoRoute(
         path: splashScreen,
         builder: (context, state) => const SplashScreen(),
