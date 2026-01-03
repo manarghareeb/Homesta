@@ -18,7 +18,7 @@ class _RememberMeAndForgetPasswordState
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Wrap(
       children: [
         CheckboxWidget(),
         Text('Remember me', style: TextStyles.font14BlackColorW400),
@@ -37,7 +37,7 @@ class _RememberMeAndForgetPasswordState
           clipBehavior: Clip.none,
           child: Text(
             'Forget Password?',
-            style: TextStyles.font14PrimaryColorW400
+            style: TextStyles.font14PrimaryColorW400,
           ),
         ),
       ],

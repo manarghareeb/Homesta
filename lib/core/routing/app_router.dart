@@ -68,7 +68,7 @@ abstract class AppRouter {
   //static final categorySectionScreen = '/categorySectionScreen';
   //static const String categorySectionScreen = '/categorySection/:title';
   //add sub category screen
-    static const String subcategoryScreen = '/subcategoryScreen';
+  static const String subcategoryScreen = '/subcategoryScreen';
   static final addNewPasswordScreen = '/addNewPasswordScreen';
   static final setNewPasswordScreen = '/setNewPasswordScreen';
   static final verficationScreen = '/verificationScreen';
@@ -97,7 +97,7 @@ abstract class AppRouter {
   static final emptyCartScreen = '/emptyCartScreen';
 
   static final route = GoRouter(
-    initialLocation: homeScreen,
+    initialLocation: splashScreen,
     routes: [
       GoRoute(
         path: onboardingRoute,
@@ -134,17 +134,18 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: productDetailsScreen,
-        
+
         builder: (context, state) {
-          final  product=state.extra as ProductEntity;
+          final product = state.extra as ProductEntity;
           print("product id ${product.productId}");
-          return  BlocProvider(
-        
-            create: (context) => sl<ReviewsCubit>()..getReviews(productId: product.productId),
-          child:  ProductDetailsView(productEntity: product,));
-        }  
-        
-       
+          return BlocProvider(
+            create:
+                (context) =>
+                    sl<ReviewsCubit>()
+                      ..getReviews(productId: product.productId),
+            child: ProductDetailsView(productEntity: product),
+          );
+        },
       ),
       GoRoute(path: homeScreen, builder: (context, state) => const HomeView()),
       GoRoute(
@@ -175,11 +176,12 @@ abstract class AppRouter {
       GoRoute(
         path: subcategoryScreen,
         builder: (context, state) {
- final int id = state.extra! as int;
+          final int id = state.extra! as int;
 
           return SubCategoriesScreen(id: id);
         },
       ),
+
       // GoRoute(
       //   path: '/categorySection/:categoryName/:subCategoryName',
       //   builder: (context, state) {
@@ -196,7 +198,6 @@ abstract class AppRouter {
       //     );
       //   },
       // ),
-
       GoRoute(
         path: addNewPasswordScreen,
         builder: (context, state) => const AddNewPasswordScreen(),
