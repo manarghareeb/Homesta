@@ -97,7 +97,7 @@ abstract class AppRouter {
   static final emptyCartScreen = '/emptyCartScreen';
 
   static final route = GoRouter(
-    initialLocation: splashScreen,
+    initialLocation: loginScreen,
     routes: [
       GoRoute(
         path: onboardingRoute,

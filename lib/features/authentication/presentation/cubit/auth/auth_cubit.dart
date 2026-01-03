@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:homesta/core/api/api_keys.dart';
+import 'package:homesta/core/error/expections.dart';
 import '../../../../../core/api/end_ponits.dart';
 import '../../../../../core/cache/cache_helper.dart';
 import '../../../data/models/forget_response_model.dart';
@@ -21,8 +22,8 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       final result = await repo.login(email, password);
       emit(AuthSuccess(result));
-    } catch (e) {
-      emit(AuthFailure(e.toString()));
+    }on ServerException catch (e) {
+      emit(AuthFailure(e.errModel.errorMessage));
     }
   }
 //signUp
@@ -43,8 +44,8 @@ class AuthCubit extends Cubit<AuthState> {
         agreeTerms,
       );
       emit(RegisterSuccess(result));
-    } catch (e) {
-      emit(AuthFailure(e.toString()));
+    }on ServerException catch (e) {
+      emit(AuthFailure(e.errModel.errorMessage));
     }
   }
 
