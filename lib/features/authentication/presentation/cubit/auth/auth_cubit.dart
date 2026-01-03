@@ -20,6 +20,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> login(String email, String password) async {
     emit(AuthLoading());
     try {
+      
       final result = await repo.login(email, password);
       emit(AuthSuccess(result));
     }on ServerException catch (e) {

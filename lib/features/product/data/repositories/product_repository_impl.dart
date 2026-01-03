@@ -3,6 +3,7 @@ import 'package:homesta/core/error/error_model.dart';
 import 'package:homesta/core/error/expections.dart';
 import 'package:homesta/features/product/data/data_sources/remote_data_source/product_data_source.dart';
 import 'package:homesta/features/product/data/data_sources/remote_data_source/review_data_source.dart';
+import 'package:homesta/features/product/domain/entities/params/add_review_params.dart';
 import 'package:homesta/features/product/domain/entities/product_entitty.dart';
 import 'package:homesta/features/product/domain/entities/review_entity.dart';
 import 'package:homesta/features/product/domain/repositories/product_repository.dart';
@@ -33,4 +34,14 @@ return right(reviews);
 return left(e.errModel);
 
 }}
+
+  @override
+  Future<Either<ErrorModel, Unit>> addReview(AddReviewParams params)async {
+ try {
+ await reviewDataSource.addReview(params);
+     return right(unit);
+} on ServerException catch (e) {
+return left(e.errModel);
+}
+  }
 }

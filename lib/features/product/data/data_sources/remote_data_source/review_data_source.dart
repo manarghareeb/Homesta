@@ -2,9 +2,13 @@
 import 'package:homesta/core/api/api_consumer.dart';
 import 'package:homesta/core/api/end_ponits.dart';
 import 'package:homesta/features/product/data/models/review_model.dart';
+import 'package:homesta/features/product/domain/entities/params/add_review_params.dart';
 
 abstract class ReviewProductDataSource {
   Future<List<ReviewModel>> getProductReviews(int productId);
+  Future<void> addReview(AddReviewParams params);
+
+
 }
 
 class ReviewProductDataSourceImp implements ReviewProductDataSource {
@@ -21,5 +25,10 @@ class ReviewProductDataSourceImp implements ReviewProductDataSource {
  }
  return productReviws;
 
+  }
+  
+  @override
+  Future<void> addReview( AddReviewParams params) async{
+await api.post(EndPoint.addProductReviews,data: params.toJson());
   }
 }
