@@ -1,8 +1,8 @@
 class AddReviewParams {
-  final String productId;
+  final int productId;
   final String userId;
-  final String storeId;
-  final double rating;
+  final int storeId;
+  final int rating;
   final String comment;
 
   AddReviewParams({

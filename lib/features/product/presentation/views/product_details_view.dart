@@ -77,11 +77,11 @@ final ProductEntity productEntity;
                 /// محتوى التابات
                 SizedBox(
                   height: 500.h,
-                  child: const TabBarView(
+                  child:  TabBarView(
                     children: [
                       DiscriptionTab(),
                       AddtionalInfoTab(),
-                      ReviewTab(),
+                      ReviewTab(productEntity: productEntity,),
                     ],
                   ),
                 ),
