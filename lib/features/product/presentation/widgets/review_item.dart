@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/features/product/domain/entities/review_entity.dart';
 import 'package:homesta/features/product/presentation/widgets/rating_star.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class ReviewItem extends StatelessWidget {
@@ -20,10 +21,12 @@ final ReviewEntity review;
             spacing: 5,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-                      CircleAvatar(
-            backgroundImage:  AssetImage('assets/images/image 1.png'),
-            radius: 30,
-          ),
+                      Skeleton.leaf(
+                        child: CircleAvatar(
+                                    backgroundImage:  AssetImage('assets/images/image 1.png'),
+                                    radius: 30,
+                                  ),
+                      ),
           Text(review.userName,style: TextStyles.font16BlackRegular,),
           Spacer(),
           SizedBox(

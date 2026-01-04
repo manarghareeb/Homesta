@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/features/product/presentation/cubits/review_cubit/review_cubit.dart';
 import 'package:homesta/features/product/presentation/cubits/review_cubit/review_state.dart';
+import 'package:homesta/features/product/presentation/widgets/skeletonizer_all_review_section.dart';
 import 'rating_star.dart';
 import 'review_tab.dart';
 
@@ -15,7 +16,7 @@ class AllReviewSection extends StatelessWidget {
     return BlocBuilder<ReviewsCubit, ReviewsState>(
       builder: (context, state) {
         if (state is ReviewsLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: SkeletonizerAllReviewSection());
         }
 
         if (state is ReviewsFailure) {
@@ -28,7 +29,10 @@ class AllReviewSection extends StatelessWidget {
           final reviews = state.reviews;
 
           if (reviews.isEmpty) {
-            return const Text('No reviews yet');
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: const Text('No reviews yet'),
+            );
           }
 
           /// ⭐ average rating
