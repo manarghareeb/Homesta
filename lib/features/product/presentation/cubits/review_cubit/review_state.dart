@@ -15,9 +15,19 @@ class ReviewsSuccess extends ReviewsState {
 
    ReviewsSuccess(this.reviews);
 }
-
 class ReviewsFailure extends ReviewsState {
   final String message;
 
    ReviewsFailure(this.message);
+}
+class AddReviewsSuccess extends ReviewsState {
+
+}
+class AddReviewLoading extends ReviewsState {}
+
+
+class AddReviewsFailure extends ReviewsState {
+  final String message;
+
+   AddReviewsFailure(this.message);
 }

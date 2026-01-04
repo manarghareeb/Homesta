@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
+import 'package:homesta/features/product/domain/entities/product_entitty.dart';
 import 'package:homesta/features/product/presentation/widgets/add_review_section.dart';
 import 'package:homesta/features/product/presentation/widgets/all_review_section.dart';
 import 'package:homesta/features/product/presentation/widgets/explore_product.dart';
 import 'package:homesta/features/product/presentation/widgets/review_list.dart';
 import 'package:homesta/features/product/presentation/widgets/reviews_and_view_all_section.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class ReviewTab extends StatefulWidget {
-  const ReviewTab({super.key});
-
+  const ReviewTab({super.key, required this.productEntity});
+final ProductEntity productEntity;
   @override
   State<ReviewTab> createState() => _ReviewTabState();
 }
@@ -42,7 +44,7 @@ class _ReviewTabState extends State<ReviewTab> {
             ),
           ),
       
-          AddReviewSection(),
+          AddReviewSection(productEntity: widget.productEntity,),
           SizedBox(height: 10,),
           ExploreProduct()
         ],

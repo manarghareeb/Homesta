@@ -14,6 +14,7 @@ import 'package:homesta/features/product/data/data_sources/remote_data_source/pr
 import 'package:homesta/features/product/data/data_sources/remote_data_source/review_data_source.dart';
 import 'package:homesta/features/product/data/repositories/product_repository_impl.dart';
 import 'package:homesta/features/product/domain/repositories/product_repository.dart';
+import 'package:homesta/features/product/domain/usecases/add_review_use_case.dart';
 import 'package:homesta/features/product/domain/usecases/get_all_product_use_case.dart';
 import 'package:homesta/features/product/domain/usecases/get_product_review_use_case.dart';
 import 'package:homesta/features/product/presentation/cubits/product_cubit.dart';
@@ -59,6 +60,9 @@ void initServiceLocator() {
         sl.registerLazySingleton(
     () => GetProductReviewUseCase(productRepository:  sl()),
   );
+          sl.registerLazySingleton(
+    () => AddReviewUseCase(productRepository:  sl()),
+  );
   /// Cubits
   sl.registerFactory(
     () => CategoryCubit(getCategoriesUseCase: sl(),searchCategoryUseCase:  sl()),
@@ -70,6 +74,6 @@ void initServiceLocator() {
     () => SubCategoryCubit(getSubCategoryUseCase:  sl()),
   );
         sl.registerFactory(
-    () => ReviewsCubit(  sl()),
+    () => ReviewsCubit(  sl(),sl()),
   );
 }

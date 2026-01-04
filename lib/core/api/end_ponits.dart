@@ -9,11 +9,11 @@ class EndPoint {
   static String confirmEmail = "api/Auth/ConfirmEmail";
   static String resendConfirmEmail = "api/Auth/ResendEmailConfirmation";
 
-
   static String getAllCategory = "api/Category";
   static String searchCategory = "api/Category/search";
   static String getAllProducts = "api/Product/GetAllProducts";
   static String getProductImages = "api/ProductImages/product";
-  static String getSubCategory="api/SubCategory/by-category";
-    static String getProductReviews= "api/Review/product";
+  static String getSubCategory = "api/SubCategory/by-category";
+  static String getProductReviews = "api/Review/product";
+  static String addProductReviews = "api/Review";
 }
