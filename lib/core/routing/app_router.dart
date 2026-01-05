@@ -6,6 +6,10 @@ import 'package:homesta/features/account/presentation/views/customer_support_scr
 import 'package:homesta/features/account/presentation/views/edit_profile_screen.dart';
 import 'package:homesta/features/account/presentation/views/faqs_screen.dart';
 import 'package:homesta/features/account/presentation/views/help_center_screen.dart';
+import 'package:homesta/features/admin/category/presentation/views/admin_category_screen.dart';
+import 'package:homesta/features/admin/dashboard/presentation/views/dashboard_screen.dart';
+import 'package:homesta/features/admin/product/presentation/views/admin_product_screen.dart';
+import 'package:homesta/features/admin/profile/presentation/views/admin_account_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/logout_screen.dart';
 import 'package:homesta/features/account/presentation/views/manage_address_screen.dart';
 import 'package:homesta/features/account/presentation/views/my_order_screen.dart';
@@ -104,13 +108,18 @@ abstract class AppRouter {
   static final sellerAccountScreen = '/sellerAccountScreen';
   static final productScreen = '/productScreen';
   static final productFormScreen = '/productFormScreen';
+  // Admin Route
+  static final adminAccountScreen = '/adminAccountScreen';
+  static final adminProductScreen = '/adminProductScreen';
+  static final adminCategoryScreen = '/adminCategoryScreen';
+  static final adminDashboardScreen = '/adminDashboardScreen';
 
   static final route = GoRouter(
     initialLocation: onboardingRoute,
     routes: [
       GoRoute(
         path: onboardingRoute,
-        builder: (context, state) => const SellerAccountScreen(),
+        builder: (context, state) => const AdminAccountScreen(),
       ),
       // Seller Route
       GoRoute(
@@ -132,6 +141,23 @@ abstract class AppRouter {
       GoRoute(
         path: salesAnalyticsScreen,
         builder: (context, state) => const SalesAnalyticsScreen(),
+      ),
+      // Admin Route
+      GoRoute(
+        path: adminAccountScreen,
+        builder: (context, state) => const AdminAccountScreen(),
+      ),
+      GoRoute(
+        path: adminDashboardScreen,
+        builder: (context, state) => const DashboardScreen(),
+      ),
+      GoRoute(
+        path: adminProductScreen,
+        builder: (context, state) => const AdminProductScreen(),
+      ),
+      GoRoute(
+        path: adminCategoryScreen,
+        builder: (context, state) => const AdminCategoryScreen(),
       ),
       // User Route
       GoRoute(
