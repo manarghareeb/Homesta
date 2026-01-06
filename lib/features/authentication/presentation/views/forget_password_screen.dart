@@ -92,7 +92,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       );
                       GoRouter.of(context).push(
                         AppRouter.verficationScreen,
-                        extra: controller.text,
+                        extra: controller.text.trim(),
                       );
                     } else if (state is AuthFailure) {
                       ScaffoldMessenger.of(

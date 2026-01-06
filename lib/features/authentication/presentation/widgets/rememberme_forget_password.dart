@@ -18,7 +18,7 @@ class _RememberMeAndForgetPasswordState
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
+    return Row(
       children: [
         Row(
           children: [

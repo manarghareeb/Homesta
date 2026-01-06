@@ -6,6 +6,8 @@ import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
 import 'package:homesta/core/widgets/custom_text_field_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../cubit/auth/auth_cubit.dart';
 
 class PasswordManagerScreen extends StatefulWidget {
   const PasswordManagerScreen({super.key});
@@ -15,17 +17,17 @@ class PasswordManagerScreen extends StatefulWidget {
 }
 
 class _PasswordManagerScreenState extends State<PasswordManagerScreen> {
+  final confirmPasswordController = TextEditingController();
   final currentPasswordController = TextEditingController();
   final newPasswordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
+    confirmPasswordController.dispose();
     currentPasswordController.dispose();
     newPasswordController.dispose();
-    confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -42,16 +44,16 @@ class _PasswordManagerScreenState extends State<PasswordManagerScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               /// Current Password
-              _buildLabel("Password", required: true),
+              _buildLabel("Current Password", required: true),
               CustomTextFieldWidget(
                 controller: currentPasswordController,
-                hintText: "Enter Password",
+                hintText: "Enter Current Password",
                 textInputType: TextInputType.text,
                 obscureText: true,
                 title: '',
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "Enter your password";
+                    return "Enter your current password";
                   } else if (value.length < 8) {
                     return "Password must be at least 8 characters";
                   }
@@ -80,7 +82,7 @@ class _PasswordManagerScreenState extends State<PasswordManagerScreen> {
               _buildLabel("New Password", required: true),
               CustomTextFieldWidget(
                 controller: newPasswordController,
-                hintText: "Enter Password",
+                hintText: "Enter New Password",
                 textInputType: TextInputType.text,
                 obscureText: true,
                 title: '',
@@ -99,7 +101,7 @@ class _PasswordManagerScreenState extends State<PasswordManagerScreen> {
               _buildLabel("Confirm New Password", required: true),
               CustomTextFieldWidget(
                 controller: confirmPasswordController,
-                hintText: "Enter Password",
+                hintText: "Confirm New Password",
                 textInputType: TextInputType.text,
                 obscureText: true,
                 title: '',
@@ -116,17 +118,36 @@ class _PasswordManagerScreenState extends State<PasswordManagerScreen> {
               ),
               SizedBox(height: 30.h),
 
-              /// Update Button
-              CustomButtonWidget(
-                buttonText: "Update Password",
-                onPressed: () {
-                  if (formKey.currentState!.validate()) {
+              /// Update Button with BlocConsumer
+              BlocConsumer<AuthCubit, AuthState>(
+                listener: (context, state) {
+                  if (state is ChangePasswordSuccess) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Password Updated Successfully"),
-                      ),
+                      SnackBar(content: Text(state.response.message)),
+                    );
+                    GoRouter.of(context).push(AppRouter.loginScreen);
+                  } else if (state is AuthFailure) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(state.error)),
                     );
                   }
+                },
+                builder: (context, state) {
+                  if (state is AuthLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  return CustomButtonWidget(
+                    buttonText: "Update Password",
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+                        context.read<AuthCubit>().changePassword(
+                          confirmPasswordController.text,
+                          currentPasswordController.text,
+                          newPasswordController.text,
+                        );
+                      }
+                    },
+                  );
                 },
               ),
             ],
@@ -144,17 +165,16 @@ class _PasswordManagerScreenState extends State<PasswordManagerScreen> {
         text: TextSpan(
           text: text,
           style: TextStyles.font16BlackRegular,
-          children:
-              required
-                  ? [
-                    TextSpan(
-                      text: " *",
-                      style: TextStyles.font14BlackColorW400.copyWith(
-                        color: Colors.red,
-                      ),
-                    ),
-                  ]
-                  : [],
+          children: required
+              ? [
+            TextSpan(
+              text: " *",
+              style: TextStyles.font14BlackColorW400.copyWith(
+                color: Colors.red,
+              ),
+            ),
+          ]
+              : [],
         ),
       ),
     );

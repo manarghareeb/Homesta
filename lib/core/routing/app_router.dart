@@ -14,9 +14,9 @@ import 'package:homesta/features/admin/profile/presentation/views/admin_account_
 import 'package:homesta/features/authentication/presentation/views/logout_screen.dart';
 import 'package:homesta/features/account/presentation/views/manage_address_screen.dart';
 import 'package:homesta/features/account/presentation/views/my_order_screen.dart';
-import 'package:homesta/features/account/presentation/views/password_manager_screen.dart';
 import 'package:homesta/features/cart/domain/repos/cart_repo.dart';
 import 'package:homesta/features/cart/presentation/cubit/add_item_to_cart_cubit/add_item_to_cart_cubit.dart';
+import 'package:homesta/features/authentication/presentation/views/password_manager_screen.dart';
 import 'package:homesta/features/cart/presentation/views/empty_cart_screen.dart';
 import 'package:homesta/features/chat/data/models/chat_message_model.dart';
 import 'package:homesta/features/chat/domain/repos/chat_repo.dart';
@@ -122,7 +122,7 @@ abstract class AppRouter {
     routes: [
       GoRoute(
         path: onboardingRoute,
-        builder: (context, state) => const LoginScreen(),
+        builder: (context, state) => const LoginScreen(),        
       ),
       // Seller Route
       GoRoute(
@@ -274,12 +274,19 @@ abstract class AppRouter {
         builder: (context, state) => const AddNewPasswordScreen(),
       ),
       GoRoute(
-        path: setNewPasswordScreen,
-        builder: (context, state) => const SetNewPasswordScreen(),
+        path: AppRouter.setNewPasswordScreen,
+        builder: (context, state) {
+          final data = state.extra as Map<String, dynamic>;
+          final email = data["email"] as String;
+          return SetNewPasswordScreen(email: email);
+        },
       ),
       GoRoute(
-        path: verficationScreen,
-        builder: (context, state) => const VerificationScreen(),
+        path: AppRouter.verficationScreen,
+        builder: (context, state) {
+          final email = state.extra as String;
+          return VerificationScreen(email: email);
+        },
       ),
       GoRoute(
         path: notificationScreen,
