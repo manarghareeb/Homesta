@@ -28,7 +28,21 @@ class ResetPasswordSuccess extends AuthState {
   final ResetPasswordResponseModel response;
   ResetPasswordSuccess(this.response);
 }
-
+//verification
+class VerifyResetCodeSuccess extends AuthState {
+  final VerifyResetCodeResponseModel response;
+  VerifyResetCodeSuccess(this.response);
+}
+//resend code
+class ResendResetCodeSuccess extends AuthState {
+  final ResendResetCodeResponseModel response;
+  ResendResetCodeSuccess(this.response);
+}
+//manage pass (Update pass)
+class ChangePasswordSuccess extends AuthState {
+  final ChangePasswordResponseModel response;
+  ChangePasswordSuccess(this.response);
+}
 //logout
 class LogoutSuccess extends AuthState {
   final LogoutResponseModel response;
