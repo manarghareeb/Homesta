@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homesta/core/theming/colors.dart';
+import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 import 'package:homesta/features/shop/presentation/view/filter_drawer.dart';
 import 'package:homesta/features/shop/presentation/widgets/SortRowWidget.dart';
 import 'package:homesta/features/shop/presentation/widgets/ActiveFiltersWidget.dart';
@@ -13,13 +14,7 @@ class FiltersScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
 
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        iconTheme: const IconThemeData(color: Colors.white),
-        title: const Text('Filters', style: TextStyle(color: Colors.black)),
-      ),
+      appBar: CustomAppBarWidget(text: 'Filters'),
 
       endDrawer: const FilterDrawer(),
 

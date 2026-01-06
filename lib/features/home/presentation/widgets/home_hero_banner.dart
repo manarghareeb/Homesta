@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 
 class HomeHeroBanner extends StatelessWidget {
@@ -87,7 +89,11 @@ class HomeHeroBanner extends StatelessWidget {
                         SizedBox(
                           height: 40,
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              GoRouter.of(
+                                context,
+                              ).push(AppRouter.filtersScreen);
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: ColorManager.primaryColor,
                               padding: const EdgeInsets.symmetric(
