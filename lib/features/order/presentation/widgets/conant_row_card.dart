@@ -25,7 +25,12 @@ class ContactRowWidget extends StatelessWidget {
         if (icon != null) ...[
           Icon(icon, size: 24.sp, color: Colors.black),
         ] else if (imagePath != null) ...[
-          Image.asset(imagePath!, width: 18.w, height: 18.w, fit: BoxFit.contain),
+          Image.asset(
+            imagePath!,
+            width: 18.w,
+            height: 18.w,
+            fit: BoxFit.contain,
+          ),
         ],
         SizedBox(width: 12.w),
         Expanded(

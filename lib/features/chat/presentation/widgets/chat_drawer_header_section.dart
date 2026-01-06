@@ -3,9 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/styles.dart';
 
 class ChatDrawerHeaderSection extends StatelessWidget {
-  const ChatDrawerHeaderSection({
-    super.key,
-  });
+  const ChatDrawerHeaderSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +22,7 @@ class ChatDrawerHeaderSection extends StatelessWidget {
           children: [
             const Icon(Icons.search),
             SizedBox(width: 8.w),
-            Text(
-              "Search Chats",
-              style: TextStyles.font15BlackW500,
-            ),
+            Text("Search Chats", style: TextStyles.font15BlackW500),
           ],
         ),
         SizedBox(height: 16.h),
@@ -43,7 +38,7 @@ class ChatDrawerHeaderSection extends StatelessWidget {
           "Your Chats",
           style: TextStyles.font14GreyColorW400.copyWith(
             fontSize: 18.sp,
-            color: Color(0xFF8C8F98)
+            color: Color(0xFF8C8F98),
           ),
         ),
       ],

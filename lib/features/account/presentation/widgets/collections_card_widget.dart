@@ -43,7 +43,8 @@ class CollectionCard extends StatelessWidget {
                           child: ClipRRect(
                             child: Image.asset(
                               thumbnails[i + 1],
-                              height: (200.h / ((thumbnails.length / 2).ceil())),
+                              height:
+                                  (200.h / ((thumbnails.length / 2).ceil())),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -63,7 +64,6 @@ class CollectionCard extends StatelessWidget {
 }
 
 //هاي بحالة الصورة صارلها تنقل او اكتر من اربع صور
-
 
 // @override
 // Widget build(BuildContext context) {

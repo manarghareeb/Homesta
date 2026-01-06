@@ -16,4 +16,6 @@ class EndPoint {
   static String getSubCategory = "api/SubCategory/by-category";
   static String getProductReviews = "api/Review/product";
   static String addProductReviews = "api/Review";
+  static String addCart = 'api/Cart/add';
+  static String getCartItem = 'api/Cart/items';
 }

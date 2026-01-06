@@ -8,7 +8,7 @@ class GetAllProductUseCase {
 
   GetAllProductUseCase({required this.productRepository});
 
-  Future<Either<ErrorModel,List<ProductEntity>>> call(){
+  Future<Either<ErrorModel, List<ProductEntity>>> call() {
     return productRepository.getAllProducts();
   }
 }

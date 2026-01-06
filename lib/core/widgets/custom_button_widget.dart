@@ -13,7 +13,7 @@ class CustomButtonWidget extends StatelessWidget {
     this.textColor,
     this.minWidth,
     this.height,
-    this.raduis
+    this.raduis,
   });
 
   final String buttonText;
@@ -44,7 +44,7 @@ class CustomButtonWidget extends StatelessWidget {
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         minimumSize: Size(minWidth ?? double.infinity, height ?? 48.h),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(raduis ??25.r),
+          borderRadius: BorderRadius.circular(raduis ?? 25.r),
           side: BorderSide(
             color: isPrimary ? Colors.transparent : ColorManager.primaryColor,
           ),

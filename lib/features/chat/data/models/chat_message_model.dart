@@ -6,13 +6,17 @@ class ChatMessageModel {
 
   ChatMessageModel({required this.firstQuestion, required this.messages});
 
-  factory ChatMessageModel.fromJson(Map<String, dynamic> json, String userMessage) {
+  factory ChatMessageModel.fromJson(
+    Map<String, dynamic> json,
+    String userMessage,
+  ) {
     String currentTime() {
       final now = DateTime.now();
       final hour = now.hour > 12 ? now.hour - 12 : now.hour;
       final period = now.hour >= 12 ? 'PM' : 'AM';
       return "${hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')} $period";
     }
+
     return ChatMessageModel(
       firstQuestion: userMessage,
       messages: [

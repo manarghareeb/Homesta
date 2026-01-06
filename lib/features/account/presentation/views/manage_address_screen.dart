@@ -77,7 +77,8 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
                   CustomTextFieldWidget(
                     controller: firstNameController,
                     hintText: "Enter First Name",
-                    textInputType: TextInputType.name, title: '',
+                    textInputType: TextInputType.name,
+                    title: '',
                   ),
                   SizedBox(height: 12.h),
 
@@ -85,7 +86,8 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
                   CustomTextFieldWidget(
                     controller: lastNameController,
                     hintText: "Enter Last Name",
-                    textInputType: TextInputType.name, title: '',
+                    textInputType: TextInputType.name,
+                    title: '',
                   ),
                   SizedBox(height: 12.h),
 
@@ -93,7 +95,8 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
                   CustomTextFieldWidget(
                     controller: companyController,
                     hintText: "Enter Company Name",
-                    textInputType: TextInputType.text, title: '',
+                    textInputType: TextInputType.text,
+                    title: '',
                   ),
                   SizedBox(height: 12.h),
 
@@ -109,7 +112,8 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
                   CustomTextFieldWidget(
                     controller: streetController,
                     hintText: "Enter Street Address",
-                    textInputType: TextInputType.streetAddress, title: '',
+                    textInputType: TextInputType.streetAddress,
+                    title: '',
                   ),
                   SizedBox(height: 12.h),
 
@@ -134,7 +138,8 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
                   CustomTextFieldWidget(
                     controller: zipController,
                     hintText: "Enter Zip Code",
-                    textInputType: TextInputType.number, title: '',
+                    textInputType: TextInputType.number,
+                    title: '',
                   ),
                   SizedBox(height: 12.h),
 
@@ -142,7 +147,8 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
                   CustomTextFieldWidget(
                     controller: phoneController,
                     hintText: "Enter Phone Number",
-                    textInputType: TextInputType.phone, title: '',
+                    textInputType: TextInputType.phone,
+                    title: '',
                   ),
                   SizedBox(height: 12.h),
 
@@ -150,7 +156,8 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
                   CustomTextFieldWidget(
                     controller: emailController,
                     hintText: "Enter Email Address",
-                    textInputType: TextInputType.emailAddress, title: '',
+                    textInputType: TextInputType.emailAddress,
+                    title: '',
                   ),
                   SizedBox(height: 20.h),
 
@@ -159,7 +166,8 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                            content: Text("Address Saved Successfully")),
+                          content: Text("Address Saved Successfully"),
+                        ),
                       );
                     },
                   ),
@@ -180,14 +188,17 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
         text: TextSpan(
           text: text,
           style: TextStyles.font16BlackRegular,
-          children: required
-              ? [
-            TextSpan(
-              text: " *",
-              style: TextStyles.font14BlackColorW400.copyWith(color: Colors.red),
-            ),
-          ]
-              : [],
+          children:
+              required
+                  ? [
+                    TextSpan(
+                      text: " *",
+                      style: TextStyles.font14BlackColorW400.copyWith(
+                        color: Colors.red,
+                      ),
+                    ),
+                  ]
+                  : [],
         ),
       ),
     );

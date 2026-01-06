@@ -28,7 +28,7 @@ class ChatDrawerFooter extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
             border: Border.all(color: Color(0xFFDBE2FD), width: 1.w),
-            color: ColorManager.aliceBlue, 
+            color: ColorManager.aliceBlue,
           ),
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 24.0),

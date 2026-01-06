@@ -91,16 +91,14 @@ class OrderSuccessfullyScreen extends StatelessWidget {
               ),
               SizedBox(height: 24.h),
               CustomButtonWidget(
-                buttonText: 'Back to home', 
+                buttonText: 'Back to home',
                 onPressed: () {
                   Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const HomeView(),
-                        ),
-                        (route) => false,
-                      );
-                }
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomeView()),
+                    (route) => false,
+                  );
+                },
               ),
               SizedBox(height: 16.h),
               CustomButtonWidget(

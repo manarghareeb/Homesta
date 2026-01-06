@@ -7,9 +7,11 @@ import 'category_state.dart';
 class CategoryCubit extends Cubit<CategoryState> {
   final GetCategoryUseCase getCategoriesUseCase;
   final SearchCategoryUseCase searchCategoryUseCase;
-  
 
-  CategoryCubit({required this.getCategoriesUseCase, required this.searchCategoryUseCase}) : super(CategoryInitial());
+  CategoryCubit({
+    required this.getCategoriesUseCase,
+    required this.searchCategoryUseCase,
+  }) : super(CategoryInitial());
 
   Future<void> getCategories() async {
     emit(CategoryLoading());
@@ -26,11 +28,11 @@ class CategoryCubit extends Cubit<CategoryState> {
     );
   }
 
-    Future<void> search(String query) async {
-      if(query.isEmpty){
-        getCategories();
-        return;
-      }
+  Future<void> search(String query) async {
+    if (query.isEmpty) {
+      getCategories();
+      return;
+    }
     emit(CategoryLoading());
 
     final result = await searchCategoryUseCase(query);

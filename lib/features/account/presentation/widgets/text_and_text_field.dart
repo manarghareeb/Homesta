@@ -25,12 +25,15 @@ class TextAndTextField extends StatelessWidget {
       children: [
         RichText(
           text: TextSpan(
-            text: textLabel, 
+            text: textLabel,
             style: TextStyles.font18BlackW500.copyWith(fontSize: 16.sp),
             children: [
-              TextSpan(text: '*', style: TextStyle(color: ColorManager.redColor))
-            ]
-          )
+              TextSpan(
+                text: '*',
+                style: TextStyle(color: ColorManager.redColor),
+              ),
+            ],
+          ),
         ),
         SizedBox(height: 8.h),
         TextFormField(

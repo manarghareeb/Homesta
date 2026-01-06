@@ -22,12 +22,7 @@ class SelectColorSection extends StatelessWidget {
       ColorManager.greyColor,
     ];
 
-    final List<String> colorNames = [
-      'Green',
-      'Black',
-      'Orange',
-      'Grey',
-    ];
+    final List<String> colorNames = ['Green', 'Black', 'Orange', 'Grey'];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,9 +47,10 @@ class SelectColorSection extends StatelessWidget {
           spacing: 8.w,
           children: List.generate(colors.length, (index) {
             return GestureDetector(
-              onTap: onColorSelected != null
-                  ? () => onColorSelected!(colors[index])
-                  : null,
+              onTap:
+                  onColorSelected != null
+                      ? () => onColorSelected!(colors[index])
+                      : null,
               child: Container(
                 height: 32.h,
                 width: 32.w,
@@ -62,9 +58,10 @@ class SelectColorSection extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: colors[index],
                   border: Border.all(
-                    color: colorNames[index] == selectedColorName
-                        ? ColorManager.primaryColor
-                        : Colors.transparent,
+                    color:
+                        colorNames[index] == selectedColorName
+                            ? ColorManager.primaryColor
+                            : Colors.transparent,
                     width: 2,
                   ),
                 ),

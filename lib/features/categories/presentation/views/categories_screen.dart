@@ -19,11 +19,10 @@ class CategoriesScreen extends StatefulWidget {
 }
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
- // late stt.SpeechToText _speech;
+  // late stt.SpeechToText _speech;
   bool _isListening = false;
   final TextEditingController _searchController = TextEditingController();
   Timer? _debounce;
-
 
   // void _listen() async {
   //   if (!_isListening) {
@@ -61,7 +60,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   void dispose() {
     _searchController.dispose();
-   // _speech.stop();
+    // _speech.stop();
     _debounce?.cancel();
     super.dispose();
   }
@@ -104,7 +103,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           _isListening ? Icons.mic : Icons.mic_none,
                           color: ColorManager.lightGreyColor,
                         ),
-                        onPressed: (){},
+                        onPressed: () {},
                       ),
                       filled: true,
                       fillColor: ColorManager.soLightGreyColor,

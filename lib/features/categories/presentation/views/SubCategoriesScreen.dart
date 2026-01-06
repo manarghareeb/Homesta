@@ -9,7 +9,6 @@ import 'package:homesta/features/categories/domain/entities/sub_category_entity.
 import 'package:homesta/features/categories/presentation/cubits/sub_category_cubit.dart/sub_category_cubit.dart';
 import 'package:homesta/features/categories/presentation/widgets/sub_category_bloc_builder.dart';
 
-
 class SubCategoriesScreen extends StatelessWidget {
   final int id;
 
@@ -44,13 +43,11 @@ class SubCategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     return BlocProvider(
       create: (context) => sl<SubCategoryCubit>()..getSubCategories(id),
       child: Scaffold(
         backgroundColor: Colors.white,
-      
+
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
@@ -60,7 +57,7 @@ class SubCategoriesScreen extends StatelessWidget {
             onPressed: () => Navigator.pop(context),
           ),
         ),
-      
+
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: Column(
@@ -108,8 +105,8 @@ class SubCategoriesScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 16.h),
-      
-          SubCategoryBlocBuilder(),
+
+              SubCategoryBlocBuilder(),
             ],
           ),
         ),

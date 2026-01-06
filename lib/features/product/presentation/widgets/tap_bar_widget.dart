@@ -7,17 +7,20 @@ class TapBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  TabBar(
+    return TabBar(
       indicatorColor: ColorManager.primaryColor,
       labelColor: ColorManager.primaryColor,
       unselectedLabelColor: ColorManager.greyColor,
-      labelStyle: TextStyles.font15BlackW500.copyWith(color: ColorManager.primaryColor,fontSize: 14),
+      labelStyle: TextStyles.font15BlackW500.copyWith(
+        color: ColorManager.primaryColor,
+        fontSize: 14,
+      ),
       dividerHeight: 1,
       dividerColor: ColorManager.greyColor,
 
       indicatorWeight: 3,
       tabs: const [
-        Tab(text: 'Description',),
+        Tab(text: 'Description'),
         Tab(text: 'Addtional infomation'),
         Tab(text: 'Review'),
       ],

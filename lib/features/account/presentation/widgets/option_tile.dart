@@ -72,7 +72,7 @@ class OptionTile extends StatelessWidget {
     this.trailing,
     this.subtitle,
     this.imagePath,
-    this.backgroundColor, 
+    this.backgroundColor,
     this.colorBorder,
   });
 
@@ -83,21 +83,22 @@ class OptionTile extends StatelessWidget {
         Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.r),
-            side: BorderSide(
-              color: colorBorder ?? ColorManager.lightGreyColor
-            )
+            side: BorderSide(color: colorBorder ?? ColorManager.lightGreyColor),
           ),
           color: backgroundColor ?? Colors.white,
           elevation: 0,
           child: ListTile(
             leading: buildLeading(),
             title: Text(label, style: TextStyles.font16BlackRegular),
-            subtitle: subtitle != null ? Text(subtitle!, style: TextStyles.font14GreyColorW400) : null,
+            subtitle:
+                subtitle != null
+                    ? Text(subtitle!, style: TextStyles.font14GreyColorW400)
+                    : null,
             trailing: trailing ?? Icon(Icons.arrow_forward_ios, size: 16),
             onTap: onTap,
           ),
         ),
-        SizedBox(height: 16,),
+        SizedBox(height: 16),
       ],
     );
   }
@@ -105,7 +106,7 @@ class OptionTile extends StatelessWidget {
   Widget buildLeading() {
     if (imagePath != null) {
       return CircleAvatar(
-        backgroundColor:Color(0xffF6F6F6),
+        backgroundColor: Color(0xffF6F6F6),
         child: Image.asset(
           imagePath!,
           width: 20.w,

@@ -48,10 +48,11 @@ class _SelectGenderButtonState extends State<SelectGenderButton> {
                         ? ColorManager.primaryColor
                         : Colors.white,
                 border: Border.all(
-                  color: widget.selectedGender == widget.gender
-                        ? Color(0xFF34C759)
-                        : ColorManager.greyColor, 
-                  width: 2
+                  color:
+                      widget.selectedGender == widget.gender
+                          ? Color(0xFF34C759)
+                          : ColorManager.greyColor,
+                  width: 2,
                 ),
               ),
             ),

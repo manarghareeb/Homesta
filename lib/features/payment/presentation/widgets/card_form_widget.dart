@@ -36,7 +36,7 @@ class _CardFormWidgetState extends State<CardFormWidget> {
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(15.r),
           bottomRight: Radius.circular(15.r),
-        )
+        ),
       ),
       child: Column(
         children: [

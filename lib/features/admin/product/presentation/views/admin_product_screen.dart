@@ -22,7 +22,6 @@ class AProduct {
   });
 }
 
-
 class AdminProductScreen extends StatelessWidget {
   const AdminProductScreen({super.key});
 
@@ -68,7 +67,7 @@ class AdminProductScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15)
+                    topRight: Radius.circular(15),
                   ),
                   color: ColorManager.aliceBlue,
                 ),
@@ -90,8 +89,8 @@ class AdminProductScreen extends StatelessWidget {
                   border: Border.all(color: ColorManager.aliceBlue),
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(15),
-                    bottomRight: Radius.circular(15)
-                  )
+                    bottomRight: Radius.circular(15),
+                  ),
                 ),
                 child: ListView.separated(
                   shrinkWrap: true,
@@ -111,8 +110,10 @@ class AdminProductScreen extends StatelessWidget {
                     );
                   },
                   separatorBuilder:
-                      (context, index) =>
-                          Divider(height: 1, color: ColorManager.lightGreyColor),
+                      (context, index) => Divider(
+                        height: 1,
+                        color: ColorManager.lightGreyColor,
+                      ),
                   itemCount: products.length,
                 ),
               ),

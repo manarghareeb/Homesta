@@ -6,7 +6,7 @@ import 'package:homesta/core/error/expections.dart';
 import 'package:homesta/features/chat/data/models/chat_message_model.dart';
 import 'package:homesta/features/chat/domain/repos/chat_repo.dart';
 
-class ChatRepoImpl implements ChatRepo{
+class ChatRepoImpl implements ChatRepo {
   final ApiConsumer apiConsumer;
   ChatRepoImpl({required this.apiConsumer});
 

@@ -3,9 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
 
 class PhotoProfile extends StatelessWidget {
-  const PhotoProfile({
-    super.key,
-  });
+  const PhotoProfile({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,4 +37,3 @@ class PhotoProfile extends StatelessWidget {
     );
   }
 }
-

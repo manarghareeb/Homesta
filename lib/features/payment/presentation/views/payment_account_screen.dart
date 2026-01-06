@@ -15,9 +15,7 @@ class _PaymentAccountScreenState extends State<PaymentAccountScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBarWidget(text: 'Payment Method'),
-      body:  PaymentWidget(
-        onPaymentSelected: (payment) {}
-      ),
+      body: PaymentWidget(onPaymentSelected: (payment) {}),
     );
   }
 }

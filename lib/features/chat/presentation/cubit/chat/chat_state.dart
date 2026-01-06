@@ -14,7 +14,6 @@ class ChatSuccess extends ChatState {
   ChatSuccess(this.messages);
 }
 
-
 class ChatError extends ChatState {
   final String error;
 

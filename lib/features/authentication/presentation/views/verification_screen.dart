@@ -104,10 +104,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   if (currentCode.isNotEmpty) {
                     GoRouter.of(context).push(
                       AppRouter.setNewPasswordScreen,
-                      extra: {
-                        "email": widget.email ?? "",
-                        "code": currentCode,
-                      },
+                      extra: {"email": widget.email ?? "", "code": currentCode},
                     );
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -133,9 +130,9 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       SnackBar(content: Text(state.response.message)),
                     );
                   } else if (state is AuthFailure) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(state.error)),
-                    );
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text(state.error)));
                   }
                 },
                 child: const SizedBox.shrink(),

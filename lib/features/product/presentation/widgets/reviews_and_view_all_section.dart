@@ -7,10 +7,10 @@ class ReviewsAndViewAllSection extends StatelessWidget {
   const ReviewsAndViewAllSection({
     super.key,
     required this.isVisible,
-    required this.onTap
+    required this.onTap,
   });
- final bool isVisible;
- final void Function() onTap;
+  final bool isVisible;
+  final void Function() onTap;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -29,7 +29,9 @@ class ReviewsAndViewAllSection extends StatelessWidget {
               Text('View All', style: TextStyles.font16GreyRegular),
               SizedBox(width: 4.w),
               Icon(
-              isVisible ? Icons.keyboard_arrow_up_outlined :  Icons.keyboard_arrow_down_outlined,
+                isVisible
+                    ? Icons.keyboard_arrow_up_outlined
+                    : Icons.keyboard_arrow_down_outlined,
                 size: 29.sp,
                 color: ColorManager.greyColor,
               ),

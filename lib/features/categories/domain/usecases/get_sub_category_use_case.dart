@@ -7,5 +7,6 @@ class GetSubCategoryUseCase {
   final CategoryRepo categoryRepo;
   GetSubCategoryUseCase(this.categoryRepo);
 
-  Future<Either<ErrorModel, List<SubCategoryEntity>>> call(int id) => categoryRepo.getSubCategory(id);
+  Future<Either<ErrorModel, List<SubCategoryEntity>>> call(int id) =>
+      categoryRepo.getSubCategory(id);
 }

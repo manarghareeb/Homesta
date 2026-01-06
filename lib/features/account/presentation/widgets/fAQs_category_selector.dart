@@ -18,7 +18,7 @@ class FAQCategorySelector extends StatefulWidget {
 }
 
 class _FAQCategorySelectorState extends State<FAQCategorySelector> {
-  int? activeIndex; 
+  int? activeIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +43,13 @@ class _FAQCategorySelectorState extends State<FAQCategorySelector> {
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 14.h),
                 decoration: BoxDecoration(
-                  color: isActive ? ColorManager.thirdColor : Colors.transparent,
+                  color:
+                      isActive ? ColorManager.thirdColor : Colors.transparent,
                   borderRadius: BorderRadius.circular(15.r),
-                  border: isActive
-                      ? null
-                      : Border.all(color: ColorManager.lightGreyColor),
+                  border:
+                      isActive
+                          ? null
+                          : Border.all(color: ColorManager.lightGreyColor),
                 ),
                 child: Text(
                   widget.categories[index],

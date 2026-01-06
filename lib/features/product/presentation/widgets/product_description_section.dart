@@ -3,10 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/styles.dart';
 
 class ProductDescriptionSection extends StatelessWidget {
-  const ProductDescriptionSection({super.key, required this.description, required this.price});
-final String description;
+  const ProductDescriptionSection({
+    super.key,
+    required this.description,
+    required this.price,
+  });
+  final String description;
 
-final String price;
+  final String price;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,8 +24,8 @@ final String price;
         ),
         SizedBox(height: 8.h),
         Text(
-         description,
-         // 'Lorem ipsum dolor sit amet consectetur. Nec aliquam morbi lacus habitasse amet. Nunc dui dictum facilisi faucibus amet sitaliquam morbi lacus habitasse amet. Nunc dui dictum facilisi faucibus amet sit',
+          description,
+          // 'Lorem ipsum dolor sit amet consectetur. Nec aliquam morbi lacus habitasse amet. Nunc dui dictum facilisi faucibus amet sitaliquam morbi lacus habitasse amet. Nunc dui dictum facilisi faucibus amet sit',
           style: TextStyles.font14GreyColorW400,
         ),
         SizedBox(height: 16.h),

@@ -34,13 +34,13 @@ class CartView extends StatelessWidget {
             child: Column(
               children: [
                 const OrderSummaryInCheckout(),
-                SizedBox(height: 24.h,),
+                SizedBox(height: 24.h),
                 CustomButtonWidget(
-                  buttonText: 'Continue to Shipping', 
-                  onPressed: onNext
-                )
+                  buttonText: 'Continue to Shipping',
+                  onPressed: onNext,
+                ),
               ],
-            )
+            ),
           ),
         ],
       ),

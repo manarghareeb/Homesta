@@ -23,7 +23,6 @@ class CartItemWidget extends StatefulWidget {
 }
 
 class _CartItemWidgetState extends State<CartItemWidget> {
-
   @override
   Widget build(BuildContext context) {
     return Container(

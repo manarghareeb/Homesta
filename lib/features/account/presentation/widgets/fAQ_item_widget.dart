@@ -34,14 +34,8 @@ class _FAQItemWidgetState extends State<FAQItemWidget> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  widget.question,
-                  style: TextStyles.font14BlackColorW400,
-                ),
-                Icon(
-                  Icons.add,
-                  color: ColorManager.primaryColor,
-                ),
+                Text(widget.question, style: TextStyles.font14BlackColorW400),
+                Icon(Icons.add, color: ColorManager.primaryColor),
               ],
             ),
           ),
@@ -68,7 +62,7 @@ class _FAQItemWidgetState extends State<FAQItemWidget> {
                       child: Text(
                         widget.question,
                         style: TextStyles.font14WhiteColorW400.copyWith(
-                          fontWeight: FontWeight.w500
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),

@@ -21,7 +21,7 @@ class SubCategoryBlocBuilder extends StatelessWidget {
           if (subCategories.isEmpty) {
             return const Center(child: Text("No sub categories found!"));
           }
-          
+
           return Expanded(
             child: ListView.separated(
               itemCount: subCategories.length,

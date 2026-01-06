@@ -20,25 +20,33 @@ class _RememberMeAndForgetPasswordState
   Widget build(BuildContext context) {
     return Wrap(
       children: [
-        CheckboxWidget(),
-        Text('Remember me', style: TextStyles.font14BlackColorW400),
-        const Spacer(),
-        TextButton(
-          onPressed: () {
-            GoRouter.of(context).push(AppRouter.forgetPasswordScreen);
-          },
-          style: TextButton.styleFrom(
-            padding: EdgeInsets.zero,
-            minimumSize: const Size(0, 0),
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            splashFactory: NoSplash.splashFactory,
-            foregroundColor: Colors.transparent,
-          ),
-          clipBehavior: Clip.none,
-          child: Text(
-            'Forget Password?',
-            style: TextStyles.font14PrimaryColorW400,
-          ),
+        Row(
+          children: [
+            Row(
+              children: [
+                const CheckboxWidget(),
+                Text('Remember me', style: TextStyles.font14BlackColorW400),
+              ],
+            ),
+            const Spacer(),
+            TextButton(
+              onPressed: () {
+                GoRouter.of(context).push(AppRouter.forgetPasswordScreen);
+              },
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.zero,
+                minimumSize: const Size(0, 0),
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                splashFactory: NoSplash.splashFactory,
+                foregroundColor: Colors.transparent,
+              ),
+              clipBehavior: Clip.none,
+              child: Text(
+                'Forget Password?',
+                style: TextStyles.font14PrimaryColorW400,
+              ),
+            ),
+          ],
         ),
       ],
     );

@@ -21,9 +21,9 @@ class SkeletonizerAllReviewSection extends StatelessWidget {
               Text('(${'0'} Reviews)', style: TextStyles.font13LightGreyW500),
             ],
           ),
-      
+
           const SizedBox(width: 50),
-      
+
           /// RIGHT
           Expanded(
             child: Column(

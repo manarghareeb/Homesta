@@ -30,10 +30,7 @@ class OrderSummarySection extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(item['title'], style: TextStyles.font16BlackRegular),
-                    Text(
-                      item['value'],
-                      style: TextStyles.font16BlackRegular,
-                    ),
+                    Text(item['value'], style: TextStyles.font16BlackRegular),
                   ],
                 ),
                 if (!isTotal) SizedBox(height: 16.h),

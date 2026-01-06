@@ -30,15 +30,15 @@ class CustomDropdownWidget extends StatelessWidget {
 
     return DropdownButtonFormField<String>(
       value: value,
-      items: items
-          .map((e) => DropdownMenuItem(
-        value: e,
-        child: Text(
-          e,
-          style: TextStyles.font14BlackColorW400,
-        ),
-      ))
-          .toList(),
+      items:
+          items
+              .map(
+                (e) => DropdownMenuItem(
+                  value: e,
+                  child: Text(e, style: TextStyles.font14BlackColorW400),
+                ),
+              )
+              .toList(),
       onChanged: onChanged,
       iconEnabledColor: ColorManager.primaryColor, // لون السهم
       style: TextStyles.font14BlackColorW400.copyWith(
@@ -53,7 +53,9 @@ class CustomDropdownWidget extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15.r),
-          borderSide: BorderSide(color: ColorManager.primaryColor), // لون البوردر عند التركيز
+          borderSide: BorderSide(
+            color: ColorManager.primaryColor,
+          ), // لون البوردر عند التركيز
         ),
       ),
     );

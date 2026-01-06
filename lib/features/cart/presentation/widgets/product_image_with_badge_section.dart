@@ -39,8 +39,9 @@ class ProductImageWithBadgeSection extends StatelessWidget {
               ),
               child: Text(
                 '$discountPercent% Off',
-                style: TextStyles.font12GreyColorW400
-                    .copyWith(color: ColorManager.soLightGreyColor),
+                style: TextStyles.font12GreyColorW400.copyWith(
+                  color: ColorManager.soLightGreyColor,
+                ),
               ),
             ),
           ),

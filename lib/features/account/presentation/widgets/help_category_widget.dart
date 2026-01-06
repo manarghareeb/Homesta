@@ -6,8 +6,8 @@ class HelpCategoryWidget extends StatelessWidget {
   final String title;
   final String description;
   final IconData? icon;
-  final Color? colorIcon;        // ✅ صار Color بدل IconData
-  final Color? backgroundColor;  // ✅ لون الخلفية للأيقونة
+  final Color? colorIcon; // ✅ صار Color بدل IconData
+  final Color? backgroundColor; // ✅ لون الخلفية للأيقونة
 
   const HelpCategoryWidget({
     super.key,
@@ -40,17 +40,21 @@ class HelpCategoryWidget extends StatelessWidget {
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.circular(5.r),
               ),
-              child: Icon(
-                icon,
-                size: 20.sp,
-                color: colorIcon ?? Colors.white,
-              ),
+              child: Icon(icon, size: 20.sp, color: colorIcon ?? Colors.white),
             ),
             SizedBox(height: 12.h),
 
-            Text(title, style: TextStyles.font16BlackW500, textAlign: TextAlign.center),
+            Text(
+              title,
+              style: TextStyles.font16BlackW500,
+              textAlign: TextAlign.center,
+            ),
             SizedBox(height: 4.h),
-            Text(description, style: TextStyles.font14BlackColorW400, textAlign: TextAlign.center),
+            Text(
+              description,
+              style: TextStyles.font14BlackColorW400,
+              textAlign: TextAlign.center,
+            ),
           ],
         ),
       ),

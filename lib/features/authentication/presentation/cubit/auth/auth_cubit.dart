@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:homesta/core/api/api_keys.dart';
 import 'package:homesta/core/error/expections.dart';
-import '../../../../../core/api/end_ponits.dart';
 import '../../../../../core/cache/cache_helper.dart';
 import '../../../data/models/forget_response_model.dart';
 import '../../../data/models/login_response_model.dart';
@@ -16,25 +15,25 @@ class AuthCubit extends Cubit<AuthState> {
   final AuthRepository repo;
 
   AuthCubit(this.repo) : super(AuthInitial());
-//logIn
+  //logIn
   Future<void> login(String email, String password) async {
     emit(AuthLoading());
     try {
-      
       final result = await repo.login(email, password);
       emit(AuthSuccess(result));
-    }on ServerException catch (e) {
+    } on ServerException catch (e) {
       emit(AuthFailure(e.errModel.errorMessage));
     }
   }
-//signUp
+
+  //signUp
   Future<void> register(
-      String firstName,
-      String lastName,
-      String email,
-      String password,
-      bool agreeTerms,
-      ) async {
+    String firstName,
+    String lastName,
+    String email,
+    String password,
+    bool agreeTerms,
+  ) async {
     emit(AuthLoading());
     try {
       final result = await repo.register(
@@ -45,12 +44,12 @@ class AuthCubit extends Cubit<AuthState> {
         agreeTerms,
       );
       emit(RegisterSuccess(result));
-    }on ServerException catch (e) {
+    } on ServerException catch (e) {
       emit(AuthFailure(e.errModel.errorMessage));
     }
   }
 
-//forget password
+  //forget password
   Future<void> forgetPassword(String email) async {
     emit(AuthLoading());
     try {
@@ -60,12 +59,13 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthFailure(e.toString()));
     }
   }
+
   //reset password
   Future<void> resetPassword(
-      String email,
-      String code,
-      String newPassword,
-      ) async {
+    String email,
+    String code,
+    String newPassword,
+  ) async {
     emit(AuthLoading());
     try {
       final result = await repo.resetPassword(email, code, newPassword);
@@ -75,7 +75,7 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-//logout
+  //logout
   Future<void> logout() async {
     emit(AuthLoading());
     try {

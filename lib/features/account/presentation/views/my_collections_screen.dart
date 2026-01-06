@@ -23,17 +23,22 @@ class CollectionsScreen extends StatelessWidget {
             ),
             SizedBox(height: 16.h),
 
-           //create new collection
+            //create new collection
             ElevatedButton.icon(
               onPressed: () {},
-              icon: const Icon(Icons.add,color: Colors.black,),
-              label: Text("Create a list", style: TextStyles.font16BlackRegular,),
+              icon: const Icon(Icons.add, color: Colors.black),
+              label: Text(
+                "Create a list",
+                style: TextStyles.font16BlackRegular,
+              ),
               style: ElevatedButton.styleFrom(
                 textStyle: TextStyles.font16GreyRegular,
                 backgroundColor: Colors.white,
                 minimumSize: Size(double.infinity, 48.h),
                 side: const BorderSide(color: Colors.black, width: 1),
-                shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(10.r),),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.r),
+                ),
               ),
             ),
             SizedBox(height: 24.h),
@@ -64,9 +69,7 @@ class CollectionsScreen extends StatelessWidget {
                   CollectionCard(
                     title: "Bathroom",
                     savedCount: 1,
-                    thumbnails: [
-                      "assets/images/image 1.png",
-                    ],
+                    thumbnails: ["assets/images/image 1.png"],
                   ),
                 ],
               ),
@@ -77,6 +80,3 @@ class CollectionsScreen extends StatelessWidget {
     );
   }
 }
-
-
-

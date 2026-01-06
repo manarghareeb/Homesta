@@ -61,7 +61,8 @@ class SellerAccountScreen extends StatelessWidget {
                 icon: Icons.add_box_outlined,
                 label: 'Add Product',
                 onTap: () {
-                  GoRouter.of(context).push(AppRouter.productFormScreen);;
+                  GoRouter.of(context).push(AppRouter.productFormScreen);
+                  ;
                 },
               ),
               OptionTile(

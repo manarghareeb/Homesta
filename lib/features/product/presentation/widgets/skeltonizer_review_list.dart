@@ -8,19 +8,30 @@ class SkeltonizerReviewList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        final  fakeReviews =
-        List.generate(4, (index) => ReviewEntity(reviewId: 1, comment: "comment", rating: 4, reviewDate: DateTime.now(), userName: "userName", productName: "productName", storeName: "storeName"));
+    final fakeReviews = List.generate(
+      4,
+      (index) => ReviewEntity(
+        reviewId: 1,
+        comment: "comment",
+        rating: 4,
+        reviewDate: DateTime.now(),
+        userName: "userName",
+        productName: "productName",
+        storeName: "storeName",
+      ),
+    );
     return Skeletonizer(
       enabled: true,
       child: ListView.separated(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: 4,
-            separatorBuilder: (context, index) => Container(color: Color(0xffE0DFDF),height:2 ,),
-            itemBuilder: (context, index) {
-              return ReviewItem(review: fakeReviews[index] ,);
-            },
-          ),
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: 4,
+        separatorBuilder:
+            (context, index) => Container(color: Color(0xffE0DFDF), height: 2),
+        itemBuilder: (context, index) {
+          return ReviewItem(review: fakeReviews[index]);
+        },
+      ),
     );
   }
 }

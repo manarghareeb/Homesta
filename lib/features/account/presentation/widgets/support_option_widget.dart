@@ -46,7 +46,11 @@ class SupportOptionWidget extends StatelessWidget {
               ],
             ),
             SizedBox(height: 6.h),
-            Text(description, style: TextStyles.font14GreyColorW400, textAlign: TextAlign.center),
+            Text(
+              description,
+              style: TextStyles.font14GreyColorW400,
+              textAlign: TextAlign.center,
+            ),
             SizedBox(height: 8.h),
             Align(
               alignment: Alignment.center,
@@ -58,13 +62,12 @@ class SupportOptionWidget extends StatelessWidget {
                 textColor: Colors.black,
                 minWidth: 150.w,
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
-
 
   Widget _buildIconOrImage() {
     if (icon != null) {

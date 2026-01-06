@@ -4,9 +4,7 @@ import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 
 class SendMessageButton extends StatelessWidget {
-  const SendMessageButton({
-    super.key,
-  });
+  const SendMessageButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +25,7 @@ class SendMessageButton extends StatelessWidget {
             ),
             child: Text(
               'Send Message',
-              style: TextStyles.font16WhiteW500.copyWith(
-                fontSize: 14.sp,
-              ),
+              style: TextStyles.font16WhiteW500.copyWith(fontSize: 14.sp),
             ),
           ),
         ),

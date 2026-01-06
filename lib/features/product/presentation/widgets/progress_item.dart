@@ -11,8 +11,8 @@ class ProgressItem extends StatelessWidget {
     required this.percentText,
   });
 
-  final String label;       
-  final double value;  
+  final String label;
+  final double value;
   final String percentText;
 
   @override
@@ -20,10 +20,7 @@ class ProgressItem extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: TextStyles.font14soLightGreyColorW400,
-        ),
+        Text(label, style: TextStyles.font14soLightGreyColorW400),
         SizedBox(height: 3.h),
         Row(
           children: [

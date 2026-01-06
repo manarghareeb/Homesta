@@ -6,11 +6,7 @@ class NotificationItem extends StatelessWidget {
   final String text;
   final bool isNew;
 
-  const NotificationItem({
-    super.key,
-    required this.text,
-    required this.isNew,
-  });
+  const NotificationItem({super.key, required this.text, required this.isNew});
 
   /// دالة لتحديد الأيقونة حسب النص
   IconData _getNotificationIcon(String text) {

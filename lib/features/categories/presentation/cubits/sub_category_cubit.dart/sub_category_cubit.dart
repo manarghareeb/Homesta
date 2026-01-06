@@ -3,11 +3,10 @@ import 'package:homesta/features/categories/domain/usecases/get_sub_category_use
 import 'package:homesta/features/categories/presentation/cubits/sub_category_cubit.dart/sub_category_state.dart';
 
 class SubCategoryCubit extends Cubit<SubCategoryState> {
-final GetSubCategoryUseCase getSubCategoryUseCase;
+  final GetSubCategoryUseCase getSubCategoryUseCase;
 
-  SubCategoryCubit({required this.getSubCategoryUseCase}):super(SubCategoryInitial());
-
-
+  SubCategoryCubit({required this.getSubCategoryUseCase})
+    : super(SubCategoryInitial());
 
   getSubCategories(int id) async {
     emit(SubCategoryLoading());
@@ -23,5 +22,4 @@ final GetSubCategoryUseCase getSubCategoryUseCase;
       },
     );
   }
-
 }

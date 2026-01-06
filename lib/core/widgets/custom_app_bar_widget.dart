@@ -33,10 +33,7 @@ class CustomAppBarWidget extends StatelessWidget
           GoRouter.of(context).pop();
         },
       ),
-      title: Text(
-        text,
-        style: TextStyles.font20BlackColorW500,
-      ),
+      title: Text(text, style: TextStyles.font20BlackColorW500),
       centerTitle: true,
       actions: actions,
     );

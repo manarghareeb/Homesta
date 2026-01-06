@@ -26,7 +26,7 @@ class CategoryBlocBuilder extends StatelessWidget {
                 itemCount: state.categories.length,
                 itemBuilder: (context, index) {
                   final category = state.categories[index];
-                  return CategoryItem( categoryEntity:category);
+                  return CategoryItem(categoryEntity: category);
                 },
               );
             }

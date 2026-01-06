@@ -11,7 +11,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 
 class ReviewTab extends StatefulWidget {
   const ReviewTab({super.key, required this.productEntity});
-final ProductEntity productEntity;
+  final ProductEntity productEntity;
   @override
   State<ReviewTab> createState() => _ReviewTabState();
 }
@@ -22,31 +22,33 @@ class _ReviewTabState extends State<ReviewTab> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
-              spacing: 5,
+        spacing: 5,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-                SizedBox(height: 10,),
-          ReviewsAndViewAllSection(isVisible: isVisible,onTap: () {
-            setState(() {
-              isVisible = !isVisible;
-            });
-          },),
+          SizedBox(height: 10),
+          ReviewsAndViewAllSection(
+            isVisible: isVisible,
+            onTap: () {
+              setState(() {
+                isVisible = !isVisible;
+              });
+            },
+          ),
           Visibility(
             visible: isVisible,
             child: Column(
               children: [
-          
-             AllReviewSection(),
+                AllReviewSection(),
                 Container(color: Color(0xffE0DFDF), height: 2),
-                ReviewList(), 
+                ReviewList(),
                 Container(color: Color(0xffE0DFDF), height: 2),
               ],
             ),
           ),
-      
-          AddReviewSection(productEntity: widget.productEntity,),
-          SizedBox(height: 10,),
-          ExploreProduct()
+
+          AddReviewSection(productEntity: widget.productEntity),
+          SizedBox(height: 10),
+          ExploreProduct(),
         ],
       ),
     );

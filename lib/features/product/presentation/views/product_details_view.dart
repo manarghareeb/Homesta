@@ -15,7 +15,7 @@ import 'package:homesta/features/product/presentation/widgets/tap_bar_widget.dar
 
 class ProductDetailsView extends StatelessWidget {
   const ProductDetailsView({super.key, required this.productEntity});
-final ProductEntity productEntity;
+  final ProductEntity productEntity;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -56,7 +56,10 @@ final ProductEntity productEntity;
                 SizedBox(height: 24.h),
                 const ProductTitleWithRating(),
                 SizedBox(height: 24.h),
-                 ProductDescriptionSection(description: productEntity.description,price: productEntity.price.toString(),),
+                ProductDescriptionSection(
+                  description: productEntity.description,
+                  price: productEntity.price.toString(),
+                ),
                 SizedBox(height: 16.h),
                 SelectColorSection(
                   selectedColorName: 'Green',
@@ -77,11 +80,11 @@ final ProductEntity productEntity;
                 /// محتوى التابات
                 SizedBox(
                   height: 500.h,
-                  child:  TabBarView(
+                  child: TabBarView(
                     children: [
                       DiscriptionTab(),
                       AddtionalInfoTab(),
-                      ReviewTab(productEntity: productEntity,),
+                      ReviewTab(productEntity: productEntity),
                     ],
                   ),
                 ),
@@ -89,9 +92,6 @@ final ProductEntity productEntity;
             ),
           ),
         ),
-      
-       
-        
       ),
     );
   }

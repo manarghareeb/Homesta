@@ -137,7 +137,7 @@ class _AddReviewSectionState extends State<AddReviewSection> {
             BlocProvider.of<ReviewsCubit>(
               context,
             ).getReviews(productId: widget.productEntity.productId);
-            _rating=0;
+            _rating = 0;
             reviewController.clear();
           }
           if (state is AddReviewsFailure) {

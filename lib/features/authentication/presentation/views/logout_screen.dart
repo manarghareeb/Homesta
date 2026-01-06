@@ -88,9 +88,9 @@ class LogoutConfirmScreen extends StatelessWidget {
                     GoRouter.of(context).pushReplacement(AppRouter.loginScreen);
                   });
                 } else if (state is AuthFailure) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(state.error)),
-                  );
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text(state.error)));
                 }
               },
               builder: (context, state) {
@@ -104,7 +104,7 @@ class LogoutConfirmScreen extends StatelessWidget {
                   },
                 );
               },
-            )
+            ),
           ],
         ),
       ),

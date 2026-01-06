@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:homesta/core/routing/app_router.dart';
+import 'package:homesta/features/cart/presentation/cubit/add_item_to_cart_cubit/add_item_to_cart_cubit.dart';
+import 'package:homesta/features/cart/presentation/cubit/add_item_to_cart_cubit/add_item_to_cart_state.dart';
 
 import 'package:homesta/features/home/presentation/widgets/product_item.dart';
 import 'package:homesta/features/home/presentation/widgets/skeltonizer_grid_view.dart';
@@ -11,46 +15,53 @@ class ProductBlocBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  BlocBuilder<ProductCubit, ProductState>(
-      builder: (context,state) {
+    return BlocBuilder<ProductCubit, ProductState>(
+      builder: (context, state) {
         if (state is ProductLoading) {
-          return const Center(
-            child: SkeletonizerGridView(),
-          );
-        }
-        else if (state is ProductFailure) {
-          return Center(
-            child: Text(state.message),
-          );
-        }
-        else if (state is ProductSuccess) {
-      // return   Text("${state.products.length}");
-         final products = state.products ?? [];
-  if (products.isEmpty) {
-    return const Center(child: Text("No products found"));
-  }
+          return const Center(child: SkeletonizerGridView());
+        } else if (state is ProductFailure) {
+          return Center(child: Text(state.message));
+        } else if (state is ProductSuccess) {
+          // return   Text("${state.products.length}");
+          final products = state.products ?? [];
+          if (products.isEmpty) {
+            return const Center(child: Text("No products found"));
+          }
 
-  return GridView.builder(
-    shrinkWrap: true,
-    physics: const NeverScrollableScrollPhysics(),
-    padding: const EdgeInsets.all(16),
-    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-      maxCrossAxisExtent: 220,
-      mainAxisSpacing: 16,
-      crossAxisSpacing: 16,
-      childAspectRatio: 0.75,
-    ),
-    itemCount: products.length,
-    itemBuilder: (context, index) {
-      final product = products[index];
-      return ProductItem(productEntity: product);
-    },
-  );
+          return BlocListener<AddItemToCartCubit, AddItemToCartState>(
+            listener: (context, state) {
+              if (state is AddItemToCartSuccess) {
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(SnackBar(content: Text(state.response.message)));
+                context.push(AppRouter.cartScreen);
+              } else if (state is AddItemToCartFailure) {
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(SnackBar(content: Text(state.error)));
+              }
+            },
+            child: GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              padding: const EdgeInsets.all(16),
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 220,
+                mainAxisSpacing: 16,
+                crossAxisSpacing: 16,
+                childAspectRatio: 0.75,
+              ),
+              itemCount: products.length,
+              itemBuilder: (context, index) {
+                final product = products[index];
+                return ProductItem(productEntity: product);
+              },
+            ),
+          );
         }
-      
-        return Container(child: Text("something went wrong"),);
-      }
+
+        return Container(child: Text("something went wrong"));
+      },
     );
-
   }
 }

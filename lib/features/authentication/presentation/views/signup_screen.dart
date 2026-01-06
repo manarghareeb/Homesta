@@ -117,8 +117,9 @@ class _SignupScreenState extends State<SignupScreen> {
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter your Email';
-                        } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                            .hasMatch(value)) {
+                        } else if (!RegExp(
+                          r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                        ).hasMatch(value)) {
                           return 'Please enter a valid email address';
                         }
                         return null;
@@ -173,28 +174,31 @@ class _SignupScreenState extends State<SignupScreen> {
                   if (state is RegisterSuccess) {
                     showDialog(
                       context: context,
-                      builder: (_) => AlertDialog(
-                        backgroundColor: Colors.white,
-                        title: const Text("Check your email"),
-                        content: const Text(
-                          "Your account has been created successfully.\n"
+                      builder:
+                          (_) => AlertDialog(
+                            backgroundColor: Colors.white,
+                            title: const Text("Check your email"),
+                            content: const Text(
+                              "Your account has been created successfully.\n"
                               "Please check your email and confirm your account before logging in.",
-                        ),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                              GoRouter.of(context).push(AppRouter.loginScreen);
-                            },
-                            child: const Text("OK"),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  GoRouter.of(
+                                    context,
+                                  ).push(AppRouter.loginScreen);
+                                },
+                                child: const Text("OK"),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
                     );
                   } else if (state is AuthFailure) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(state.error)),
-                    );
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text(state.error)));
                   }
                 },
                 builder: (context, state) {
@@ -207,7 +211,9 @@ class _SignupScreenState extends State<SignupScreen> {
                       if (formKey.currentState!.validate()) {
                         if (!isChecked) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text("You must agree to the terms")),
+                            const SnackBar(
+                              content: Text("You must agree to the terms"),
+                            ),
                           );
                           return;
                         }

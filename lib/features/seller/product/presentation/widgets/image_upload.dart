@@ -23,26 +23,25 @@ class ImageUpload extends StatefulWidget {
 }
 
 class _ImageUploadState extends State<ImageUpload> {
-      File? image;
-    final ImagePicker picker = ImagePicker();
+  File? image;
+  final ImagePicker picker = ImagePicker();
 
-    Future<void> pickImage() async {
-      final XFile? pickedFile = await picker.pickImage(
-        source: ImageSource.gallery,
-      );
-      if (pickedFile != null) {
-        setState(() {
-          image = File(pickedFile.path);
-        });
-        if (widget.onImagePicked != null) {
-          widget.onImagePicked!(image!);
-        }
+  Future<void> pickImage() async {
+    final XFile? pickedFile = await picker.pickImage(
+      source: ImageSource.gallery,
+    );
+    if (pickedFile != null) {
+      setState(() {
+        image = File(pickedFile.path);
+      });
+      if (widget.onImagePicked != null) {
+        widget.onImagePicked!(image!);
       }
     }
+  }
+
   @override
   Widget build(BuildContext context) {
-
-
     return GestureDetector(
       onTap: pickImage,
       child: Container(
@@ -54,7 +53,7 @@ class _ImageUploadState extends State<ImageUpload> {
           borderRadius: BorderRadius.circular(15.r),
         ),
         child: ClipRRect(
-              borderRadius: BorderRadius.circular(15.r),
+          borderRadius: BorderRadius.circular(15.r),
 
           child:
               image != null

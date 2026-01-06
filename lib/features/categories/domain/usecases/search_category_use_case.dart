@@ -6,5 +6,6 @@ import 'package:homesta/features/categories/domain/repositories/category_repo.da
 class SearchCategoryUseCase {
   final CategoryRepo categoryRepo;
   SearchCategoryUseCase(this.categoryRepo);
-  Future<Either<ErrorModel, List<CategoryEntity>>> call(String query) => categoryRepo.searCategoty(query);
+  Future<Either<ErrorModel, List<CategoryEntity>>> call(String query) =>
+      categoryRepo.searCategoty(query);
 }

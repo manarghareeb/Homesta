@@ -37,7 +37,7 @@ class ChatHeaderBubble extends StatelessWidget {
         child: Text(
           "Hi! I will help you",
           style: TextStyles.font16WhiteW500.copyWith(
-            fontWeight: FontWeight.w400
+            fontWeight: FontWeight.w400,
           ),
         ),
       ),

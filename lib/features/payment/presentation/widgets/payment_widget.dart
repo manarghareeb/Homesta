@@ -68,14 +68,16 @@ class _PaymentWidgetState extends State<PaymentWidget> {
                           ? ColorManager.soLightGreyColor
                           : Colors.white,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15.r), 
+                    topLeft: Radius.circular(15.r),
                     topRight: Radius.circular(15.r),
-                    bottomLeft: selectedPayment == 'Add New Credit/ Debit Card'
-                    ? Radius.zero
-                    : Radius.circular(15.r),
-                    bottomRight: selectedPayment == 'Add New Credit/ Debit Card'
-                    ? Radius.zero
-                    : Radius.circular(15.r),
+                    bottomLeft:
+                        selectedPayment == 'Add New Credit/ Debit Card'
+                            ? Radius.zero
+                            : Radius.circular(15.r),
+                    bottomRight:
+                        selectedPayment == 'Add New Credit/ Debit Card'
+                            ? Radius.zero
+                            : Radius.circular(15.r),
                   ),
                   border: Border.all(
                     color:
@@ -106,9 +108,10 @@ class _PaymentWidgetState extends State<PaymentWidget> {
                     Expanded(
                       child: Text(
                         'Add New Credit/ Debit Card',
-                        style: selectedPayment == 'Add New Credit/ Debit Card' 
-                        ? TextStyles.font16BlackRegular
-                        : TextStyles.font16DeepGeyColorRegular,
+                        style:
+                            selectedPayment == 'Add New Credit/ Debit Card'
+                                ? TextStyles.font16BlackRegular
+                                : TextStyles.font16DeepGeyColorRegular,
                       ),
                     ),
                   ],

@@ -18,9 +18,9 @@ class CustomTextFieldWidget extends StatefulWidget {
     this.maxLines,
     this.isFilled,
   });
-   final Color? fillColor ;
-   final int ?maxLines;
-   final bool? isFilled;
+  final Color? fillColor;
+  final int? maxLines;
+  final bool? isFilled;
   final TextEditingController controller;
   final String hintText;
   final TextInputType textInputType;
@@ -51,8 +51,8 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
       ),
       decoration: InputDecoration(
         fillColor: widget.fillColor,
-        filled:widget.isFilled??false ,
-    
+        filled: widget.isFilled ?? false,
+
         prefixIcon:
             widget.prefixIcon != null
                 ? Icon(widget.prefixIcon, color: ColorManager.lightGreyColor)

@@ -8,5 +8,6 @@ class GetCategoryUseCase {
 
   GetCategoryUseCase(this.categoryRepo);
 
-   Future<Either<ErrorModel, List<CategoryEntity>>> call() => categoryRepo.getCategories(); 
+  Future<Either<ErrorModel, List<CategoryEntity>>> call() =>
+      categoryRepo.getCategories();
 }
