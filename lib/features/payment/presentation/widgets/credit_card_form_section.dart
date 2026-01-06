@@ -23,9 +23,7 @@ class CreditCardFormSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 24.h),
-        TitleToTextField(
-          title: 'Card Holder Name', 
-        ),
+        TitleToTextField(title: 'Card Holder Name'),
         SizedBox(height: 8.h),
         CustomTextFieldWidget(
           controller: cardHolderController,
@@ -34,9 +32,7 @@ class CreditCardFormSection extends StatelessWidget {
           title: '',
         ),
         SizedBox(height: 16.h),
-        TitleToTextField(
-          title: 'Card Number', 
-        ),
+        TitleToTextField(title: 'Card Number'),
         SizedBox(height: 8.h),
         CustomTextFieldWidget(
           controller: cardNumberController,
@@ -51,9 +47,7 @@ class CreditCardFormSection extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TitleToTextField(
-                    title: 'Expiry Date', 
-                  ),
+                  TitleToTextField(title: 'Expiry Date'),
                   SizedBox(height: 8.h),
                   CustomTextFieldWidget(
                     controller: expiryDateController,
@@ -69,9 +63,7 @@ class CreditCardFormSection extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TitleToTextField(
-                    title: 'CVV', 
-                  ),
+                  TitleToTextField(title: 'CVV'),
                   SizedBox(height: 8.h),
                   CustomTextFieldWidget(
                     controller: cvvController,

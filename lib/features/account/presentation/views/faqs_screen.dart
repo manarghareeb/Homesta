@@ -54,13 +54,13 @@ class _FAQsScreenState extends State<FAQsScreen> {
   @override
   Widget build(BuildContext context) {
     final categories = faqData.keys.toList();
-    final selectedCategory = selectedCategoryIndex != null
-        ? categories[selectedCategoryIndex!]
-        : null;
+    final selectedCategory =
+        selectedCategoryIndex != null
+            ? categories[selectedCategoryIndex!]
+            : null;
 
-    final questions = selectedCategory != null
-        ? faqData[selectedCategory]!
-        : [];
+    final questions =
+        selectedCategory != null ? faqData[selectedCategory]! : [];
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -79,10 +79,12 @@ class _FAQsScreenState extends State<FAQsScreen> {
                 },
               ),
               SizedBox(height: 24.h),
-              ...questions.map((q) => FAQItemWidget(
-                    question: q['question']!,
-                    answer: q['answer']!,
-                  )),
+              ...questions.map(
+                (q) => FAQItemWidget(
+                  question: q['question']!,
+                  answer: q['answer']!,
+                ),
+              ),
             ],
           ),
         ),

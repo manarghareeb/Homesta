@@ -15,7 +15,6 @@ class ContactUsScreen extends StatefulWidget {
 }
 
 class _ContactUsScreenState extends State<ContactUsScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +44,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
               SizedBox(height: 16.h),
               const SendMessageButton(),
               SizedBox(height: 24.h),
-              const ContactInfoSection()
+              const ContactInfoSection(),
             ],
           ),
         ),

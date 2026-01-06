@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:homesta/core/di/service_locator.dart';
 import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
+import 'package:homesta/features/cart/presentation/cubit/add_item_to_cart_cubit/add_item_to_cart_cubit.dart';
 import 'package:homesta/features/home/presentation/widgets/product_bloc_builder.dart';
 import 'package:homesta/features/product/presentation/cubits/product_cubit.dart';
 
@@ -13,7 +14,6 @@ import '../widgets/home_hero_banner.dart';
 import '../widgets/home_categories.dart';
 import '../widgets/sales_promotions_widget.dart';
 import '../widgets/products_tabs_widget.dart';
-import '../widgets/product_card_widget.dart';
 import '../widgets/flash_sale_widget.dart';
 import '../widgets/deals_of_the_day_widget.dart';
 import '../widgets/discount_banner_widget.dart';
@@ -33,26 +33,28 @@ class HomeScreen extends StatelessWidget {
           builder: (context, constraints) {
             final isTablet = constraints.maxWidth >= 600;
             final isDesktop = constraints.maxWidth >= 1000;
-      
+
             return SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: isDesktop ? 48.w : 16.w),
+              padding: EdgeInsets.symmetric(
+                horizontal: isDesktop ? 48.w : 16.w,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 16.h),
-      
+
                   const HomeHeroBanner(),
                   SizedBox(height: 20.h),
-      
+
                   const HomeCategories(),
                   SizedBox(height: 24.h),
-      
+
                   const SalesPromotionsWidget(),
                   SizedBox(height: 24.h),
-      
+
                   const ProductsTabsWidget(),
                   SizedBox(height: 16.h),
-      
+
                   // /// 🟢 Responsive Grid
                   // GridView.builder(
                   //   shrinkWrap: true,
@@ -86,36 +88,45 @@ class HomeScreen extends StatelessWidget {
                   //     );
                   //   },
                   // ),
-      ProductBlocBuilder(),
+                  /*BlocProvider(
+                    create: (context) => AddItemToCartCubit(context.read<CartRepo>()),
+                    child: const ProductBlocBuilder(),
+                  ),*/
+                  BlocProvider(
+                    create: (context) => sl<AddItemToCartCubit>(),
+                    child: const ProductBlocBuilder(),
+                  ),
                   SizedBox(height: 24.h),
-      
+
                   const FlashSaleWidget(),
                   SizedBox(height: 24.h),
-      
+
                   const DealsOfDayWidget(),
                   SizedBox(height: 24.h),
-      
+
                   const DiscountBannerWidget(),
                   SizedBox(height: 16.h),
                   const DiscountBannerWidget(dark: true),
-      
+
                   SizedBox(height: 24.h),
-      
+
                   const TrendingSalesSection(title: 'Trending'),
                   SizedBox(height: 24.h),
                   const TrendingSalesSection(title: 'Sales'),
-      
+
                   SizedBox(height: 32.h),
                 ],
               ),
             );
           },
         ),
-      
+
         floatingActionButton: FloatingActionButton(
           backgroundColor: ColorManager.aliceBlue,
           mini: true,
-          shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(6.r)),
+          shape: BeveledRectangleBorder(
+            borderRadius: BorderRadius.circular(6.r),
+          ),
           onPressed: () {
             context.push(AppRouter.chatScreen);
           },

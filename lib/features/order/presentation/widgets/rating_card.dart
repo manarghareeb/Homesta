@@ -14,11 +14,12 @@ class RatingBreakdownCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             Text("Rating Breakdown", style: TextStyles.font18BoldBlack),
             SizedBox(height: 8.h),
-            Text("Average Rating: ⭐ 3.1 ",
-                style: TextStyles.font14GreyColorW400),
+            Text(
+              "Average Rating: ⭐ 3.1 ",
+              style: TextStyles.font14GreyColorW400,
+            ),
 
             SizedBox(height: 16.h),
 
@@ -41,13 +42,12 @@ class RatingBreakdownCard extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 4.h),
       child: Row(
         children: [
-          SizedBox(width: 40.w, child: Text(label, style: TextStyles.font14BlackColorW400)),
-          SizedBox(width: 8.w),
-          Container(
-            height: 8.h,
-            width: barWidth,
-            color: Colors.amber,
+          SizedBox(
+            width: 40.w,
+            child: Text(label, style: TextStyles.font14BlackColorW400),
           ),
+          SizedBox(width: 8.w),
+          Container(height: 8.h, width: barWidth, color: Colors.amber),
           SizedBox(width: 8.w),
           Text("($count)", style: TextStyles.font14GreyColorW400),
         ],

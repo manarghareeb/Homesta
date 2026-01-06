@@ -10,38 +10,42 @@ import 'package:homesta/features/product/domain/repositories/product_repository.
 
 class ProductRepositoryImpl implements ProductRepository {
   final ProductDataSource productDataSource;
-final ReviewProductDataSource reviewDataSource;
-  ProductRepositoryImpl({required this.productDataSource, required this.reviewDataSource});
+  final ReviewProductDataSource reviewDataSource;
+  ProductRepositoryImpl({
+    required this.productDataSource,
+    required this.reviewDataSource,
+  });
   @override
-  Future<Either<ErrorModel, List<ProductEntity>>> getAllProducts()async {
-try {
-final List<ProductEntity> products=  await productDataSource.getProducts();
-return right(products);
-
-} on ServerException catch (e) {
-return left(e.errModel);
-}
-  
-}
-
-  @override
-  Future<Either<ErrorModel, List<ReviewEntity>>> getAllProductReviews(int productId) async{
-    try{
-final List<ReviewEntity> reviews=  await reviewDataSource.getProductReviews(productId);
-return right(reviews);
-
-} on ServerException catch (e) {
-return left(e.errModel);
-
-}}
+  Future<Either<ErrorModel, List<ProductEntity>>> getAllProducts() async {
+    try {
+      final List<ProductEntity> products =
+          await productDataSource.getProducts();
+      return right(products);
+    } on ServerException catch (e) {
+      return left(e.errModel);
+    }
+  }
 
   @override
-  Future<Either<ErrorModel, Unit>> addReview(AddReviewParams params)async {
- try {
- await reviewDataSource.addReview(params);
-     return right(unit);
-} on ServerException catch (e) {
-return left(e.errModel);
-}
+  Future<Either<ErrorModel, List<ReviewEntity>>> getAllProductReviews(
+    int productId,
+  ) async {
+    try {
+      final List<ReviewEntity> reviews = await reviewDataSource
+          .getProductReviews(productId);
+      return right(reviews);
+    } on ServerException catch (e) {
+      return left(e.errModel);
+    }
+  }
+
+  @override
+  Future<Either<ErrorModel, Unit>> addReview(AddReviewParams params) async {
+    try {
+      await reviewDataSource.addReview(params);
+      return right(unit);
+    } on ServerException catch (e) {
+      return left(e.errModel);
+    }
   }
 }

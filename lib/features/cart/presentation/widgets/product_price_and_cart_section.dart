@@ -32,8 +32,9 @@ class ProductPriceAndCartSection extends StatelessWidget {
               ),
               Text(
                 '\$$price',
-                style: TextStyles.font14GreyColorW400
-                    .copyWith(decoration: TextDecoration.lineThrough),
+                style: TextStyles.font14GreyColorW400.copyWith(
+                  decoration: TextDecoration.lineThrough,
+                ),
               ),
             ],
           )

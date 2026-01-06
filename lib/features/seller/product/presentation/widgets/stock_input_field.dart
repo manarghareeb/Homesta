@@ -16,7 +16,7 @@ class _StockInputFieldState extends State<StockInputField> {
   @override
   void initState() {
     super.initState();
-    stock = widget.initialStock ?? 0; 
+    stock = widget.initialStock ?? 0;
   }
 
   void updateStock(int value) {
@@ -24,7 +24,7 @@ class _StockInputFieldState extends State<StockInputField> {
       stock = value;
     });
     if (widget.onChanged != null) {
-      widget.onChanged!(stock); 
+      widget.onChanged!(stock);
     }
   }
 
@@ -40,10 +40,7 @@ class _StockInputFieldState extends State<StockInputField> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Stok",
-            style: TextStyles.font16GreyRegular,
-          ),
+          Text("Stok", style: TextStyles.font16GreyRegular),
           const SizedBox(height: 8),
           Container(
             height: 50,
@@ -55,16 +52,13 @@ class _StockInputFieldState extends State<StockInputField> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "$stock",
-                  style: TextStyles.font16GreyRegular,
-                ),
+                Text("$stock", style: TextStyles.font16GreyRegular),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     GestureDetector(
                       onTap: () => updateStock(stock + 1),
-                      child: const Icon(Icons.arrow_drop_up, size: 18,),
+                      child: const Icon(Icons.arrow_drop_up, size: 18),
                     ),
                     GestureDetector(
                       onTap: () => updateStock(stock > 0 ? stock - 1 : 0),

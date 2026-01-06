@@ -20,13 +20,15 @@ class ApiKeys {
   static const String discount = 'discount';
   static const String deliveryTime = 'deliveryTime';
   static const String subCategoryId = 'subCategoryId';
-  static const String  productId = 'productId';
+  static const String productId = 'productId';
   static const String storeId = 'storeId';
   //reviw
-    static const String reviewId = 'reviewId';
+  static const String reviewId = 'reviewId';
   static const String comment = 'comment';
   static const String reviewDate = 'reviewDate';
   static const String userName = 'userName';
   static const String productName = 'productName';
   static const String storeName = 'storeName';
+  // Cart
+  static const String colorId = 'colorId';
 }

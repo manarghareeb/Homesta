@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homesta/core/di/service_locator.dart';
@@ -13,6 +14,8 @@ import 'package:homesta/features/admin/profile/presentation/views/admin_account_
 import 'package:homesta/features/authentication/presentation/views/logout_screen.dart';
 import 'package:homesta/features/account/presentation/views/manage_address_screen.dart';
 import 'package:homesta/features/account/presentation/views/my_order_screen.dart';
+import 'package:homesta/features/cart/domain/repos/cart_repo.dart';
+import 'package:homesta/features/cart/presentation/cubit/add_item_to_cart_cubit/add_item_to_cart_cubit.dart';
 import 'package:homesta/features/authentication/presentation/views/password_manager_screen.dart';
 import 'package:homesta/features/cart/presentation/views/empty_cart_screen.dart';
 import 'package:homesta/features/chat/data/models/chat_message_model.dart';
@@ -210,7 +213,19 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: cartScreen,
-        builder: (context, state) => const CartScreen(),
+        builder: (context, state) {
+          final product = state.extra as ProductEntity;
+          return BlocProvider(
+            create:
+                (context) =>
+                    sl<AddItemToCartCubit>()..addItemToCart(
+                      productId: product.productId,
+                      colorId: 1,
+                      quantity: 1,
+                    ),
+            child: const CartScreen(),
+          );
+        },
       ),
       GoRoute(
         path: wishlistScreen,

@@ -13,21 +13,19 @@ class AuthRemoteDataSource {
   final ApiConsumer api;
 
   AuthRemoteDataSource(this.api);
-//login
+  //login
   Future<LoginResponseModel> login({
     required String email,
     required String password,
   }) async {
     final response = await api.post(
       EndPoint.signIn,
-      data: {
-        "email": email,
-        "password": password,
-      },
+      data: {"email": email, "password": password},
     );
     return LoginResponseModel.fromJson(response);
   }
-//SignUp
+
+  //SignUp
   Future<RegisterResponseModel> register({
     required String firstName,
     required String lastName,
@@ -43,17 +41,14 @@ class AuthRemoteDataSource {
         "lastName": lastName,
         "password": password,
         "roles": [
-          {
-            "id": "2",
-            "roleName": "User",
-            "isSelected": true
-          }
+          {"id": "2", "roleName": "User", "isSelected": true},
         ],
-        "agreeTerms": agreeTerms
+        "agreeTerms": agreeTerms,
       },
     );
     return RegisterResponseModel.fromJson(response);
   }
+
   //forget password
   Future<ForgetPasswordResponseModel> forgetPassword(String email) async {
     final response = await api.post(
@@ -67,6 +62,7 @@ class AuthRemoteDataSource {
     // إذا رجع JSON
     return ForgetPasswordResponseModel.fromJson(response);
   }
+
   //reset password
   Future<ResetPasswordResponseModel> resetPassword({
     required String email,

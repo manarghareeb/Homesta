@@ -5,8 +5,7 @@ import 'package:homesta/features/payment/presentation/widgets/payment_widget.dar
 class PaymentView extends StatefulWidget {
   final VoidCallback onNext;
   final VoidCallback onBack;
-  const PaymentView(
-      {super.key, required this.onNext, required this.onBack});
+  const PaymentView({super.key, required this.onNext, required this.onBack});
 
   @override
   State<PaymentView> createState() => _PaymentViewState();
@@ -28,12 +27,12 @@ class _PaymentViewState extends State<PaymentView> {
             },
           ),
           CustomButtonWidget(
-            buttonText: 'Continue', 
-            onPressed: (){
+            buttonText: 'Continue',
+            onPressed: () {
               if (selectedPayment.isNotEmpty) {
                 widget.onNext();
               }
-            }
+            },
           ),
         ],
       ),

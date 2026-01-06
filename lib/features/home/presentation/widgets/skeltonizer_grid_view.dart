@@ -6,24 +6,23 @@ import 'package:skeletonizer/skeletonizer.dart';
 class SkeletonizerGridView extends StatelessWidget {
   const SkeletonizerGridView({super.key});
 
-  static final List<ProductEntity> _dummyProducts =
-      List.generate(
-        6,
-        (index) => ProductEntity(
-          productId: 1,
-          name: "Loading",
-          description: "Loading",
-          colors: [],
-          price: 0,
-          rating: 0,
-          quantity: 0,
-          discount: 0,
-          deliveryTime: 0,
-          subCategoryId: 0,
-          categoryId: 0,
-          storeId: 0,
-        ),
-      );
+  static final List<ProductEntity> _dummyProducts = List.generate(
+    6,
+    (index) => ProductEntity(
+      productId: 1,
+      name: "Loading",
+      description: "Loading",
+      colors: [],
+      price: 0,
+      rating: 0,
+      quantity: 0,
+      discount: 0,
+      deliveryTime: 0,
+      subCategoryId: 0,
+      categoryId: 0,
+      storeId: 0,
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +42,7 @@ class SkeletonizerGridView extends StatelessWidget {
         itemCount: _dummyProducts.length,
         itemBuilder: (context, index) {
           return Skeletonizer(
-            child: ProductItem(
-              productEntity: _dummyProducts[index],
-            ),
+            child: ProductItem(productEntity: _dummyProducts[index]),
           );
         },
       ),

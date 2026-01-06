@@ -2,6 +2,9 @@ import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
 import 'package:homesta/core/api/api_consumer.dart';
 import 'package:homesta/core/api/dio_consumer.dart';
+import 'package:homesta/features/cart/data/repos/cart_repo_impl.dart';
+import 'package:homesta/features/cart/domain/repos/cart_repo.dart';
+import 'package:homesta/features/cart/presentation/cubit/add_item_to_cart_cubit/add_item_to_cart_cubit.dart';
 import 'package:homesta/features/categories/data/datasources/category_data_source.dart';
 import 'package:homesta/features/categories/data/repositories/category_repo_imp.dart';
 import 'package:homesta/features/categories/domain/repositories/category_repo.dart';
@@ -26,15 +29,16 @@ void initServiceLocator() {
   /// External
   sl.registerLazySingleton<Dio>(() => Dio());
   sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: sl()));
+
   /// DataSources
   sl.registerLazySingleton<CategoryDataSource>(
-    () => CategoryDataSourceImpl( api: sl()),
+    () => CategoryDataSourceImpl(api: sl()),
   );
-    sl.registerLazySingleton<ProductDataSource>(
-    () => ProductDataSourceImp( api: sl()),
+  sl.registerLazySingleton<ProductDataSource>(
+    () => ProductDataSourceImp(api: sl()),
   );
-      sl.registerLazySingleton<ReviewProductDataSource>(
-    () => ReviewProductDataSourceImp( api: sl()),
+  sl.registerLazySingleton<ReviewProductDataSource>(
+    () => ReviewProductDataSourceImp(api: sl()),
   );
 
   /// Repositories
@@ -42,38 +46,28 @@ void initServiceLocator() {
     () => CategoryRepoImp(categoryDataSource: sl()),
   );
   sl.registerLazySingleton<ProductRepository>(
-    () => ProductRepositoryImpl(productDataSource: sl(),reviewDataSource: sl()),
+    () =>
+        ProductRepositoryImpl(productDataSource: sl(), reviewDataSource: sl()),
   );
+  sl.registerLazySingleton<CartRepo>(() => CartRepoImpl(apiConsumer: sl()));
+
   /// UseCases
+  sl.registerLazySingleton(() => GetCategoryUseCase(sl()));
+  sl.registerLazySingleton(() => SearchCategoryUseCase(sl()));
+  sl.registerLazySingleton(() => GetAllProductUseCase(productRepository: sl()));
+  sl.registerLazySingleton(() => GetSubCategoryUseCase(sl()));
   sl.registerLazySingleton(
-    () => GetCategoryUseCase(sl()),
+    () => GetProductReviewUseCase(productRepository: sl()),
   );
-  sl.registerLazySingleton(
-    () => SearchCategoryUseCase(sl()),
-  );
-    sl.registerLazySingleton(
-    () => GetAllProductUseCase(productRepository: sl()),
-  );
-      sl.registerLazySingleton(
-    () => GetSubCategoryUseCase( sl()),
-  );
-        sl.registerLazySingleton(
-    () => GetProductReviewUseCase(productRepository:  sl()),
-  );
-          sl.registerLazySingleton(
-    () => AddReviewUseCase(productRepository:  sl()),
-  );
+  sl.registerLazySingleton(() => AddReviewUseCase(productRepository: sl()));
+
   /// Cubits
   sl.registerFactory(
-    () => CategoryCubit(getCategoriesUseCase: sl(),searchCategoryUseCase:  sl()),
+    () =>
+        CategoryCubit(getCategoriesUseCase: sl(), searchCategoryUseCase: sl()),
   );
-    sl.registerFactory(
-    () => ProductCubit( sl()),
-  );
-      sl.registerFactory(
-    () => SubCategoryCubit(getSubCategoryUseCase:  sl()),
-  );
-        sl.registerFactory(
-    () => ReviewsCubit(  sl(),sl()),
-  );
+  sl.registerFactory(() => ProductCubit(sl()));
+  sl.registerFactory(() => SubCategoryCubit(getSubCategoryUseCase: sl()));
+  sl.registerFactory(() => ReviewsCubit(sl(), sl()));
+  sl.registerFactory(() => AddItemToCartCubit(sl()));
 }

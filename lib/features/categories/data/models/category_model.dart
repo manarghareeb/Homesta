@@ -1,7 +1,6 @@
 import 'package:homesta/core/api/api_keys.dart';
 import 'package:homesta/features/categories/domain/entities/category_entity.dart';
 
-
 class CategoryModel extends CategoryEntity {
   const CategoryModel({
     required super.categoryId,

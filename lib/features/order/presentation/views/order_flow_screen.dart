@@ -31,26 +31,24 @@ class _OrderFlowScreenState extends State<OrderFlowScreen> {
     "Checkout",
     "Shipping",
     "Payment",
-    "Payment"
+    "Payment",
   ];
 
   List<Widget> get screens => [
-        CartView(
-          onNext: () => setState(() => currentStep++),
-        ),
-        ShippingView(
-          onBack: () => setState(() => currentStep--),
-          onNext: () => setState(() => currentStep++),
-        ),
-        PaymentView(
-          onBack: () => setState(() => currentStep--),
-          onNext: () => setState(() => currentStep++),
-        ),
-        SummaryView(
-          onBack: () => setState(() => currentStep--),
-          onNext: () => navigateToSuccessScreen(context),
-        ),
-      ];
+    CartView(onNext: () => setState(() => currentStep++)),
+    ShippingView(
+      onBack: () => setState(() => currentStep--),
+      onNext: () => setState(() => currentStep++),
+    ),
+    PaymentView(
+      onBack: () => setState(() => currentStep--),
+      onNext: () => setState(() => currentStep++),
+    ),
+    SummaryView(
+      onBack: () => setState(() => currentStep--),
+      onNext: () => navigateToSuccessScreen(context),
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -118,8 +116,7 @@ class _OrderFlowScreenState extends State<OrderFlowScreen> {
                       return Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(iconSteps[index],
-                              color: stepColor, size: 18.sp),
+                          Icon(iconSteps[index], color: stepColor, size: 18.sp),
                           SizedBox(width: 4.w),
                           Text(
                             steps[index],
@@ -153,13 +150,9 @@ class _OrderFlowScreenState extends State<OrderFlowScreen> {
   }
 
   void navigateToSuccessScreen(BuildContext context) {
-  Navigator.pushReplacement(
-    context,
-    MaterialPageRoute(
-      builder: (_) => const OrderSuccessfullyScreen(),
-    ),
-  );
-}
-
-
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const OrderSuccessfullyScreen()),
+    );
+  }
 }

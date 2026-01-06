@@ -13,36 +13,39 @@ class CategoryRepoImp extends CategoryRepo {
 
   CategoryRepoImp({required this.categoryDataSource});
   @override
-   Future<Either<ErrorModel, List<CategoryEntity>>> getCategories()async{
-     try {
-final List<CategoryModel> categories=  await categoryDataSource.getCategories(); 
-return right(categories); 
-} on ServerException catch (e) {
-return left(e.errModel);
-}
-
+  Future<Either<ErrorModel, List<CategoryEntity>>> getCategories() async {
+    try {
+      final List<CategoryModel> categories =
+          await categoryDataSource.getCategories();
+      return right(categories);
+    } on ServerException catch (e) {
+      return left(e.errModel);
     }
-    
-      @override
-      Future<Either<ErrorModel, List<CategoryEntity>>> searCategoty(String query)async {
-     try {
-final List<CategoryModel> categories=  await categoryDataSource.searchCategory(query); 
-return right(categories); 
-} on ServerException catch (e) {
-return left(e.errModel);
-}
-      }
+  }
 
   @override
-  Future<Either<ErrorModel, List<SubCategoryEntity>>> getSubCategory(int id)async {
-     try {
-final List<SubCategoryModel> categories=  await categoryDataSource.getSubCategories(id); 
-return right(categories); 
-} on ServerException catch (e) {
-return left(e.errModel);
-}
-  }
-    
-    
+  Future<Either<ErrorModel, List<CategoryEntity>>> searCategoty(
+    String query,
+  ) async {
+    try {
+      final List<CategoryModel> categories = await categoryDataSource
+          .searchCategory(query);
+      return right(categories);
+    } on ServerException catch (e) {
+      return left(e.errModel);
     }
+  }
 
+  @override
+  Future<Either<ErrorModel, List<SubCategoryEntity>>> getSubCategory(
+    int id,
+  ) async {
+    try {
+      final List<SubCategoryModel> categories = await categoryDataSource
+          .getSubCategories(id);
+      return right(categories);
+    } on ServerException catch (e) {
+      return left(e.errModel);
+    }
+  }
+}

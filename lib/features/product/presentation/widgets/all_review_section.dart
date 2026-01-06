@@ -20,9 +20,7 @@ class AllReviewSection extends StatelessWidget {
         }
 
         if (state is ReviewsFailure) {
-          return Center(
-            child: Text(state.message),
-          );
+          return Center(child: Text(state.message));
         }
 
         if (state is ReviewsSuccess) {
@@ -38,12 +36,11 @@ class AllReviewSection extends StatelessWidget {
           /// ⭐ average rating
           final averageRating =
               reviews.map((e) => e.rating).reduce((a, b) => a + b) /
-                  reviews.length;
+              reviews.length;
 
           /// ⭐ rating distribution
           double ratingPercent(int star) {
-            final count =
-                reviews.where((r) => r.rating == star).length;
+            final count = reviews.where((r) => r.rating == star).length;
             return count / reviews.length;
           }
 

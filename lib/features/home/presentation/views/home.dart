@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/features/account/presentation/views/account_screen.dart';

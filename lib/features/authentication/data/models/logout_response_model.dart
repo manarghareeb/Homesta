@@ -4,8 +4,6 @@ class LogoutResponseModel {
   LogoutResponseModel({required this.message});
 
   factory LogoutResponseModel.fromJson(Map<String, dynamic> json) {
-    return LogoutResponseModel(
-      message: json['message'] ?? '',
-    );
+    return LogoutResponseModel(message: json['message'] ?? '');
   }
 }

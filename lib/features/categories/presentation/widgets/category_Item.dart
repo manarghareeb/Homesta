@@ -15,7 +15,10 @@ class CategoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-  context.push(AppRouter.subcategoryScreen, extra: categoryEntity.categoryId);
+        context.push(
+          AppRouter.subcategoryScreen,
+          extra: categoryEntity.categoryId,
+        );
       },
 
       child: AnimatedContainer(
@@ -28,7 +31,9 @@ class CategoryItem extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(15.r),
-              child: CustomCachedNetworkImage(imagePath: categoryEntity.imagePath),
+              child: CustomCachedNetworkImage(
+                imagePath: categoryEntity.imagePath,
+              ),
             ),
             Container(
               decoration: BoxDecoration(

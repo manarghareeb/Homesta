@@ -139,9 +139,9 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       extra: {"email": widget.email.trim()},
                     );
                   } else if (state is AuthFailure) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(state.error)),
-                    );
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text(state.error)));
                   }
                 },
                 child: const SizedBox.shrink(),

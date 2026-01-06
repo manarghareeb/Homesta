@@ -3,9 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SocialMediaButton extends StatelessWidget {
-  const SocialMediaButton({
-    super.key,
-  });
+  const SocialMediaButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +11,7 @@ class SocialMediaButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         InkWell(
-          onTap: () {
-          },
+          onTap: () {},
           child: SvgPicture.asset(
             'assets/images/material-icon-theme_google.svg',
             width: 32.w,
@@ -23,8 +20,7 @@ class SocialMediaButton extends StatelessWidget {
         ),
         SizedBox(width: 48.w),
         InkWell(
-          onTap: () {
-          },
+          onTap: () {},
           child: SvgPicture.asset(
             'assets/images/logos_facebook.svg',
             width: 32.w,
@@ -33,8 +29,7 @@ class SocialMediaButton extends StatelessWidget {
         ),
         SizedBox(width: 48.w),
         InkWell(
-          onTap: () {
-          },
+          onTap: () {},
           child: SvgPicture.asset(
             'assets/images/Vector.svg',
             width: 32.w,
@@ -45,4 +40,3 @@ class SocialMediaButton extends StatelessWidget {
     );
   }
 }
-

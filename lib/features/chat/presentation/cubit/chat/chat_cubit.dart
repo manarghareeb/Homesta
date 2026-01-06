@@ -27,12 +27,14 @@ class ChatCubit extends Cubit<ChatState> {
     emit(ChatLoading(messages));
     try {
       var response = await chatRepo.sendMessage(message);
-      messages.add(ChatMessagesHistory(
-        text: response.messages.last.text,
-        isUser: false,
-        sender: "AI",
-        time: formattedTime(),
-      ));
+      messages.add(
+        ChatMessagesHistory(
+          text: response.messages.last.text,
+          isUser: false,
+          sender: "AI",
+          time: formattedTime(),
+        ),
+      );
       emit(ChatSuccess(List.from(messages)));
     } catch (e) {
       emit(ChatError(e.toString()));

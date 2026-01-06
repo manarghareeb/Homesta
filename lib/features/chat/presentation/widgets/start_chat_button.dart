@@ -7,9 +7,7 @@ import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 
 class StartChatButton extends StatelessWidget {
-  const StartChatButton({
-    super.key,
-  });
+  const StartChatButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +22,7 @@ class StartChatButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(20.r),
           border: Border.all(color: Colors.white, width: 2.w),
           gradient: LinearGradient(
-            colors: [
-              ColorManager.startchatColor,
-              ColorManager.primaryColor,
-            ],
+            colors: [ColorManager.startchatColor, ColorManager.primaryColor],
             stops: [0.2, 1.0],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -44,16 +39,9 @@ class StartChatButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              FontAwesomeIcons.comment,
-              color: Colors.white,
-              size: 20.sp,
-            ),
+            Icon(FontAwesomeIcons.comment, color: Colors.white, size: 20.sp),
             SizedBox(width: 8.w),
-            Text(
-              "Start Chat",
-              style: TextStyles.font14WhiteColorW400,
-            ),
+            Text("Start Chat", style: TextStyles.font14WhiteColorW400),
           ],
         ),
       ),

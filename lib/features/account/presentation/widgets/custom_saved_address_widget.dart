@@ -33,7 +33,10 @@ class SavedAddressWidget extends StatelessWidget {
               Text(name, style: TextStyles.font16BlackW500),
               GestureDetector(
                 onTap: onDelete,
-                child: Icon(Icons.delete_outline, color: ColorManager.lightGreyColor)
+                child: Icon(
+                  Icons.delete_outline,
+                  color: ColorManager.lightGreyColor,
+                ),
               ),
             ],
           ),
@@ -43,10 +46,13 @@ class SavedAddressWidget extends StatelessWidget {
               Text(address, style: TextStyles.font14GreyColorW400),
               GestureDetector(
                 onTap: onEdit,
-                child: Icon(Icons.edit_outlined, color: ColorManager.lightGreyColor)
+                child: Icon(
+                  Icons.edit_outlined,
+                  color: ColorManager.lightGreyColor,
+                ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );

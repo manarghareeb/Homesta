@@ -35,10 +35,10 @@ import 'package:homesta/core/theming/styles.dart';
 
 class DataAnalytics extends StatelessWidget {
   const DataAnalytics({
-    super.key, 
-    required this.title, 
-    required this.subTitle, 
-    this.titleStyle, 
+    super.key,
+    required this.title,
+    required this.subTitle,
+    this.titleStyle,
     this.subTitleStyle,
   });
   final String title;
@@ -60,7 +60,10 @@ class DataAnalytics extends StatelessWidget {
         children: [
           Text(title, style: titleStyle ?? TextStyles.font16GreyRegular),
           SizedBox(height: 8),
-          Text(subTitle, style: subTitleStyle ?? TextStyles.font20BlackColorW500),
+          Text(
+            subTitle,
+            style: subTitleStyle ?? TextStyles.font20BlackColorW500,
+          ),
         ],
       ),
     );

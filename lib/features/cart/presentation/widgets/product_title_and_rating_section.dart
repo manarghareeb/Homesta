@@ -23,9 +23,12 @@ class ProductTitleAndRatingSection extends StatelessWidget {
           children: [
             Icon(Icons.star, color: ColorManager.yellowColor, size: 14.sp),
             SizedBox(width: 2.w),
-            Text(rating.toStringAsFixed(1), style: TextStyles.font14BlackColorW400),
+            Text(
+              rating.toStringAsFixed(1),
+              style: TextStyles.font14BlackColorW400,
+            ),
           ],
-        )
+        ),
       ],
     );
   }

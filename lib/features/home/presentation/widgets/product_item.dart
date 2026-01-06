@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
+import 'package:homesta/features/cart/presentation/cubit/add_item_to_cart_cubit/add_item_to_cart_cubit.dart';
 import 'package:homesta/features/product/domain/entities/product_entitty.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -13,7 +15,7 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-       context.push(AppRouter.productDetailsScreen,extra: productEntity);
+        context.push(AppRouter.productDetailsScreen, extra: productEntity);
       },
       child: SizedBox(
         height: 260.h, // ✅ يمنع overflow
@@ -39,32 +41,40 @@ class ProductItem extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-      
+
                     /// Discount
                     Positioned(
                       top: 6,
                       left: 6,
                       child: _badge("${productEntity.discount}% Off"),
                     ),
-      
+
                     /// Icons
                     Positioned(
                       top: 6,
                       right: 6,
                       child: Column(
                         children: [
-                          _icon(Icons.favorite_border),
+                          _icon(Icons.favorite_border, () {}),
                           SizedBox(height: 6.h),
-                          _icon(Icons.shopping_cart_outlined),
+                          _icon(Icons.shopping_cart_outlined, () {
+                            final addToCartCubit =
+                                context.read<AddItemToCartCubit>();
+                            addToCartCubit.addItemToCart(
+                              productId: productEntity.productId,
+                              quantity: 1,
+                              colorId: 1,
+                            );
+                          }),
                         ],
                       ),
                     ),
                   ],
                 ),
               ),
-      
+
               SizedBox(height: 6.h),
-      
+
               /// TITLE
               Text(
                 productEntity.name,
@@ -72,9 +82,9 @@ class ProductItem extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(fontWeight: FontWeight.w600),
               ),
-      
+
               SizedBox(height: 4.h),
-      
+
               /// RATING
               Row(
                 children: [
@@ -86,9 +96,9 @@ class ProductItem extends StatelessWidget {
                   ),
                 ],
               ),
-      
+
               SizedBox(height: 4.h),
-      
+
               /// PRICE
               Row(
                 children: [
@@ -129,14 +139,17 @@ class ProductItem extends StatelessWidget {
     );
   }
 
-  Widget _icon(IconData icon) {
-    return Container(
-      padding: EdgeInsets.all(4.w),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        shape: BoxShape.circle,
+  Widget _icon(IconData icon, Function() onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.all(4.w),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+        ),
+        child: Icon(icon, size: 16),
       ),
-      child: Icon(icon, size: 16),
     );
   }
 }

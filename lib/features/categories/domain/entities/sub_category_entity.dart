@@ -4,7 +4,7 @@ class SubCategoryEntity {
   final String name;
   final String imagePath;
 
-const  SubCategoryEntity({
+  const SubCategoryEntity({
     required this.subCategoryId,
     required this.categoryId,
     required this.name,

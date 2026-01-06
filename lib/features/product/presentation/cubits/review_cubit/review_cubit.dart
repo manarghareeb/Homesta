@@ -4,12 +4,12 @@ import 'package:homesta/features/product/domain/usecases/add_review_use_case.dar
 import 'package:homesta/features/product/domain/usecases/get_product_review_use_case.dart';
 import 'package:homesta/features/product/presentation/cubits/review_cubit/review_state.dart';
 
-
 class ReviewsCubit extends Cubit<ReviewsState> {
   final GetProductReviewUseCase getReviewsUseCase;
   final AddReviewUseCase addReviewUseCase;
 
-  ReviewsCubit(this.getReviewsUseCase,this.addReviewUseCase) : super(ReviewsInitial());
+  ReviewsCubit(this.getReviewsUseCase, this.addReviewUseCase)
+    : super(ReviewsInitial());
 
   Future<void> getReviews({required int productId}) async {
     emit(ReviewsLoading());

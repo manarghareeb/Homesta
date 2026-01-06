@@ -52,7 +52,10 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   ],
                 ),
                 SizedBox(height: 16.h),
-                Text('Forget Password?', style: TextStyles.font24BlackColorW500),
+                Text(
+                  'Forget Password?',
+                  style: TextStyles.font24BlackColorW500,
+                ),
                 SizedBox(height: 8.h),
                 Text(
                   'Don’t worry, we’ll send you reset instructions.',
@@ -72,8 +75,9 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your Email';
-                    } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                        .hasMatch(value)) {
+                    } else if (!RegExp(
+                      r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                    ).hasMatch(value)) {
                       return 'Please enter a valid email address';
                     }
                     return null;
@@ -91,9 +95,9 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         extra: controller.text.trim(),
                       );
                     } else if (state is AuthFailure) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(state.error)),
-                      );
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(SnackBar(content: Text(state.error)));
                     }
                   },
                   builder: (context, state) {
@@ -104,7 +108,9 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       buttonText: 'Submit',
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
-                          context.read<AuthCubit>().forgetPassword(controller.text);
+                          context.read<AuthCubit>().forgetPassword(
+                            controller.text,
+                          );
                         }
                       },
                     );

@@ -6,7 +6,7 @@ class AnalyticsContainer extends StatelessWidget {
   final DataAnalytics firstRowItem1;
   final DataAnalytics firstRowItem2;
   final DataAnalytics secondRowItem1;
-  final DataAnalytics? secondRowItem2; 
+  final DataAnalytics? secondRowItem2;
 
   const AnalyticsContainer({
     super.key,

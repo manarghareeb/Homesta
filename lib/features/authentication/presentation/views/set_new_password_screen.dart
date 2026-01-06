@@ -12,7 +12,6 @@ import 'package:homesta/features/authentication/presentation/cubit/auth/auth_cub
 class SetNewPasswordScreen extends StatefulWidget {
   const SetNewPasswordScreen({super.key, this.email});
 
-
   final String? email;
 
   @override
@@ -22,7 +21,7 @@ class SetNewPasswordScreen extends StatefulWidget {
 class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
-  TextEditingController();
+      TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -148,7 +147,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                       },
                     );
                   },
-                )
+                ),
               ],
             ),
           ),

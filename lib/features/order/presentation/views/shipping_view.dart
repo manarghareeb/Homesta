@@ -57,9 +57,7 @@ class _ShippingViewState extends State<ShippingView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TitleToTextField(
-                      title: 'First Name', 
-                    ),
+                    TitleToTextField(title: 'First Name'),
                     SizedBox(height: 8.h),
                     CustomTextFieldWidget(
                       controller: firstNameController,
@@ -75,9 +73,7 @@ class _ShippingViewState extends State<ShippingView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TitleToTextField(
-                      title: 'Last Name', 
-                    ),
+                    TitleToTextField(title: 'Last Name'),
                     SizedBox(height: 8.h),
                     CustomTextFieldWidget(
                       controller: lastNameController,
@@ -91,9 +87,7 @@ class _ShippingViewState extends State<ShippingView> {
             ],
           ),
           SizedBox(height: 16.h),
-          TitleToTextField(
-            title: 'Email', 
-          ),
+          TitleToTextField(title: 'Email'),
           SizedBox(height: 8.h),
           CustomTextFieldWidget(
             controller: emailController,
@@ -102,9 +96,7 @@ class _ShippingViewState extends State<ShippingView> {
             title: '',
           ),
           SizedBox(height: 16.h),
-          TitleToTextField(
-            title: 'Phone', 
-          ),
+          TitleToTextField(title: 'Phone'),
           SizedBox(height: 8.h),
           CustomTextFieldWidget(
             controller: phoneController,
@@ -113,9 +105,7 @@ class _ShippingViewState extends State<ShippingView> {
             title: '',
           ),
           SizedBox(height: 16.h),
-          TitleToTextField(
-            title: 'Address', 
-          ),
+          TitleToTextField(title: 'Address'),
           SizedBox(height: 8.h),
           CustomTextFieldWidget(
             controller: addressController,
@@ -124,9 +114,7 @@ class _ShippingViewState extends State<ShippingView> {
             title: '',
           ),
           SizedBox(height: 16.h),
-          TitleToTextField(
-            title: 'Zip Code', 
-          ),
+          TitleToTextField(title: 'Zip Code'),
           SizedBox(height: 8.h),
           CustomTextFieldWidget(
             controller: zipCodeController,
@@ -141,9 +129,7 @@ class _ShippingViewState extends State<ShippingView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TitleToTextField(
-                      title: 'City', 
-                    ),
+                    TitleToTextField(title: 'City'),
                     SizedBox(height: 8.h),
                     CustomTextFieldWidget(
                       controller: cityController,
@@ -155,16 +141,14 @@ class _ShippingViewState extends State<ShippingView> {
                 ),
               ),
               SizedBox(width: 16.w),
-              Expanded(
-                child: const SelectedCountry(),
-              ),
+              Expanded(child: const SelectedCountry()),
             ],
           ),
-          SizedBox(height: 24.h,),
+          SizedBox(height: 24.h),
           CustomButtonWidget(
-            buttonText: 'Continue to Payment', 
-            onPressed: widget.onNext
-          )
+            buttonText: 'Continue to Payment',
+            onPressed: widget.onNext,
+          ),
         ],
       ),
     );

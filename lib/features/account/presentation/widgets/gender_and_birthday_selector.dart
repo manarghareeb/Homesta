@@ -128,7 +128,8 @@ class _GenderAndBirthdaySelectorState extends State<GenderAndBirthdaySelector> {
                                 ColorManager
                                     .primaryColor, //color of AppBar and Buttons
                             onPrimary:
-                                Colors.white, //color of text in AppBar and Buttons
+                                Colors
+                                    .white, //color of text in AppBar and Buttons
                             surface:
                                 ColorManager
                                     .soLightGreyColor, //color of backgournd calendar

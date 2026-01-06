@@ -10,13 +10,9 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: CustomAppBarWidget(
-        text: 'Cart',
-        backgroundColor: Colors.white,
-      ),
+      appBar: CustomAppBarWidget(text: 'Cart', backgroundColor: Colors.white),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsetsGeometry.symmetric(
@@ -52,10 +48,7 @@ class CartScreen extends StatelessWidget {
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  'Total Price',
-                  style: TextStyles.font16BlackW500,
-                ),
+                Text('Total Price', style: TextStyles.font16BlackW500),
                 Text(
                   '\$1170',
                   style: TextStyles.font16BlackW500.copyWith(
@@ -84,7 +77,7 @@ class CartScreen extends StatelessWidget {
             ),
           ],
         ),
-      )
+      ),
     );
   }
 }

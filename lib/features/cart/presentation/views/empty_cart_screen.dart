@@ -11,10 +11,7 @@ class EmptyCartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: CustomAppBarWidget(
-        text: 'Cart',
-        backgroundColor: Colors.white,
-      ),
+      appBar: CustomAppBarWidget(text: 'Cart', backgroundColor: Colors.white),
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 60.h),
@@ -42,9 +39,8 @@ class EmptyCartScreen extends StatelessWidget {
                   children: [
                     TextSpan(
                       text: "shop by category",
-                      style: TextStyles.font16PrimaryColorW400Underline.copyWith(
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: TextStyles.font16PrimaryColorW400Underline
+                          .copyWith(fontWeight: FontWeight.w500),
                     ),
                   ],
                 ),

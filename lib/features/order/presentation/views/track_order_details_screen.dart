@@ -49,7 +49,10 @@ class _TrackOrderDetailsScreenState extends State<TrackOrderDetailsScreen> {
                       ),
                     ],
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 16.h,
+                  ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -90,7 +93,6 @@ class _TrackOrderDetailsScreenState extends State<TrackOrderDetailsScreen> {
                           ),
                         ],
                       ),
-                      
                     ],
                   ),
                 ),
@@ -103,26 +105,25 @@ class _TrackOrderDetailsScreenState extends State<TrackOrderDetailsScreen> {
                   borderRadius: BorderRadius.circular(10.r),
                 ),
                 child: ListTile(
-                  
-                  leading: const Icon(Icons.person_outlined, color: Colors.white,),
-                  title: Text(
-                    'Name',
-                    style: TextStyles.font16WhiteW500,
+                  leading: const Icon(
+                    Icons.person_outlined,
+                    color: Colors.white,
                   ),
-                  subtitle:  Text(
+                  title: Text('Name', style: TextStyles.font16WhiteW500),
+                  subtitle: Text(
                     'Seller Name',
                     style: TextStyles.font16WhiteW500,
                   ),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(Icons.phone_outlined, color: Colors.white,),
-                      SizedBox(width: 8.w,),
-                      const Icon(Icons.email_outlined, color: Colors.white,),
+                      const Icon(Icons.phone_outlined, color: Colors.white),
+                      SizedBox(width: 8.w),
+                      const Icon(Icons.email_outlined, color: Colors.white),
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

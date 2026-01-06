@@ -7,6 +7,6 @@ class GetProductReviewUseCase {
   final ProductRepository productRepository;
 
   GetProductReviewUseCase({required this.productRepository});
-  Future<Either<ErrorModel,List<ReviewEntity>>> call(int productId)=>productRepository.getAllProductReviews(productId);
-
+  Future<Either<ErrorModel, List<ReviewEntity>>> call(int productId) =>
+      productRepository.getAllProductReviews(productId);
 }

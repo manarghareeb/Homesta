@@ -7,7 +7,6 @@ import 'package:homesta/core/theming/styles.dart';
 import '../../../../core/routing/app_router.dart';
 import '../../../../core/widgets/custom_app_bar_widget.dart';
 
-
 class MyOrderScreen extends StatefulWidget {
   const MyOrderScreen({super.key});
 
@@ -25,10 +24,30 @@ class _MyOrdersScreenState extends State<MyOrderScreen> {
       paymentMethod: "Paypal",
       deliveryDate: "24 April 2024",
       items: [
-        OrderItemModel("Wingback Chair", "Light Brown", "\$320.00", "assets/images/bar_stool.png"),
-        OrderItemModel("Wooden Sofa Chair", "Grey", "\$180.00", "assets/images/bar_stool.png"),
-        OrderItemModel("Bar Stool", "Brown", "\$60.00", "assets/images/bar_stool.png"),
-        OrderItemModel("Brown Bean Bag Chair", "Brown", "\$180.00", "assets/images/bar_stool.png"),
+        OrderItemModel(
+          "Wingback Chair",
+          "Light Brown",
+          "\$320.00",
+          "assets/images/bar_stool.png",
+        ),
+        OrderItemModel(
+          "Wooden Sofa Chair",
+          "Grey",
+          "\$180.00",
+          "assets/images/bar_stool.png",
+        ),
+        OrderItemModel(
+          "Bar Stool",
+          "Brown",
+          "\$60.00",
+          "assets/images/bar_stool.png",
+        ),
+        OrderItemModel(
+          "Brown Bean Bag Chair",
+          "Brown",
+          "\$180.00",
+          "assets/images/bar_stool.png",
+        ),
       ],
       status: "Accepted",
       statusMessage: "Your Order has been Accepted",
@@ -40,7 +59,12 @@ class _MyOrdersScreenState extends State<MyOrderScreen> {
       paymentMethod: "Cash",
       deliveryDate: "24 April 2024",
       items: [
-        OrderItemModel("Brown Bean Bag Chair", "Brown", "\$375.00", "assets/images/bar_stool.png"),
+        OrderItemModel(
+          "Brown Bean Bag Chair",
+          "Brown",
+          "\$375.00",
+          "assets/images/bar_stool.png",
+        ),
       ],
       status: "Delivered",
       statusMessage: "Your Order has been Delivered",
@@ -54,9 +78,7 @@ class _MyOrdersScreenState extends State<MyOrderScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: const CustomAppBarWidget(
-        text: 'My Orders',
-      ),
+      appBar: const CustomAppBarWidget(text: 'My Orders'),
       body: Padding(
         padding: EdgeInsets.all(16.w),
         child: Column(
@@ -105,7 +127,6 @@ class _MyOrdersScreenState extends State<MyOrderScreen> {
     );
   }
 }
-
 
 class OrderModel {
   final String orderId;
@@ -180,9 +201,15 @@ class OrderCard extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text("Order ID", style: TextStyles.font14GreyColorW400),
+                          Text(
+                            "Order ID",
+                            style: TextStyles.font14GreyColorW400,
+                          ),
                           SizedBox(height: 4.h),
-                          Text(order.orderId, style: TextStyles.font14BlackColorW500),
+                          Text(
+                            order.orderId,
+                            style: TextStyles.font14BlackColorW500,
+                          ),
                         ],
                       ),
                     ),
@@ -197,9 +224,15 @@ class OrderCard extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text("Total Payment", style: TextStyles.font14GreyColorW400),
+                          Text(
+                            "Total Payment",
+                            style: TextStyles.font14GreyColorW400,
+                          ),
                           SizedBox(height: 4.h),
-                          Text(order.totalPayment, style: TextStyles.font14BlackColorW500),
+                          Text(
+                            order.totalPayment,
+                            style: TextStyles.font14BlackColorW500,
+                          ),
                         ],
                       ),
                     ),
@@ -215,9 +248,15 @@ class OrderCard extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text("Payment Method", style: TextStyles.font14GreyColorW400),
+                          Text(
+                            "Payment Method",
+                            style: TextStyles.font14GreyColorW400,
+                          ),
                           SizedBox(height: 4.h),
-                          Text(order.paymentMethod, style: TextStyles.font14BlackColorW500),
+                          Text(
+                            order.paymentMethod,
+                            style: TextStyles.font14BlackColorW500,
+                          ),
                         ],
                       ),
                     ),
@@ -232,9 +271,15 @@ class OrderCard extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text("Delivery Date", style: TextStyles.font14GreyColorW400),
+                          Text(
+                            "Delivery Date",
+                            style: TextStyles.font14GreyColorW400,
+                          ),
                           SizedBox(height: 4.h),
-                          Text(order.deliveryDate, style: TextStyles.font14BlackColorW500),
+                          Text(
+                            order.deliveryDate,
+                            style: TextStyles.font14BlackColorW500,
+                          ),
                         ],
                       ),
                     ),
@@ -255,23 +300,26 @@ class OrderCard extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
             decoration: BoxDecoration(
-              color: order.status == "Accepted"
-                  ? const Color(0xFFFFF1E3) // خلفية Accepted
-                  : const Color(0xFFFC5FBD2), // خلفية Delivered
+              color:
+                  order.status == "Accepted"
+                      ? const Color(0xFFFFF1E3) // خلفية Accepted
+                      : const Color(0xFFFC5FBD2), // خلفية Delivered
               borderRadius: BorderRadius.circular(20.r),
               border: Border.all(
-                color: order.status == "Accepted"
-                    ? const Color(0xFFB19470) // إطار Accepted
-                    : const Color(0xFF7BC370), // إطار Delivered
+                color:
+                    order.status == "Accepted"
+                        ? const Color(0xFFB19470) // إطار Accepted
+                        : const Color(0xFF7BC370), // إطار Delivered
                 width: 1.5,
               ),
             ),
             child: Text(
               order.status,
               style: TextStyles.font16BlackRegular.copyWith(
-                color: order.status == "Accepted"
-                    ? const Color(0xFFB19470) // نص Accepted
-                    : const Color(0xFF7BC370), // نص Delivered
+                color:
+                    order.status == "Accepted"
+                        ? const Color(0xFFB19470) // نص Accepted
+                        : const Color(0xFF7BC370), // نص Delivered
               ),
             ),
           ),
@@ -279,64 +327,73 @@ class OrderCard extends StatelessWidget {
           SizedBox(height: 4.h),
 
           /// رسالة الحالة كنص عادي تحت الـ Container
-          Text(
-            order.statusMessage,
-            style: TextStyles.font16BlackRegular,
-          ),
+          Text(order.statusMessage, style: TextStyles.font16BlackRegular),
 
           SizedBox(height: 12.h),
 
           /// الأزرار
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: order.actions.map((action) {
-              final bool isTrackOrReview = action == "Track Order" || action == "Add Review";
-              final bool isCancel = action.toLowerCase().contains("cancel");
+            children:
+                order.actions.map((action) {
+                  final bool isTrackOrReview =
+                      action == "Track Order" || action == "Add Review";
+                  final bool isCancel = action.toLowerCase().contains("cancel");
 
-              return Padding(
-                padding: EdgeInsets.only(bottom: 12.h),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: isTrackOrReview
-                        ? ColorManager.primaryColor
-                        : Colors.white,
-                    foregroundColor: isTrackOrReview
-                        ? Colors.white
-                        : (isCancel ? Colors.red : ColorManager.primaryColor),
-                    side: BorderSide(
-                      color: isTrackOrReview
-                          ? ColorManager.primaryColor
-                          : (isCancel ? Colors.red : ColorManager.primaryColor),
-                      width: 1.5,
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: 12.h),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            isTrackOrReview
+                                ? ColorManager.primaryColor
+                                : Colors.white,
+                        foregroundColor:
+                            isTrackOrReview
+                                ? Colors.white
+                                : (isCancel
+                                    ? Colors.red
+                                    : ColorManager.primaryColor),
+                        side: BorderSide(
+                          color:
+                              isTrackOrReview
+                                  ? ColorManager.primaryColor
+                                  : (isCancel
+                                      ? Colors.red
+                                      : ColorManager.primaryColor),
+                          width: 1.5,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.r),
+                        ),
+                        padding: EdgeInsets.symmetric(vertical: 12.h),
+                      ),
+                      onPressed: () {
+                        if (action == "Track Order") {
+                          GoRouter.of(context).push(AppRouter.trackOrder);
+                        } else if (action == "Invoice") {
+                          GoRouter.of(context).push(AppRouter.invoice);
+                        } else if (action == "Cancel Order") {
+                          GoRouter.of(context).push(AppRouter.cancelOrder);
+                        } else if (action == "Add Review") {
+                          GoRouter.of(context).push(AppRouter.addReview);
+                        }
+                      },
+                      child: Text(
+                        action,
+                        style: TextStyles.font15BlackW500.copyWith(
+                          color:
+                              isTrackOrReview
+                                  ? Colors.white
+                                  : (isCancel
+                                      ? Colors.red
+                                      : ColorManager.primaryColor),
+                        ),
+                      ),
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.r),
-                    ),
-                    padding: EdgeInsets.symmetric(vertical: 12.h),
-                  ),
-                  onPressed: () {
-                    if (action == "Track Order") {
-                      GoRouter.of(context).push(AppRouter.trackOrder);
-                    } else if (action == "Invoice") {
-                      GoRouter.of(context).push(AppRouter.invoice);
-                    } else if (action == "Cancel Order") {
-                      GoRouter.of(context).push(AppRouter.cancelOrder);
-                    } else if (action == "Add Review") {
-                      GoRouter.of(context).push(AppRouter.addReview);
-                    }
-                  },
-                  child: Text(
-                    action,
-                    style: TextStyles.font15BlackW500.copyWith(
-                      color: isTrackOrReview
-                          ? Colors.white
-                          : (isCancel ? Colors.red : ColorManager.primaryColor),
-                    ),
-                  ),
-                ),
-              );
-            }).toList(),
-          )
+                  );
+                }).toList(),
+          ),
         ],
       ),
     );
@@ -374,11 +431,7 @@ class OrderItemWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  item.name,
-                  style: TextStyles.font15BlackW500,
-                  maxLines: 1,
-                ),
+                Text(item.name, style: TextStyles.font15BlackW500, maxLines: 1),
                 Text(
                   "Color: ${item.color}",
                   style: TextStyles.font14GreyColorW400,
@@ -405,13 +458,19 @@ class OrderItemWidget extends StatelessWidget {
     );
   }
 }
+
 /// صف معلومات (Label + Value)
 class InfoRow extends StatelessWidget {
   final String label;
   final String value;
   final Color? valueColor;
 
-  const InfoRow({super.key, required this.label, required this.value, this.valueColor});
+  const InfoRow({
+    super.key,
+    required this.label,
+    required this.value,
+    this.valueColor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -430,7 +489,9 @@ class InfoRow extends StatelessWidget {
           Flexible(
             child: Text(
               value,
-              style: TextStyles.font14BlackColorW400.copyWith(color: valueColor ?? ColorManager.blackColor),
+              style: TextStyles.font14BlackColorW400.copyWith(
+                color: valueColor ?? ColorManager.blackColor,
+              ),
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
               textAlign: TextAlign.end,

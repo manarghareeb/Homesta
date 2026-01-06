@@ -68,11 +68,11 @@ class AccountScreen extends StatelessWidget {
                 },
               ),
               OptionTile(
-                  icon: Icons.list_alt,
-                  label: 'My Order',
-                  onTap: () {
-                    GoRouter.of(context).push(AppRouter.myOrderScreen);
-                  }
+                icon: Icons.list_alt,
+                label: 'My Order',
+                onTap: () {
+                  GoRouter.of(context).push(AppRouter.myOrderScreen);
+                },
               ),
               OptionTile(
                 icon: Icons.favorite_border,

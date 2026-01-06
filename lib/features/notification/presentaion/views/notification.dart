@@ -37,9 +37,10 @@ class NotificationScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Padding(
         padding: EdgeInsets.all(16.w),
-        child: hasNotifications
-            ? _buildNotificationList(hasNew, hasOld)
-            : const NotificationEmptyScreen(),
+        child:
+            hasNotifications
+                ? _buildNotificationList(hasNew, hasOld)
+                : const NotificationEmptyScreen(),
       ),
     );
   }
@@ -50,13 +51,17 @@ class NotificationScreen extends StatelessWidget {
         if (hasNew) ...[
           Text('New Notifications', style: TextStyles.font20BlackColorW500),
           SizedBox(height: 12.h),
-          ...newNotifications.map((text) => NotificationItem(text: text, isNew: true)).toList(),
+          ...newNotifications
+              .map((text) => NotificationItem(text: text, isNew: true))
+              .toList(),
           SizedBox(height: 24.h),
         ],
         if (hasOld) ...[
           Text('Older Notifications', style: TextStyles.font20BlackColorW500),
           SizedBox(height: 12.h),
-          ...oldNotifications.map((text) => NotificationItem(text: text, isNew: false)).toList(),
+          ...oldNotifications
+              .map((text) => NotificationItem(text: text, isNew: false))
+              .toList(),
         ],
       ],
     );

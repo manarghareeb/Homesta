@@ -12,18 +12,19 @@ class AuthRepository {
   final AuthRemoteDataSource remote;
 
   AuthRepository(this.remote);
- //login
+  //login
   Future<LoginResponseModel> login(String email, String password) {
     return remote.login(email: email, password: password);
   }
- //signUp
+
+  //signUp
   Future<RegisterResponseModel> register(
-      String firstName,
-      String lastName,
-      String email,
-      String password,
-      bool agreeTerms,
-      ) {
+    String firstName,
+    String lastName,
+    String email,
+    String password,
+    bool agreeTerms,
+  ) {
     return remote.register(
       firstName: firstName,
       lastName: lastName,
@@ -32,10 +33,12 @@ class AuthRepository {
       agreeTerms: agreeTerms,
     );
   }
+
   //forget password
   Future<ForgetPasswordResponseModel> forgetPassword(String email) async {
     return await remote.forgetPassword(email);
   }
+
   //reset password
   Future<ResetPasswordResponseModel> resetPassword(
       String email,
@@ -74,5 +77,4 @@ class AuthRepository {
   Future<LogoutResponseModel> logout() async {
     return await remote.logout();
   }
-
 }

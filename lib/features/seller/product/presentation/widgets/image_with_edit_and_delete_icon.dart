@@ -49,7 +49,7 @@ class ImageWithAddAndDeleteIcon extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ProductFormScreen(product: product,),
+                  builder: (context) => ProductFormScreen(product: product),
                 ),
               );
             },
