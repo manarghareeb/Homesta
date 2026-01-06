@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homesta/core/di/service_locator.dart';
@@ -8,13 +7,13 @@ import 'package:homesta/features/account/presentation/views/edit_profile_screen.
 import 'package:homesta/features/account/presentation/views/faqs_screen.dart';
 import 'package:homesta/features/account/presentation/views/help_center_screen.dart';
 import 'package:homesta/features/admin/category/presentation/views/admin_category_screen.dart';
+import 'package:homesta/features/admin/category/presentation/views/admin_sub_category_screen.dart';
 import 'package:homesta/features/admin/dashboard/presentation/views/dashboard_screen.dart';
 import 'package:homesta/features/admin/product/presentation/views/admin_product_screen.dart';
 import 'package:homesta/features/admin/profile/presentation/views/admin_account_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/logout_screen.dart';
 import 'package:homesta/features/account/presentation/views/manage_address_screen.dart';
 import 'package:homesta/features/account/presentation/views/my_order_screen.dart';
-import 'package:homesta/features/cart/domain/repos/cart_repo.dart';
 import 'package:homesta/features/cart/presentation/cubit/add_item_to_cart_cubit/add_item_to_cart_cubit.dart';
 import 'package:homesta/features/authentication/presentation/views/password_manager_screen.dart';
 import 'package:homesta/features/cart/presentation/views/empty_cart_screen.dart';
@@ -116,13 +115,14 @@ abstract class AppRouter {
   static final adminProductScreen = '/adminProductScreen';
   static final adminCategoryScreen = '/adminCategoryScreen';
   static final adminDashboardScreen = '/adminDashboardScreen';
+  static final adminSubCategoryScreen = '/adminSubCategoryScreen';
 
   static final route = GoRouter(
     initialLocation: onboardingRoute,
     routes: [
       GoRoute(
         path: onboardingRoute,
-        builder: (context, state) => const LoginScreen(),        
+        builder: (context, state) => const AdminAccountScreen(),        
       ),
       // Seller Route
       GoRoute(
@@ -161,6 +161,10 @@ abstract class AppRouter {
       GoRoute(
         path: adminCategoryScreen,
         builder: (context, state) => const AdminCategoryScreen(),
+      ),
+      GoRoute(
+        path: adminSubCategoryScreen,
+        builder: (context, state) => const AdminSubCategoryScreen(),
       ),
       // User Route
       GoRoute(
