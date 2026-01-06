@@ -6,25 +6,25 @@ import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 import 'package:homesta/features/admin/category/presentation/widgets/add_item_section.dart';
 import 'package:homesta/features/admin/category/presentation/widgets/item_card.dart';
 
-class AdminCategoryScreen extends StatelessWidget {
-  const AdminCategoryScreen({super.key});
+class AdminSubCategoryScreen extends StatelessWidget {
+  const AdminSubCategoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: CustomAppBarWidget(text: 'Category'),
+      appBar: CustomAppBarWidget(text: 'Sub Category'),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
         child: Column(
           children: [
             AddItemSection(
-              managementTitle: 'Management Category',
-              description: 'Kelola kategori furniture Anda',
-              addButtonText: 'Add category',
-              nameFieldTitle: 'Name Category',
-              nameFieldHint: 'Enter Name Category',
-              imageFieldTitle: 'Image Category',
+              managementTitle: 'Management SubCategory',
+              description: 'Kelola subcategory furniture Anda',
+              addButtonText: 'Add subcategory',
+              nameFieldTitle: 'Name SubCategory',
+              nameFieldHint: 'Enter Name SubCategory',
+              imageFieldTitle: 'Image SubCategory',
             ),
             SizedBox(height: 24),
             Expanded(

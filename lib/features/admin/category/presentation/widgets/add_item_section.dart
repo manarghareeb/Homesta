@@ -8,17 +8,32 @@ import 'package:homesta/core/widgets/title_to_text_field.dart';
 import 'package:homesta/features/admin/category/presentation/widgets/save_and_discard_buttons.dart';
 import 'package:homesta/features/admin/category/presentation/widgets/upload_image_widget.dart';
 
-class AddCategorySection extends StatefulWidget {
-  const AddCategorySection({super.key});
+class AddItemSection extends StatefulWidget {
+  final String managementTitle;
+  final String description;
+  final String addButtonText;
+  final String nameFieldTitle;
+  final String nameFieldHint;
+  final String imageFieldTitle;
+
+  const AddItemSection({
+    super.key,
+    required this.managementTitle,
+    required this.description,
+    required this.addButtonText,
+    required this.nameFieldTitle,
+    required this.nameFieldHint,
+    required this.imageFieldTitle,
+  });
 
   @override
-  State<AddCategorySection> createState() => _AddCategorySectionState();
+  State<AddItemSection> createState() => _AddItemSectionState();
 }
 
-class _AddCategorySectionState extends State<AddCategorySection> {
-  bool isAddingCategory = false;
+class _AddItemSectionState extends State<AddItemSection> {
+  bool isAdding = false;
   File? selectedImage;
-  final TextEditingController categoryNameController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,23 +43,21 @@ class _AddCategorySectionState extends State<AddCategorySection> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Management Category', style: TextStyles.font15BlackW500),
+                Text(widget.managementTitle, style: TextStyles.font15BlackW500),
                 SizedBox(height: 8),
-                Text(
-                  'Kelola kategori furniture Anda',
-                  style: TextStyles.font12GreyColorW400,
-                ),
+                Text(widget.description, style: TextStyles.font12GreyColorW400),
               ],
             ),
             GestureDetector(
               onTap: () {
                 setState(() {
-                  isAddingCategory = true;
+                  isAdding = true;
                 });
               },
               child: Container(
-                padding: EdgeInsets.all(12),
+                padding: EdgeInsets.all(8.w),
                 decoration: BoxDecoration(
                   color: ColorManager.primaryColor,
                   borderRadius: BorderRadius.circular(15),
@@ -52,18 +65,15 @@ class _AddCategorySectionState extends State<AddCategorySection> {
                 child: Row(
                   children: [
                     Icon(Icons.add, color: Colors.white),
-                    SizedBox(width: 8),
-                    Text(
-                      'Add category',
-                      style: TextStyles.font14WhiteColorW400,
-                    ),
+                    SizedBox(width: 4),
+                    Text(widget.addButtonText, style: TextStyles.font14WhiteColorW400),
                   ],
                 ),
               ),
             ),
           ],
         ),
-        if (isAddingCategory)
+        if (isAdding)
           Container(
             padding: EdgeInsets.all(16.w),
             margin: EdgeInsets.symmetric(vertical: 24.h),
@@ -75,32 +85,32 @@ class _AddCategorySectionState extends State<AddCategorySection> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TitleToTextField(title: 'Name Category'),
+                TitleToTextField(title: widget.nameFieldTitle),
                 SizedBox(height: 8),
                 CustomTextFieldWidget(
-                  controller: categoryNameController,
-                  hintText: 'Enter Name Category',
+                  controller: nameController,
+                  hintText: widget.nameFieldHint,
                   textInputType: TextInputType.name,
-                  title: 'Enter Name Category',
+                  title: widget.nameFieldHint,
                 ),
                 SizedBox(height: 16.h),
-                TitleToTextField(title: 'Image Category'),
+                TitleToTextField(title: widget.imageFieldTitle),
                 SizedBox(height: 8),
                 const UploadImageWidget(),
                 SizedBox(height: 20.h),
                 SaveAndDiscardButtons(
                   saveOnPressed: () {
                     setState(() {
-                      isAddingCategory = false;
+                      isAdding = false;
                       selectedImage = null;
-                      categoryNameController.clear();
+                      nameController.clear();
                     });
                   },
                   discardOnPressed: () {
                     setState(() {
-                      isAddingCategory = false;
+                      isAdding = false;
                       selectedImage = null;
-                      categoryNameController.clear();
+                      nameController.clear();
                     });
                   },
                 ),
