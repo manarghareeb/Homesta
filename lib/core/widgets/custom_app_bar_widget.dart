@@ -21,6 +21,7 @@ class CustomAppBarWidget extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyActions: false,
       surfaceTintColor: backgroundColor,
       backgroundColor: backgroundColor,
       leading: IconButton(
