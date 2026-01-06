@@ -10,11 +10,10 @@ import 'package:homesta/core/widgets/title_to_text_field.dart';
 import 'package:homesta/features/authentication/presentation/cubit/auth/auth_cubit.dart';
 
 class SetNewPasswordScreen extends StatefulWidget {
-  const SetNewPasswordScreen({super.key, this.email, this.code});
+  const SetNewPasswordScreen({super.key, this.email});
 
 
   final String? email;
-  final String? code;
 
   @override
   State<SetNewPasswordScreen> createState() => _SetNewPasswordScreenState();
@@ -124,7 +123,6 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                         SnackBar(content: Text(state.response.message)),
                       );
 
-                      // بعد ثانية واحدة ننتقل لشاشة تسجيل الدخول
                       Future.delayed(const Duration(seconds: 1), () {
                         GoRouter.of(context).push(AppRouter.loginScreen);
                       });
@@ -144,7 +142,6 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                         if (formKey.currentState!.validate()) {
                           context.read<AuthCubit>().resetPassword(
                             widget.email ?? "",
-                            widget.code ?? "",
                             passwordController.text,
                           );
                         }
