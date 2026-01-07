@@ -22,6 +22,11 @@ import 'package:homesta/features/product/domain/usecases/get_all_product_use_cas
 import 'package:homesta/features/product/domain/usecases/get_product_review_use_case.dart';
 import 'package:homesta/features/product/presentation/cubits/product_cubit.dart';
 import 'package:homesta/features/product/presentation/cubits/review_cubit/review_cubit.dart';
+import 'package:homesta/features/seller/product/data/data_source/saller_product_data_source.dart';
+import 'package:homesta/features/seller/product/data/repo/saller_repo_impl.dart';
+import 'package:homesta/features/seller/product/domain/repo/saller_product_repo.dart';
+import 'package:homesta/features/seller/product/domain/usecases/add_product_use_case.dart';
+import 'package:homesta/features/seller/product/presentation/cubits/saller_product_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -40,6 +45,10 @@ void initServiceLocator() {
   sl.registerLazySingleton<ReviewProductDataSource>(
     () => ReviewProductDataSourceImp(api: sl()),
   );
+  //saller product data source
+  sl.registerLazySingleton<SallerProductDataSource>(
+    () => SallerProductDataSourceImpl(apiConsumer: sl()),
+  );
 
   /// Repositories
   sl.registerLazySingleton<CategoryRepo>(
@@ -50,6 +59,10 @@ void initServiceLocator() {
         ProductRepositoryImpl(productDataSource: sl(), reviewDataSource: sl()),
   );
   sl.registerLazySingleton<CartRepo>(() => CartRepoImpl(apiConsumer: sl()));
+  //saller product repo
+  sl.registerLazySingleton<SallerProductRepo>(
+    () => SallerProductRepoImpl(sallerProductDataSource: sl()),
+  );
 
   /// UseCases
   sl.registerLazySingleton(() => GetCategoryUseCase(sl()));
@@ -60,7 +73,8 @@ void initServiceLocator() {
     () => GetProductReviewUseCase(productRepository: sl()),
   );
   sl.registerLazySingleton(() => AddReviewUseCase(productRepository: sl()));
-
+//saller product usecase
+  sl.registerLazySingleton(() => AddProductUseCase(sallerProductRepo: sl()));
   /// Cubits
   sl.registerFactory(
     () =>
@@ -70,4 +84,6 @@ void initServiceLocator() {
   sl.registerFactory(() => SubCategoryCubit(getSubCategoryUseCase: sl()));
   sl.registerFactory(() => ReviewsCubit(sl(), sl()));
   sl.registerFactory(() => AddItemToCartCubit(sl()));
+  //saller product cubit
+  sl.registerFactory(() => SellerProductCubit(addProductUseCase: sl()));
 }

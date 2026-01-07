@@ -7,6 +7,7 @@ class ApiKeys {
   static String message = "message";
   static String id = "id";
   static String phone = "phone";
+  static String authorization = "Authorization";
   //gategory
   static const String categoryId = 'categoryId';
   static const String name = 'name';

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
 import 'package:homesta/core/widgets/custom_text_field_widget.dart';
+import 'package:homesta/features/seller/product/data/data_source/saller_product_data_source.dart';
 import 'package:homesta/features/seller/product/data/models/product_seller_model.dart';
+import 'package:homesta/features/seller/product/domain/entitiy/params/add_product_params.dart';
+import 'package:homesta/features/seller/product/presentation/cubits/saller_product_cubit.dart';
 import 'package:homesta/features/seller/product/presentation/widgets/image_upload.dart';
 import 'package:homesta/features/seller/product/presentation/widgets/select_category.dart';
 import 'package:homesta/features/seller/product/presentation/widgets/stock_input_field.dart';
@@ -118,7 +122,27 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                 },
               ),
               SizedBox(height: 24.h),
-              CustomButtonWidget(buttonText: 'Save', onPressed: () {}),
+              CustomButtonWidget(
+                buttonText: 'Save',
+                onPressed: () {
+                  BlocProvider.of<SellerProductCubit>(
+                    context,
+                  ).addSellerProducts(
+                    AddProductParams(
+             
+ name: "aaa",
+                  description: "aaa",
+                  price: 122,
+                  colors: ["aaa"],
+                  quantity: 1,
+                  discount: 0,
+                  subCategoryId: 1,
+                  categoryId: 1,
+                  storeId: 1,
+                    ),
+                  );
+                },
+              ),
             ],
           ),
         ),

@@ -43,6 +43,7 @@ import 'package:homesta/features/product/presentation/cubits/review_cubit/review
 import 'package:homesta/features/product/presentation/views/product_details_view.dart';
 import 'package:homesta/features/seller/analytics/presentation/views/sales_analytics_screen.dart';
 import 'package:homesta/features/seller/company%20data/presentation/views/company_data_screen.dart';
+import 'package:homesta/features/seller/product/presentation/cubits/saller_product_cubit.dart';
 import 'package:homesta/features/seller/product/presentation/views/product_form_screen.dart';
 import 'package:homesta/features/seller/product/presentation/views/product_screen.dart';
 import 'package:homesta/features/seller/profile/presentation/views/seller_account_screen.dart';
@@ -118,7 +119,7 @@ abstract class AppRouter {
   static final adminDashboardScreen = '/adminDashboardScreen';
 
   static final route = GoRouter(
-    initialLocation: onboardingRoute,
+    initialLocation: sellerAccountScreen,
     routes: [
       GoRoute(
         path: onboardingRoute,
@@ -127,11 +128,15 @@ abstract class AppRouter {
       // Seller Route
       GoRoute(
         path: sellerAccountScreen,
-        builder: (context, state) => const SellerAccountScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => sl<SellerProductCubit>(),
+          child: const SellerAccountScreen()),
       ),
       GoRoute(
         path: productFormScreen,
-        builder: (context, state) => const ProductFormScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => sl<SellerProductCubit>(),
+          child: const ProductFormScreen()),
       ),
       GoRoute(
         path: productScreen,
