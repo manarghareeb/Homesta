@@ -15,3 +15,17 @@ class SellerAddProductError extends SellerProductState {
 
   SellerAddProductError(this.message);
 }
+
+class SellerGetProductLoading extends SellerProductState {}
+
+class SellerGetProductSuccess extends SellerProductState {
+final List<ProductEntity> products;
+
+  SellerGetProductSuccess(this.products);
+}
+
+class SellerGetProductError extends SellerProductState {
+  final String message;
+
+  SellerGetProductError(this.message);
+}

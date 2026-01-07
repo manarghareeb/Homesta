@@ -140,7 +140,9 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: productScreen,
-        builder: (context, state) => const ProductScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => sl<SellerProductCubit>()..getSellerProducts(1),
+          child: const ProductScreen()),
       ),
       GoRoute(
         path: companyDataScreen,
