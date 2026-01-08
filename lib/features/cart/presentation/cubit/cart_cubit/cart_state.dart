@@ -7,8 +7,8 @@ class CartInitial extends CartState {}
 class CartLoading extends CartState {}
 
 class CartSuccess extends CartState {
-  final CartModel message;
-  CartSuccess(this.message);
+  final CartModel cart;
+  CartSuccess(this.cart);
 }
 
 class CartFailure extends CartState {

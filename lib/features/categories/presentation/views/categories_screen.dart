@@ -9,7 +9,6 @@ import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/features/categories/presentation/cubits/category_cubit/category_cubit.dart';
 import 'package:homesta/features/categories/presentation/widgets/category_bloc_builder.dart';
 
-import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({super.key});

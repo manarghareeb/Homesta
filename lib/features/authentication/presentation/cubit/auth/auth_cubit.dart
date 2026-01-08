@@ -22,8 +22,12 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> login(String email, String password) async {
     emit(AuthLoading());
     try {
-
       final result = await repo.login(email, password);
+      await CacheHelper().saveData(key: ApiKeys.token, value: result.token);
+      await CacheHelper().saveData(
+          key: "userEmail", value: result.user.email);
+      await CacheHelper().saveData(
+          key: "userName", value: "${result.user.firstName} ${result.user.lastName}");
       emit(AuthSuccess(result));
     } on ServerException catch (e) {
       emit(AuthFailure(e.errModel.errorMessage));

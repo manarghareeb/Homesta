@@ -48,4 +48,20 @@ class ProductRepositoryImpl implements ProductRepository {
       return left(e.errModel);
     }
   }
+
+  @override
+  Future<Either<ErrorModel, List<ProductEntity>>> getProductsByCategory({
+    required int categoryId,
+    required int subCategoryId,
+  }) async {
+    try {
+    final List<ProductEntity> allProducts =
+        await productDataSource.getProducts();
+    final filtered = allProducts.where((p) =>
+        p.categoryId == categoryId && p.subCategoryId == subCategoryId).toList();
+    return right(filtered);
+  } on ServerException catch (e) {
+    return left(e.errModel);
+  }
+  }
 }

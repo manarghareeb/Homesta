@@ -1,4 +1,3 @@
-import 'package:homesta/features/categories/domain/entities/category_entity.dart';
 import 'package:homesta/features/categories/domain/entities/sub_category_entity.dart';
 
 abstract class SubCategoryState {}

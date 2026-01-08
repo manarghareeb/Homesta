@@ -8,5 +8,11 @@ class CartCubit extends Cubit<CartState> {
 
   Future<void> getCartItems() async {
     emit(CartLoading());
+    try {
+      final cart = await cartRepo.getCart();
+      emit(CartSuccess(cart));
+    } catch (e) {
+      emit(CartFailure(e.toString()));
+    }
   }
 }

@@ -15,9 +15,9 @@ class AddItemToCartCubit extends Cubit<AddItemToCartState> {
     emit(AddItemToCartLoading());
     try {
       final cartModel = await cartRepo.addItemToCart(
-        productId,
-        quantity,
-        colorId,
+        productId: productId,
+        quantity: quantity,
+        colorId: colorId,
       );
       emit(AddItemToCartSuccess(cartModel));
     } catch (e) {

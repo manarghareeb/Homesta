@@ -28,23 +28,33 @@ class _ActiveFiltersWidgetState extends State<ActiveFiltersWidget> {
   }
 
   @override
+  void didUpdateWidget(covariant ActiveFiltersWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.initialFilters != widget.initialFilters) {
+      setState(() {
+        filters = List.from(widget.initialFilters);
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     if (filters.isEmpty) return const SizedBox();
 
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
       decoration: BoxDecoration(
         color: ColorManager.soLightGreyColor,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              const Text(
+              Text(
                 'Active Filter',
-                style: TextStyle(fontWeight: FontWeight.w600),
+                style: TextStyles.font16BlackRegular,
               ),
               const Spacer(),
               GestureDetector(
@@ -54,20 +64,20 @@ class _ActiveFiltersWidgetState extends State<ActiveFiltersWidget> {
                   });
                   widget.onClearAll();
                 },
-                child: const Text(
+                child: Text(
                   'Clear All',
-                  style: TextStyle(color: ColorManager.primaryColor),
+                  style: TextStyles.font16PrimaryColorW400Underline,
                 ),
               ),
             ],
           ),
 
-          const SizedBox(height: 12),
+          const SizedBox(height: 8),
 
           /// Chips
           Wrap(
-            spacing: 8,
-            runSpacing: 8,
+            spacing: 16,
+            //runSpacing: 2,
             children:
                 filters.map((filter) {
                   return Chip(
@@ -77,7 +87,7 @@ class _ActiveFiltersWidgetState extends State<ActiveFiltersWidget> {
                     ),
                     label: Text(
                       filter,
-                      style: const TextStyle(color: ColorManager.blackColor),
+                      style: TextStyles.font13BlackColorW400,
                     ),
                     deleteIcon: Icon(
                       Icons.close,
