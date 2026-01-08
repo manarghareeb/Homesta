@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/features/cart/presentation/cubit/add_item_to_cart_cubit/add_item_to_cart_cubit.dart';
 import 'package:homesta/features/cart/presentation/cubit/add_item_to_cart_cubit/add_item_to_cart_state.dart';
+import 'package:homesta/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart';
 
 import 'package:homesta/features/home/presentation/widgets/product_item.dart';
 import 'package:homesta/features/home/presentation/widgets/skeltonizer_grid_view.dart';
@@ -31,11 +30,13 @@ class ProductBlocBuilder extends StatelessWidget {
           return BlocListener<AddItemToCartCubit, AddItemToCartState>(
             listener: (context, state) {
               if (state is AddItemToCartSuccess) {
+                print('Successss');
                 ScaffoldMessenger.of(
                   context,
                 ).showSnackBar(SnackBar(content: Text(state.response.message)));
-                context.push(AppRouter.cartScreen);
+                context.read<CartCubit>().getCartItems();
               } else if (state is AddItemToCartFailure) {
+                print('Error: $state.error');
                 ScaffoldMessenger.of(
                   context,
                 ).showSnackBar(SnackBar(content: Text(state.error)));

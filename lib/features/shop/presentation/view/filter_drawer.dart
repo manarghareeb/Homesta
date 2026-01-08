@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:homesta/core/theming/colors.dart';
+import 'package:homesta/core/theming/styles.dart';
+import 'package:homesta/features/categories/presentation/cubits/category_cubit/category_cubit.dart';
+import 'package:homesta/features/categories/presentation/cubits/category_cubit/category_state.dart';
+import 'package:homesta/features/product/presentation/cubits/product_cubit.dart';
 import 'package:homesta/features/shop/presentation/widgets/filter_apply_button.dart';
 import 'package:homesta/features/shop/presentation/widgets/filter_checkbox_item.dart';
 import 'package:homesta/features/shop/presentation/widgets/filter_color_item.dart';
@@ -7,16 +12,26 @@ import 'package:homesta/features/shop/presentation/widgets/filter_price_slider.d
 import 'package:homesta/features/shop/presentation/widgets/filter_section.dart';
 
 class FilterDrawer extends StatefulWidget {
-  const FilterDrawer({super.key});
+  const FilterDrawer({
+    super.key,
+    required this.selectedCategoryIds,
+    required this.onCategoryChanged,
+    required this.selectedCategoryNames,
+  });
+  final Set<int> selectedCategoryIds;
+  final Function(Set<int>, List<String>) onCategoryChanged;
+  final List<String> selectedCategoryNames;
 
   @override
   State<FilterDrawer> createState() => _FilterDrawerState();
 }
 
 class _FilterDrawerState extends State<FilterDrawer> {
+  late Set<int> localSelected;
   final Set<String> selectedColors = {};
+  late List<String> selectedCategoryNames;
 
-  final Map<String, Color> colors = {
+  final Map<String, Color> colors = const {
     'brown': Colors.brown,
     'grey': Colors.grey,
     'green': Colors.green,
@@ -25,6 +40,28 @@ class _FilterDrawerState extends State<FilterDrawer> {
     'blue': Colors.blue,
     'black': Colors.black,
   };
+
+  @override
+  void initState() {
+    super.initState();
+    localSelected = {...widget.selectedCategoryIds};
+    selectedCategoryNames = [...widget.selectedCategoryNames];
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {});
+    });
+  }
+
+  @override
+  void didUpdateWidget(covariant FilterDrawer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.selectedCategoryIds != widget.selectedCategoryIds ||
+        oldWidget.selectedCategoryNames != widget.selectedCategoryNames) {
+      setState(() {
+        localSelected = {...widget.selectedCategoryIds};
+        selectedCategoryNames = [...widget.selectedCategoryNames];
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +75,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              /// Header
+              // Header
               Row(
                 children: [
                   IconButton(
@@ -46,10 +83,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                     onPressed: () => Navigator.pop(context),
                   ),
                   const Spacer(),
-                  const Text(
-                    'Filter Options',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
+                  Text('Filter Options', style: TextStyles.font16BlackRegular),
                 ],
               ),
               Container(
@@ -57,27 +91,68 @@ class _FilterDrawerState extends State<FilterDrawer> {
                 width: double.infinity,
                 color: ColorManager.greyColor,
               ),
-
-              const SizedBox(height: 12),
+              const SizedBox(height: 16),
 
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                       /// CATEGORY
-                      FilterSection(
-                        title: 'Category',
-                        child: Column(
-                          children: const [
-                            FilterCheckboxItem(title: 'Bed room'),
-                            FilterCheckboxItem(title: 'Bathroom'),
-                            FilterCheckboxItem(title: 'Living room'),
-                            FilterCheckboxItem(title: 'Decoration'),
-                            FilterCheckboxItem(title: 'Kitchen'),
-                            FilterCheckboxItem(title: 'Electronic'),
-                            FilterCheckboxItem(title: 'Medical devices'),
-                          ],
-                        ),
+                      BlocBuilder<CategoryCubit, CategoryState>(
+                        builder: (context, state) {
+                          if (state is CategoryLoading) {
+                            return const CircularProgressIndicator();
+                          }
+                          if (state is CategoryFailure) {
+                            return Center(child: Text(state.message));
+                          }
+                          if (state is CategorySuccess) {
+                            return FilterSection(
+                              title: 'Category',
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: state.categories.length,
+                                itemBuilder: (context, index) {
+                                  final category = state.categories[index];
+                                  final isChecked = localSelected.contains(
+                                    category.categoryId,
+                                  );
+
+                                  return FilterCheckboxItem(
+                                    title: category.name,
+                                    isChecked: isChecked,
+                                    onTap: () {
+                                      setState(() {
+                                        if (isChecked) {
+                                          localSelected.remove(
+                                            category.categoryId,
+                                          );
+                                          selectedCategoryNames.remove(
+                                            category.name,
+                                          );
+                                        } else {
+                                          localSelected.add(
+                                            category.categoryId,
+                                          );
+                                          selectedCategoryNames.add(
+                                            category.name,
+                                          );
+                                        }
+                                      });
+                                      widget.onCategoryChanged(
+                                        {...localSelected},
+                                        [...selectedCategoryNames],
+                                      );
+                                      //widget.onCategoryChanged(localSelected, selectedCategoryNames);
+                                    },
+                                  );
+                                },
+                              ),
+                            );
+                          }
+                          return const SizedBox();
+                        },
                       ),
 
                       /// PRICE
@@ -111,20 +186,26 @@ class _FilterDrawerState extends State<FilterDrawer> {
                                   },
                                 );
                               }).toList(),
-                        ),
-                      ),
-
-                      /// MATERIAL
-                      FilterSection(
-                        title: 'Material',
-                        child: Column(
-                          children: const [
-                            FilterCheckboxItem(title: 'Metal'),
-                            FilterCheckboxItem(title: 'Wood'),
-                            FilterCheckboxItem(title: 'Upholstered'),
-                            FilterCheckboxItem(title: 'Glass'),
-                            FilterCheckboxItem(title: 'Plastic'),
-                          ],
+                          /*colors.entries.map((entry) {
+                                return BlocBuilder<
+                                  ProductFilterCubit,
+                                  ProductFilter
+                                >(
+                                  builder: (context, filterState) {
+                                    final isSelected = filterState.colors
+                                        .contains(entry.key);
+                                    return FilterColorItem(
+                                      color: entry.value,
+                                      isSelected: isSelected,
+                                      onTap: () {
+                                        context
+                                            .read<ProductFilterCubit>()
+                                            .toggleColor(entry.key);
+                                      },
+                                    );
+                                  },
+                                );
+                              }).toList(),*/
                         ),
                       ),
 
@@ -132,9 +213,51 @@ class _FilterDrawerState extends State<FilterDrawer> {
                       FilterSection(
                         title: 'Availability',
                         child: Column(
-                          children: const [
-                            FilterCheckboxItem(title: 'In Stock'),
-                            FilterCheckboxItem(title: 'Out of Stock'),
+                          children: [
+                            FilterCheckboxItem(
+                              title: 'In Stock',
+                              isChecked: true,
+                              onTap: () {},
+                            ),
+                            FilterCheckboxItem(
+                              title: 'Out of Stock',
+                              isChecked: true,
+                              onTap: () {},
+                            ),
+                            /*BlocBuilder<ProductFilterCubit, ProductFilter>(
+                              builder: (context, filterState) {
+                                return FilterCheckboxItem(
+                                  title: 'In Stock',
+                                  isChecked: filterState.inStock == true,
+                                  onTap: () {
+                                    context
+                                        .read<ProductFilterCubit>()
+                                        .setAvailability(
+                                          filterState.inStock == true
+                                              ? null
+                                              : true,
+                                        );
+                                  },
+                                );
+                              },
+                            ),
+                            BlocBuilder<ProductFilterCubit, ProductFilter>(
+                              builder: (context, filterState) {
+                                return FilterCheckboxItem(
+                                  title: 'Out of Stock',
+                                  isChecked: filterState.inStock == false,
+                                  onTap: () {
+                                    context
+                                        .read<ProductFilterCubit>()
+                                        .setAvailability(
+                                          filterState.inStock == false
+                                              ? null
+                                              : false,
+                                        );
+                                  },
+                                );
+                              },
+                            ),*/
                           ],
                         ),
                       ),
@@ -143,7 +266,27 @@ class _FilterDrawerState extends State<FilterDrawer> {
                 ),
               ),
 
-              FilterApplyButton(onPressed: () {}),
+              /// APPLY BUTTON
+              FilterApplyButton(
+                onPressed: () {
+                  print('++++++++++++++++++++++++++++++++++');
+                  print('selectedCategoryIds: $localSelected');
+                  print('selectedCategoryNames: $selectedCategoryNames');
+
+                  /*widget.onCategoryChanged(
+                    localSelected,
+                    selectedCategoryNames,
+                  );*/
+                  widget.onCategoryChanged(
+                    {...localSelected},
+                    [...selectedCategoryNames],
+                  );
+                  context.read<ProductCubit>().filterProductsByCategories(
+                    localSelected.toList(),
+                  );
+                  Navigator.pop(context);
+                },
+              ),
             ],
           ),
         ),

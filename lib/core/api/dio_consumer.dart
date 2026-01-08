@@ -1,4 +1,6 @@
+import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
+import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:homesta/core/api/api_consumer.dart';
 import 'package:homesta/core/api/api_interceptors.dart';
 import 'package:homesta/core/api/end_ponits.dart';
@@ -6,8 +8,10 @@ import 'package:homesta/core/error/expections.dart';
 
 class DioConsumer extends ApiConsumer {
   final Dio dio;
+  final cookieJar = CookieJar();
 
   DioConsumer({required this.dio}) {
+    dio.interceptors.add(CookieManager(cookieJar));
     dio.options.baseUrl = EndPoint.baseUrl;
     dio.interceptors.add(ApiInterceptor());
     dio.interceptors.add(
@@ -20,6 +24,10 @@ class DioConsumer extends ApiConsumer {
         error: true,
       ),
     );
+    dio.options.validateStatus = (status) {
+      return status != null && status < 500;
+    };
+    dio.options.followRedirects = false;
   }
 
   @override

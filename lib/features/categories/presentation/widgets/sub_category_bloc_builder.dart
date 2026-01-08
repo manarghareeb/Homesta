@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:homesta/core/routing/app_router.dart';
 
 import 'package:homesta/features/categories/presentation/cubits/sub_category_cubit.dart/sub_category_cubit.dart';
 import 'package:homesta/features/categories/presentation/cubits/sub_category_cubit.dart/sub_category_state.dart';
@@ -32,12 +34,19 @@ class SubCategoryBlocBuilder extends StatelessWidget {
                   title: item.name,
                   image: item.imagePath,
                   onTap: () {
-                    // context.push(AppRouter.categorySectionScreen,extra: item.categoryId);
-                    // GoRouter.of(context).push(
-                    //   '/categorySection/'
-                    //   '${Uri.encodeComponent(categoryName)}/'
-                    //   '${Uri.encodeComponent(item['title']!)}',
-                    // );
+                    GoRouter.of(context).push(
+                      AppRouter.categorySectionScreen,
+                      extra: {
+                        'categoryId': item.categoryId,
+                        'subCategoryId': item.subCategoryId,
+                      },
+                    );
+                    /*context.push(AppRouter.categorySectionScreen,extra: item.categoryId);
+                    GoRouter.of(context).push(
+                      '/categorySection/'
+                      '${Uri.encodeComponent(categoryName)}/'
+                      '${Uri.encodeComponent(item['title']!)}',
+                    );*/
                   },
                 );
               },

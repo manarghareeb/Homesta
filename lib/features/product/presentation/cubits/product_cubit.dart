@@ -1,10 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:homesta/features/product/domain/entities/product_entitty.dart';
 import 'package:homesta/features/product/domain/usecases/get_all_product_use_case.dart';
 
 import 'product_state.dart';
 
 class ProductCubit extends Cubit<ProductState> {
   final GetAllProductUseCase getAllProductsUseCase;
+  List<ProductEntity> allProducts = [];
 
   ProductCubit(this.getAllProductsUseCase) : super(ProductInitial());
 
@@ -18,8 +20,59 @@ class ProductCubit extends Cubit<ProductState> {
         emit(ProductFailure(failure.errorMessage));
       },
       (products) {
+        allProducts = products;
         emit(ProductSuccess(products));
       },
     );
+
   }
+
+  void filterProductsByCategories(List<int> categoryIds) {
+    if (categoryIds.isEmpty) {
+      emit(ProductSuccess(allProducts));
+      return;
+    }
+
+    final filtered = allProducts
+        .where((p) => categoryIds.contains(p.categoryId))
+        .toList();
+
+    emit(ProductSuccess(filtered));
+  }
+
+  /*void getProductsByCategory(int categoryId) {
+  final products = state is ProductSuccess ? (state as ProductSuccess).products : [];
+
+  final filtered = products
+      .map((p) => p as ProductEntity)
+      .where((p) => p.categoryId == categoryId)
+      .toList();
+
+  emit(ProductSuccess(filtered));
+}*/
+  /*void getProductsByCategory(int categoryId) {
+    //final allProducts = state is ProductSuccess ? (state as ProductSuccess).products : [];
+    // لو عايز كل المنتجات بدون فلترة:
+    // final allProducts = _allProductsFromApi;
+
+   // final filtered =
+     //   allProducts.where((p) => p.categoryId == categoryId).toList();
+    final filtered =
+        allProducts.where((p) => p.categoryId == categoryId).toList();
+
+    emit(ProductSuccess(filtered));
+  }*/
+  void getProductsByCategories(List<int> categoryIds) {
+  final allProducts = state is ProductSuccess
+    ? (state as ProductSuccess).products.cast<ProductEntity>() // <- هنا
+    : <ProductEntity>[];
+
+  //final filtered = allProducts.where((p) => categoryIds.contains(p.categoryId)).toList();
+final filtered = allProducts
+    .where((p) => categoryIds.contains(p.categoryId))
+    .toList();
+
+  emit(ProductSuccess(filtered));
+}
+
 }

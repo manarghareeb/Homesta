@@ -25,13 +25,13 @@ class WishlistScreen extends StatelessWidget {
           IconButton(onPressed: () {}, icon: const Icon(Icons.share)),
           IconButton(
             onPressed: () {
-              GoRouter.of(context).push(AppRouter.emptyCartScreen);
+              GoRouter.of(context).push(AppRouter.cartScreen);
             },
             icon: const Icon(Icons.shopping_cart_outlined),
           ),
         ],
       ),
-      body: Padding(
+      /*body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
         child: GridView.builder(
           itemCount: 10,
@@ -52,7 +52,7 @@ class WishlistScreen extends StatelessWidget {
             );
           },
         ),
-      ),
+      ),*/
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 8.h),
         child: Row(
@@ -95,4 +95,4 @@ class WishlistScreen extends StatelessWidget {
       ),
     );
   }
-}
+} 

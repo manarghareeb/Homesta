@@ -5,6 +5,7 @@ import 'package:homesta/core/api/dio_consumer.dart';
 import 'package:homesta/features/cart/data/repos/cart_repo_impl.dart';
 import 'package:homesta/features/cart/domain/repos/cart_repo.dart';
 import 'package:homesta/features/cart/presentation/cubit/add_item_to_cart_cubit/add_item_to_cart_cubit.dart';
+import 'package:homesta/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart';
 import 'package:homesta/features/categories/data/datasources/category_data_source.dart';
 import 'package:homesta/features/categories/data/repositories/category_repo_imp.dart';
 import 'package:homesta/features/categories/domain/repositories/category_repo.dart';
@@ -20,7 +21,9 @@ import 'package:homesta/features/product/domain/repositories/product_repository.
 import 'package:homesta/features/product/domain/usecases/add_review_use_case.dart';
 import 'package:homesta/features/product/domain/usecases/get_all_product_use_case.dart';
 import 'package:homesta/features/product/domain/usecases/get_product_review_use_case.dart';
+import 'package:homesta/features/product/domain/usecases/get_products_by_category_use_case%20.dart';
 import 'package:homesta/features/product/presentation/cubits/product_cubit.dart';
+import 'package:homesta/features/product/presentation/cubits/products_by_category_cubit/products_by_category_cubit.dart';
 import 'package:homesta/features/product/presentation/cubits/review_cubit/review_cubit.dart';
 
 final sl = GetIt.instance;
@@ -60,6 +63,7 @@ void initServiceLocator() {
     () => GetProductReviewUseCase(productRepository: sl()),
   );
   sl.registerLazySingleton(() => AddReviewUseCase(productRepository: sl()));
+  sl.registerLazySingleton(() => GetProductsByCategoryUseCase(sl()));
 
   /// Cubits
   sl.registerFactory(
@@ -70,4 +74,6 @@ void initServiceLocator() {
   sl.registerFactory(() => SubCategoryCubit(getSubCategoryUseCase: sl()));
   sl.registerFactory(() => ReviewsCubit(sl(), sl()));
   sl.registerFactory(() => AddItemToCartCubit(sl()));
+  sl.registerFactory(() => CartCubit(sl()));
+  sl.registerFactory(() => ProductsByCategoryCubit(sl()));
 }

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:homesta/core/theming/colors.dart';
 
 class FilterApplyButton extends StatelessWidget {
-  const FilterApplyButton({super.key, required Null Function() onPressed});
+  const FilterApplyButton({super.key, required this.onPressed});
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class FilterApplyButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
         ),
-        onPressed: () => Navigator.pop(context),
+        onPressed: onPressed,
         child: const Text(
           'Apply Filters',
           style: TextStyle(color: Colors.white),

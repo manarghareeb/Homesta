@@ -18,12 +18,19 @@ class ProductModel extends ProductEntity {
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
+    final List<dynamic> colorList = json[ApiKeys.colors] ?? [];
+  final parsedColors = colorList
+      .expand((c) => c.split(','))
+      .map((e) => e.trim().toLowerCase())
+      .where((e) => e.isNotEmpty)
+      .toList();
+
     return ProductModel(
       productId: json[ApiKeys.productId],
       name: json[ApiKeys.name],
       description: json[ApiKeys.description],
-      colors: json[ApiKeys.colors],
-
+      //colors: json[ApiKeys.colors],
+      colors: parsedColors,
       price: (json[ApiKeys.price] as num).toDouble(),
       rating: json[ApiKeys.rating],
       quantity: json[ApiKeys.quantity],

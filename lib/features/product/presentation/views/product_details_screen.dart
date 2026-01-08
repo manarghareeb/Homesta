@@ -7,7 +7,6 @@ import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 import 'package:homesta/features/product/presentation/widgets/comment_on_product_section.dart';
 import 'package:homesta/features/home/presentation/widgets/count_container.dart';
-import 'package:homesta/features/product/presentation/widgets/product_description_section.dart';
 import 'package:homesta/features/product/presentation/widgets/product_image_galary_section.dart';
 import 'package:homesta/features/product/presentation/widgets/product_rating_section.dart';
 import 'package:homesta/features/product/presentation/widgets/product_title_with_rating.dart';
