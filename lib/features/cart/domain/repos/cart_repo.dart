@@ -5,7 +5,7 @@ abstract class CartRepo {
   Future<AddItemToCartResponse> addItemToCart({
     required int productId,
     required int quantity,
-    required int colorId,
+    required String colorId,
   });
   Future<CartModel> getCart();
 }

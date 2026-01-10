@@ -42,7 +42,7 @@ class CartScreen extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: 16.h),
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: 7,
+                      itemCount: cartItems.length,
                       separatorBuilder:
                           (context, index) => SizedBox(height: 24.h),
                       itemBuilder: (context, index) {

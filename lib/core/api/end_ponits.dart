@@ -7,9 +7,9 @@ class EndPoint {
   static String resetPassword = "api/Auth/ResetPassword";
   // static String confirmEmail = "api/Auth/ConfirmEmail";
   // static String resendConfirmEmail = "api/Auth/ResendEmailConfirmation";
-  static String verifyResetCode = "/api/Auth/VerifyResetCode";
-  static String resendResetCode = "/api/Auth/resend-reset-code";
-  static String changePassword = "/api/Auth/change-password";
+  static String verifyResetCode = "api/Auth/VerifyResetCode";
+  static String resendResetCode = "api/Auth/resend-reset-code";
+  static String changePassword = "api/Auth/change-password";
   static String chat = "https://tasabehahmed-chatbot-bert.hf.space/chat";
 
   static String getAllCategory = "api/Category";

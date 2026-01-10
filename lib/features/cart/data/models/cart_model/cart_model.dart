@@ -5,10 +5,10 @@ class CartModel {
   String? userId;
   List<CartItem>? cartItems;
   int? totalItems;
-  int? subTotal;
+  double? subTotal;
   int? shipping;
   int? tax;
-  int? totalPrice;
+  double? totalPrice;
   DateTime? createdAt;
   bool? isEmpty;
 
@@ -33,10 +33,10 @@ class CartModel {
             ?.map((e) => CartItem.fromJson(e as Map<String, dynamic>))
             .toList(),
     totalItems: json['totalItems'] as int?,
-    subTotal: json['subTotal'] as int?,
+    subTotal: json['subTotal'] as double?,
     shipping: json['shipping'] as int?,
     tax: json['tax'] as int?,
-    totalPrice: json['totalPrice'] as int?,
+    totalPrice: json['totalPrice'] as double?,
     createdAt:
         json['createdAt'] == null
             ? null

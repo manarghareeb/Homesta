@@ -14,7 +14,7 @@ class CartRepoImpl implements CartRepo {
   Future<AddItemToCartResponse> addItemToCart({
     required int productId,
     required int quantity,
-    required int colorId,
+    required String colorId,
   }) async {
     try {
       final response = await apiConsumer.post(
@@ -22,7 +22,7 @@ class CartRepoImpl implements CartRepo {
         data: {
           ApiKeys.productId: productId,
           ApiKeys.quantity: quantity,
-          ApiKeys.colorId: colorId,
+          ApiKeys.colorName: colorId,
         },
       );
       if (response != null && response is Map<String, dynamic>) {
