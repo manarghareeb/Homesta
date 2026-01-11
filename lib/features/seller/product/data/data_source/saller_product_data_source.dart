@@ -24,9 +24,8 @@ class SallerProductDataSourceImpl implements SallerProductDataSource {
   }
   
   @override
-  Future<void> deleteProduct(int productId) {
-    // TODO: implement deleteProduct
-    throw UnimplementedError();
+  Future<void> deleteProduct(int productId)async {
+await apiConsumer.delete("${EndPoint.deleteProduct}$productId");
   }
   
   @override
