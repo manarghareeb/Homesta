@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
+import 'package:homesta/features/product/domain/entities/product_entitty.dart';
 import 'package:homesta/features/seller/product/data/models/product_seller_model.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -15,7 +16,7 @@ class ImageUpload extends StatefulWidget {
     this.onImagePicked,
   });
   final bool isEdit;
-  final Product? product;
+  final ProductEntity? product;
   final ValueChanged<File>? onImagePicked;
 
   @override
@@ -59,7 +60,7 @@ class _ImageUploadState extends State<ImageUpload> {
               image != null
                   ? Image.file(image!, fit: BoxFit.cover)
                   : (widget.isEdit && widget.product != null
-                      ? Image.asset(widget.product!.image, fit: BoxFit.cover)
+                      ? Image.asset("widget.product!.image", fit: BoxFit.cover)
                       : Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

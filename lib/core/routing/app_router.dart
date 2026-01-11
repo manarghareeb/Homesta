@@ -18,6 +18,8 @@ import 'package:homesta/features/cart/domain/repos/cart_repo.dart';
 import 'package:homesta/features/cart/presentation/cubit/add_item_to_cart_cubit/add_item_to_cart_cubit.dart';
 import 'package:homesta/features/authentication/presentation/views/password_manager_screen.dart';
 import 'package:homesta/features/cart/presentation/views/empty_cart_screen.dart';
+import 'package:homesta/features/categories/presentation/cubits/category_cubit/category_cubit.dart';
+import 'package:homesta/features/categories/presentation/cubits/sub_category_cubit.dart/sub_category_cubit.dart';
 import 'package:homesta/features/chat/data/models/chat_message_model.dart';
 import 'package:homesta/features/chat/domain/repos/chat_repo.dart';
 import 'package:homesta/features/chat/presentation/cubit/chat/chat_cubit.dart';
@@ -119,7 +121,7 @@ abstract class AppRouter {
   static final adminDashboardScreen = '/adminDashboardScreen';
 
   static final route = GoRouter(
-    initialLocation: sellerAccountScreen,
+    initialLocation: loginScreen,
     routes: [
       GoRoute(
         path: onboardingRoute,
@@ -134,8 +136,19 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: productFormScreen,
-        builder: (context, state) => BlocProvider(
-          create: (context) => sl<SellerProductCubit>(),
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            BlocProvider<SellerProductCubit>(
+              create: (context) => sl<SellerProductCubit>(),
+            ),
+            BlocProvider<CategoryCubit>(
+              create: (context) => sl<CategoryCubit>(),
+            ),
+            BlocProvider<SubCategoryCubit>(
+              create: (context) => sl<SubCategoryCubit>(),
+            ),
+          ],
+         
           child: const ProductFormScreen()),
       ),
       GoRoute(

@@ -43,7 +43,7 @@ void handleDioExceptions(DioException e) {
           );
         case 401: //unauthorized
           throw ServerException(
-            errModel: ErrorModel.fromJson(e.response!.data),
+            errModel: ErrorModel(errorMessage:  ("unauthorized")),
           );
         case 403: //forbidden
           throw ServerException(

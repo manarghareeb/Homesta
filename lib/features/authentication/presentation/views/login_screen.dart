@@ -144,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               value: state.user.user.email,
                             );
 
-                            GoRouter.of(context).push(AppRouter.homeScreen);
+                            GoRouter.of(context).push(AppRouter.sellerAccountScreen);
                           } else if (state is AuthFailure) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text(state.error)),
