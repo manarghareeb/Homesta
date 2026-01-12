@@ -47,8 +47,9 @@ class _CreateStoreFormState extends State<CreateStoreForm> {
       listener: (context, state) {
         if (state is StoreSuccess) {
     
-          context.push(AppRouter.sellerAccountScreen);
-        } else if (state is StoreError) {
+         // context.push(AppRouter.sellerAccountScreen);
+        }
+         else if (state is StoreError) {
   showSnackBar(context, state.message);
         }
       },
@@ -166,6 +167,7 @@ class _CreateStoreFormState extends State<CreateStoreForm> {
                               hasSms: hasSms,
                             );
                             context.read<StoreCubit>().createStore(params);
+                            context.push( AppRouter.sellerAccountScreen);
                           }
                         },
                         minWidth: double.infinity,

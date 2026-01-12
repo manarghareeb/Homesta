@@ -32,6 +32,7 @@ import 'package:homesta/features/seller/profile/data/data_source/store_data_sour
 import 'package:homesta/features/seller/profile/data/repo/store_repo_impl.dart';
 import 'package:homesta/features/seller/profile/domain/repo/store_repo.dart';
 import 'package:homesta/features/seller/profile/domain/use_cases/create_store_use_case.dart';
+import 'package:homesta/features/seller/profile/domain/use_cases/get_store_use_case.dart';
 import 'package:homesta/features/seller/profile/presentation/cubits/store_cubit.dart';
 
 final sl = GetIt.instance;
@@ -93,6 +94,7 @@ void initServiceLocator() {
   sl.registerLazySingleton(() => AddProductUseCase(sallerProductRepo: sl()));
   //store usecase
     sl.registerLazySingleton(() => CreateStoreUseCase(sl()));
+    sl.registerLazySingleton( () => GetStoreUseCase(sl()));
   /// Cubits
   sl.registerFactory(
     () =>
@@ -105,5 +107,5 @@ void initServiceLocator() {
   //saller product cubit
   sl.registerFactory(() => SellerProductCubit(addProductUseCase: sl(), getSallerProductUsecase: sl()));
 //store cubit
-  sl.registerFactory(() => StoreCubit(createStoreUseCase: sl()));
+  sl.registerFactory(() => StoreCubit(createStoreUseCase: sl(),getStoreUseCase: sl()));
 }

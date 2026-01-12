@@ -1,20 +1,24 @@
 
-
 import 'package:homesta/features/seller/profile/domain/entites/store_entiy.dart';
 
 class StoreModel extends StoreEntity {
-  StoreModel({
+  const StoreModel({
+    required super.storeId,
     required super.name,
     required super.phone,
-    required super.email,
-    required super.address,
-    required super.workingHours,
+    super.email,
+    super.address,
+    super.workingHours,
     required super.hasWhatsapp,
     required super.hasSms,
+    super.sellerId,
+    super.sellerName,
+    required super.totalProducts,
   });
 
   factory StoreModel.fromJson(Map<String, dynamic> json) {
     return StoreModel(
+      storeId: json['storeId'],
       name: json['name'],
       phone: json['phone'],
       email: json['email'],
@@ -22,18 +26,9 @@ class StoreModel extends StoreEntity {
       workingHours: json['workingHours'],
       hasWhatsapp: json['hasWhatsapp'],
       hasSms: json['hasSms'],
+      sellerId: json['sellerId'],
+      sellerName: json['sellerName'],
+      totalProducts: json['totalProducts'],
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'phone': phone,
-      'email': email,
-      'address': address,
-      'workingHours': workingHours,
-      'hasWhatsapp': hasWhatsapp,
-      'hasSms': hasSms,
-    };
   }
 }

@@ -4,6 +4,7 @@ import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 import 'package:homesta/features/seller/company%20data/presentation/widgets/about_cart.dart';
 import 'package:homesta/features/seller/company%20data/presentation/widgets/detail_row.dart';
+import 'package:homesta/features/seller/company%20data/presentation/widgets/get_store_bloc_builder.dart';
 import 'package:homesta/features/seller/company%20data/presentation/widgets/mission_vision_cart.dart';
 
 class CompanyDataScreen extends StatelessWidget {
@@ -45,32 +46,8 @@ class CompanyDataScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               //const CompanyDetails(),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8,
-                  vertical: 16,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Company Details",
-                      style: TextStyles.font20BlackColorW500,
-                    ),
-                    const SizedBox(height: 16),
-                    DetailRow(label: "Brand Name", value: "CasaLux"),
-                    DetailRow(label: "Full Name", value: "Mohamed Ahmed"),
-                    DetailRow(label: "Founded", value: "2010"),
-                    DetailRow(label: "Headquarters", value: "Egypt"),
-                    DetailRow(label: "Email", value: "info@homesta.com"),
-                    DetailRow(label: "Phone", value: "+123-456-789"),
-                  ],
-                ),
-              ),
+             GetStoreBlocBuilder(),
+              
               const SizedBox(height: 24),
               SizedBox(
                 width: double.infinity,
