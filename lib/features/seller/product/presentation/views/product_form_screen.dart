@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:homesta/core/api/api_keys.dart';
+import 'package:homesta/core/cache/cache_helper.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
@@ -33,7 +35,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController priceController = TextEditingController();
-    TextEditingController discountController = TextEditingController();
+  TextEditingController discountController = TextEditingController();
   TextEditingController colorController = TextEditingController();
   TextEditingController stockController = TextEditingController();
 
@@ -104,30 +106,32 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                     ),
                     SizedBox(height: 16.h),
                     SelectCategory(
-  initialCategoryId: widget.product?.categoryId,
-  onCategorySelected: (categoryId) {
-    setState(() {
-      selectedCategoryId = categoryId;
-      selectedSubCategoryId = null; // reset sub
-    });
-    // جلب SubCategories من Cubit
-    context.read<SubCategoryCubit>().getSubCategories(categoryId);
-  },
-),
-SizedBox(height: 16.h),
-// بعد كده Dropdown SubCategory
-if (selectedCategoryId != null)
-  SelectSubCategory(
-    categoryId: selectedCategoryId!,
-    initialSubCategoryId: widget.product?.subCategoryId,
-    onSubCategorySelected: (subId) {
-      setState(() {
-        selectedSubCategoryId = subId;
-      });
-    },
-  ),
+                      initialCategoryId: widget.product?.categoryId,
+                      onCategorySelected: (categoryId) {
+                        setState(() {
+                          selectedCategoryId = categoryId;
+                          selectedSubCategoryId = null; // reset sub
+                        });
+                        // جلب SubCategories من Cubit
+                        context.read<SubCategoryCubit>().getSubCategories(
+                          categoryId,
+                        );
+                      },
+                    ),
+                    SizedBox(height: 16.h),
+                    // بعد كده Dropdown SubCategory
+                    if (selectedCategoryId != null)
+                      SelectSubCategory(
+                        categoryId: selectedCategoryId!,
+                        initialSubCategoryId: widget.product?.subCategoryId,
+                        onSubCategorySelected: (subId) {
+                          setState(() {
+                            selectedSubCategoryId = subId;
+                          });
+                        },
+                      ),
 
-  SizedBox(height: 16.h),
+                    SizedBox(height: 16.h),
                     ImageUpload(isEdit: isEdit, product: widget.product),
                     SizedBox(height: 16.h),
                     CustomTextFieldWidget(
@@ -163,8 +167,8 @@ if (selectedCategoryId != null)
                         return null;
                       },
                     ),
-                         SizedBox(height: 16.h),
-                                     CustomTextFieldWidget(
+                    SizedBox(height: 16.h),
+                    CustomTextFieldWidget(
                       prefixIcon: Icons.price_change_outlined,
                       controller: discountController,
                       hintText: 'product Discount',
@@ -206,36 +210,38 @@ if (selectedCategoryId != null)
                       },
                     ),
                     SizedBox(height: 24.h),
-                  state is SellerAddProductLoading ? const CircularProgressIndicator() :  CustomButtonWidget(
-                      buttonText: 'Save',
-                      onPressed: () async {
-                        if (!_formKey.currentState!.validate()) {
-                          return;
-                        }
-if (selectedCategoryId == null) {
-  showSnackBar(context, "اختاري Category");
-  return;
-}
+                    state is SellerAddProductLoading
+                        ? const CircularProgressIndicator()
+                        : CustomButtonWidget(
+                          buttonText: 'Save',
+                          onPressed: () async {
+                            if (!_formKey.currentState!.validate()) {
+                              return;
+                            }
+                            if (selectedCategoryId == null) {
+                              showSnackBar(context, "اختاري Category");
+                              return;
+                            }
 
-                        final params = AddProductParams(
-                          name: nameController.text.trim(),
-                          description: descriptionController.text.trim(),
-                          price: int.parse(priceController.text),
-                          colors: [colorController.text.trim()],
-                          quantity: int.parse(stockController.text),
-                          rating: widget.product?.rating ?? 0,
-                          discount: int.parse(discountController.text),
-                          deliveryTime: 1,
-                          categoryId: selectedCategoryId!,
-                          subCategoryId: selectedSubCategoryId!,
-                          storeId: widget.product?.storeId??1,
-                        );
+                            final params = AddProductParams(
+                              name: nameController.text.trim(),
+                              description: descriptionController.text.trim(),
+                              price: int.parse(priceController.text),
+                              colors: [colorController.text.trim()],
+                              quantity: int.parse(stockController.text),
+                              rating: widget.product?.rating ?? 0,
+                              discount: int.parse(discountController.text),
+                              deliveryTime: 1,
+                              categoryId: selectedCategoryId!,
+                              subCategoryId: selectedSubCategoryId!,
+                              storeId: CacheHelper().getData(key: ApiKeys.storeId)
+                            );
 
-                        context.read<SellerProductCubit>().addSellerProducts(
-                          params,
-                        );
-                      },
-                    ),
+                            context
+                                .read<SellerProductCubit>()
+                                .addSellerProducts(params);
+                          },
+                        ),
                   ],
                 ),
               );

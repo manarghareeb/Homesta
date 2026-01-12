@@ -150,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             if (roles.contains("Admin")) {
                               GoRouter.of(context).push(AppRouter.adminAccountScreen);
                             } else if (roles.contains("Seller")) {
-                              GoRouter.of(context).push(AppRouter.sellerAccountScreen);
+                              GoRouter.of(context).push(AppRouter.crateStoreScreen);
                             } else if (roles.contains("User")) {
                               GoRouter.of(context).push(AppRouter.homeScreen);
                             } else {
@@ -159,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 const SnackBar(content: Text("No valid role assigned")),
                               );
                             }
-                            GoRouter.of(context).push(AppRouter.crateStoreScreen);
+                            //GoRouter.of(context).push(AppRouter.crateStoreScreen);
                           } else if (state is AuthFailure) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text(state.error)),
