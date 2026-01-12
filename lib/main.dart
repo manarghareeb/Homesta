@@ -9,7 +9,6 @@ import 'package:homesta/core/di/service_locator.dart';
 import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/features/cart/data/repos/cart_repo_impl.dart';
-import 'package:homesta/features/cart/domain/repos/cart_repo.dart';
 import 'package:homesta/features/cart/presentation/cubit/add_item_to_cart_cubit/add_item_to_cart_cubit.dart';
 import 'package:homesta/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart';
 
@@ -52,10 +51,9 @@ void main() async {
                 (context) =>
                     AddItemToCartCubit(CartRepoImpl(apiConsumer: apiConsumer)),
           ),
-                 BlocProvider<CartCubit>(
+          BlocProvider<CartCubit>(
             create:
-                (context) =>
-                    CartCubit(CartRepoImpl(apiConsumer: apiConsumer)),
+                (context) => CartCubit(CartRepoImpl(apiConsumer: apiConsumer)),
           ),
         ],
         child: const MyApp(),

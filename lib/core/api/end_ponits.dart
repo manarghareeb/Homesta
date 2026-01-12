@@ -21,4 +21,6 @@ class EndPoint {
   static String addProductReviews = "api/Review";
   static String addCart = 'api/Cart/add';
   static String getCart = 'api/Cart';
+  static String shipping = 'api/Order/shipping';
+  static String payment = 'api/Order/payment';
 }

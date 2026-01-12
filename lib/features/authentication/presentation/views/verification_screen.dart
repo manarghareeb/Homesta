@@ -54,10 +54,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 style: TextStyles.font14GreyColorW400,
                 textAlign: TextAlign.center,
               ),
-              Text(
-                widget.email,
-                style: TextStyles.font14PrimaryColorW400,
-              ),
+              Text(widget.email, style: TextStyles.font14PrimaryColorW400),
               SizedBox(height: 56.h),
 
               /// Code input
@@ -119,7 +116,9 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 text: 'Didn’t receive code?',
                 textButton: ' Resend Code',
                 onTap: () {
-                  context.read<AuthCubit>().resendResetCode(widget.email.trim());
+                  context.read<AuthCubit>().resendResetCode(
+                    widget.email.trim(),
+                  );
                 },
               ),
 

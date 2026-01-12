@@ -55,13 +55,19 @@ class ProductRepositoryImpl implements ProductRepository {
     required int subCategoryId,
   }) async {
     try {
-    final List<ProductEntity> allProducts =
-        await productDataSource.getProducts();
-    final filtered = allProducts.where((p) =>
-        p.categoryId == categoryId && p.subCategoryId == subCategoryId).toList();
-    return right(filtered);
-  } on ServerException catch (e) {
-    return left(e.errModel);
-  }
+      final List<ProductEntity> allProducts =
+          await productDataSource.getProducts();
+      final filtered =
+          allProducts
+              .where(
+                (p) =>
+                    p.categoryId == categoryId &&
+                    p.subCategoryId == subCategoryId,
+              )
+              .toList();
+      return right(filtered);
+    } on ServerException catch (e) {
+      return left(e.errModel);
+    }
   }
 }

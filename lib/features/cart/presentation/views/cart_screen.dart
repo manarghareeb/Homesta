@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
@@ -16,7 +18,10 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: CustomAppBarWidget(text: 'Cart', backgroundColor: Colors.white),
+      appBar: const CustomAppBarWidget(
+        text: 'Cart',
+        backgroundColor: Colors.white,
+      ),
       body: BlocBuilder<CartCubit, CartState>(
         builder: (context, state) {
           if (state is CartLoading) {
@@ -25,16 +30,12 @@ class CartScreen extends StatelessWidget {
             return Center(child: Text(state.error));
           } else if (state is CartSuccess) {
             final cartItems = state.cart.cartItems ?? [];
-
             if (cartItems.isEmpty) {
               return const EmptyCartScreen();
             }
             return SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsetsGeometry.symmetric(
-                  horizontal: 16.w,
-                  vertical: 16.h,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -43,30 +44,33 @@ class CartScreen extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: cartItems.length,
-                      separatorBuilder:
-                          (context, index) => SizedBox(height: 24.h),
+                      separatorBuilder: (context, index) =>
+                          SizedBox(height: 24.h),
                       itemBuilder: (context, index) {
                         final cartItem = cartItems[index];
                         return CartItemWidget(
-                          name: 'Modern Chair',
-                          color: 'Green',
+                          name: cartItem.productName ?? 'Unknown Product',
+                          color: (cartItem.productColors != null &&
+                                  cartItem.productColors!.isNotEmpty)
+                              ? cartItem.productColors!.first
+                              : 'Green',
                           image: 'assets/images/chair.png',
-                          price: 200,
+                          price: cartItem.unitPrice ?? 0,
                         );
                       },
                     ),
+                    SizedBox(height: 100.h), 
                   ],
                 ),
               ),
             );
           }
-          return Container();
+          return const Center(child: CircularProgressIndicator());
         },
       ),
       bottomNavigationBar: BlocBuilder<CartCubit, CartState>(
         builder: (context, state) {
-          if (state is CartSuccess &&
-              (state.cart.cartItems?.isEmpty ?? false)) {
+          if (state is CartSuccess && (state.cart.cartItems?.isNotEmpty ?? false)) {
             final totalPrice = state.cart.totalPrice ?? 0;
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
@@ -77,7 +81,7 @@ class CartScreen extends StatelessWidget {
                     children: [
                       Text('Total Price', style: TextStyles.font16BlackW500),
                       Text(
-                        '$totalPrice',
+                        '\$$totalPrice',
                         style: TextStyles.font16BlackW500.copyWith(
                           color: ColorManager.thirdColor,
                         ),
@@ -87,7 +91,9 @@ class CartScreen extends StatelessWidget {
                   SizedBox(width: 64.w),
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        GoRouter.of(context).push(AppRouter.orderFlowScreen);
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: ColorManager.primaryColor,
                         padding: EdgeInsets.symmetric(vertical: 14.h),
@@ -105,8 +111,9 @@ class CartScreen extends StatelessWidget {
                 ],
               ),
             );
+          } else {
+            return const SizedBox.shrink(); 
           }
-          return const SizedBox.shrink();
         },
       ),
     );

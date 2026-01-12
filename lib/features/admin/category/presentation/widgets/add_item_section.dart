@@ -66,7 +66,10 @@ class _AddItemSectionState extends State<AddItemSection> {
                   children: [
                     Icon(Icons.add, color: Colors.white),
                     SizedBox(width: 4),
-                    Text(widget.addButtonText, style: TextStyles.font14WhiteColorW400),
+                    Text(
+                      widget.addButtonText,
+                      style: TextStyles.font14WhiteColorW400,
+                    ),
                   ],
                 ),
               ),

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 import 'package:homesta/features/cart/presentation/views/cart_view.dart';
+import 'package:homesta/features/order/data/models/payment_response/payment_response.dart';
+import 'package:homesta/features/order/presentation/cubit/shipping_cubit/shipping_cubit.dart';
+import 'package:homesta/features/order/presentation/cubit/shipping_cubit/shipping_state.dart';
 import 'package:homesta/features/order/presentation/views/order_successfully_screen.dart';
-import 'package:homesta/features/payment/presentation/views/payment_view.dart';
+import 'package:homesta/features/order/presentation/views/payment_view.dart';
 import 'package:homesta/features/order/presentation/views/shipping_view.dart';
 import 'package:homesta/features/order/presentation/views/summary_view.dart';
 
@@ -17,6 +21,8 @@ class OrderFlowScreen extends StatefulWidget {
 
 class _OrderFlowScreenState extends State<OrderFlowScreen> {
   int currentStep = 0;
+  int? shippingOrderId;
+  PaymentResponse? paymentResponse;
 
   final List<String> steps = ["Cart", "Shipping", "Payment", "Summary"];
 
@@ -31,23 +37,64 @@ class _OrderFlowScreenState extends State<OrderFlowScreen> {
     "Checkout",
     "Shipping",
     "Payment",
-    "Payment",
+    "Summary",
   ];
 
   List<Widget> get screens => [
     CartView(onNext: () => setState(() => currentStep++)),
-    ShippingView(
-      onBack: () => setState(() => currentStep--),
-      onNext: () => setState(() => currentStep++),
+    BlocConsumer<ShippingCubit, ShippingState>(
+      listener: (context, state) {
+        if (state is ShippingSuccess) {
+          shippingOrderId = state.response;
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Shipping info saved successfully!')),
+          );
+          setState(() => currentStep++);
+        } else if (state is ShippingFailure) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.error)));
+        }
+      },
+      builder: (context, state) {
+        if (state is ShippingLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        return ShippingView(
+          onBack: () => setState(() => currentStep--),
+          onNext: (shippingData) {
+            context.read<ShippingCubit>().addShipping(shippingData);
+          },
+        );
+      },
     ),
-    PaymentView(
-      onBack: () => setState(() => currentStep--),
-      onNext: () => setState(() => currentStep++),
-    ),
-    SummaryView(
+    if (shippingOrderId != null)
+      PaymentView(
+        orderId: shippingOrderId!,
+        onBack: () => setState(() => currentStep--),
+        onNext: (PaymentResponse response) {
+          setState(() {
+            paymentResponse = response;
+            currentStep++;
+          });
+        },
+        //onNext: () => setState(() => currentStep++),
+      )
+    else
+      const SizedBox.shrink(),
+    if (paymentResponse != null)
+      SummaryView(
+        paymentResponse: paymentResponse!,
+        onBack: () => setState(() => currentStep--),
+        onNext: () => navigateToSuccessScreen(context),
+      )
+    else
+      const SizedBox.shrink(),
+    /*SummaryView(
       onBack: () => setState(() => currentStep--),
       onNext: () => navigateToSuccessScreen(context),
-    ),
+    ),*/
   ];
 
   @override

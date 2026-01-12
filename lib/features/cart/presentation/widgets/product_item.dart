@@ -20,7 +20,8 @@ class ProductItem extends StatefulWidget {
     required this.price,
     required this.discountPercent,
     required this.image,
-    required this.rating, required ProductEntity productEntity,
+    required this.rating,
+    required ProductEntity productEntity,
   });
 
   @override

@@ -9,14 +9,19 @@ class ProductsByCategoryCubit extends Cubit<ProductsByCategoryState> {
   final GetProductsByCategoryUseCase getProductsByCategoryUseCase;
 
   ProductsByCategoryCubit(this.getProductsByCategoryUseCase)
-      : super(ProductsByCategoryInitial());
+    : super(ProductsByCategoryInitial());
 
-  void loadProducts({required int categoryId, required int subCategoryId}) async {
+  void loadProducts({
+    required int categoryId,
+    required int subCategoryId,
+  }) async {
     emit(ProductsByCategoryLoading());
 
     final Either<ErrorModel, List<ProductEntity>> result =
         await getProductsByCategoryUseCase(
-            categoryId: categoryId, subCategoryId: subCategoryId);
+          categoryId: categoryId,
+          subCategoryId: subCategoryId,
+        );
 
     result.fold(
       (error) => emit(ProductsByCategoryFailure(error.errorMessage)),

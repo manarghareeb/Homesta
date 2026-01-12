@@ -41,31 +41,31 @@ class AuthRepository {
 
   //reset password
   Future<ResetPasswordResponseModel> resetPassword(
-      String email,
-      String newPassword,
-      ) {
-    return remote.resetPassword(
-      email: email,
-      newPassword: newPassword,
-    );
+    String email,
+    String newPassword,
+  ) {
+    return remote.resetPassword(email: email, newPassword: newPassword);
   }
+
   //verification
   Future<VerifyResetCodeResponseModel> verifyResetCode(
-      String email,
-      String code,
-      ) {
+    String email,
+    String code,
+  ) {
     return remote.verifyResetCode(email: email, code: code);
   }
-//resend code
+
+  //resend code
   Future<ResendResetCodeResponseModel> resendResetCode(String email) {
     return remote.resendResetCode(email);
   }
-//manage pass (Update pass)
+
+  //manage pass (Update pass)
   Future<ChangePasswordResponseModel> changePassword(
-      String confirmNewPassword,
-      String currentPassword,
-      String newPassword,
-      ) {
+    String confirmNewPassword,
+    String currentPassword,
+    String newPassword,
+  ) {
     return remote.changePassword(
       confirmNewPassword: confirmNewPassword,
       currentPassword: currentPassword,

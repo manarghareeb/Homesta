@@ -127,9 +127,9 @@ class _PasswordManagerScreenState extends State<PasswordManagerScreen> {
                     );
                     GoRouter.of(context).push(AppRouter.loginScreen);
                   } else if (state is AuthFailure) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(state.error)),
-                    );
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text(state.error)));
                   }
                 },
                 builder: (context, state) {
@@ -165,16 +165,17 @@ class _PasswordManagerScreenState extends State<PasswordManagerScreen> {
         text: TextSpan(
           text: text,
           style: TextStyles.font16BlackRegular,
-          children: required
-              ? [
-            TextSpan(
-              text: " *",
-              style: TextStyles.font14BlackColorW400.copyWith(
-                color: Colors.red,
-              ),
-            ),
-          ]
-              : [],
+          children:
+              required
+                  ? [
+                    TextSpan(
+                      text: " *",
+                      style: TextStyles.font14BlackColorW400.copyWith(
+                        color: Colors.red,
+                      ),
+                    ),
+                  ]
+                  : [],
         ),
       ),
     );

@@ -26,34 +26,37 @@ class CartModel {
   });
 
   factory CartModel.fromJson(Map<String, dynamic> json) => CartModel(
-    cartId: json['cartId'] as int?,
-    userId: json['userId'] as String?,
-    cartItems:
-        (json['cartItems'] as List<dynamic>?)
+        cartId: json['cartId'] as int?,
+        userId: json['userId'] as String?,
+        cartItems: (json['cartItems'] as List<dynamic>?)
             ?.map((e) => CartItem.fromJson(e as Map<String, dynamic>))
             .toList(),
-    totalItems: json['totalItems'] as int?,
-    subTotal: json['subTotal'] as double?,
-    shipping: json['shipping'] as int?,
-    tax: json['tax'] as int?,
-    totalPrice: json['totalPrice'] as double?,
-    createdAt:
-        json['createdAt'] == null
+        totalItems: json['totalItems'] as int?,
+        subTotal: (json['subTotal'] != null)
+            ? (json['subTotal'] as num).toDouble()
+            : null,
+        shipping: json['shipping'] as int?,
+        tax: json['tax'] as int?,
+        totalPrice: (json['totalPrice'] != null)
+            ? (json['totalPrice'] as num).toDouble()
+            : null,
+        createdAt: json['createdAt'] == null
             ? null
             : DateTime.parse(json['createdAt'] as String),
-    isEmpty: json['isEmpty'] as bool?,
-  );
+        isEmpty: json['isEmpty'] as bool?,
+      );
 
   Map<String, dynamic> toJson() => {
-    'cartId': cartId,
-    'userId': userId,
-    'cartItems': cartItems?.map((e) => e.toJson()).toList(),
-    'totalItems': totalItems,
-    'subTotal': subTotal,
-    'shipping': shipping,
-    'tax': tax,
-    'totalPrice': totalPrice,
-    'createdAt': createdAt?.toIso8601String(),
-    'isEmpty': isEmpty,
-  };
+        'cartId': cartId,
+        'userId': userId,
+        'cartItems': cartItems?.map((e) => e.toJson()).toList(),
+        'totalItems': totalItems,
+        'subTotal': subTotal,
+        'shipping': shipping,
+        'tax': tax,
+        'totalPrice': totalPrice,
+        'createdAt': createdAt?.toIso8601String(),
+        'isEmpty': isEmpty,
+      };
 }
+

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';

@@ -19,11 +19,12 @@ class ProductModel extends ProductEntity {
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     final List<dynamic> colorList = json[ApiKeys.colors] ?? [];
-  final parsedColors = colorList
-      .expand((c) => c.split(','))
-      .map((e) => e.trim().toLowerCase())
-      .where((e) => e.isNotEmpty)
-      .toList();
+    final parsedColors =
+        colorList
+            .expand((c) => c.split(','))
+            .map((e) => e.trim().toLowerCase())
+            .where((e) => e.isNotEmpty)
+            .toList();
 
     return ProductModel(
       productId: json[ApiKeys.productId],

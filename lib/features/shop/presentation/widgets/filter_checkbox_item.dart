@@ -3,10 +3,15 @@ import 'package:homesta/core/theming/colors.dart';
 
 class FilterCheckboxItem extends StatelessWidget {
   final String title;
-  final bool isChecked; 
+  final bool isChecked;
   final VoidCallback onTap;
 
-  const FilterCheckboxItem({super.key, required this.title, required this.isChecked, required this.onTap});
+  const FilterCheckboxItem({
+    super.key,
+    required this.title,
+    required this.isChecked,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +25,15 @@ class FilterCheckboxItem extends StatelessWidget {
               width: 22,
               height: 22,
               decoration: BoxDecoration(
-                color: isChecked ? ColorManager.primaryColor : ColorManager.soLightGreyColor,
+                color:
+                    isChecked
+                        ? ColorManager.primaryColor
+                        : ColorManager.soLightGreyColor,
                 borderRadius: BorderRadius.circular(4),
               ),
               child:
                   isChecked
-                      ? const Icon(
-                        Icons.check,
-                        size: 16,
-                        color: Colors.white,
-                      )
+                      ? const Icon(Icons.check, size: 16, color: Colors.white)
                       : null,
             ),
 

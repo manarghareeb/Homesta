@@ -52,10 +52,7 @@ class _ActiveFiltersWidgetState extends State<ActiveFiltersWidget> {
         children: [
           Row(
             children: [
-              Text(
-                'Active Filter',
-                style: TextStyles.font16BlackRegular,
-              ),
+              Text('Active Filter', style: TextStyles.font16BlackRegular),
               const Spacer(),
               GestureDetector(
                 onTap: () {
@@ -85,10 +82,7 @@ class _ActiveFiltersWidgetState extends State<ActiveFiltersWidget> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    label: Text(
-                      filter,
-                      style: TextStyles.font13BlackColorW400,
-                    ),
+                    label: Text(filter, style: TextStyles.font13BlackColorW400),
                     deleteIcon: Icon(
                       Icons.close,
                       color: TextStyles.font14BlackColorW500.color,

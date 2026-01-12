@@ -3,20 +3,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
-import 'package:homesta/core/widgets/custom_button_widget.dart';
+import 'package:homesta/features/cart/presentation/views/cart_view.dart';
 import 'package:homesta/features/home/presentation/views/home.dart';
-import 'package:homesta/features/order/presentation/widgets/order_summary_in_checkout.dart';
-import 'package:homesta/features/cart/presentation/widgets/your_card_item.dart';
-
+import 'package:homesta/features/order/data/models/payment_response/payment_response.dart';
 import '../../../../core/routing/app_router.dart';
 
 class SummaryView extends StatelessWidget {
   final VoidCallback onNext;
   final VoidCallback onBack;
-  const SummaryView({super.key, required this.onNext, required this.onBack});
+  final PaymentResponse paymentResponse;
+  const SummaryView({super.key, required this.onNext, required this.onBack, required this.paymentResponse});
 
   @override
   Widget build(BuildContext context) {
+    final order = paymentResponse.success;
     return Align(
       alignment: Alignment.topCenter,
       child: SingleChildScrollView(
@@ -52,7 +52,7 @@ class SummaryView extends StatelessWidget {
                       ),
                       SizedBox(width: 4.w),
                       Text(
-                        'Nasr City, Cairo - Egypt',
+                        order.address,
                         style: TextStyles.font14GreyColorW400,
                       ),
                     ],
@@ -74,41 +74,18 @@ class SummaryView extends StatelessWidget {
                   Text('Payment Method', style: TextStyles.font16BlackW500),
                   SizedBox(height: 8.h),
                   Text(
-                    'Credit Card (Mastercard **** 1425)',
+                    order.paymentMethod,
                     style: TextStyles.font14GreyColorW400,
                   ),
                 ],
               ),
             ),
             SizedBox(height: 24.h),
-            Text('Order Items (4)', style: TextStyles.font16BlackW500),
+            Text('Order Items (${order.items.length})', style: TextStyles.font16BlackW500),
             SizedBox(height: 16.h),
-            ListView.separated(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: 4,
-              separatorBuilder:
-                  (context, index) =>
-                      Divider(color: ColorManager.lightGreyColor),
-              itemBuilder: (context, index) => const YourCardItem(),
-            ),
-            SizedBox(height: 24.h),
-            Container(
-              padding: EdgeInsets.all(24.h),
-              decoration: BoxDecoration(
-                color: ColorManager.aliceBlue,
-                borderRadius: BorderRadius.circular(15.r),
-              ),
-              child: Column(
-                children: [
-                  const OrderSummaryInCheckout(),
-                  SizedBox(height: 24.h),
-                  CustomButtonWidget(
-                    buttonText: 'Place Order',
-                    onPressed: onNext,
-                  ),
-                ],
-              ),
+            CartView(
+              buttonText: 'Place Order',
+              onNext: (){}
             ),
             SizedBox(height: 24.h),
             Row(
