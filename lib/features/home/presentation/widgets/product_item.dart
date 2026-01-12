@@ -63,7 +63,7 @@ class ProductItem extends StatelessWidget {
                             addToCartCubit.addItemToCart(
                               productId: productEntity.productId,
                               quantity: 1,
-                              colorId: 1,
+                              colorId: productEntity.colors.first,
                             );
                           }),
                         ],

@@ -3,12 +3,12 @@ class CartItem {
   int? productId;
   String? productName;
   List<String>? productColors;
-  int? unitPrice;
+  double? unitPrice;
   int? quantity;
-  int? totalPrice;
+  double? totalPrice;
   String? categoryName;
   int? productDiscount;
-  int? finalPrice;
+  double? finalPrice;
 
   CartItem({
     this.cartItemId,
@@ -28,12 +28,12 @@ class CartItem {
     productId: json['productId'] as int?,
     productName: json['productName'] as String?,
     productColors: json['productColors'] as List<String>?,
-    unitPrice: json['unitPrice'] as int?,
+    unitPrice: json['unitPrice'] as double?,
     quantity: json['quantity'] as int?,
-    totalPrice: json['totalPrice'] as int?,
+    totalPrice: json['totalPrice'] as double?,
     categoryName: json['categoryName'] as String?,
     productDiscount: json['productDiscount'] as int?,
-    finalPrice: json['finalPrice'] as int?,
+    finalPrice: json['finalPrice'] as double?,
   );
 
   Map<String, dynamic> toJson() => {

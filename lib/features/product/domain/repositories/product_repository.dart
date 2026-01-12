@@ -11,4 +11,8 @@ abstract class ProductRepository {
     int productId,
   );
   Future<Either<ErrorModel, Unit>> addReview(AddReviewParams params);
+  Future<Either<ErrorModel, List<ProductEntity>>> getProductsByCategory({
+    required int categoryId,
+    required int subCategoryId,
+  });
 }

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
+import 'package:homesta/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart';
+import 'package:homesta/features/cart/presentation/cubit/cart_cubit/cart_state.dart';
+import 'package:homesta/features/cart/presentation/views/empty_cart_screen.dart';
 import 'package:homesta/features/cart/presentation/widgets/cart_item_widget.dart';
 
 class CartScreen extends StatelessWidget {
@@ -13,70 +17,97 @@ class CartScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBarWidget(text: 'Cart', backgroundColor: Colors.white),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsetsGeometry.symmetric(
-            horizontal: 16.w,
-            vertical: 16.h,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ListView.separated(
-                padding: EdgeInsets.symmetric(vertical: 16.h),
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: 7,
-                separatorBuilder: (context, index) => SizedBox(height: 24.h),
-                itemBuilder: (context, index) {
-                  return CartItemWidget(
-                    name: 'Modern Chair',
-                    color: 'Green',
-                    image: 'assets/images/chair.png',
-                    price: 200,
-                  );
-                },
+      body: BlocBuilder<CartCubit, CartState>(
+        builder: (context, state) {
+          if (state is CartLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is CartFailure) {
+            return Center(child: Text(state.error));
+          } else if (state is CartSuccess) {
+            final cartItems = state.cart.cartItems ?? [];
+
+            if (cartItems.isEmpty) {
+              return const EmptyCartScreen();
+            }
+            return SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsetsGeometry.symmetric(
+                  horizontal: 16.w,
+                  vertical: 16.h,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ListView.separated(
+                      padding: EdgeInsets.symmetric(vertical: 16.h),
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: cartItems.length,
+                      separatorBuilder:
+                          (context, index) => SizedBox(height: 24.h),
+                      itemBuilder: (context, index) {
+                        final cartItem = cartItems[index];
+                        return CartItemWidget(
+                          name: 'Modern Chair',
+                          color: 'Green',
+                          image: 'assets/images/chair.png',
+                          price: 200,
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ),
-        ),
+            );
+          }
+          return Container();
+        },
       ),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-        child: Row(
-          children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text('Total Price', style: TextStyles.font16BlackW500),
-                Text(
-                  '\$1170',
-                  style: TextStyles.font16BlackW500.copyWith(
-                    color: ColorManager.thirdColor,
+      bottomNavigationBar: BlocBuilder<CartCubit, CartState>(
+        builder: (context, state) {
+          if (state is CartSuccess &&
+              (state.cart.cartItems?.isEmpty ?? false)) {
+            final totalPrice = state.cart.totalPrice ?? 0;
+            return Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+              child: Row(
+                children: [
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text('Total Price', style: TextStyles.font16BlackW500),
+                      Text(
+                        '$totalPrice',
+                        style: TextStyles.font16BlackW500.copyWith(
+                          color: ColorManager.thirdColor,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-            SizedBox(width: 64.w),
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: ColorManager.primaryColor,
-                  padding: EdgeInsets.symmetric(vertical: 14.h),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.r),
+                  SizedBox(width: 64.w),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: ColorManager.primaryColor,
+                        padding: EdgeInsets.symmetric(vertical: 14.h),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.r),
+                        ),
+                      ),
+                      child: Text(
+                        'Checkout',
+                        textAlign: TextAlign.center,
+                        style: TextStyles.font16WhiteW500,
+                      ),
+                    ),
                   ),
-                ),
-                child: Text(
-                  'Checkout with Coupon(9)',
-                  textAlign: TextAlign.center,
-                  style: TextStyles.font16WhiteW500,
-                ),
+                ],
               ),
-            ),
-          ],
-        ),
+            );
+          }
+          return const SizedBox.shrink();
+        },
       ),
     );
   }

@@ -6,12 +6,10 @@ import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
 import 'package:homesta/core/widgets/custom_text_field_widget.dart';
 import 'package:homesta/core/widgets/snack_bar.dart';
-import 'package:homesta/core/widgets/title_to_text_field.dart';
 import 'package:homesta/features/product/domain/entities/params/add_review_params.dart';
 import 'package:homesta/features/product/domain/entities/product_entitty.dart';
 import 'package:homesta/features/product/presentation/cubits/review_cubit/review_cubit.dart';
 import 'package:homesta/features/product/presentation/cubits/review_cubit/review_state.dart';
-import 'package:homesta/features/product/presentation/widgets/add_photo_or_video.dart';
 
 class AddReviewSection extends StatefulWidget {
   const AddReviewSection({super.key, required this.productEntity});

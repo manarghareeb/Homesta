@@ -5,6 +5,7 @@ import 'package:homesta/features/cart/presentation/widgets/product_image_with_ba
 import 'package:homesta/features/cart/presentation/widgets/product_overlay_actions.dart';
 import 'package:homesta/features/cart/presentation/widgets/product_price_and_cart_section.dart';
 import 'package:homesta/features/cart/presentation/widgets/product_title_and_rating_section.dart';
+import 'package:homesta/features/product/domain/entities/product_entitty.dart';
 
 class ProductItem extends StatefulWidget {
   final String name;
@@ -19,7 +20,7 @@ class ProductItem extends StatefulWidget {
     required this.price,
     required this.discountPercent,
     required this.image,
-    required this.rating,
+    required this.rating, required ProductEntity productEntity,
   });
 
   @override

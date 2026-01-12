@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:homesta/core/di/service_locator.dart';
 import 'package:homesta/core/theming/colors.dart';
+import 'package:homesta/features/product/presentation/cubits/product_cubit.dart';
+import 'package:homesta/features/search/presentation/views/cubit/cubit/search_cubit.dart';
+import 'package:homesta/features/search/presentation/widgets/search_bloc_builder.dart';
 import 'package:homesta/features/search/presentation/widgets/search_empty_state.dart';
 import 'package:homesta/features/search/presentation/widgets/search_populated_state.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
@@ -106,50 +111,73 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Search', style: TextStyles.font24BlackColorW500),
-        centerTitle: true,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => sl<ProductCubit>()..getAllProducts(),
+        ),
+        BlocProvider(
+          create: (context) => SearchCubit(),
+        ),
+      ],
+
+    
+
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Search', style: TextStyles.font24BlackColorW500),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.white,
+        ),
         backgroundColor: Colors.white,
-        surfaceTintColor: Colors.white,
-      ),
-      backgroundColor: Colors.white,
-      body: Padding(
-        padding: EdgeInsets.all(16.w),
-        child: Column(
-          children: [
-            TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                hintText: 'Search',
-                hintStyle: TextStyles.font14lightGreyColorW400,
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: ColorManager.lightGreyColor,
-                ),
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    _isListening ? Icons.mic : Icons.mic_none,
-                    color: ColorManager.lightGreyColor,
+        body: Builder(
+          builder: (context) {
+            return Padding(
+              padding: EdgeInsets.all(16.w),
+              child: Column(
+                children: [
+                  TextField(
+                    controller: _searchController,
+                    onChanged: (value) {
+                      final res=BlocProvider.of<ProductCubit>(context).allProducts;
+                      context.read<SearchCubit>().search(res,value);
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Search',
+                      hintStyle: TextStyles.font14lightGreyColorW400,
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: ColorManager.lightGreyColor,
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _isListening ? Icons.mic : Icons.mic_none,
+                          color: ColorManager.lightGreyColor,
+                        ),
+                        onPressed: _listen,
+                      ),
+                      filled: true,
+                      fillColor: ColorManager.soLightGreyColor,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12.r),
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
                   ),
-                  onPressed: _listen,
-                ),
-                filled: true,
-                fillColor: ColorManager.soLightGreyColor,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.r),
-                  borderSide: BorderSide.none,
-                ),
+                  SizedBox(height: 20.h),
+                  // Expanded(
+                  //   child:
+                  //       _isSearching
+                  //           ? const SearchPopulatedState()
+                  //           : const SearchEmptyState(),
+                  // ),
+                  SearchBlocBuilder()
+            
+                ],
               ),
-            ),
-            SizedBox(height: 20.h),
-            Expanded(
-              child:
-                  _isSearching
-                      ? const SearchPopulatedState()
-                      : const SearchEmptyState(),
-            ),
-          ],
+            );
+          }
         ),
       ),
     );
