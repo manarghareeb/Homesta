@@ -39,7 +39,7 @@ void handleDioExceptions(DioException e) {
       switch (e.response?.statusCode) {
         case 400: // Bad request
           throw ServerException(
-            errModel: ErrorModel.fromJson(e.response!.data),
+            errModel: ErrorModel(errorMessage: "Bad request"),
           );
         case 401: //unauthorized
           throw ServerException(
@@ -47,11 +47,11 @@ void handleDioExceptions(DioException e) {
           );
         case 403: //forbidden
           throw ServerException(
-            errModel: ErrorModel.fromJson(e.response!.data),
+            errModel: ErrorModel(errorMessage:  ("forbidden")),
           );
         case 404: //not found
           throw ServerException(
-            errModel: ErrorModel.fromJson(e.response!.data),
+            errModel: ErrorModel(errorMessage: ("not found")),
           );
         case 409: //cofficient
           throw ServerException(

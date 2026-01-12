@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homesta/core/di/service_locator.dart';
@@ -14,7 +14,7 @@ import 'package:homesta/features/admin/profile/presentation/views/admin_account_
 import 'package:homesta/features/authentication/presentation/views/logout_screen.dart';
 import 'package:homesta/features/account/presentation/views/manage_address_screen.dart';
 import 'package:homesta/features/account/presentation/views/my_order_screen.dart';
-import 'package:homesta/features/cart/domain/repos/cart_repo.dart';
+
 import 'package:homesta/features/cart/presentation/cubit/add_item_to_cart_cubit/add_item_to_cart_cubit.dart';
 import 'package:homesta/features/authentication/presentation/views/password_manager_screen.dart';
 import 'package:homesta/features/cart/presentation/views/empty_cart_screen.dart';
@@ -48,7 +48,10 @@ import 'package:homesta/features/seller/company%20data/presentation/views/compan
 import 'package:homesta/features/seller/product/presentation/cubits/saller_product_cubit.dart';
 import 'package:homesta/features/seller/product/presentation/views/product_form_screen.dart';
 import 'package:homesta/features/seller/product/presentation/views/product_screen.dart';
+import 'package:homesta/features/seller/profile/presentation/cubits/store_cubit.dart';
+import 'package:homesta/features/seller/profile/presentation/views/create_store_view.dart';
 import 'package:homesta/features/seller/profile/presentation/views/seller_account_screen.dart';
+import 'package:homesta/features/seller/profile/presentation/views/widgets/create_store_form.dart';
 import 'package:homesta/features/splash/presentation/splashscreen.dart';
 import '../../features/account/presentation/views/account_screen.dart';
 import '../../features/account/presentation/views/add_review.dart';
@@ -114,6 +117,7 @@ abstract class AppRouter {
   static final sellerAccountScreen = '/sellerAccountScreen';
   static final productScreen = '/productScreen';
   static final productFormScreen = '/productFormScreen';
+   static final crateStoreScreen = '/createStoreScreen';
   // Admin Route
   static final adminAccountScreen = '/adminAccountScreen';
   static final adminProductScreen = '/adminProductScreen';
@@ -128,6 +132,13 @@ abstract class AppRouter {
         builder: (context, state) => const LoginScreen(),        
       ),
       // Seller Route
+            GoRoute(
+        path: crateStoreScreen,
+        builder: (context, state) => BlocProvider(
+          create: (context) => sl<StoreCubit>(),
+          child: const CreateStoreView()),        
+      ),
+
       GoRoute(
         path: sellerAccountScreen,
         builder: (context, state) => BlocProvider(

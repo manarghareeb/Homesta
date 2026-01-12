@@ -27,5 +27,6 @@ class EndPoint {
   static String addProduct = "api/Product/Create";
   static String editProduct = "api/Product/Update";
   static String deleteProduct = "api/Product/Delete";
+  static String createStore = "api/Store";
 
 }

@@ -8,7 +8,6 @@ import 'package:homesta/core/widgets/custom_text_field_widget.dart';
 import 'package:homesta/core/widgets/snack_bar.dart';
 import 'package:homesta/features/categories/presentation/cubits/sub_category_cubit.dart/sub_category_cubit.dart';
 import 'package:homesta/features/product/domain/entities/product_entitty.dart';
-import 'package:homesta/features/seller/product/data/models/product_seller_model.dart';
 import 'package:homesta/features/seller/product/domain/entitiy/params/add_product_params.dart';
 import 'package:homesta/features/seller/product/presentation/cubits/saller_product_cubit.dart';
 import 'package:homesta/features/seller/product/presentation/cubits/saller_product_state.dart';
