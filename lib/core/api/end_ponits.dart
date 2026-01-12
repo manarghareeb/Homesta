@@ -27,4 +27,14 @@ class EndPoint {
   static String getCart = 'api/Cart';
   static String shipping = 'api/Order/shipping';
   static String payment = 'api/Order/payment';
+  static String getCartItem = 'api/Cart/items';
+
+  //saller endpoints
+  static String getSallerProducts = "api/Store/";
+  static String addProduct = "api/Product/Create";
+  static String editProduct = "api/Product/Update";
+  static String deleteProduct = "api/Product/Delete";
+  static String createStore = "api/Store";
+  static String getStore = "api/Store";
+
 }

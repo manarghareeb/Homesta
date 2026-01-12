@@ -29,6 +29,18 @@ import 'package:homesta/features/product/domain/usecases/get_products_by_categor
 import 'package:homesta/features/product/presentation/cubits/product_cubit.dart';
 import 'package:homesta/features/product/presentation/cubits/products_by_category_cubit/products_by_category_cubit.dart';
 import 'package:homesta/features/product/presentation/cubits/review_cubit/review_cubit.dart';
+import 'package:homesta/features/seller/product/data/data_source/saller_product_data_source.dart';
+import 'package:homesta/features/seller/product/data/repo/saller_repo_impl.dart';
+import 'package:homesta/features/seller/product/domain/repo/saller_product_repo.dart';
+import 'package:homesta/features/seller/product/domain/usecases/add_product_use_case.dart';
+import 'package:homesta/features/seller/product/domain/usecases/get_saller_product_usecase.dart';
+import 'package:homesta/features/seller/product/presentation/cubits/saller_product_cubit.dart';
+import 'package:homesta/features/seller/profile/data/data_source/store_data_source.dart';
+import 'package:homesta/features/seller/profile/data/repo/store_repo_impl.dart';
+import 'package:homesta/features/seller/profile/domain/repo/store_repo.dart';
+import 'package:homesta/features/seller/profile/domain/use_cases/create_store_use_case.dart';
+import 'package:homesta/features/seller/profile/domain/use_cases/get_store_use_case.dart';
+import 'package:homesta/features/seller/profile/presentation/cubits/store_cubit.dart';
 
 import '../../features/admin/domain/usecases/add_category_use_case.dart';
 import '../../features/admin/domain/usecases/add_subCategory_use_case.dart';
@@ -54,6 +66,14 @@ void initServiceLocator() {
   sl.registerLazySingleton<ReviewProductDataSource>(
     () => ReviewProductDataSourceImp(api: sl()),
   );
+  //saller product data source
+  sl.registerLazySingleton<SallerProductDataSource>(
+    () => SallerProductDataSourceImpl(apiConsumer: sl()),
+  );
+  //store data source
+  sl.registerLazySingleton<StoreDataSource>(
+    () => StoreDataSourceImpl(apiConsumer: sl()),
+  );
 
   /// Repositories
   sl.registerLazySingleton<CategoryRepo>(
@@ -65,6 +85,15 @@ void initServiceLocator() {
   );
   sl.registerLazySingleton<CartRepo>(() => CartRepoImpl(apiConsumer: sl()));
   sl.registerLazySingleton<OrderRepo>(() => OrderRepoImpl(apiConsumer: sl()));
+  //saller product repo
+  sl.registerLazySingleton<SallerProductRepo>(
+    () => SallerProductRepoImpl(sallerProductDataSource: sl()),
+  );
+  //store repo
+    sl.registerLazySingleton<StoreRepo>(
+    () => StoreRepoImpl(storeDataSource:  sl()),
+  );
+
 
   /// UseCases
   sl.registerLazySingleton(() => GetCategoryUseCase(sl()));
@@ -83,6 +112,12 @@ void initServiceLocator() {
   sl.registerLazySingleton(() => DeleteSubCategoryUseCase(sl()));
 
 
+    sl.registerLazySingleton(() => GetSallerProductUsecase(sallerProductRepo:  sl()));
+//saller product usecase
+  sl.registerLazySingleton(() => AddProductUseCase(sallerProductRepo: sl()));
+  //store usecase
+    sl.registerLazySingleton(() => CreateStoreUseCase(sl()));
+    sl.registerLazySingleton( () => GetStoreUseCase(sl()));
   /// Cubits
   sl.registerFactory(
     () =>
@@ -96,4 +131,8 @@ void initServiceLocator() {
   sl.registerFactory(() => ProductsByCategoryCubit(sl()));
   sl.registerFactory(() => ShippingCubit(sl()));
   sl.registerFactory(() => PaymentCubit(sl()));
+  //saller product cubit
+  sl.registerFactory(() => SellerProductCubit(addProductUseCase: sl(), getSallerProductUsecase: sl()));
+//store cubit
+  sl.registerFactory(() => StoreCubit(createStoreUseCase: sl(),getStoreUseCase: sl()));
 }

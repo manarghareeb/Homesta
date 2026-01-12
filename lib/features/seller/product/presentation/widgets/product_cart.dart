@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
-import 'package:homesta/features/seller/product/data/models/product_seller_model.dart';
+import 'package:homesta/features/product/domain/entities/product_entitty.dart';
 import 'package:homesta/features/seller/product/presentation/widgets/image_with_edit_and_delete_icon.dart';
 
 class ProductCard extends StatelessWidget {
-  final Product product;
+  final ProductEntity product;
 
   const ProductCard({super.key, required this.product});
 
@@ -19,7 +19,7 @@ class ProductCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ImageWithAddAndDeleteIcon(product: product),
+          ImageWithAddAndDeleteIcon(),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 12),
             child: Column(
@@ -27,7 +27,7 @@ class ProductCard extends StatelessWidget {
               children: [
                 Text(product.name, style: TextStyles.font15BlackW500),
                 SizedBox(height: 4),
-                Text(product.category, style: TextStyles.font15GreyColorW400),
+                Text(product.categoryId.toString(), style: TextStyles.font15GreyColorW400),
                 SizedBox(height: 4),
                 Text(
                   product.description,
@@ -49,11 +49,11 @@ class ProductCard extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           radius: 7,
-                          backgroundColor: product.colorValue,
+                          backgroundColor: Colors.amber,
                         ),
                         SizedBox(width: 4),
                         Text(
-                          product.colorName,
+                          product.colors.first,
                           style: TextStyles.font14GreyColorW400,
                         ),
                       ],
@@ -62,7 +62,7 @@ class ProductCard extends StatelessWidget {
                 ),
                 SizedBox(height: 4),
                 Text(
-                  "Stok :${product.stock}",
+                  "Stok :${product.quantity}",
                   style: TextStyles.font13LightGreyW500.copyWith(
                     color: ColorManager.greyColor,
                   ),

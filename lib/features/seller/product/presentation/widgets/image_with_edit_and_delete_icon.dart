@@ -4,9 +4,9 @@ import 'package:homesta/features/seller/product/data/models/product_seller_model
 import 'package:homesta/features/seller/product/presentation/views/product_form_screen.dart';
 
 class ImageWithAddAndDeleteIcon extends StatelessWidget {
-  const ImageWithAddAndDeleteIcon({super.key, required this.product});
+  const ImageWithAddAndDeleteIcon({super.key, });
 
-  final Product product;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class ImageWithAddAndDeleteIcon extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           margin: EdgeInsets.only(left: 8, right: 8, bottom: 8, top: 16),
-          child: Image.asset(product.image, fit: BoxFit.contain),
+          child: Image.asset("assets/images/catrgories_image/kitchen.png", fit: BoxFit.contain),
         ),
         Positioned(
           top: 25,
@@ -46,12 +46,12 @@ class ImageWithAddAndDeleteIcon extends StatelessWidget {
           right: 15,
           child: GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ProductFormScreen(product: product),
-                ),
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => ProductFormScreen(product: product),
+              //   ),
+              // );
             },
             child: Container(
               padding: EdgeInsets.all(4),

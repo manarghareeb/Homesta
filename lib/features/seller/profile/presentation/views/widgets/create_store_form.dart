@@ -171,6 +171,7 @@ class _CreateStoreFormState extends State<CreateStoreForm> {
                               hasSms: hasSms,
                             );
                            // context.read<StoreCubit>().createStore(params);
+                            context.read<StoreCubit>().createStore(params);
                             context.push( AppRouter.sellerAccountScreen);
                           }
                         },

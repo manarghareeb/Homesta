@@ -15,6 +15,7 @@ final GetSallerProductUsecase getSallerProductUsecase;
   }) : super(SellerProductInitial());
 
   /// 🔹 add seller products
+  /// 🔹 Get seller products
   Future<void> addSellerProducts(AddProductParams params) async {
     emit(SellerAddProductLoading());
 

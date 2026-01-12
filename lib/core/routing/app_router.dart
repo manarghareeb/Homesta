@@ -1,5 +1,8 @@
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:homesta/core/api/api_keys.dart';
+import 'package:homesta/core/cache/cache_helper.dart';
 import 'package:homesta/core/di/service_locator.dart';
 import 'package:homesta/features/account/presentation/views/contact_us_screen.dart';
 import 'package:homesta/features/account/presentation/views/customer_support_screen.dart';
@@ -14,11 +17,13 @@ import 'package:homesta/features/admin/profile/presentation/views/admin_account_
 import 'package:homesta/features/authentication/presentation/views/logout_screen.dart';
 import 'package:homesta/features/account/presentation/views/manage_address_screen.dart';
 import 'package:homesta/features/account/presentation/views/my_order_screen.dart';
+
 import 'package:homesta/features/authentication/presentation/views/password_manager_screen.dart';
 import 'package:homesta/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart';
 import 'package:homesta/features/cart/presentation/views/empty_cart_screen.dart';
 import 'package:homesta/features/categories/presentation/cubits/category_cubit/category_cubit.dart';
 import 'package:homesta/features/categories/presentation/views/category_section_screen.dart';
+import 'package:homesta/features/categories/presentation/cubits/sub_category_cubit.dart/sub_category_cubit.dart';
 import 'package:homesta/features/chat/data/models/chat_message_model.dart';
 import 'package:homesta/features/chat/domain/repos/chat_repo.dart';
 import 'package:homesta/features/chat/presentation/cubit/chat/chat_cubit.dart';
@@ -46,9 +51,13 @@ import 'package:homesta/features/product/presentation/cubits/review_cubit/review
 import 'package:homesta/features/product/presentation/views/product_details_view.dart';
 import 'package:homesta/features/seller/analytics/presentation/views/sales_analytics_screen.dart';
 import 'package:homesta/features/seller/company%20data/presentation/views/company_data_screen.dart';
+import 'package:homesta/features/seller/product/presentation/cubits/saller_product_cubit.dart';
 import 'package:homesta/features/seller/product/presentation/views/product_form_screen.dart';
 import 'package:homesta/features/seller/product/presentation/views/product_screen.dart';
+import 'package:homesta/features/seller/profile/presentation/cubits/store_cubit.dart';
+import 'package:homesta/features/seller/profile/presentation/views/create_store_view.dart';
 import 'package:homesta/features/seller/profile/presentation/views/seller_account_screen.dart';
+import 'package:homesta/features/seller/profile/presentation/views/widgets/create_store_form.dart';
 import 'package:homesta/features/splash/presentation/splashscreen.dart';
 import '../../features/account/presentation/views/account_screen.dart';
 import '../../features/account/presentation/views/add_review.dart';
@@ -116,6 +125,7 @@ abstract class AppRouter {
   static final sellerAccountScreen = '/sellerAccountScreen';
   static final productScreen = '/productScreen';
   static final productFormScreen = '/productFormScreen';
+   static final crateStoreScreen = '/createStoreScreen';
   // Admin Route
   static final adminAccountScreen = '/adminAccountScreen';
   static final adminProductScreen = '/adminProductScreen';
@@ -124,28 +134,57 @@ abstract class AppRouter {
   static final adminSubCategoryScreen = '/adminSubCategoryScreen';
 
   static final route = GoRouter(
-    initialLocation: onboardingRoute,
+    initialLocation: loginScreen,
     routes: [
       GoRoute(
         path: onboardingRoute,
         builder: (context, state) => const LoginScreen(),
       ),
       // Seller Route
+            GoRoute(
+        path: crateStoreScreen,
+        builder: (context, state) => BlocProvider(
+          create: (context) => sl<StoreCubit>(),
+          child: const CreateStoreView()),        
+      ),
+
       GoRoute(
         path: sellerAccountScreen,
-        builder: (context, state) => const SellerAccountScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => sl<SellerProductCubit>(),
+          child: const SellerAccountScreen()),
       ),
       GoRoute(
         path: productFormScreen,
-        builder: (context, state) => const ProductFormScreen(),
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            BlocProvider<SellerProductCubit>(
+              create: (context) => sl<SellerProductCubit>(),
+            ),
+            BlocProvider<CategoryCubit>(
+              create: (context) => sl<CategoryCubit>(),
+            ),
+            BlocProvider<SubCategoryCubit>(
+              create: (context) => sl<SubCategoryCubit>(),
+            ),
+          ],
+         
+          child: const ProductFormScreen()),
       ),
       GoRoute(
         path: productScreen,
-        builder: (context, state) => const ProductScreen(),
+        builder: (context, state) => BlocProvider(
+       
+          create: (context) =>
+        
+           sl<SellerProductCubit>()..getSellerProducts(CacheHelper().getData(key: ApiKeys.storeId)),
+          child: const ProductScreen()),
       ),
       GoRoute(
         path: companyDataScreen,
-        builder: (context, state) => const CompanyDataScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => sl<StoreCubit>()..getStore(CacheHelper().getData(key: ApiKeys.storeId)),
+          child: const CompanyDataScreen()),
       ),
       GoRoute(
         path: salesAnalyticsScreen,

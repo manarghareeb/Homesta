@@ -111,9 +111,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Enter your password';
-                                } else if (value.length < 8) {
-                                  return 'Password must be at least 8 characters';
-                                }
+                                } 
+                                // else if (value.length < 8) {
+                                //   return 'Password must be at least 8 characters';
+                                // }
                                 return null;
                               },
                             ),
@@ -158,6 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 const SnackBar(content: Text("No valid role assigned")),
                               );
                             }
+                            GoRouter.of(context).push(AppRouter.crateStoreScreen);
                           } else if (state is AuthFailure) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text(state.error)),
