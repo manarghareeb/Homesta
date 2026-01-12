@@ -11,13 +11,17 @@ class EndPoint {
   static String resendResetCode = "/api/Auth/resend-reset-code";
   static String changePassword = "/api/Auth/change-password";
   static String chat = "https://tasabehahmed-chatbot-bert.hf.space/chat";
-
   static String getAllCategory = "api/Category";
+  static String addCategory = "/api/Category";
+  static String deleteCategory = "/api/Category";
+  static String updateCategory = "/api/Category";
   static String searchCategory = "api/Category/search";
-  static String getAllProducts = "api/Product/GetAllProducts";
-  static String getProductImages = "api/ProductImages/product";
   static String getSubCategory = "api/SubCategory/by-category";
   static String getProductReviews = "api/Review/product";
+  static String deleteSubCategory = "/api/SubCategory";
+  static String updateSubCategory = "/api/SubCategory";
+  static String getAllProducts = "api/Product/GetAllProducts";
+  static String getProductImages = "api/ProductImages/product";
   static String addProductReviews = "api/Review";
   static String addCart = 'api/Cart/add';
   static String getCartItem = 'api/Cart/items';

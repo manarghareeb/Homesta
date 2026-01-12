@@ -24,6 +24,7 @@ class AuthRepository {
     String email,
     String password,
     bool agreeTerms,
+    List<Map<String, dynamic>> roles,
   ) {
     return remote.register(
       firstName: firstName,
@@ -31,6 +32,7 @@ class AuthRepository {
       email: email,
       password: password,
       agreeTerms: agreeTerms,
+      roles: roles,
     );
   }
 

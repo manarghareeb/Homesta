@@ -1,4 +1,3 @@
-import 'package:homesta/features/categories/domain/entities/category_entity.dart';
 import 'package:homesta/features/categories/domain/entities/sub_category_entity.dart';
 
 abstract class SubCategoryState {}
@@ -17,4 +16,9 @@ class SubCategoryFailure extends SubCategoryState {
   final String message;
 
   SubCategoryFailure(this.message);
+}
+
+class SubCategoryAddedSuccess extends SubCategoryState {
+  final SubCategoryEntity subCategory;
+  SubCategoryAddedSuccess(this.subCategory);
 }

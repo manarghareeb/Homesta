@@ -2,11 +2,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:homesta/features/categories/domain/usecases/get_sub_category_use_case.dart';
 import 'package:homesta/features/categories/presentation/cubits/sub_category_cubit.dart/sub_category_state.dart';
 
-class SubCategoryCubit extends Cubit<SubCategoryState> {
-  final GetSubCategoryUseCase getSubCategoryUseCase;
+import '../../../../admin/domain/usecases/add_subCategory_use_case.dart';
+import '../../../../admin/domain/usecases/delete_sub_category_use_case.dart';
+import '../../../../admin/domain/usecases/update_sub_category_use_case.dart';
 
-  SubCategoryCubit({required this.getSubCategoryUseCase})
-    : super(SubCategoryInitial());
+class SubCategoryCubit extends Cubit<SubCategoryState> {
+  final AddSubCategoryUseCase addSubCategoryUseCase;
+  final GetSubCategoryUseCase getSubCategoryUseCase;
+  final DeleteSubCategoryUseCase deleteSubCategoryUseCase;
+  final UpdateSubCategoryUseCase updateSubCategoryUseCase;
+
+  SubCategoryCubit({
+    required this.addSubCategoryUseCase,
+    required this.getSubCategoryUseCase,
+    required this.deleteSubCategoryUseCase,
+    required this.updateSubCategoryUseCase,
+  }) : super(SubCategoryInitial());
+
 
   getSubCategories(int id) async {
     emit(SubCategoryLoading());
@@ -19,6 +31,59 @@ class SubCategoryCubit extends Cubit<SubCategoryState> {
       },
       (categories) {
         emit(SubCategorySuccess(categories));
+      },
+    );
+  }
+
+  Future<void> addSubCategory(
+      int categoryId,
+      String name,
+      String imagePath,
+      double price,
+      ) async {
+    emit(SubCategoryLoading());
+
+    final result = await addSubCategoryUseCase(categoryId, name, imagePath, price);
+
+    result.fold(
+          (error) => emit(SubCategoryFailure(error.errorMessage)),
+          (subCategories) async {
+
+        final subCategoriesResult = await getSubCategoryUseCase(categoryId);
+        subCategoriesResult.fold(
+              (error) => emit(SubCategoryFailure(error.errorMessage)),
+              (subCategories) => emit(SubCategorySuccess(subCategories)),
+        );
+      },
+    );
+  }
+
+  Future<void> deleteSubCategory(int id, int categoryId) async {
+    emit(SubCategoryLoading());
+    final result = await deleteSubCategoryUseCase(id);
+    result.fold(
+          (error) => emit(SubCategoryFailure(error.errorMessage)),
+          (_) async {
+        final subResult = await getSubCategoryUseCase(categoryId);
+        subResult.fold(
+              (error) => emit(SubCategoryFailure(error.errorMessage)),
+              (subCategories) => emit(SubCategorySuccess(subCategories)),
+        );
+      },
+    );
+  }
+
+  Future<void> updateSubCategory(int id, String name, String imagePath, double price, int categoryId) async {
+    emit(SubCategoryLoading());
+    final result = await updateSubCategoryUseCase(id, name, imagePath, price);
+    result.fold(
+          (error) => emit(SubCategoryFailure(error.errorMessage)),
+          (_) async {
+        final subResult = await getSubCategoryUseCase(categoryId);
+        subResult.fold(
+              (error) => emit(SubCategoryFailure(error.errorMessage)),
+              (subCategories) => emit(SubCategorySuccess(subCategories)),
+        );
       },
     );
   }

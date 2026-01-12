@@ -23,6 +23,13 @@ import 'package:homesta/features/product/domain/usecases/get_product_review_use_
 import 'package:homesta/features/product/presentation/cubits/product_cubit.dart';
 import 'package:homesta/features/product/presentation/cubits/review_cubit/review_cubit.dart';
 
+import '../../features/admin/domain/usecases/add_category_use_case.dart';
+import '../../features/admin/domain/usecases/add_subCategory_use_case.dart';
+import '../../features/admin/domain/usecases/delete_category_use_case.dart';
+import '../../features/admin/domain/usecases/delete_sub_category_use_case.dart';
+import '../../features/admin/domain/usecases/update_category_use_case.dart';
+import '../../features/admin/domain/usecases/update_sub_category_use_case.dart';
+
 final sl = GetIt.instance;
 
 void initServiceLocator() {
@@ -56,18 +63,24 @@ void initServiceLocator() {
   sl.registerLazySingleton(() => SearchCategoryUseCase(sl()));
   sl.registerLazySingleton(() => GetAllProductUseCase(productRepository: sl()));
   sl.registerLazySingleton(() => GetSubCategoryUseCase(sl()));
-  sl.registerLazySingleton(
-    () => GetProductReviewUseCase(productRepository: sl()),
-  );
+  sl.registerLazySingleton(() => GetProductReviewUseCase(productRepository: sl()));
   sl.registerLazySingleton(() => AddReviewUseCase(productRepository: sl()));
+
+  sl.registerLazySingleton(() => AddCategoryUseCase(sl()));
+  sl.registerLazySingleton(() => DeleteCategoryUseCase(sl()));
+  sl.registerLazySingleton(() => UpdateCategoryUseCase(sl()));
+  sl.registerLazySingleton(() => AddSubCategoryUseCase(sl()));
+  sl.registerLazySingleton(() => UpdateSubCategoryUseCase(sl()));
+  sl.registerLazySingleton(() => DeleteSubCategoryUseCase(sl()));
+
 
   /// Cubits
   sl.registerFactory(
     () =>
-        CategoryCubit(getCategoriesUseCase: sl(), searchCategoryUseCase: sl()),
+        CategoryCubit(getCategoriesUseCase: sl(), searchCategoryUseCase: sl(), addCategoryUseCase: sl(), deleteCategoryUseCase: sl(), updateCategoryUseCase: sl()),
   );
   sl.registerFactory(() => ProductCubit(sl()));
-  sl.registerFactory(() => SubCategoryCubit(getSubCategoryUseCase: sl()));
+  sl.registerFactory(() => SubCategoryCubit(getSubCategoryUseCase: sl(), addSubCategoryUseCase: sl(), deleteSubCategoryUseCase: sl(), updateSubCategoryUseCase: sl()));
   sl.registerFactory(() => ReviewsCubit(sl(), sl()));
   sl.registerFactory(() => AddItemToCartCubit(sl()));
 }
