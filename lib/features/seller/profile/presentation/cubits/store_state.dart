@@ -6,7 +6,10 @@ class StoreInitial extends StoreState {}
 
 class StoreLoading extends StoreState {}
 
-class StoreSuccess extends StoreState {}
+class StoreSuccess extends StoreState {
+  final StoreEntity storeEntity;
+  StoreSuccess(this.storeEntity);
+}
 
 class StoreError extends StoreState {
   final String message;

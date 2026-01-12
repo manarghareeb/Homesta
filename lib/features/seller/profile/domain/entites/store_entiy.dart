@@ -7,11 +7,11 @@ class StoreEntity {
   final String? workingHours;
   final bool hasWhatsapp;
   final bool hasSms;
-  final int? sellerId;
+  final String? sellerId;
   final String? sellerName;
-  final int totalProducts;
 
-  const StoreEntity({
+
+   StoreEntity({
     required this.storeId,
     required this.name,
     required this.phone,
@@ -22,6 +22,6 @@ class StoreEntity {
     required this.hasSms,
     this.sellerId,
     this.sellerName,
-    required this.totalProducts,
+
   });
 }

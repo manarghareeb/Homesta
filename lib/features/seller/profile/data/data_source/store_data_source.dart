@@ -5,7 +5,7 @@ import 'package:homesta/features/seller/profile/data/models/store_model.dart';
 import 'package:homesta/features/seller/profile/domain/entites/params/create_store_params.dart';
 
 abstract class StoreDataSource {
-Future<void> createStore(CreateStoreParams params);
+Future<StoreModel> createStore(CreateStoreParams params);
 Future<StoreModel> getStore(int id);
 
 
@@ -15,8 +15,9 @@ class StoreDataSourceImpl implements StoreDataSource {
   final ApiConsumer apiConsumer;
   StoreDataSourceImpl({required this.apiConsumer});
   @override
-  Future<void> createStore(CreateStoreParams params)async {
-await apiConsumer.post(EndPoint.createStore,data: params.toJson());
+  Future<StoreModel> createStore(CreateStoreParams params)async {
+final res= await apiConsumer.post(EndPoint.createStore,data: params.toJson());
+return StoreModel.fromJson(res);
 
   }
   

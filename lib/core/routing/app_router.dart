@@ -1,6 +1,8 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:homesta/core/api/api_keys.dart';
+import 'package:homesta/core/cache/cache_helper.dart';
 import 'package:homesta/core/di/service_locator.dart';
 import 'package:homesta/features/account/presentation/views/contact_us_screen.dart';
 import 'package:homesta/features/account/presentation/views/customer_support_screen.dart';
@@ -165,13 +167,16 @@ abstract class AppRouter {
       GoRoute(
         path: productScreen,
         builder: (context, state) => BlocProvider(
-          create: (context) => sl<SellerProductCubit>()..getSellerProducts(1),
+       
+          create: (context) =>
+        
+           sl<SellerProductCubit>()..getSellerProducts(CacheHelper().getData(key: ApiKeys.storeId)),
           child: const ProductScreen()),
       ),
       GoRoute(
         path: companyDataScreen,
         builder: (context, state) => BlocProvider(
-          create: (context) => sl<StoreCubit>()..getStore(1),
+          create: (context) => sl<StoreCubit>()..getStore(CacheHelper().getData(key: ApiKeys.storeId)),
           child: const CompanyDataScreen()),
       ),
       GoRoute(

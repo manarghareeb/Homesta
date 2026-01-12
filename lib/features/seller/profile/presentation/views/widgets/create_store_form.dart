@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:homesta/core/api/api_keys.dart';
+import 'package:homesta/core/cache/cache_helper.dart';
 import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
 import 'package:homesta/core/widgets/custom_text_field_widget.dart';
@@ -46,8 +48,10 @@ class _CreateStoreFormState extends State<CreateStoreForm> {
     return BlocConsumer<StoreCubit, StoreState>(
       listener: (context, state) {
         if (state is StoreSuccess) {
-    
-         // context.push(AppRouter.sellerAccountScreen);
+          showSnackBar(context, "store created successfully");
+    CacheHelper().saveData(key: ApiKeys.storeId, value: state.storeEntity.storeId);
+         context.push(AppRouter.sellerAccountScreen);
+       
         }
          else if (state is StoreError) {
   showSnackBar(context, state.message);

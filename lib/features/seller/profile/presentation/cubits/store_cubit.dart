@@ -17,7 +17,7 @@ class StoreCubit extends Cubit<StoreState> {
 
     result.fold(
       (failure) => emit(StoreError(failure.errorMessage)),
-      (_) => emit(StoreSuccess()),
+      (store) => emit(StoreSuccess(store)),
     );
   }
 

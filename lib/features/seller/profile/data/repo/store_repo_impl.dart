@@ -11,13 +11,15 @@ class StoreRepoImpl implements StoreRepo{
   final StoreDataSource storeDataSource;
   StoreRepoImpl({required this.storeDataSource});
   @override
-  Future<Either<ErrorModel, Unit>> createStore(CreateStoreParams params) async{
+  Future<Either<ErrorModel, StoreEntity>> createStore(CreateStoreParams params) async{
     try{
-      await storeDataSource.createStore(params);
-      return const Right(unit);
+   final store =   await storeDataSource.createStore(params);
+      return  Right(store);
     }on ServerException catch(e){
       return Left(e.errModel);
     }
+   
+    
  
   }
 
