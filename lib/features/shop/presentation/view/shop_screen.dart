@@ -76,7 +76,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                 context.read<ProductCubit>().filterProductsByCategories(
                   selectedCategoryIds.toList(),
                 );
-              }, 
+              },
             ),
             body: SingleChildScrollView(
               child: Padding(

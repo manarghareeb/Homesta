@@ -4,17 +4,35 @@ import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 
 class OrderSummaryInCheckout extends StatelessWidget {
-  const OrderSummaryInCheckout({super.key});
+  const OrderSummaryInCheckout({
+    super.key,
+    required this.itemsCount,
+    required this.subTotal,
+    required this.shipping,
+    required this.taxes,
+    //required this.discount,
+    required this.total,
+  });
+  final int itemsCount;
+  final double subTotal;
+  final double shipping;
+  final double taxes;
+  //final double discount;
+  final double total;
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, dynamic>> orderItems = [
-      {'title': 'Item', 'value': '3'},
-      {'title': 'Sub Total', 'value': '\$720'},
-      {'title': 'Shopping', 'value': '00'},
-      {'title': 'Taxes', 'value': '00'},
-      {'title': 'Coupon Discount', 'value': '-\$100'},
-      {'title': 'Total', 'value': '\$620', 'isTotal': true},
+    final orderItems = [
+      {'title': 'Item', 'value': itemsCount.toString()},
+      {'title': 'Sub Total', 'value': '\$${subTotal.toStringAsFixed(2)}'},
+      {'title': 'Shipping', 'value': '\$${shipping.toStringAsFixed(2)}'},
+      {'title': 'Taxes', 'value': '\$${taxes.toStringAsFixed(2)}'},
+      //{'title': 'Coupon Discount', 'value': '-\$${discount.toStringAsFixed(2)}'},
+      {
+        'title': 'Total',
+        'value': '\$${total.toStringAsFixed(2)}',
+        'isTotal': true,
+      },
     ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,7 +42,7 @@ class OrderSummaryInCheckout extends StatelessWidget {
         Column(
           children:
               orderItems.map((item) {
-                final bool isTotal = item['isTotal'] ?? false;
+                final bool isTotal = (item['isTotal'] as bool?) ?? false;
                 return Column(
                   children: [
                     if (isTotal) ...[
@@ -35,11 +53,11 @@ class OrderSummaryInCheckout extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          item['title'],
+                          item['title'] as String,
                           style: TextStyles.font16BlackRegular,
                         ),
                         Text(
-                          item['value'],
+                          item['value'] as String,
                           style: TextStyles.font16BlackRegular,
                         ),
                       ],

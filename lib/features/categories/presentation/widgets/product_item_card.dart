@@ -5,7 +5,10 @@ import 'package:homesta/core/theming/styles.dart';
 
 class ProductItemCard extends StatelessWidget {
   const ProductItemCard({
-    super.key, required this.image, required this.name, required this.price,
+    super.key,
+    required this.image,
+    required this.name,
+    required this.price,
     //required this.favorites,
   });
 

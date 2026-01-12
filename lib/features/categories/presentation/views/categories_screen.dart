@@ -9,7 +9,6 @@ import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/features/categories/presentation/cubits/category_cubit/category_cubit.dart';
 import 'package:homesta/features/categories/presentation/widgets/category_bloc_builder.dart';
 
-
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({super.key});
 

@@ -10,7 +10,9 @@ import 'package:homesta/features/product/presentation/cubits/products_by_categor
 
 class CategorySectionScreen extends StatelessWidget {
   const CategorySectionScreen({
-    super.key, required this.categoryId, required this.subCategoryId,
+    super.key,
+    required this.categoryId,
+    required this.subCategoryId,
 
     //required this.title,
     //required this.subCategory,
@@ -29,8 +31,12 @@ class CategorySectionScreen extends StatelessWidget {
         text: 'Products',
       ),
       body: BlocProvider(
-        create: (context) => sl<ProductsByCategoryCubit>()
-        ..loadProducts(categoryId: categoryId, subCategoryId: subCategoryId),
+        create:
+            (context) =>
+                sl<ProductsByCategoryCubit>()..loadProducts(
+                  categoryId: categoryId,
+                  subCategoryId: subCategoryId,
+                ),
         child: BlocBuilder<ProductsByCategoryCubit, ProductsByCategoryState>(
           builder: (context, state) {
             if (state is ProductsByCategoryLoading) {

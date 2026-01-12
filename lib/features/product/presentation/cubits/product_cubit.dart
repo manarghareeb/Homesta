@@ -24,7 +24,6 @@ class ProductCubit extends Cubit<ProductState> {
         emit(ProductSuccess(products));
       },
     );
-
   }
 
   void filterProductsByCategories(List<int> categoryIds) {
@@ -33,9 +32,8 @@ class ProductCubit extends Cubit<ProductState> {
       return;
     }
 
-    final filtered = allProducts
-        .where((p) => categoryIds.contains(p.categoryId))
-        .toList();
+    final filtered =
+        allProducts.where((p) => categoryIds.contains(p.categoryId)).toList();
 
     emit(ProductSuccess(filtered));
   }
@@ -63,16 +61,16 @@ class ProductCubit extends Cubit<ProductState> {
     emit(ProductSuccess(filtered));
   }*/
   void getProductsByCategories(List<int> categoryIds) {
-  final allProducts = state is ProductSuccess
-    ? (state as ProductSuccess).products.cast<ProductEntity>() // <- هنا
-    : <ProductEntity>[];
+    final allProducts =
+        state is ProductSuccess
+            ? (state as ProductSuccess).products
+                .cast<ProductEntity>() // <- هنا
+            : <ProductEntity>[];
 
-  //final filtered = allProducts.where((p) => categoryIds.contains(p.categoryId)).toList();
-final filtered = allProducts
-    .where((p) => categoryIds.contains(p.categoryId))
-    .toList();
+    //final filtered = allProducts.where((p) => categoryIds.contains(p.categoryId)).toList();
+    final filtered =
+        allProducts.where((p) => categoryIds.contains(p.categoryId)).toList();
 
-  emit(ProductSuccess(filtered));
-}
-
+    emit(ProductSuccess(filtered));
+  }
 }

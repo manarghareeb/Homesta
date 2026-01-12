@@ -78,8 +78,10 @@ class _AddItemSectionState extends State<AddCategorySection> {
                   children: [
                     const Icon(Icons.add, color: Colors.white),
                     SizedBox(width: 4),
-                    Text(widget.addButtonText,
-                        style: TextStyles.font14WhiteColorW400),
+                    Text(
+                      widget.addButtonText,
+                      style: TextStyles.font14WhiteColorW400,
+                    ),
                   ],
                 ),
               ),
@@ -120,8 +122,10 @@ class _AddItemSectionState extends State<AddCategorySection> {
                     ),
                     SizedBox(width: 12),
                     if (selectedImage != null)
-                      Text("Image selected",
-                          style: TextStyles.font14GreyColorW400),
+                      Text(
+                        "Image selected",
+                        style: TextStyles.font14GreyColorW400,
+                      ),
                   ],
                 ),
 
@@ -144,8 +148,8 @@ class _AddItemSectionState extends State<AddCategorySection> {
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                            content: Text(
-                                "Please enter name and select image")),
+                          content: Text("Please enter name and select image"),
+                        ),
                       );
                     }
                   },

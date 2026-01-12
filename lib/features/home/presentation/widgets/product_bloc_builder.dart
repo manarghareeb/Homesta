@@ -34,7 +34,7 @@ class ProductBlocBuilder extends StatelessWidget {
                 ScaffoldMessenger.of(
                   context,
                 ).showSnackBar(SnackBar(content: Text(state.response.message)));
-                 context.read<CartCubit>().getCartItems();
+                context.read<CartCubit>().getCartItems();
               } else if (state is AddItemToCartFailure) {
                 print('Error: $state.error');
                 ScaffoldMessenger.of(

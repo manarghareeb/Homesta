@@ -95,4 +95,4 @@ class WishlistScreen extends StatelessWidget {
       ),
     );
   }
-} 
+}

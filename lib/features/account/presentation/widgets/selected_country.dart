@@ -5,7 +5,8 @@ import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 
 class SelectedCountry extends StatefulWidget {
-  const SelectedCountry({super.key});
+  const SelectedCountry({super.key, this.onCountrySelected});
+  final Function(String country)? onCountrySelected;
 
   @override
   State<SelectedCountry> createState() => _SelectedCountryState();
@@ -58,6 +59,9 @@ class _SelectedCountryState extends State<SelectedCountry> {
                 setState(() {
                   selectedCountry = country.name;
                 });
+                if (widget.onCountrySelected != null) {
+                  widget.onCountrySelected!(country.name);
+                }
               },
             );
           },

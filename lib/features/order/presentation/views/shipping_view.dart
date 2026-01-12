@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:homesta/core/api/api_keys.dart';
+import 'package:homesta/core/cache/cache_helper.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
 import 'package:homesta/core/widgets/custom_text_field_widget.dart';
@@ -7,7 +9,7 @@ import 'package:homesta/features/account/presentation/widgets/selected_country.d
 import 'package:homesta/core/widgets/title_to_text_field.dart';
 
 class ShippingView extends StatefulWidget {
-  final VoidCallback onNext;
+  final Function(Map<String, dynamic> shippingData) onNext;
   final VoidCallback onBack;
   const ShippingView({super.key, required this.onNext, required this.onBack});
 
@@ -23,7 +25,7 @@ class _ShippingViewState extends State<ShippingView> {
   TextEditingController addressController = TextEditingController();
   TextEditingController zipCodeController = TextEditingController();
   TextEditingController cityController = TextEditingController();
-  TextEditingController countryController = TextEditingController();
+  String? selectedCountry;
 
   @override
   void dispose() {
@@ -34,7 +36,6 @@ class _ShippingViewState extends State<ShippingView> {
     addressController.dispose();
     zipCodeController.dispose();
     cityController.dispose();
-    countryController.dispose();
     super.dispose();
   }
 
@@ -141,13 +142,43 @@ class _ShippingViewState extends State<ShippingView> {
                 ),
               ),
               SizedBox(width: 16.w),
-              Expanded(child: const SelectedCountry()),
+              Expanded(
+                child: SelectedCountry(
+                  onCountrySelected: (country) {
+                    selectedCountry = country;
+                  },
+                ),
+              ),
             ],
           ),
           SizedBox(height: 24.h),
           CustomButtonWidget(
             buttonText: 'Continue to Payment',
-            onPressed: widget.onNext,
+            onPressed: () {
+              final userId = CacheHelper().getDataString(key: ApiKeys.id);
+              if (userId == null) {
+                print("User is not logged in!");
+                return;
+              }
+              if (selectedCountry == null || selectedCountry!.isEmpty) {
+                print("Please select a country");
+                return;
+              }
+              final shippingData = {
+                'userId': userId,
+                'info': {
+                  'firstName': firstNameController.text.trim(),
+                  'lastName': lastNameController.text.trim(),
+                  'email': emailController.text.trim(),
+                  'phone': phoneController.text.trim(),
+                  'address': addressController.text.trim(),
+                  'zipCode': zipCodeController.text.trim(),
+                  'city': cityController.text.trim(),
+                  'country': selectedCountry!,
+                },
+              };
+              widget.onNext(shippingData);
+            },
           ),
         ],
       ),

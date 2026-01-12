@@ -24,28 +24,37 @@ class CartItem {
   });
 
   factory CartItem.fromJson(Map<String, dynamic> json) => CartItem(
-    cartItemId: json['cartItemId'] as int?,
-    productId: json['productId'] as int?,
-    productName: json['productName'] as String?,
-    productColors: json['productColors'] as List<String>?,
-    unitPrice: json['unitPrice'] as double?,
-    quantity: json['quantity'] as int?,
-    totalPrice: json['totalPrice'] as double?,
-    categoryName: json['categoryName'] as String?,
-    productDiscount: json['productDiscount'] as int?,
-    finalPrice: json['finalPrice'] as double?,
-  );
+        cartItemId: json['cartItemId'] as int?,
+        productId: json['productId'] as int?,
+        productName: json['productName'] as String?,
+        productColors: (json['productColors'] as List<dynamic>?)
+            ?.map((e) => e.toString())
+            .toList(),
+        unitPrice: (json['unitPrice'] != null)
+            ? (json['unitPrice'] as num).toDouble()
+            : null,
+        quantity: json['quantity'] as int?,
+        totalPrice: (json['totalPrice'] != null)
+            ? (json['totalPrice'] as num).toDouble()
+            : null,
+        categoryName: json['categoryName'] as String?,
+        productDiscount: json['productDiscount'] as int?,
+        finalPrice: (json['finalPrice'] != null)
+            ? (json['finalPrice'] as num).toDouble()
+            : null,
+      );
 
   Map<String, dynamic> toJson() => {
-    'cartItemId': cartItemId,
-    'productId': productId,
-    'productName': productName,
-    'productColors': productColors,
-    'unitPrice': unitPrice,
-    'quantity': quantity,
-    'totalPrice': totalPrice,
-    'categoryName': categoryName,
-    'productDiscount': productDiscount,
-    'finalPrice': finalPrice,
-  };
+        'cartItemId': cartItemId,
+        'productId': productId,
+        'productName': productName,
+        'productColors': productColors,
+        'unitPrice': unitPrice,
+        'quantity': quantity,
+        'totalPrice': totalPrice,
+        'categoryName': categoryName,
+        'productDiscount': productDiscount,
+        'finalPrice': finalPrice,
+      };
 }
+

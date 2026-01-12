@@ -24,10 +24,11 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       final result = await repo.login(email, password);
       await CacheHelper().saveData(key: ApiKeys.token, value: result.token);
+      await CacheHelper().saveData(key: "userEmail", value: result.user.email);
       await CacheHelper().saveData(
-          key: "userEmail", value: result.user.email);
-      await CacheHelper().saveData(
-          key: "userName", value: "${result.user.firstName} ${result.user.lastName}");
+        key: "userName",
+        value: "${result.user.firstName} ${result.user.lastName}",
+      );
       emit(AuthSuccess(result));
     } on ServerException catch (e) {
       emit(AuthFailure(e.errModel.errorMessage));
@@ -71,10 +72,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   //reset password
-  Future<void> resetPassword(
-      String email,
-      String newPassword,
-      ) async {
+  Future<void> resetPassword(String email, String newPassword) async {
     emit(AuthLoading());
     try {
       final result = await repo.resetPassword(email, newPassword);
@@ -83,6 +81,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthFailure(e.toString()));
     }
   }
+
   // verification
   Future<void> verifyResetCode(String email, String code) async {
     emit(AuthLoading());
@@ -93,7 +92,8 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthFailure(e.toString()));
     }
   }
-// resend code
+
+  // resend code
   Future<void> resendResetCode(String email) async {
     emit(AuthLoading());
     try {
@@ -104,12 +104,12 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-//manage pass (Update pass)
+  //manage pass (Update pass)
   Future<void> changePassword(
-      String confirmNewPassword,
-      String currentPassword,
-      String newPassword,
-      ) async {
+    String confirmNewPassword,
+    String currentPassword,
+    String newPassword,
+  ) async {
     emit(AuthLoading());
     try {
       final result = await repo.changePassword(
@@ -122,7 +122,8 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthFailure(e.toString()));
     }
   }
-//logout
+
+  //logout
   Future<void> logout() async {
     emit(AuthLoading());
     try {

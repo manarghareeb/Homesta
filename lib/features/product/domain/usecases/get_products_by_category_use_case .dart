@@ -13,6 +13,8 @@ class GetProductsByCategoryUseCase {
     required int subCategoryId,
   }) async {
     return await repository.getProductsByCategory(
-        categoryId: categoryId, subCategoryId: subCategoryId);
+      categoryId: categoryId,
+      subCategoryId: subCategoryId,
+    );
   }
 }

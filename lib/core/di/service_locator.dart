@@ -14,6 +14,10 @@ import 'package:homesta/features/categories/domain/usecases/get_sub_category_use
 import 'package:homesta/features/categories/domain/usecases/search_category_use_case.dart';
 import 'package:homesta/features/categories/presentation/cubits/category_cubit/category_cubit.dart';
 import 'package:homesta/features/categories/presentation/cubits/sub_category_cubit.dart/sub_category_cubit.dart';
+import 'package:homesta/features/order/data/repos/order_repo_impl.dart';
+import 'package:homesta/features/order/domain/repos/order_repo.dart';
+import 'package:homesta/features/order/presentation/cubit/payment_cubit/payment_cubit.dart';
+import 'package:homesta/features/order/presentation/cubit/shipping_cubit/shipping_cubit.dart';
 import 'package:homesta/features/product/data/data_sources/remote_data_source/product_data_source.dart';
 import 'package:homesta/features/product/data/data_sources/remote_data_source/review_data_source.dart';
 import 'package:homesta/features/product/data/repositories/product_repository_impl.dart';
@@ -60,6 +64,7 @@ void initServiceLocator() {
         ProductRepositoryImpl(productDataSource: sl(), reviewDataSource: sl()),
   );
   sl.registerLazySingleton<CartRepo>(() => CartRepoImpl(apiConsumer: sl()));
+  sl.registerLazySingleton<OrderRepo>(() => OrderRepoImpl(apiConsumer: sl()));
 
   /// UseCases
   sl.registerLazySingleton(() => GetCategoryUseCase(sl()));
@@ -89,4 +94,6 @@ void initServiceLocator() {
   sl.registerFactory(() => AddItemToCartCubit(sl()));
   sl.registerFactory(() => CartCubit(sl()));
   sl.registerFactory(() => ProductsByCategoryCubit(sl()));
+  sl.registerFactory(() => ShippingCubit(sl()));
+  sl.registerFactory(() => PaymentCubit(sl()));
 }

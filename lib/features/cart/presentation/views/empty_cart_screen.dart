@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
-import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 
 class EmptyCartScreen extends StatelessWidget {
   const EmptyCartScreen({super.key});
@@ -11,7 +10,6 @@ class EmptyCartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: CustomAppBarWidget(text: 'Cart', backgroundColor: Colors.white),
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 60.h),

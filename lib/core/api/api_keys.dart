@@ -31,5 +31,5 @@ class ApiKeys {
   static const String storeName = 'storeName';
   // Cart
   static const String colorId = 'colorId';
-    static const String colorName= 'ColorName';
+  static const String colorName = 'ColorName';
 }

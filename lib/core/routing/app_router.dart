@@ -23,6 +23,8 @@ import 'package:homesta/features/chat/data/models/chat_message_model.dart';
 import 'package:homesta/features/chat/domain/repos/chat_repo.dart';
 import 'package:homesta/features/chat/presentation/cubit/chat/chat_cubit.dart';
 import 'package:homesta/features/chat/presentation/views/chat_message_screen.dart';
+import 'package:homesta/features/order/presentation/cubit/payment_cubit/payment_cubit.dart';
+import 'package:homesta/features/order/presentation/cubit/shipping_cubit/shipping_cubit.dart';
 import 'package:homesta/features/order/presentation/views/track_order_details_screen.dart';
 import 'package:homesta/features/order/presentation/views/track_your_order_screen.dart';
 import 'package:homesta/features/payment/presentation/views/payment_account_screen.dart';
@@ -282,8 +284,9 @@ abstract class AppRouter {
                 BlocProvider(create: (_) => ProductFilterCubit()),
                 BlocProvider(create: (_) => ProductCubit(sl())),
               ],
-              child:*/ const FiltersScreen(),
-            //),
+              child:*/
+                const FiltersScreen(),
+        //),
       ),
 
       GoRoute(
@@ -391,7 +394,18 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: orderFlowScreen,
-        builder: (context, state) => const OrderFlowScreen(),
+        builder: (context, state) {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => sl<CartCubit>()..getCartItems(),
+              ),
+              BlocProvider(create: (context) => sl<ShippingCubit>()),
+              BlocProvider(create: (context) => sl<PaymentCubit>()),
+            ],
+            child: const OrderFlowScreen(),
+          );
+        },
       ),
       GoRoute(
         path: logoutScreen,

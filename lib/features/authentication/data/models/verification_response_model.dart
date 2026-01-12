@@ -4,8 +4,6 @@ class VerifyResetCodeResponseModel {
   VerifyResetCodeResponseModel({required this.message});
 
   factory VerifyResetCodeResponseModel.fromJson(Map<String, dynamic> json) {
-    return VerifyResetCodeResponseModel(
-      message: json['message'] ?? '',
-    );
+    return VerifyResetCodeResponseModel(message: json['message'] ?? '');
   }
 }

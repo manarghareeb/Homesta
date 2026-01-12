@@ -5,7 +5,21 @@ import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/features/home/presentation/widgets/count_container.dart';
 
 class YourCardItem extends StatelessWidget {
-  const YourCardItem({super.key});
+  const YourCardItem({
+    super.key,
+    required this.image,
+    required this.name,
+    required this.color,
+    required this.price,
+    //required this.quantity,
+    required this.onPressedDelete,
+  });
+  final String image;
+  final String name;
+  final String color;
+  final double price;
+  //final double quantity;
+  final Function() onPressedDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +31,7 @@ class YourCardItem extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(15.r),
             child: Image.asset(
-              'assets/images/image 1.png',
+              image,
               width: 137.w,
               height: 111.h,
               fit: BoxFit.cover,
@@ -28,7 +42,7 @@ class YourCardItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Modern Chair', style: TextStyles.font16BlackRegular),
+                Text(name, style: TextStyles.font16BlackRegular),
                 SizedBox(height: 8.h),
                 RichText(
                   text: TextSpan(
@@ -36,7 +50,7 @@ class YourCardItem extends StatelessWidget {
                     style: TextStyles.font14BlackColorW400,
                     children: [
                       TextSpan(
-                        text: 'Grey',
+                        text: color,
                         style: TextStyles.font14GreyColorW400,
                       ),
                     ],
@@ -55,10 +69,10 @@ class YourCardItem extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(),
                 icon: Icon(Icons.delete, color: ColorManager.greyColor),
-                onPressed: () {},
+                onPressed: onPressedDelete,
               ),
               SizedBox(height: 15.h),
-              Text('\$200', style: TextStyles.font14BlackColorW400),
+              Text('\$$price', style: TextStyles.font14BlackColorW400),
             ],
           ),
         ],

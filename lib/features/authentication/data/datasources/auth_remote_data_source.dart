@@ -78,28 +78,24 @@ class AuthRemoteDataSource {
   }) async {
     final response = await api.post(
       EndPoint.resetPassword,
-      data: {
-        "email": email,
-        "newPassword": newPassword,
-      },
+      data: {"email": email, "newPassword": newPassword},
     );
     return ResetPasswordResponseModel.fromJson(response);
   }
-//verification
+
+  //verification
   Future<VerifyResetCodeResponseModel> verifyResetCode({
     required String email,
     required String code,
   }) async {
     final response = await api.post(
       EndPoint.verifyResetCode,
-      data: {
-        "email": email,
-        "code": code,
-      },
+      data: {"email": email, "code": code},
     );
     return VerifyResetCodeResponseModel.fromJson(response);
   }
-//resend code
+
+  //resend code
   Future<ResendResetCodeResponseModel> resendResetCode(String email) async {
     final response = await api.post(
       EndPoint.resendResetCode,
@@ -107,7 +103,8 @@ class AuthRemoteDataSource {
     );
     return ResendResetCodeResponseModel.fromJson(response);
   }
-//manage pass (Update pass)
+
+  //manage pass (Update pass)
   Future<ChangePasswordResponseModel> changePassword({
     required String confirmNewPassword,
     required String currentPassword,
@@ -126,8 +123,7 @@ class AuthRemoteDataSource {
 
   //logout
   Future<LogoutResponseModel> logout() async {
-    final response = await api.post( EndPoint.logOut,);
-    return  LogoutResponseModel.fromJson(response);
+    final response = await api.post(EndPoint.logOut);
+    return LogoutResponseModel.fromJson(response);
   }
-
 }

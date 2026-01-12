@@ -9,8 +9,8 @@ class AddItemToCartCubit extends Cubit<AddItemToCartState> {
 
   Future<void> addItemToCart({
     required int productId,
-   required int quantity ,
-    required String colorId ,
+    required int quantity,
+    required String colorId,
   }) async {
     emit(AddItemToCartLoading());
     try {

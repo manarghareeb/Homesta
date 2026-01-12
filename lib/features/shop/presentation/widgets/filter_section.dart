@@ -28,10 +28,7 @@ class FilterSection extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              title,
-              style: TextStyles.font16BlackW500
-            ),
+            Text(title, style: TextStyles.font16BlackW500),
             const SizedBox(height: 12),
             child,
           ],
