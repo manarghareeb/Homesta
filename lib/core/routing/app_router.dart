@@ -141,7 +141,7 @@ abstract class AppRouter {
         builder: (context, state) => const LoginScreen(),
       ),
       // Seller Route
-            GoRoute(
+      GoRoute(
         path: crateStoreScreen,
         builder: (context, state) => BlocProvider(
           create: (context) => sl<StoreCubit>(),
