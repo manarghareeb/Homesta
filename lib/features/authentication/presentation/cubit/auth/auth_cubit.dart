@@ -41,6 +41,7 @@ class AuthCubit extends Cubit<AuthState> {
     String email,
     String password,
     bool agreeTerms,
+    List<Map<String, dynamic>> roles,
   ) async {
     emit(AuthLoading());
     try {
@@ -50,6 +51,7 @@ class AuthCubit extends Cubit<AuthState> {
         email,
         password,
         agreeTerms,
+        roles,
       );
       emit(RegisterSuccess(result));
     } on ServerException catch (e) {

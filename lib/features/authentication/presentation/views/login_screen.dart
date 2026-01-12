@@ -3,14 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homesta/core/api/api_keys.dart';
-
 import 'package:homesta/core/cache/cache_helper.dart';
 import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
 import 'package:homesta/core/widgets/custom_text_field_widget.dart';
 import 'package:homesta/core/widgets/title_to_text_field.dart';
-
 import 'package:homesta/features/authentication/presentation/cubit/auth/auth_cubit.dart';
 import 'package:homesta/features/authentication/presentation/widgets/auth_navigation_text.dart';
 import 'package:homesta/features/authentication/presentation/widgets/continue_with.dart';
@@ -131,6 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       BlocConsumer<AuthCubit, AuthState>(
                         listener: (context, state) async {
                           if (state is AuthSuccess) {
+                            // حفظ البيانات الأساسية
                             await CacheHelper().saveData(
                               key: ApiKeys.token,
                               value: state.user.token,
@@ -144,7 +143,21 @@ class _LoginScreenState extends State<LoginScreen> {
                               value: state.user.user.email,
                             );
 
-                            GoRouter.of(context).push(AppRouter.homeScreen);
+
+                            final roles = state.user.user.roles;
+
+                            if (roles.contains("Admin")) {
+                              GoRouter.of(context).push(AppRouter.adminAccountScreen);
+                            } else if (roles.contains("Seller")) {
+                              GoRouter.of(context).push(AppRouter.sellerAccountScreen);
+                            } else if (roles.contains("User")) {
+                              GoRouter.of(context).push(AppRouter.homeScreen);
+                            } else {
+                              // fallback
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text("No valid role assigned")),
+                              );
+                            }
                           } else if (state is AuthFailure) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text(state.error)),

@@ -32,6 +32,9 @@ class AuthRemoteDataSource {
     required String email,
     required String password,
     required bool agreeTerms,
+    //
+    required List<Map<String, dynamic>> roles,
+
   }) async {
     final response = await api.post(
       EndPoint.signUp,
@@ -40,9 +43,14 @@ class AuthRemoteDataSource {
         "firstName": firstName,
         "lastName": lastName,
         "password": password,
-        "roles": [
-          {"id": "2", "roleName": "User", "isSelected": true},
-        ],
+        // "roles": [
+        //   {"id": "1", "roleName": "Admin", "isSelected": true},
+        //  // {"id": "2", "roleName": "User", "isSelected": false},
+        //  // {"id": "3", "roleName": "Seller", "isSelected": true},
+        // ],
+
+        "roles": roles,
+
         "agreeTerms": agreeTerms,
       },
     );
