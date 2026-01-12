@@ -17,3 +17,8 @@ class SubCategoryFailure extends SubCategoryState {
 
   SubCategoryFailure(this.message);
 }
+
+class SubCategoryAddedSuccess extends SubCategoryState {
+  final SubCategoryEntity subCategory;
+  SubCategoryAddedSuccess(this.subCategory);
+}

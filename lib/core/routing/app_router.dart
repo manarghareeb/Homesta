@@ -17,6 +17,7 @@ import 'package:homesta/features/account/presentation/views/my_order_screen.dart
 import 'package:homesta/features/authentication/presentation/views/password_manager_screen.dart';
 import 'package:homesta/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart';
 import 'package:homesta/features/cart/presentation/views/empty_cart_screen.dart';
+import 'package:homesta/features/categories/presentation/cubits/category_cubit/category_cubit.dart';
 import 'package:homesta/features/categories/presentation/views/category_section_screen.dart';
 import 'package:homesta/features/chat/data/models/chat_message_model.dart';
 import 'package:homesta/features/chat/domain/repos/chat_repo.dart';
@@ -54,9 +55,11 @@ import '../../features/account/presentation/views/add_review.dart';
 import '../../features/account/presentation/views/invoice.dart';
 import '../../features/account/presentation/views/my_collections_screen.dart';
 import '../../features/cart/presentation/views/cart_screen.dart';
+import '../../features/categories/presentation/cubits/sub_category_cubit.dart/sub_category_cubit.dart';
 import '../../features/categories/presentation/views/SubCategoriesScreen.dart';
 import '../../features/notification/presentaion/views/notification_empty_screen.dart';
 import '../../features/order/presentation/views/seller_screen.dart';
+import '../../features/product/presentation/cubits/product_cubit.dart';
 import '../../features/search/presentation/views/search_screen.dart';
 import '../../features/shop/presentation/view/shop_screen.dart';
 
@@ -154,20 +157,48 @@ abstract class AppRouter {
         builder: (context, state) => const AdminAccountScreen(),
       ),
       GoRoute(
-        path: adminDashboardScreen,
-        builder: (context, state) => const DashboardScreen(),
+        path: AppRouter.adminDashboardScreen,
+        builder: (context, state) {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => sl<ProductCubit>()..getAllProducts(),
+              ),
+              // BlocProvider(
+              //   create: (context) => sl<StoreCubit>()..getAllStores(),
+              // ),
+            ],
+            child: const DashboardScreen(),
+          );
+        },
       ),
       GoRoute(
-        path: adminProductScreen,
-        builder: (context, state) => const AdminProductScreen(),
+        path: AppRouter.adminProductScreen,
+        builder: (context, state) {
+          return BlocProvider(
+            create: (context) => sl<ProductCubit>()..getAllProducts(),
+            child: const AdminProductScreen(),
+          );
+        },
       ),
       GoRoute(
-        path: adminCategoryScreen,
-        builder: (context, state) => const AdminCategoryScreen(),
+        path: AppRouter.adminCategoryScreen,
+        builder: (context, state) {
+          return BlocProvider(
+            create: (context) => sl<CategoryCubit>()..getCategories(),
+            child: const AdminCategoryScreen(),
+          );
+        },
       ),
       GoRoute(
-        path: adminSubCategoryScreen,
-        builder: (context, state) => const AdminSubCategoryScreen(),
+        path: AppRouter.adminSubCategoryScreen,
+        builder: (context, state) {
+          final categoryId = state.extra as int;
+          return BlocProvider(
+            create: (context) => sl<SubCategoryCubit>()..getSubCategories(categoryId),
+            child: AdminSubCategoryScreen(categoryId: categoryId),
+          );
+        },
       ),
       // User Route
       GoRoute(
@@ -207,8 +238,8 @@ abstract class AppRouter {
           return BlocProvider(
             create:
                 (context) =>
-                    sl<ReviewsCubit>()
-                      ..getReviews(productId: product.productId),
+            sl<ReviewsCubit>()
+              ..getReviews(productId: product.productId),
             child: ProductDetailsView(productEntity: product),
           );
         },

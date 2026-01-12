@@ -41,10 +41,16 @@ void handleDioExceptions(DioException e) {
           throw ServerException(
             errModel: ErrorModel.fromJson(e.response!.data),
           );
-        case 401: //unauthorized
-          throw ServerException(
-            errModel: ErrorModel.fromJson(e.response!.data),
-          );
+        // case 401: //unauthorized
+        //   throw ServerException(
+        //     errModel: ErrorModel.fromJson(e.response!.data),
+        //   );
+        case 401:
+          if (e.response?.data is Map<String, dynamic>) {
+            throw ServerException(errModel: ErrorModel.fromJson(e.response!.data));
+          } else {
+            throw ServerException(errModel: ErrorModel(errorMessage: "Unauthorized"));
+          }
         case 403: //forbidden
           throw ServerException(
             errModel: ErrorModel.fromJson(e.response!.data),

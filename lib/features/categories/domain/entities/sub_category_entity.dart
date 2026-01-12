@@ -10,4 +10,7 @@ class SubCategoryEntity {
     required this.name,
     required this.imagePath,
   });
+
+
+
 }

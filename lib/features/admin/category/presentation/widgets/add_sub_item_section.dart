@@ -8,17 +8,19 @@ import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_text_field_widget.dart';
 import 'package:homesta/core/widgets/title_to_text_field.dart';
 import 'package:homesta/features/admin/category/presentation/widgets/save_and_discard_buttons.dart';
-import '../../../../categories/presentation/cubits/category_cubit/category_cubit.dart';
+import '../../../../categories/presentation/cubits/sub_category_cubit.dart/sub_category_cubit.dart';
 
-class AddCategorySection extends StatefulWidget {
+class AddSubItemSection extends StatefulWidget {
   final String managementTitle;
   final String description;
   final String addButtonText;
   final String nameFieldTitle;
   final String nameFieldHint;
   final String imageFieldTitle;
+  final int categoryId;
 
-  const AddCategorySection({
+
+  const AddSubItemSection({
     super.key,
     required this.managementTitle,
     required this.description,
@@ -26,16 +28,19 @@ class AddCategorySection extends StatefulWidget {
     required this.nameFieldTitle,
     required this.nameFieldHint,
     required this.imageFieldTitle,
+    required this.categoryId,
   });
 
   @override
-  State<AddCategorySection> createState() => _AddItemSectionState();
+  State<AddSubItemSection> createState() => _AddSubItemSectionState();
 }
 
-class _AddItemSectionState extends State<AddCategorySection> {
+class _AddSubItemSectionState extends State<AddSubItemSection> {
   bool isAdding = false;
   File? selectedImage;
   final TextEditingController nameController = TextEditingController();
+
+ double price =0.0;
 
   Future<void> _pickImage() async {
     final picked = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -50,7 +55,6 @@ class _AddItemSectionState extends State<AddCategorySection> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        /// العنوان وزر الإضافة
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -69,7 +73,7 @@ class _AddItemSectionState extends State<AddCategorySection> {
                 });
               },
               child: Container(
-                padding: EdgeInsets.all(8.w),
+                padding: EdgeInsets.all(6.w),
                 decoration: BoxDecoration(
                   color: ColorManager.primaryColor,
                   borderRadius: BorderRadius.circular(15),
@@ -77,11 +81,9 @@ class _AddItemSectionState extends State<AddCategorySection> {
                 child: Row(
                   children: [
                     const Icon(Icons.add, color: Colors.white),
-                    SizedBox(width: 4),
-                    Text(
-                      widget.addButtonText,
-                      style: TextStyles.font14WhiteColorW400,
-                    ),
+                    SizedBox(width: 1),
+                    Text(widget.addButtonText,
+                        style: TextStyles.font14WhiteColorW400),
                   ],
                 ),
               ),
@@ -122,23 +124,22 @@ class _AddItemSectionState extends State<AddCategorySection> {
                     ),
                     SizedBox(width: 12),
                     if (selectedImage != null)
-                      Text(
-                        "Image selected",
-                        style: TextStyles.font14GreyColorW400,
-                      ),
+                      Text("Image selected",
+                          style: TextStyles.font14GreyColorW400),
                   ],
                 ),
 
                 SizedBox(height: 20.h),
 
-                /// أزرار الحفظ والإلغاء
                 SaveAndDiscardButtons(
                   saveOnPressed: () {
                     if (nameController.text.isNotEmpty &&
-                        selectedImage != null) {
-                      context.read<CategoryCubit>().addCategory(
+                        selectedImage != null ) {
+                      context.read<SubCategoryCubit>().addSubCategory(
+                        widget.categoryId,
                         nameController.text,
                         selectedImage!.path,
+                        price,
                       );
                       setState(() {
                         isAdding = false;
@@ -148,8 +149,8 @@ class _AddItemSectionState extends State<AddCategorySection> {
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text("Please enter name and select image"),
-                        ),
+                            content: Text(
+                                "Please enter name, price and select image")),
                       );
                     }
                   },

@@ -48,4 +48,63 @@ class CategoryRepoImp extends CategoryRepo {
       return left(e.errModel);
     }
   }
+
+  @override
+  Future<Either<ErrorModel, Unit>> addSubCategory(int categoryId, String name, String imagePath, double price) async {
+    try {
+      await categoryDataSource.addSubCategory(categoryId, name, imagePath, price);
+      return right(unit);
+    } on ServerException catch (e) {
+      return left(e.errModel);
+    }
+  }
+
+  @override
+  Future<Either<ErrorModel, Unit>> addCategory(String name, String imagePath) async {
+    try {
+      await categoryDataSource.addCategory(name, imagePath);
+      return right(unit);
+    } on ServerException catch (e) {
+      return left(e.errModel);
+    }
+  }
+  @override
+  Future<Either<ErrorModel, Unit>> deleteCategory(int id) async {
+    try {
+      await categoryDataSource.deleteCategory(id);
+      return right(unit);
+    } on ServerException catch (e) {
+      return left(e.errModel);
+    }
+  }
+
+  @override
+  Future<Either<ErrorModel, Unit>> updateCategory(int id, String name, String imagePath) async {
+    try {
+      await categoryDataSource.updateCategory(id, name, imagePath);
+      return right(unit);
+    } on ServerException catch (e) {
+      return left(e.errModel);
+    }
+  }
+
+  @override
+  Future<Either<ErrorModel, Unit>> deleteSubCategory(int id) async {
+    try {
+      await categoryDataSource.deleteSubCategory(id);
+      return right(unit);
+    } on ServerException catch (e) {
+      return left(e.errModel);
+    }
+  }
+
+  @override
+  Future<Either<ErrorModel, Unit>> updateSubCategory(int id, String name, String imagePath, double price) async {
+    try {
+      await categoryDataSource.updateSubCategory(id, name, imagePath, price);
+      return right(unit);
+    } on ServerException catch (e) {
+      return left(e.errModel);
+    }
+  }
 }
