@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:homesta/features/product/domain/entities/product_entitty.dart';
 import 'package:homesta/features/seller/product/domain/entitiy/params/add_product_params.dart';
 import 'package:homesta/features/seller/product/domain/usecases/add_product_use_case.dart';
 import 'package:homesta/features/seller/product/domain/usecases/get_saller_product_usecase.dart';
@@ -16,14 +17,14 @@ final GetSallerProductUsecase getSallerProductUsecase;
 
   /// 🔹 add seller products
   /// 🔹 Get seller products
-  Future<void> addSellerProducts(AddProductParams params) async {
+addSellerProducts(AddProductParams params) async {
     emit(SellerAddProductLoading());
 
     final result = await addProductUseCase(params);
 
     result.fold(
       (failure) => emit(SellerAddProductError(failure.errorMessage)),
-      (products) => emit(SellerAddProductSuccess()),
+      (product) => emit(SellerAddProductSuccess(product)),
     );
   }
   /// 🔹 Get seller products

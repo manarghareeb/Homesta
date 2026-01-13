@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,6 +15,7 @@ import 'package:homesta/features/product/domain/entities/product_entitty.dart';
 import 'package:homesta/features/seller/product/domain/entitiy/params/add_product_params.dart';
 import 'package:homesta/features/seller/product/presentation/cubits/saller_product_cubit.dart';
 import 'package:homesta/features/seller/product/presentation/cubits/saller_product_state.dart';
+import 'package:homesta/features/seller/product/presentation/cubits/upload_image_cubit/upload_image_cubit.dart';
 import 'package:homesta/features/seller/product/presentation/widgets/image_upload.dart';
 import 'package:homesta/features/seller/product/presentation/widgets/select_category.dart';
 import 'package:homesta/features/seller/product/presentation/widgets/select_sub_category.dart';
@@ -29,7 +32,7 @@ class ProductFormScreen extends StatefulWidget {
 class _ProductFormScreenState extends State<ProductFormScreen> {
   int? selectedCategoryId;
   int? selectedSubCategoryId;
-
+ List <File> selectedImages = [];
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController nameController = TextEditingController();
@@ -132,7 +135,9 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                       ),
 
                     SizedBox(height: 16.h),
-                    ImageUpload(isEdit: isEdit, product: widget.product),
+                    ImageUpload(isEdit: isEdit, product: widget.product, onImagesSelected: (images) {
+                      selectedImages=images;
+                    }),
                     SizedBox(height: 16.h),
                     CustomTextFieldWidget(
                       prefixIcon: Icons.description_outlined,
@@ -248,6 +253,13 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
             },
             listener: (BuildContext context, SellerProductState state) {
               if (state is SellerAddProductSuccess) {
+                      if (selectedImages.isNotEmpty) {
+        context.read<ProductImageCubit>().uploadImages(
+              productId: state.productEntity.productId,
+              images: selectedImages,
+            );
+      }
+
                 showSnackBar(context, "added successfully");
               }
               if (state is SellerAddProductError) {

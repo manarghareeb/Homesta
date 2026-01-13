@@ -55,6 +55,7 @@ import 'package:homesta/features/product/presentation/views/product_details_view
 import 'package:homesta/features/seller/analytics/presentation/views/sales_analytics_screen.dart';
 import 'package:homesta/features/seller/company%20data/presentation/views/company_data_screen.dart';
 import 'package:homesta/features/seller/product/presentation/cubits/saller_product_cubit.dart';
+import 'package:homesta/features/seller/product/presentation/cubits/upload_image_cubit/upload_image_cubit.dart';
 import 'package:homesta/features/seller/product/presentation/views/product_form_screen.dart';
 import 'package:homesta/features/seller/product/presentation/views/product_screen.dart';
 import 'package:homesta/features/seller/profile/presentation/cubits/store_cubit.dart';
@@ -175,6 +176,8 @@ abstract class AppRouter {
                 BlocProvider<SubCategoryCubit>(
                   create: (context) => sl<SubCategoryCubit>(),
                 ),
+                BlocProvider(
+                  create: (context)=>sl<ProductImageCubit>(),)
               ],
 
               child: const ProductFormScreen(),

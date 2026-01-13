@@ -150,7 +150,14 @@ class _LoginScreenState extends State<LoginScreen> {
                             if (roles.contains("Admin")) {
                               GoRouter.of(context).push(AppRouter.adminAccountScreen);
                             } else if (roles.contains("Seller")) {
-                              GoRouter.of(context).push(AppRouter.crateStoreScreen);
+                              final isStoreCreated = await CacheHelper().getData(key: ApiKeys.storeId);
+                              if(isStoreCreated==null){
+                              context.push(AppRouter.crateStoreScreen);
+                              }
+                              else{
+                                  GoRouter.of(context).push(AppRouter.sellerAccountScreen);
+                              }
+                            
                             } else if (roles.contains("User")) {
                               GoRouter.of(context).push(AppRouter.homeScreen);
                             } else {
