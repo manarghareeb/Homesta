@@ -129,7 +129,7 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       final result = await repo.logout();
       await CacheHelper().removeData(key: ApiKeys.token);
-      await CacheHelper().removeData(key: ApiKeys.storeId);
+
       emit(LogoutSuccess(result));
     } catch (error) {
       emit(AuthFailure(error.toString()));

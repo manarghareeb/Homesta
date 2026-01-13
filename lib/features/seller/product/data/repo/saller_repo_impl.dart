@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:homesta/core/error/error_model.dart';
 import 'package:homesta/core/error/expections.dart';
@@ -5,6 +7,7 @@ import 'package:homesta/features/product/data/models/product_model.dart';
 import 'package:homesta/features/product/domain/entities/product_entitty.dart';
 import 'package:homesta/features/seller/product/data/data_source/saller_product_data_source.dart';
 import 'package:homesta/features/seller/product/domain/entitiy/params/add_product_params.dart';
+import 'package:homesta/features/seller/product/domain/entitiy/product_image_entity.dart';
 import 'package:homesta/features/seller/product/domain/repo/saller_product_repo.dart';
 
 class SallerProductRepoImpl implements SallerProductRepo{
@@ -45,6 +48,17 @@ class SallerProductRepoImpl implements SallerProductRepo{
   Future<Either<ErrorModel, Unit>> updateProduct(AddProductParams product) {
     // TODO: implement updateProduct
     throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<ErrorModel, List<ProductImageEntity>>> uploadProuductImage({required int productId, required List<File> images})async {
+    try{
+      final List<ProductImageEntity> productImageEntity= await sallerProductDataSource.uploadProductImage(productId: productId, images: images);
+      
+      return Right(productImageEntity);
+    }on ServerException catch(e){
+      return Left(e.errModel);
+    }
   }
 
 }

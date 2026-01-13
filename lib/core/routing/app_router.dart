@@ -1,4 +1,3 @@
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homesta/core/api/api_keys.dart';
@@ -52,6 +51,7 @@ import 'package:homesta/features/product/presentation/views/product_details_view
 import 'package:homesta/features/seller/analytics/presentation/views/sales_analytics_screen.dart';
 import 'package:homesta/features/seller/company%20data/presentation/views/company_data_screen.dart';
 import 'package:homesta/features/seller/product/presentation/cubits/saller_product_cubit.dart';
+import 'package:homesta/features/seller/product/presentation/cubits/upload_image_cubit/upload_image_cubit.dart';
 import 'package:homesta/features/seller/product/presentation/views/product_form_screen.dart';
 import 'package:homesta/features/seller/product/presentation/views/product_screen.dart';
 import 'package:homesta/features/seller/profile/presentation/cubits/store_cubit.dart';
@@ -125,7 +125,7 @@ abstract class AppRouter {
   static final sellerAccountScreen = '/sellerAccountScreen';
   static final productScreen = '/productScreen';
   static final productFormScreen = '/productFormScreen';
-   static final crateStoreScreen = '/createStoreScreen';
+  static final crateStoreScreen = '/createStoreScreen';
   // Admin Route
   static final adminAccountScreen = '/adminAccountScreen';
   static final adminProductScreen = '/adminProductScreen';
@@ -143,48 +143,64 @@ abstract class AppRouter {
       // Seller Route
       GoRoute(
         path: crateStoreScreen,
-        builder: (context, state) => BlocProvider(
-          create: (context) => sl<StoreCubit>(),
-          child: const CreateStoreView()),        
+        builder:
+            (context, state) => BlocProvider(
+              create: (context) => sl<StoreCubit>(),
+              child: const CreateStoreView(),
+            ),
       ),
 
       GoRoute(
         path: sellerAccountScreen,
-        builder: (context, state) => BlocProvider(
-          create: (context) => sl<SellerProductCubit>(),
-          child: const SellerAccountScreen()),
+        builder:
+            (context, state) => BlocProvider(
+              create: (context) => sl<SellerProductCubit>(),
+              child: const SellerAccountScreen(),
+            ),
       ),
       GoRoute(
         path: productFormScreen,
-        builder: (context, state) => MultiBlocProvider(
-          providers: [
-            BlocProvider<SellerProductCubit>(
-              create: (context) => sl<SellerProductCubit>(),
+        builder:
+            (context, state) => MultiBlocProvider(
+              providers: [
+                BlocProvider<SellerProductCubit>(
+                  create: (context) => sl<SellerProductCubit>(),
+                ),
+                BlocProvider<CategoryCubit>(
+                  create: (context) => sl<CategoryCubit>(),
+                ),
+                BlocProvider<SubCategoryCubit>(
+                  create: (context) => sl<SubCategoryCubit>(),
+                ),
+                BlocProvider(
+                  create: (context)=>sl<ProductImageCubit>(),)
+              ],
+
+              child: const ProductFormScreen(),
             ),
-            BlocProvider<CategoryCubit>(
-              create: (context) => sl<CategoryCubit>(),
-            ),
-            BlocProvider<SubCategoryCubit>(
-              create: (context) => sl<SubCategoryCubit>(),
-            ),
-          ],
-         
-          child: const ProductFormScreen()),
       ),
       GoRoute(
         path: productScreen,
-        builder: (context, state) => BlocProvider(
-       
-          create: (context) =>
-        
-           sl<SellerProductCubit>()..getSellerProducts(CacheHelper().getData(key: ApiKeys.storeId)),
-          child: const ProductScreen()),
+        builder:
+            (context, state) => BlocProvider(
+              create:
+                  (context) =>
+                      sl<SellerProductCubit>()..getSellerProducts(
+                        CacheHelper().getData(key: ApiKeys.storeId),
+                      ),
+              child: const ProductScreen(),
+            ),
       ),
       GoRoute(
         path: companyDataScreen,
-        builder: (context, state) => BlocProvider(
-          create: (context) => sl<StoreCubit>()..getStore(CacheHelper().getData(key: ApiKeys.storeId)),
-          child: const CompanyDataScreen()),
+        builder:
+            (context, state) => BlocProvider(
+              create:
+                  (context) =>
+                      sl<StoreCubit>()
+                        ..getStore(CacheHelper().getData(key: ApiKeys.storeId)),
+              child: const CompanyDataScreen(),
+            ),
       ),
       GoRoute(
         path: salesAnalyticsScreen,
@@ -234,7 +250,9 @@ abstract class AppRouter {
         builder: (context, state) {
           final categoryId = state.extra as int;
           return BlocProvider(
-            create: (context) => sl<SubCategoryCubit>()..getSubCategories(categoryId),
+            create:
+                (context) =>
+                    sl<SubCategoryCubit>()..getSubCategories(categoryId),
             child: AdminSubCategoryScreen(categoryId: categoryId),
           );
         },
@@ -277,8 +295,8 @@ abstract class AppRouter {
           return BlocProvider(
             create:
                 (context) =>
-            sl<ReviewsCubit>()
-              ..getReviews(productId: product.productId),
+                    sl<ReviewsCubit>()
+                      ..getReviews(productId: product.productId),
             child: ProductDetailsView(productEntity: product),
           );
         },
