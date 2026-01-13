@@ -20,6 +20,9 @@ class SkeletonizerCompanyData extends StatelessWidget {
         workingHours: "------",
         hasWhatsapp: false,
         hasSms: false,
+        sellerId: "------",
+        sellerName: "------",
+
 
       ),
     ),

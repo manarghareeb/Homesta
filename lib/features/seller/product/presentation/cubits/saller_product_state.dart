@@ -7,6 +7,9 @@ class SellerProductInitial extends SellerProductState {}
 class SellerAddProductLoading extends SellerProductState {}
 
 class SellerAddProductSuccess extends SellerProductState {
+  final ProductEntity productEntity;
+
+  SellerAddProductSuccess(this.productEntity);
 
 }
 

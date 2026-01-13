@@ -24,7 +24,7 @@ return StoreModel.fromJson(res);
   @override
   Future<StoreModel> getStore(int id)async {
     
-final res= await apiConsumer.get("${EndPoint.getStore}/$id");
+final res= await apiConsumer.get("${EndPoint.getStore}/$id/products");
 
 return StoreModel.fromJson(res);
   }

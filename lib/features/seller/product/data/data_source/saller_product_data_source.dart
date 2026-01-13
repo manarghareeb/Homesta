@@ -5,7 +5,7 @@ import 'package:homesta/features/seller/product/data/models/product_seller_model
 import 'package:homesta/features/seller/product/domain/entitiy/params/add_product_params.dart';
 
 abstract class SallerProductDataSource {
- Future<void> addProduct(AddProductParams product);
+ Future<ProductModel> addProduct(AddProductParams product);
  Future<void> deleteProduct(int productId);
  Future<void> updateProduct(AddProductParams product);
   Future<List<ProductModel>> getSellerProducts(int id);
@@ -16,11 +16,13 @@ class SallerProductDataSourceImpl implements SallerProductDataSource {
   final ApiConsumer apiConsumer;
   SallerProductDataSourceImpl({required this.apiConsumer});
   @override
-  Future<void> addProduct(AddProductParams product) {
-    return apiConsumer.post(
+  Future<ProductModel> addProduct(AddProductParams product)async {
+  final res=await apiConsumer.post(
       EndPoint.addProduct,
       data: product.toJson(),
     );
+
+    return ProductModel.fromJson(res);
   }
   
   @override

@@ -87,7 +87,9 @@ class SellerAccountScreen extends StatelessWidget {
                 label: 'Setting',
                 onTap: () {},
               ),
-              OptionTile(icon: Icons.logout, label: 'Log Out', onTap: () {}),
+              OptionTile(icon: Icons.logout, label: 'Log Out', onTap: () {
+                GoRouter.of(context).push(AppRouter.logoutScreen);
+              }),
             ],
           ),
         ),

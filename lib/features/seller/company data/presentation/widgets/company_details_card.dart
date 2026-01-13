@@ -39,10 +39,10 @@ class CompanyDetailsCard extends StatelessWidget {
             label: "Working Hours",
             value: store.workingHours ?? "—",
           ),
-          // DetailRow(
-          //   label: "Total Products",
-          //   value: store.totalProducts.toString(),
-          // ),
+          DetailRow(
+            label: "Total Products",
+            value: store.totalProducts.toString(),
+          ),
         ],
       ),
     );
