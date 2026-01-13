@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:homesta/core/api/api_consumer.dart';
 import 'package:homesta/core/api/api_keys.dart';
 import 'package:homesta/core/cache/cache_helper.dart';
 import 'package:homesta/core/di/service_locator.dart';
@@ -16,8 +15,8 @@ import 'package:homesta/features/admin/product/presentation/views/admin_product_
 import 'package:homesta/features/admin/profile/presentation/views/admin_account_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/logout_screen.dart';
 import 'package:homesta/features/account/presentation/views/manage_address_screen.dart';
-import 'package:homesta/features/account/presentation/views/my_order_screen.dart';
-
+import 'package:homesta/features/order/presentation/cubit/user_orders_cubit/user_orders_cubit.dart';
+import 'package:homesta/features/order/presentation/views/my_order_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/password_manager_screen.dart';
 import 'package:homesta/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart';
 import 'package:homesta/features/cart/presentation/views/empty_cart_screen.dart';
@@ -28,7 +27,6 @@ import 'package:homesta/features/chat/data/models/chat_message_model.dart';
 import 'package:homesta/features/chat/domain/repos/chat_repo.dart';
 import 'package:homesta/features/chat/presentation/cubit/chat/chat_cubit.dart';
 import 'package:homesta/features/chat/presentation/views/chat_message_screen.dart';
-import 'package:homesta/features/order/data/repos/order_repo_impl.dart';
 import 'package:homesta/features/order/presentation/cubit/order_details_cubit/order_details_cubit.dart';
 import 'package:homesta/features/order/presentation/cubit/payment_cubit/payment_cubit.dart';
 import 'package:homesta/features/order/presentation/cubit/place_order_cubit/place_order_cubit.dart';
@@ -60,14 +58,12 @@ import 'package:homesta/features/seller/product/presentation/views/product_scree
 import 'package:homesta/features/seller/profile/presentation/cubits/store_cubit.dart';
 import 'package:homesta/features/seller/profile/presentation/views/create_store_view.dart';
 import 'package:homesta/features/seller/profile/presentation/views/seller_account_screen.dart';
-import 'package:homesta/features/seller/profile/presentation/views/widgets/create_store_form.dart';
 import 'package:homesta/features/splash/presentation/splashscreen.dart';
 import '../../features/account/presentation/views/account_screen.dart';
 import '../../features/account/presentation/views/add_review.dart';
 import '../../features/account/presentation/views/invoice.dart';
 import '../../features/account/presentation/views/my_collections_screen.dart';
 import '../../features/cart/presentation/views/cart_screen.dart';
-import '../../features/categories/presentation/cubits/sub_category_cubit.dart/sub_category_cubit.dart';
 import '../../features/categories/presentation/views/SubCategoriesScreen.dart';
 import '../../features/notification/presentaion/views/notification_empty_screen.dart';
 import '../../features/order/presentation/views/seller_screen.dart';
@@ -281,7 +277,19 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: myOrderScreen,
-        builder: (context, state) => const MyOrderScreen(),
+        builder: (context, state) {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (_) => sl<UserOrdersCubit>()..getUserOrders(),
+              ),
+              BlocProvider(
+                create: (_) => sl<TrackOrderDetailsCubit>(),
+              ),
+            ],
+            child: const MyOrderScreen(),
+          );
+        },
       ),
       GoRoute(
         path: helpCenterScreen,
@@ -482,11 +490,9 @@ abstract class AppRouter {
         path: trackOrderDetails,
         builder: (context, state) {
           final orderId = state.extra as int;
-          //final orderRepo = OrderRepoImpl(apiConsumer: sl<ApiConsumer>());
           return BlocProvider(
             create:
                 (context) => sl<TrackOrderDetailsCubit>()..fetchOrder(orderId),
-                    //TrackOrderDetailsCubit(orderRepo)..fetchOrder(orderId),
             child: TrackOrderDetailsScreen(orderId: orderId),
           );
         },
