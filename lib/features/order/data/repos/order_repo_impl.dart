@@ -1,9 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:homesta/core/api/api_consumer.dart';
+import 'package:homesta/core/api/api_keys.dart';
 import 'package:homesta/core/api/end_ponits.dart';
 import 'package:homesta/core/error/error_model.dart';
 import 'package:homesta/core/error/expections.dart';
+import 'package:homesta/features/order/data/models/order_details_response/order_details.dart';
 import 'package:homesta/features/order/data/models/payment_response/payment_response.dart';
+import 'package:homesta/features/order/data/models/place_order_response.dart';
 import 'package:homesta/features/order/domain/repos/order_repo.dart';
 
 class OrderRepoImpl implements OrderRepo {
@@ -35,22 +38,65 @@ class OrderRepoImpl implements OrderRepo {
       return left(e.errModel);
     }
   }
-  
+
   @override
-  Future<Either<ErrorModel, PaymentResponse>> makePayment(
-      {required int orderId, required String paymentMethod}) async {
+  Future<Either<ErrorModel, PaymentResponse>> makePayment({
+    required int orderId,
+    required String paymentMethod,
+  }) async {
     try {
       final response = await apiConsumer.post(
         EndPoint.payment,
-        data: {
-          "orderId": orderId,
-          "paymentMethod": paymentMethod,
-        },
+        data: {"orderId": orderId, "paymentMethod": paymentMethod},
       );
 
       if (response is Map<String, dynamic>) {
         final result = PaymentResponse.fromJson(response);
         return right(result);
+      } else {
+        return left(
+          ErrorModel(
+            errorMessage: 'Invalid response format from server: $response',
+          ),
+        );
+      }
+    } on ServerException catch (e) {
+      return left(e.errModel);
+    }
+  }
+
+  @override
+  Future<Either<ErrorModel, PlaceOrderResponse>> makePlaceOrder({
+    required String userId,
+  }) async {
+    try {
+      final response = await apiConsumer.post(
+        EndPoint.createPlaceOrder,
+        data: {ApiKeys.userId: userId},
+      );
+
+      if (response is Map<String, dynamic>) {
+        final result = PlaceOrderResponse.fromJson(response);
+        return right(result);
+      } else {
+        return left(
+          ErrorModel(
+            errorMessage: 'Invalid response format from server: $response',
+          ),
+        );
+      }
+    } on ServerException catch (e) {
+      return left(e.errModel);
+    }
+  }
+
+  @override
+  Future<Either<ErrorModel, OrderDetails>> getOrderDetails(int orderId) async {
+    try {
+      final response = await apiConsumer.get('${EndPoint.orderDetails}?orderId=$orderId');
+      if (response is Map<String, dynamic>) {
+        final order = OrderDetails.fromJson(response);
+        return right(order);
       } else {
         return left(
           ErrorModel(

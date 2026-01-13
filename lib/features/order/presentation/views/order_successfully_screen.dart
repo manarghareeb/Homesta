@@ -8,7 +8,8 @@ import 'package:homesta/core/widgets/custom_button_widget.dart';
 import 'package:homesta/features/home/presentation/views/home.dart';
 
 class OrderSuccessfullyScreen extends StatelessWidget {
-  const OrderSuccessfullyScreen({super.key});
+  const OrderSuccessfullyScreen({super.key, required this.orderId});
+  final int orderId;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +51,7 @@ class OrderSuccessfullyScreen extends StatelessWidget {
                           style: TextStyles.font16GreyRegular,
                         ),
                         Text(
-                          '#46406',
+                          '$orderId',
                           style: TextStyles.font16WhiteW500.copyWith(
                             color: ColorManager.primaryColor,
                           ),
@@ -104,7 +105,10 @@ class OrderSuccessfullyScreen extends StatelessWidget {
               CustomButtonWidget(
                 buttonText: 'Track Order',
                 onPressed: () {
-                  GoRouter.of(context).push(AppRouter.trackOrder);
+                  GoRouter.of(
+                    context,
+                  ).push(AppRouter.trackOrderDetails, extra: orderId);
+                  print('-------= $orderId =------------');
                 },
                 isPrimary: false,
               ),

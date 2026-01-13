@@ -33,4 +33,8 @@ class ApiKeys {
   // Cart
   static const String colorId = 'colorId';
   static const String colorName = 'ColorName';
+
+  // Order
+  static const String orderId = 'orderId';
+  static const String userId = 'userId';
 }

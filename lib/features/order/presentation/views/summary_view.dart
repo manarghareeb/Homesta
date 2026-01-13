@@ -1,18 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:homesta/core/api/api_keys.dart';
+import 'package:homesta/core/cache/cache_helper.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/features/cart/presentation/views/cart_view.dart';
 import 'package:homesta/features/home/presentation/views/home.dart';
 import 'package:homesta/features/order/data/models/payment_response/payment_response.dart';
+import 'package:homesta/features/order/presentation/cubit/place_order_cubit/place_order_cubit.dart';
+import 'package:homesta/features/order/presentation/cubit/place_order_cubit/place_order_state.dart';
+import 'package:homesta/features/order/presentation/views/order_successfully_screen.dart';
 import '../../../../core/routing/app_router.dart';
 
 class SummaryView extends StatelessWidget {
-  final VoidCallback onNext;
+  //final VoidCallback onNext;
   final VoidCallback onBack;
   final PaymentResponse paymentResponse;
-  const SummaryView({super.key, required this.onNext, required this.onBack, required this.paymentResponse});
+  const SummaryView({
+    super.key,
+    //required this.onNext,
+    required this.onBack,
+    required this.paymentResponse,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -81,12 +92,62 @@ class SummaryView extends StatelessWidget {
               ),
             ),
             SizedBox(height: 24.h),
-            Text('Order Items (${order.items.length})', style: TextStyles.font16BlackW500),
+            Text(
+              'Order Items (${order.items.length})',
+              style: TextStyles.font16BlackW500,
+            ),
             SizedBox(height: 16.h),
-            CartView(
+            /*CartView(
               buttonText: 'Place Order',
               onNext: (){}
+            ),*/
+            BlocConsumer<PlaceOrderCubit, PlaceOrderState>(
+              listener: (context, state) {
+                if (state is PlaceOrderSuccess) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(state.placeOrderResponse.message)),
+                  );
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => OrderSuccessfullyScreen(
+                        orderId: state.placeOrderResponse.orderId,
+                      ),
+                    ),
+                  );
+
+                } else if (state is PlaceOrderFailure) {
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text(state.error)));
+                }
+              },
+              builder: (context, state) {
+                final isLoading = state is PlaceOrderLoading;
+
+                return CartView(
+                  buttonText: isLoading ? 'Placing Order...' : 'Place Order',
+                  onNext: () {
+                    if (isLoading) return;
+                    final userId = CacheHelper().getData(key: ApiKeys.id);
+                    if (userId == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            'User ID not found. Please log in again.',
+                          ),
+                        ),
+                      );
+                      return;
+                    }
+                    context.read<PlaceOrderCubit>().makePlaceOrder(
+                      userId: userId,
+                    );
+                  },
+                );
+              },
             ),
+
             SizedBox(height: 24.h),
             Row(
               children: [
