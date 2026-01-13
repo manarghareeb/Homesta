@@ -7,7 +7,6 @@ import 'package:homesta/features/cart/presentation/views/cart_view.dart';
 import 'package:homesta/features/order/data/models/payment_response/payment_response.dart';
 import 'package:homesta/features/order/presentation/cubit/shipping_cubit/shipping_cubit.dart';
 import 'package:homesta/features/order/presentation/cubit/shipping_cubit/shipping_state.dart';
-import 'package:homesta/features/order/presentation/views/order_successfully_screen.dart';
 import 'package:homesta/features/order/presentation/views/payment_view.dart';
 import 'package:homesta/features/order/presentation/views/shipping_view.dart';
 import 'package:homesta/features/order/presentation/views/summary_view.dart';
@@ -79,7 +78,6 @@ class _OrderFlowScreenState extends State<OrderFlowScreen> {
             currentStep++;
           });
         },
-        //onNext: () => setState(() => currentStep++),
       )
     else
       const SizedBox.shrink(),
@@ -87,14 +85,10 @@ class _OrderFlowScreenState extends State<OrderFlowScreen> {
       SummaryView(
         paymentResponse: paymentResponse!,
         onBack: () => setState(() => currentStep--),
-        onNext: () => navigateToSuccessScreen(context),
+        //onNext: () {}
       )
     else
       const SizedBox.shrink(),
-    /*SummaryView(
-      onBack: () => setState(() => currentStep--),
-      onNext: () => navigateToSuccessScreen(context),
-    ),*/
   ];
 
   @override
@@ -193,13 +187,6 @@ class _OrderFlowScreenState extends State<OrderFlowScreen> {
           ],
         ),
       ),
-    );
-  }
-
-  void navigateToSuccessScreen(BuildContext context) {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (_) => const OrderSuccessfullyScreen()),
     );
   }
 }

@@ -5,48 +5,38 @@ import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 
 class OrderTimeline extends StatelessWidget {
-  const OrderTimeline({super.key});
+  final String currentStatus; 
+  final String orderDateFormatted; 
+
+  const OrderTimeline({
+    super.key,
+    required this.currentStatus,
+    required this.orderDateFormatted,
+  });
 
   @override
   Widget build(BuildContext context) {
     final steps = [
-      {
-        'title': 'Order Placed',
-        'date': '20 Apr 2025\n11:00 AM',
-        'done': true,
-        'icon': FontAwesomeIcons.clipboardList,
-      },
-      {
-        'title': 'Accepted',
-        'date': '20 Apr 2025\n11:00 AM',
-        'done': true,
-        'icon': FontAwesomeIcons.clipboardList,
-      },
-      {
-        'title': 'In Progress',
-        'date': 'Expected\n21 Apr 2025',
-        'done': false,
-        'icon': FontAwesomeIcons.box,
-      },
-      {
-        'title': 'On the Way',
-        'date': 'Expected\n22,23 Apr 2025',
-        'done': false,
-        'icon': Icons.local_shipping,
-      },
-      {
-        'title': 'Delivered',
-        'date': 'Expected\n24 Apr 2025',
-        'done': false,
-        'icon': Icons.home_filled,
-      },
+      'Pending',
+      'Processing',
+      'Shipped',
+      'Delivered',
+      'Cancelled'
     ];
-
+    
     return Column(
       children: List.generate(steps.length, (index) {
         final step = steps[index];
-        final bool isDone = step['done'] as bool;
+        final bool isDone = steps.indexOf(currentStatus) > index || steps.indexOf(currentStatus) == index;
         final bool isLast = index == steps.length - 1;
+        final bool isCurrent = currentStatus == step;
+        final iconMap = {
+          'Pending': FontAwesomeIcons.clipboardList,
+          'Processing': FontAwesomeIcons.clipboardList,
+          'Shipped': FontAwesomeIcons.box,
+          'Delivered': Icons.local_shipping,
+          'Cancelled': Icons.home_filled
+        };
 
         return IntrinsicHeight(
           child: Row(
@@ -92,12 +82,12 @@ class OrderTimeline extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        step['title'] as String,
+                        step,
                         style: TextStyles.font16BlackRegular,
                       ),
                       SizedBox(height: 4.h),
                       Text(
-                        step['date'] as String,
+                        orderDateFormatted,
                         style:
                             isDone
                                 ? TextStyles.font14deepGreyColorW400
@@ -109,7 +99,7 @@ class OrderTimeline extends StatelessWidget {
                 ),
               ),
               Icon(
-                step['icon'] as IconData? ?? Icons.circle,
+                iconMap[step],
                 color:
                     isDone ? ColorManager.primaryColor : ColorManager.greyColor,
               ),

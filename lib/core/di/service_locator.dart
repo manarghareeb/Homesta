@@ -16,7 +16,9 @@ import 'package:homesta/features/categories/presentation/cubits/category_cubit/c
 import 'package:homesta/features/categories/presentation/cubits/sub_category_cubit.dart/sub_category_cubit.dart';
 import 'package:homesta/features/order/data/repos/order_repo_impl.dart';
 import 'package:homesta/features/order/domain/repos/order_repo.dart';
+import 'package:homesta/features/order/presentation/cubit/order_details_cubit/order_details_cubit.dart';
 import 'package:homesta/features/order/presentation/cubit/payment_cubit/payment_cubit.dart';
+import 'package:homesta/features/order/presentation/cubit/place_order_cubit/place_order_cubit.dart';
 import 'package:homesta/features/order/presentation/cubit/shipping_cubit/shipping_cubit.dart';
 import 'package:homesta/features/product/data/data_sources/remote_data_source/product_data_source.dart';
 import 'package:homesta/features/product/data/data_sources/remote_data_source/review_data_source.dart';
@@ -131,6 +133,8 @@ void initServiceLocator() {
   sl.registerFactory(() => ProductsByCategoryCubit(sl()));
   sl.registerFactory(() => ShippingCubit(sl()));
   sl.registerFactory(() => PaymentCubit(sl()));
+  sl.registerFactory(() => PlaceOrderCubit(sl()));
+  sl.registerFactory(() => TrackOrderDetailsCubit(sl()));
   //saller product cubit
   sl.registerFactory(() => SellerProductCubit(addProductUseCase: sl(), getSallerProductUsecase: sl()));
 //store cubit
