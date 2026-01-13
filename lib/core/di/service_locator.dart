@@ -20,6 +20,7 @@ import 'package:homesta/features/order/presentation/cubit/order_details_cubit/or
 import 'package:homesta/features/order/presentation/cubit/payment_cubit/payment_cubit.dart';
 import 'package:homesta/features/order/presentation/cubit/place_order_cubit/place_order_cubit.dart';
 import 'package:homesta/features/order/presentation/cubit/shipping_cubit/shipping_cubit.dart';
+import 'package:homesta/features/order/presentation/cubit/user_orders_cubit/user_orders_cubit.dart';
 import 'package:homesta/features/product/data/data_sources/remote_data_source/product_data_source.dart';
 import 'package:homesta/features/product/data/data_sources/remote_data_source/review_data_source.dart';
 import 'package:homesta/features/product/data/repositories/product_repository_impl.dart';
@@ -138,6 +139,7 @@ void initServiceLocator() {
   sl.registerFactory(() => PaymentCubit(sl()));
   sl.registerFactory(() => PlaceOrderCubit(sl()));
   sl.registerFactory(() => TrackOrderDetailsCubit(sl()));
+  sl.registerFactory(() => UserOrdersCubit(sl()));
   //saller product cubit
   sl.registerFactory(() => SellerProductCubit(addProductUseCase: sl(), getSallerProductUsecase: sl()));
 //store cubit

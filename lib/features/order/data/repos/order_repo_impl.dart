@@ -7,6 +7,7 @@ import 'package:homesta/core/error/expections.dart';
 import 'package:homesta/features/order/data/models/order_details_response/order_details.dart';
 import 'package:homesta/features/order/data/models/payment_response/payment_response.dart';
 import 'package:homesta/features/order/data/models/place_order_response.dart';
+import 'package:homesta/features/order/data/models/user_orders_response.dart';
 import 'package:homesta/features/order/domain/repos/order_repo.dart';
 
 class OrderRepoImpl implements OrderRepo {
@@ -97,6 +98,28 @@ class OrderRepoImpl implements OrderRepo {
       if (response is Map<String, dynamic>) {
         final order = OrderDetails.fromJson(response);
         return right(order);
+      } else {
+        return left(
+          ErrorModel(
+            errorMessage: 'Invalid response format from server: $response',
+          ),
+        );
+      }
+    } on ServerException catch (e) {
+      return left(e.errModel);
+    }
+  }
+
+  @override
+  Future<Either<ErrorModel, List<UserOrdersResponse>>> getUserOrders() async {
+    try {
+      final response = await apiConsumer.get(EndPoint.userOrders);
+
+      if (response is List) {
+        final orders = response
+            .map((e) => UserOrdersResponse.fromJson(e as Map<String, dynamic>))
+            .toList();
+        return right(orders);
       } else {
         return left(
           ErrorModel(
