@@ -12,6 +12,7 @@ import 'package:homesta/features/categories/domain/repositories/category_repo.da
 import 'package:homesta/features/categories/domain/usecases/get_category_use_case.dart';
 import 'package:homesta/features/categories/domain/usecases/get_sub_category_use_case.dart';
 import 'package:homesta/features/categories/domain/usecases/search_category_use_case.dart';
+import 'package:homesta/features/categories/domain/usecases/search_sub_category_use_case.dart';
 import 'package:homesta/features/categories/presentation/cubits/category_cubit/category_cubit.dart';
 import 'package:homesta/features/categories/presentation/cubits/sub_category_cubit.dart/sub_category_cubit.dart';
 import 'package:homesta/features/order/data/repos/order_repo_impl.dart';
@@ -118,6 +119,8 @@ void initServiceLocator() {
   sl.registerLazySingleton(() => UpdateSubCategoryUseCase(sl()));
   sl.registerLazySingleton(() => DeleteSubCategoryUseCase(sl()));
   sl.registerLazySingleton(() => GetProductImagesUseCase(sl()));
+    sl.registerLazySingleton(() => SearchSubCategoryUseCase());
+
 
     sl.registerLazySingleton(() => GetSallerProductUsecase(sallerProductRepo:  sl()));
 //saller product usecase
@@ -132,7 +135,7 @@ void initServiceLocator() {
         CategoryCubit(getCategoriesUseCase: sl(), searchCategoryUseCase: sl(), addCategoryUseCase: sl(), deleteCategoryUseCase: sl(), updateCategoryUseCase: sl()),
   );
   sl.registerFactory(() => ProductCubit(sl()));
-  sl.registerFactory(() => SubCategoryCubit(getSubCategoryUseCase: sl(), addSubCategoryUseCase: sl(), deleteSubCategoryUseCase: sl(), updateSubCategoryUseCase: sl()));
+  sl.registerFactory(() => SubCategoryCubit(getSubCategoryUseCase: sl(), addSubCategoryUseCase: sl(), deleteSubCategoryUseCase: sl(), updateSubCategoryUseCase: sl(), searchSubCategoryUseCase: sl()));
   sl.registerFactory(() => ReviewsCubit(sl(), sl()));
   sl.registerFactory(() => AddItemToCartCubit(sl()));
   sl.registerFactory(() => CartCubit(sl()));

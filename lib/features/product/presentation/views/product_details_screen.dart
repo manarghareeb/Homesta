@@ -104,4 +104,5 @@ class ProductDetailsScreen extends StatelessWidget {
       ),
     );
   }
-}*/
+}
+*/
