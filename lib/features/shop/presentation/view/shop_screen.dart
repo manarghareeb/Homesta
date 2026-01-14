@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:homesta/core/di/service_locator.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
-import 'package:homesta/features/cart/presentation/cubit/add_item_to_cart_cubit/add_item_to_cart_cubit.dart';
 import 'package:homesta/features/categories/presentation/cubits/category_cubit/category_cubit.dart';
 import 'package:homesta/features/categories/presentation/cubits/category_cubit/category_state.dart';
 import 'package:homesta/features/home/presentation/widgets/product_bloc_builder.dart';
@@ -54,71 +52,64 @@ class _FiltersScreenState extends State<FiltersScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (_) => sl<ProductCubit>()..getAllProducts()),
-        BlocProvider(create: (_) => sl<AddItemToCartCubit>()),
-        BlocProvider(create: (_) => sl<CategoryCubit>()..getCategories()),
-      ],
-      child: Builder(
-        builder: (context) {
-          return Scaffold(
-            backgroundColor: Colors.white,
-            appBar: CustomAppBarWidget(text: 'Filters'),
-            endDrawer: FilterDrawer(
-              selectedCategoryNames: activeFilters,
-              selectedCategoryIds: selectedCategoryIds,
-              onCategoryChanged: (newSet, categoryNames) {
-                setState(() {
-                  selectedCategoryIds = {...newSet};
-                  activeFilters = [...categoryNames];
-                });
-                context.read<ProductCubit>().filterProductsByCategories(
-                  selectedCategoryIds.toList(),
-                );
-              },
-            ),
-            body: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SortRowWidget(),
-                    const SizedBox(height: 16),
-                    Divider(color: ColorManager.lightGreyColor),
-                    const SizedBox(height: 16),
-                    if (activeFilters.isNotEmpty)
-                      ActiveFiltersWidget(
-                        initialFilters: [...activeFilters],
-                        onClearAll: () => clearAllFilters(context),
-                        onRemoveFilter:
-                            (filter) => removeSingleFilter(context, filter),
-                      ),
-                    const SizedBox(height: 24),
-                    BlocBuilder<ProductCubit, ProductState>(
-                      builder: (context, state) {
-                        if (state is ProductSuccess) {
-                          final filteredCount = state.products.length;
-                          final totalCount =
-                              context.read<ProductCubit>().allProducts.length;
-                          return Text(
-                            'Showing $filteredCount of $totalCount results',
-                            style: TextStyles.font15BlackW400,
-                          );
-                        }
-                        return const SizedBox();
-                      },
+    return Builder(
+      builder: (context) {
+        return Scaffold(
+          backgroundColor: Colors.white,
+          appBar: CustomAppBarWidget(text: 'Filters'),
+          endDrawer: FilterDrawer(
+            selectedCategoryNames: activeFilters,
+            selectedCategoryIds: selectedCategoryIds,
+            onCategoryChanged: (newSet, categoryNames) {
+              setState(() {
+                selectedCategoryIds = {...newSet};
+                activeFilters = [...categoryNames];
+              });
+              context.read<ProductCubit>().filterProductsByCategories(
+                selectedCategoryIds.toList(),
+              );
+            },
+          ),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SortRowWidget(),
+                  const SizedBox(height: 16),
+                  Divider(color: ColorManager.lightGreyColor),
+                  const SizedBox(height: 16),
+                  if (activeFilters.isNotEmpty)
+                    ActiveFiltersWidget(
+                      initialFilters: [...activeFilters],
+                      onClearAll: () => clearAllFilters(context),
+                      onRemoveFilter:
+                          (filter) => removeSingleFilter(context, filter),
                     ),
-                    const SizedBox(height: 16),
-                    const ProductBlocBuilder(),
-                  ],
-                ),
+                  const SizedBox(height: 24),
+                  BlocBuilder<ProductCubit, ProductState>(
+                    builder: (context, state) {
+                      if (state is ProductSuccess) {
+                        final filteredCount = state.products.length;
+                        final totalCount =
+                            context.read<ProductCubit>().allProducts.length;
+                        return Text(
+                          'Showing $filteredCount of $totalCount results',
+                          style: TextStyles.font15BlackW400,
+                        );
+                      }
+                      return const SizedBox();
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  const ProductBlocBuilder(),
+                ],
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

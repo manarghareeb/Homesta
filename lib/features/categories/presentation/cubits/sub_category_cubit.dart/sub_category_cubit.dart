@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:homesta/features/categories/domain/entities/sub_category_entity.dart';
 import 'package:homesta/features/categories/domain/usecases/get_sub_category_use_case.dart';
 import 'package:homesta/features/categories/presentation/cubits/sub_category_cubit.dart/sub_category_state.dart';
 
@@ -87,4 +88,18 @@ class SubCategoryCubit extends Cubit<SubCategoryState> {
       },
     );
   }
+  Future<List<SubCategoryEntity>> fetchSubCategories(int id) async {
+  final result = await getSubCategoryUseCase(id);
+
+  return result.fold(
+    (error) {
+      // نرجّع قائمة فاضية لو فيه error
+      return <SubCategoryEntity>[];
+    },
+    (categories) {
+      return categories;
+    },
+  );
+}
+
 }

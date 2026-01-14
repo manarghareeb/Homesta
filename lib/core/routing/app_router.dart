@@ -15,6 +15,7 @@ import 'package:homesta/features/admin/product/presentation/views/admin_product_
 import 'package:homesta/features/admin/profile/presentation/views/admin_account_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/logout_screen.dart';
 import 'package:homesta/features/account/presentation/views/manage_address_screen.dart';
+import 'package:homesta/features/cart/presentation/cubit/add_item_to_cart_cubit/add_item_to_cart_cubit.dart';
 import 'package:homesta/features/order/presentation/cubit/user_orders_cubit/user_orders_cubit.dart';
 import 'package:homesta/features/order/presentation/views/my_order_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/password_manager_screen.dart';
@@ -172,8 +173,7 @@ abstract class AppRouter {
                 BlocProvider<SubCategoryCubit>(
                   create: (context) => sl<SubCategoryCubit>(),
                 ),
-                BlocProvider(
-                  create: (context)=>sl<ProductImageCubit>(),)
+                BlocProvider(create: (context) => sl<ProductImageCubit>()),
               ],
 
               child: const ProductFormScreen(),
@@ -286,9 +286,7 @@ abstract class AppRouter {
               BlocProvider(
                 create: (_) => sl<UserOrdersCubit>()..getUserOrders(),
               ),
-              BlocProvider(
-                create: (_) => sl<TrackOrderDetailsCubit>(),
-              ),
+              BlocProvider(create: (_) => sl<TrackOrderDetailsCubit>()),
             ],
             child: const MyOrderScreen(),
           );
@@ -302,10 +300,9 @@ abstract class AppRouter {
         path: productDetailsScreen,
 
         builder: (context, state) {
-             final data = state.extra as Map<String, dynamic>;
-    final product = data['product'] as ProductEntity;
-    final images = data['images'] as List<ProductImageEntity>;
-
+          final data = state.extra as Map<String, dynamic>;
+          final product = data['product'] as ProductEntity;
+          final images = data['images'] as List<ProductImageEntity>;
 
           print("product id ${product.productId}");
           return BlocProvider(
@@ -325,14 +322,8 @@ abstract class AppRouter {
       GoRoute(
         path: cartScreen,
         builder: (context, state) {
-          //final product = state.extra as ProductEntity;
           return BlocProvider(
             create: (context) => sl<CartCubit>()..getCartItems(),
-            /*sl<AddItemToCartCubit>()..addItemToCart(
-                      productId: product.productId,
-                      colorId: 1,
-                      quantity: 1,
-                    ),*/
             child: const CartScreen(),
           );
         },
@@ -351,15 +342,17 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: filtersScreen,
-        builder:
-            (context, state) => /*MultiBlocProvider(
-              providers:[
-                BlocProvider(create: (_) => ProductFilterCubit()),
-                BlocProvider(create: (_) => ProductCubit(sl())),
-              ],
-              child:*/
-                const FiltersScreen(),
-        //),
+        builder: (context, state) {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (_) => sl<CategoryCubit>()..getCategories()),
+              BlocProvider(create: (_) => sl<SubCategoryCubit>()),
+              BlocProvider(create: (_) => sl<ProductCubit>()..getAllProducts()),
+              BlocProvider(create: (_) => sl<AddItemToCartCubit>()),
+            ],
+            child: const FiltersScreen(),
+          );
+        },
       ),
 
       GoRoute(
