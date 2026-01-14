@@ -3,6 +3,7 @@ import 'package:homesta/core/error/error_model.dart';
 import 'package:homesta/features/order/data/models/order_details_response/order_details.dart';
 import 'package:homesta/features/order/data/models/payment_response/payment_response.dart';
 import 'package:homesta/features/order/data/models/place_order_response.dart';
+import 'package:homesta/features/order/data/models/user_orders_response.dart';
 
 abstract class OrderRepo {
   Future<Either<ErrorModel, int>> addShipping(
@@ -16,4 +17,5 @@ abstract class OrderRepo {
     required String userId,
   });
   Future<Either<ErrorModel, OrderDetails>> getOrderDetails(int orderId);
+  Future<Either<ErrorModel, List<UserOrdersResponse>>> getUserOrders();
 }

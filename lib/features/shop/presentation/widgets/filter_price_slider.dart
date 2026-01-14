@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:homesta/core/theming/colors.dart';
 
 class FilterPriceSlider extends StatefulWidget {
-  const FilterPriceSlider({super.key});
+  const FilterPriceSlider({super.key, this.onPriceChanged});
+  //final void Function(double start, double end) onPriceChanged;
+  final Function(double, double)? onPriceChanged;
 
   @override
   State<FilterPriceSlider> createState() => _FilterPriceSliderState();
 }
 
 class _FilterPriceSliderState extends State<FilterPriceSlider> {
-  RangeValues values = const RangeValues(25.00, 1000.00);
+  RangeValues values = const RangeValues(25.00, 10000.00);
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +25,15 @@ class _FilterPriceSliderState extends State<FilterPriceSlider> {
         RangeSlider(
           values: values,
           min: 0.00,
-          max: 1000.00,
+          max: 10000.00,
           divisions: 100,
           activeColor: ColorManager.primaryColor,
           inactiveColor: ColorManager.lightGreyIconColor,
           onChanged: (val) {
             setState(() => values = val);
+            if (widget.onPriceChanged != null) {
+              widget.onPriceChanged!(values.start, values.end);
+            }
           },
         ),
       ],

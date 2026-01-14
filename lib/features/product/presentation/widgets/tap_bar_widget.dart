@@ -18,10 +18,10 @@ class TapBarWidget extends StatelessWidget {
       dividerHeight: 1,
       dividerColor: ColorManager.greyColor,
 
-      indicatorWeight: 3,
+      indicatorWeight: 2,
       tabs: const [
         Tab(text: 'Description'),
-        Tab(text: 'Addtional infomation'),
+    
         Tab(text: 'Review'),
       ],
     );

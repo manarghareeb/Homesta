@@ -31,6 +31,21 @@ class ProductCubit extends Cubit<ProductState> {
       emit(ProductSuccess(allProducts));
       return;
     }
+    //final filtered =
+    //  allProducts.where((p) => categoryIds.contains(p.categoryId)).toList();
+    final filtered =
+        allProducts.where((p) {
+          return categoryIds.contains(p.categoryId) ||
+              categoryIds.contains(p.subCategoryId);
+        }).toList();
+    emit(ProductSuccess(filtered));
+  }
+
+  void getProductsByCategories(List<int> categoryIds) {
+    final allProducts =
+        state is ProductSuccess
+            ? (state as ProductSuccess).products.cast<ProductEntity>()
+            : <ProductEntity>[];
 
     final filtered =
         allProducts.where((p) => categoryIds.contains(p.categoryId)).toList();
@@ -38,38 +53,68 @@ class ProductCubit extends Cubit<ProductState> {
     emit(ProductSuccess(filtered));
   }
 
-  /*void getProductsByCategory(int categoryId) {
-  final products = state is ProductSuccess ? (state as ProductSuccess).products : [];
+  void filterByPrice(double start, double end) async {
+    emit(ProductLoading());
 
-  final filtered = products
-      .map((p) => p as ProductEntity)
-      .where((p) => p.categoryId == categoryId)
-      .toList();
+    final result = await getAllProductsUseCase();
 
-  emit(ProductSuccess(filtered));
-}*/
-  /*void getProductsByCategory(int categoryId) {
-    //final allProducts = state is ProductSuccess ? (state as ProductSuccess).products : [];
-    // لو عايز كل المنتجات بدون فلترة:
-    // final allProducts = _allProductsFromApi;
+    result.fold((error) => emit(ProductFailure(error.errorMessage)), (
+      products,
+    ) {
+      final filtered =
+          products.where((p) => p.price >= start && p.price <= end).toList();
 
-   // final filtered =
-     //   allProducts.where((p) => p.categoryId == categoryId).toList();
-    final filtered =
-        allProducts.where((p) => p.categoryId == categoryId).toList();
+      emit(ProductSuccess(filtered));
+    });
+  }
+
+  void filterByAvailability({
+    required bool inStock,
+    required bool outOfStock,
+  }) {
+    if (state is! ProductSuccess) return;
+
+    final currentProducts =
+        (state as ProductSuccess).products.cast<ProductEntity>();
+
+    final filtered = currentProducts.where((p) {
+      if (inStock && p.quantity > 0) return true;
+      if (outOfStock && p.quantity == 0) return true;
+      return false;
+    }).toList();
 
     emit(ProductSuccess(filtered));
-  }*/
-  void getProductsByCategories(List<int> categoryIds) {
-    final allProducts =
-        state is ProductSuccess
-            ? (state as ProductSuccess).products
-                .cast<ProductEntity>() // <- هنا
-            : <ProductEntity>[];
+  }
 
-    //final filtered = allProducts.where((p) => categoryIds.contains(p.categoryId)).toList();
-    final filtered =
-        allProducts.where((p) => categoryIds.contains(p.categoryId)).toList();
+  void applyFilters({
+    List<int>? categoryIds,
+    double? startPrice,
+    double? endPrice,
+    bool? inStock,
+    bool? outOfStock,
+  }) {
+    var filtered = List<ProductEntity>.from(allProducts);
+
+    if (categoryIds != null && categoryIds.isNotEmpty) {
+      filtered = filtered.where((p) {
+        return categoryIds.contains(p.categoryId) ||
+            categoryIds.contains(p.subCategoryId);
+      }).toList();
+    }
+
+    if (startPrice != null && endPrice != null) {
+      filtered = filtered
+          .where((p) => p.price >= startPrice && p.price <= endPrice)
+          .toList();
+    }
+
+    if (inStock != null || outOfStock != null) {
+      filtered = filtered.where((p) {
+        if (inStock == true && p.quantity > 0) return true;
+        if (outOfStock == true && p.quantity == 0) return true;
+        return false;
+      }).toList();
+    }
 
     emit(ProductSuccess(filtered));
   }

@@ -26,7 +26,7 @@ class ProductBlocBuilder extends StatelessWidget {
           if (products.isEmpty) {
             return const Center(child: Text("No products found"));
           }
-
+    
           return BlocListener<AddItemToCartCubit, AddItemToCartState>(
             listener: (context, state) {
               if (state is AddItemToCartSuccess) {
@@ -60,7 +60,7 @@ class ProductBlocBuilder extends StatelessWidget {
             ),
           );
         }
-
+    
         return Container(child: Text("something went wrong"));
       },
     );

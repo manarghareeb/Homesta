@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
+import 'package:homesta/core/widgets/custom_cached_network_image.dart';
+import 'package:homesta/features/seller/product/domain/entitiy/product_image_entity.dart';
 
 class ProductImageGallerySection extends StatelessWidget {
   final String mainImage;
-  final List<String> thumbnails;
+  final List<ProductImageEntity> thumbnails;
 
   const ProductImageGallerySection({
     super.key,
@@ -16,7 +18,8 @@ class ProductImageGallerySection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.asset(mainImage),
+        //Image.asset(mainImage),
+        CustomCachedNetworkImage(imagePath: mainImage),
         SizedBox(height: 24.h),
         Wrap(
           spacing: 20.w,
@@ -30,7 +33,8 @@ class ProductImageGallerySection extends StatelessWidget {
                 color: Colors.white,
                 border: Border.all(color: ColorManager.thirdColor),
               ),
-              child: Image.asset(thumbnails[index]),
+              child:CustomCachedNetworkImage(imagePath: thumbnails[index].imageUrl),
+              // Image.asset(thumbnails[index]),
             );
           }),
         ),

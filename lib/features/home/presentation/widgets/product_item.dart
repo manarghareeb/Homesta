@@ -2,153 +2,98 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:homesta/core/di/service_locator.dart';
 import 'package:homesta/core/routing/app_router.dart';
-import 'package:homesta/core/theming/colors.dart';
-import 'package:homesta/features/cart/presentation/cubit/add_item_to_cart_cubit/add_item_to_cart_cubit.dart';
+import 'package:homesta/features/home/presentation/widgets/product_image_widget.dart';
 import 'package:homesta/features/product/domain/entities/product_entitty.dart';
-import 'package:skeletonizer/skeletonizer.dart';
+import 'package:homesta/features/product/presentation/cubits/get_product_images_cubit.dart/get_product_images_cubit.dart';
+import 'package:homesta/features/product/presentation/cubits/get_product_images_cubit.dart/get_ptoduct_image_state.dart';
+import 'package:homesta/features/seller/product/domain/entitiy/product_image_entity.dart';
+
 
 class ProductItem extends StatelessWidget {
   const ProductItem({super.key, required this.productEntity});
   final ProductEntity productEntity;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        context.push(AppRouter.productDetailsScreen, extra: productEntity);
-      },
-      child: SizedBox(
-        height: 260.h, // ✅ يمنع overflow
-        child: Container(
-          padding: EdgeInsets.all(10.w),
-          decoration: BoxDecoration(
-            color: const Color(0xffE0DFDF),
-            borderRadius: BorderRadius.circular(20.r),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              /// IMAGE
-              Expanded(
-                flex: 5,
-                child: Stack(
+    return BlocProvider(
+      create: (context) => sl<GetProductImagesCubit>()..getProductImages(productEntity.productId),
+    
+
+      child: Builder(
+        builder: (context) {
+          return GestureDetector(
+            onTap: () {
+                final loadedImages = context.read<GetProductImagesCubit>().state is GetPtoductImageSuccess
+          ? (context.read<GetProductImagesCubit>().state as GetPtoductImageSuccess).products
+          : <ProductImageEntity>[];
+              context.push(AppRouter.productDetailsScreen, extra: {
+          'product': productEntity,
+          'images': loadedImages,
+              },);
+            },
+            child: SizedBox(
+              height: 260.h, // ✅ يمنع overflow
+              child: Container(
+                padding: EdgeInsets.all(10.w),
+                decoration: BoxDecoration(
+                  color: const Color(0xffE0DFDF),
+                  borderRadius: BorderRadius.circular(20.r),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(14.r),
-                      child: Image.asset(
-                        "assets/images/catrgories_image/bedroom.png",
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
+                  ProductImageWidget(productEntity: productEntity),
+          
+                    SizedBox(height: 6.h),
+          
+                    /// TITLE
+                    Text(
+                      productEntity.name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontWeight: FontWeight.w600),
                     ),
-
-                    /// Discount
-                    Positioned(
-                      top: 6,
-                      left: 6,
-                      child: _badge("${productEntity.discount}% Off"),
+          
+                    SizedBox(height: 4.h),
+          
+                    /// RATING
+                    Row(
+                      children: [
+                        const Icon(Icons.star, color: Colors.amber, size: 14),
+                        SizedBox(width: 4.w),
+                        Text(
+                          productEntity.rating.toString(),
+                          style: const TextStyle(fontSize: 12),
+                        ),
+                      ],
                     ),
-
-                    /// Icons
-                    Positioned(
-                      top: 6,
-                      right: 6,
-                      child: Column(
-                        children: [
-                          _icon(Icons.favorite_border, () {}),
-                          SizedBox(height: 6.h),
-                          _icon(Icons.shopping_cart_outlined, () {
-                            final addToCartCubit =
-                                context.read<AddItemToCartCubit>();
-                            addToCartCubit.addItemToCart(
-                              productId: productEntity.productId,
-                              quantity: 1,
-                              colorId: productEntity.colors.first,
-                            );
-                          }),
-                        ],
-                      ),
+          
+                    SizedBox(height: 4.h),
+          
+                    /// PRICE
+                    Row(
+                      children: [
+                        Text(
+                          "${(productEntity.price * productEntity.discount) / 100} EGP",
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(width: 6.w),
+                        Text(
+                          productEntity.price.toString(),
+                          style: const TextStyle(
+                            color: Colors.grey,
+                            decoration: TextDecoration.lineThrough,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ),
-
-              SizedBox(height: 6.h),
-
-              /// TITLE
-              Text(
-                productEntity.name,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontWeight: FontWeight.w600),
-              ),
-
-              SizedBox(height: 4.h),
-
-              /// RATING
-              Row(
-                children: [
-                  const Icon(Icons.star, color: Colors.amber, size: 14),
-                  SizedBox(width: 4.w),
-                  Text(
-                    productEntity.rating.toString(),
-                    style: const TextStyle(fontSize: 12),
-                  ),
-                ],
-              ),
-
-              SizedBox(height: 4.h),
-
-              /// PRICE
-              Row(
-                children: [
-                  Text(
-                    "${(productEntity.price * productEntity.discount) / 100} EGP",
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(width: 6.w),
-                  Text(
-                    productEntity.price.toString(),
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      decoration: TextDecoration.lineThrough,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _badge(String text) {
-    return Skeleton.leaf(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 3.h),
-        decoration: BoxDecoration(
-          color: ColorManager.primaryColor,
-          borderRadius: BorderRadius.circular(14.r),
-        ),
-        child: Text(
-          text,
-          style: const TextStyle(color: Colors.white, fontSize: 11),
-        ),
-      ),
-    );
-  }
-
-  Widget _icon(IconData icon, Function() onTap) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.all(4.w),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          shape: BoxShape.circle,
-        ),
-        child: Icon(icon, size: 16),
+            ),
+          );
+        }
       ),
     );
   }
