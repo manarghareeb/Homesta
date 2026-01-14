@@ -14,7 +14,11 @@ import 'package:homesta/features/product/presentation/widgets/tap_bar_widget.dar
 import 'package:homesta/features/seller/product/domain/entitiy/product_image_entity.dart';
 
 class ProductDetailsView extends StatelessWidget {
-  const ProductDetailsView({super.key, required this.productEntity, required this.images});
+  const ProductDetailsView({
+    super.key,
+    required this.productEntity,
+    required this.images,
+  });
   final ProductEntity productEntity;
   final List<ProductImageEntity> images;
   @override
@@ -45,18 +49,15 @@ class ProductDetailsView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const ProductImageGallerySection(
-                  mainImage: 
-                  'assets/images/chair.png',
-                  thumbnails: [
-                    'assets/images/chair.png',
-                    'assets/images/chair.png',
-                    'assets/images/chair.png',
-                    'assets/images/chair.png',
-                  ],
+                ProductImageGallerySection(
+                  mainImage: images[0].imageUrl,
+                  thumbnails: images,
                 ),
                 SizedBox(height: 24.h),
-                 ProductTitleWithRating(title: productEntity.name,rating: productEntity.rating.toString(),),
+                ProductTitleWithRating(
+                  title: productEntity.name,
+                  rating: productEntity.rating.toString(),
+                ),
                 SizedBox(height: 24.h),
                 ProductDescriptionSection(
                   description: productEntity.description,
@@ -85,7 +86,7 @@ class ProductDetailsView extends StatelessWidget {
                   child: TabBarView(
                     children: [
                       DiscriptionTab(),
-                
+
                       ReviewTab(productEntity: productEntity),
                     ],
                   ),
