@@ -61,6 +61,7 @@ import 'package:homesta/features/seller/profile/presentation/cubits/store_cubit.
 import 'package:homesta/features/seller/profile/presentation/views/create_store_view.dart';
 import 'package:homesta/features/seller/profile/presentation/views/seller_account_screen.dart';
 import 'package:homesta/features/splash/presentation/splashscreen.dart';
+import '../../features/account/presentation/cubit/edit_profile_cubit.dart';
 import '../../features/account/presentation/views/account_screen.dart';
 import '../../features/account/presentation/views/add_review.dart';
 import '../../features/account/presentation/views/invoice.dart';
@@ -275,9 +276,15 @@ abstract class AppRouter {
         builder: (context, state) => const ForgetPasswordScreen(),
       ),
       GoRoute(
-        path: editProfileScreen,
-        builder: (context, state) => const EditProfileScreen(),
+        path: '/editProfileScreen',
+        builder: (context, state) {
+          return BlocProvider(
+            create: (_) => sl<EditProfileCubit>(), // إذا عندك service locator
+            child: const EditProfileScreen(),
+          );
+        },
       ),
+
       GoRoute(
         path: myOrderScreen,
         builder: (context, state) {
@@ -334,7 +341,12 @@ abstract class AppRouter {
       ),*/
       GoRoute(
         path: accountScreen,
-        builder: (context, state) => const AccountScreen(),
+        builder: (context, state) {
+          return BlocProvider(
+            create: (_) => sl<EditProfileCubit>(),
+            child: const AccountScreen(),
+          );
+        },
       ),
       GoRoute(
         path: chatScreen,

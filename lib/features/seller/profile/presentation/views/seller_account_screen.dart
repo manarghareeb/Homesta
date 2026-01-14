@@ -5,6 +5,7 @@ import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/features/account/presentation/widgets/option_tile.dart';
 import 'package:homesta/features/account/presentation/widgets/photo_profile.dart';
+import 'package:image_picker/image_picker.dart';
 
 class SellerAccountScreen extends StatelessWidget {
   const SellerAccountScreen({super.key});
@@ -31,7 +32,7 @@ class SellerAccountScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const PhotoProfile(),
+                  PhotoProfile(onImageSelected: (XFile? p1) {  },),
                   SizedBox(width: 24.w),
                   Column(
                     children: [

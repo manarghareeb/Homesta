@@ -11,12 +11,15 @@ class TextAndTextField extends StatelessWidget {
     required this.textInputType,
     this.validator,
     required this.textLabel,
+    this.readOnly = false,
+
   });
   final TextEditingController controller;
   final String hintText;
   final TextInputType textInputType;
   final String? Function(String?)? validator;
   final String textLabel;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -27,19 +30,19 @@ class TextAndTextField extends StatelessWidget {
           text: TextSpan(
             text: textLabel,
             style: TextStyles.font18BlackW500.copyWith(fontSize: 16.sp),
-            children: [
-              TextSpan(
-                text: '*',
-                style: TextStyle(color: ColorManager.redColor),
-              ),
-            ],
+            // children: [
+            //   TextSpan(
+            //     text: '*',
+            //     style: TextStyle(color: ColorManager.redColor),
+            //   ),
+            // ],
           ),
         ),
         SizedBox(height: 8.h),
         TextFormField(
           controller: controller,
           keyboardType: textInputType,
-          style: TextStyles.font14GreyColorW400,
+          style: TextStyles.font14BlackColorW400,
           validator: validator,
           decoration: InputDecoration(
             hintText: hintText,
@@ -56,6 +59,7 @@ class TextAndTextField extends StatelessWidget {
               borderSide: BorderSide(color: ColorManager.lightGreyColor),
             ),
           ),
+          readOnly: readOnly,
         ),
         SizedBox(height: 16.h),
       ],
