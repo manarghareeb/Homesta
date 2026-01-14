@@ -46,6 +46,11 @@ import 'package:homesta/features/seller/profile/domain/use_cases/create_store_us
 import 'package:homesta/features/seller/profile/domain/use_cases/get_store_use_case.dart';
 import 'package:homesta/features/seller/profile/presentation/cubits/store_cubit.dart';
 
+import '../../features/account/data/datasources/user_data_source.dart';
+import '../../features/account/data/repositories/user_repo_impl.dart';
+import '../../features/account/domain/repositories/user_repo.dart';
+import '../../features/account/domain/usecases/update_user_use_case.dart';
+import '../../features/account/presentation/cubit/edit_profile_cubit.dart';
 import '../../features/admin/domain/usecases/add_category_use_case.dart';
 import '../../features/admin/domain/usecases/add_subCategory_use_case.dart';
 import '../../features/admin/domain/usecases/delete_category_use_case.dart';
@@ -78,7 +83,9 @@ void initServiceLocator() {
   sl.registerLazySingleton<StoreDataSource>(
     () => StoreDataSourceImpl(apiConsumer: sl()),
   );
-
+  sl.registerLazySingleton<UserDataSource>(
+        () => UserDataSourceImpl(api: sl()),
+  );
   /// Repositories
   sl.registerLazySingleton<CategoryRepo>(
     () => CategoryRepoImp(categoryDataSource: sl()),
@@ -97,7 +104,7 @@ void initServiceLocator() {
     sl.registerLazySingleton<StoreRepo>(
     () => StoreRepoImpl(storeDataSource:  sl()),
   );
-
+  sl.registerLazySingleton<UserRepo>(() => UserRepoImpl(sl<UserDataSource>()));
 
   /// UseCases
   sl.registerLazySingleton(() => GetCategoryUseCase(sl()));
@@ -107,14 +114,13 @@ void initServiceLocator() {
   sl.registerLazySingleton(() => GetProductReviewUseCase(productRepository: sl()));
   sl.registerLazySingleton(() => AddReviewUseCase(productRepository: sl()));
   sl.registerLazySingleton(() => GetProductsByCategoryUseCase(sl()));
-
   sl.registerLazySingleton(() => AddCategoryUseCase(sl()));
   sl.registerLazySingleton(() => DeleteCategoryUseCase(sl()));
   sl.registerLazySingleton(() => UpdateCategoryUseCase(sl()));
   sl.registerLazySingleton(() => AddSubCategoryUseCase(sl()));
   sl.registerLazySingleton(() => UpdateSubCategoryUseCase(sl()));
   sl.registerLazySingleton(() => DeleteSubCategoryUseCase(sl()));
-
+  sl.registerLazySingleton(() => UpdateUserUseCase(sl<UserRepo>()));
 
     sl.registerLazySingleton(() => GetSallerProductUsecase(sallerProductRepo:  sl()));
 //saller product usecase
@@ -123,6 +129,7 @@ void initServiceLocator() {
   //store usecase
     sl.registerLazySingleton(() => CreateStoreUseCase(sl()));
     sl.registerLazySingleton( () => GetStoreUseCase(sl()));
+  sl.registerLazySingleton(() => GetUserUseCase(sl<UserRepo>()));
   /// Cubits
   sl.registerFactory(
     () =>
@@ -143,4 +150,9 @@ void initServiceLocator() {
 //store cubit
   sl.registerFactory(() => StoreCubit(createStoreUseCase: sl(),getStoreUseCase: sl()));
   sl.registerFactory(()=>ProductImageCubit(sl()));
+  // edit profile
+  sl.registerFactory(() => EditProfileCubit(
+    sl<UpdateUserUseCase>(),
+    sl<GetUserUseCase>(),
+  ));
 }

@@ -67,24 +67,49 @@ class DioConsumer extends ApiConsumer {
     }
   }
 
+  // @override
+  // Future patch(
+  //   String path, {
+  //   dynamic data,
+  //   Map<String, dynamic>? queryParameters,
+  //   bool isFromData = false,
+  // }) async {
+  //   try {
+  //     final response = await dio.patch(
+  //       path,
+  //       data: isFromData ? FormData.fromMap(data) : data,
+  //       queryParameters: queryParameters,
+  //     );
+  //     return response.data;
+  //   } on DioException catch (e) {
+  //     handleDioExceptions(e);
+  //   }
+  // }
+
   @override
   Future patch(
-    String path, {
-    dynamic data,
-    Map<String, dynamic>? queryParameters,
-    bool isFromData = false,
-  }) async {
+      String path, {
+        dynamic data,
+        Map<String, dynamic>? queryParameters,
+        bool isFromData = false,
+      }) async {
     try {
-      final response = await dio.patch(
+      final response = await dio.put(
         path,
-        data: isFromData ? FormData.fromMap(data) : data,
+        data: data,
         queryParameters: queryParameters,
+        options: Options(
+          headers: {
+            "Content-Type": isFromData ? "multipart/form-data" : "application/json",
+          },
+        ),
       );
       return response.data;
     } on DioException catch (e) {
       handleDioExceptions(e);
     }
   }
+
 
   @override
   Future post(

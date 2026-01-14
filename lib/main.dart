@@ -21,6 +21,8 @@ import 'package:homesta/features/authentication/data/datasources/auth_remote_dat
 import 'package:homesta/features/authentication/data/repositories/auth_repository.dart';
 import 'package:homesta/features/authentication/presentation/cubit/auth/auth_cubit.dart';
 
+import 'features/account/presentation/cubit/edit_profile_cubit.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
@@ -45,7 +47,6 @@ void main() async {
       child: MultiBlocProvider(
         providers: [
           BlocProvider<AuthCubit>(create: (context) => AuthCubit(authRepo)),
-
           BlocProvider<AddItemToCartCubit>(
             create:
                 (context) =>
@@ -55,6 +56,7 @@ void main() async {
             create:
                 (context) => CartCubit(CartRepoImpl(apiConsumer: apiConsumer)),
           ),
+          BlocProvider<EditProfileCubit>( create: (context) => sl<EditProfileCubit>(),),
         ],
         child: const MyApp(),
       ),
