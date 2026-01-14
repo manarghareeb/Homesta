@@ -52,7 +52,7 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
                 /// APP BAR
                 AppBarWidget(
                   openDrawer: () {
-                    scaffoldKey.currentState?.openDrawer();
+                    //scaffoldKey.currentState?.openDrawer();
                   },
                 ),
 

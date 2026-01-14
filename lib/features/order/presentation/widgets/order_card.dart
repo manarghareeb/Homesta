@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/features/order/data/models/user_orders_response.dart';
 import 'package:homesta/features/order/presentation/cubit/order_details_cubit/order_details_cubit.dart';
+import 'package:homesta/features/order/presentation/cubit/order_details_cubit/order_details_state.dart';
 import 'package:homesta/features/order/presentation/widgets/order_details_section.dart';
 import 'package:homesta/features/order/presentation/widgets/order_header_section.dart';
 
@@ -50,7 +51,7 @@ class _OrderCardState extends State<OrderCard> {
               setState(() => showDetails = !showDetails);
             },
           ),
-          AnimatedSwitcher(
+          /*AnimatedSwitcher(
             duration: const Duration(milliseconds: 400),
             switchInCurve: Curves.easeOut,
             switchOutCurve: Curves.easeIn,
@@ -58,9 +59,33 @@ class _OrderCardState extends State<OrderCard> {
                 ? OrderDetailsSection(
                     orderId: widget.order.orderId,
                     orderStatus: widget.order.status,
+                    order: widget.order,
                   )
                 : const SizedBox(),
-          ),
+          ),*/
+          AnimatedSwitcher(
+  duration: const Duration(milliseconds: 400),
+  switchInCurve: Curves.easeOut,
+  switchOutCurve: Curves.easeIn,
+  child: showDetails
+      ? BlocBuilder<TrackOrderDetailsCubit, TrackOrderDetailsState>(
+          builder: (context, state) {
+            if (state is TrackOrderDetailsLoaded) {
+              return OrderDetailsSection(
+                orderId: widget.order.orderId,
+                orderStatus: widget.order.status,
+                order: state.order,
+              );
+            } else if (state is TrackOrderDetailsLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else {
+              return const SizedBox();
+            }
+          },
+        )
+      : const SizedBox(),
+),
+
         ],
       ),
     );
