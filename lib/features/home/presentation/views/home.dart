@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/features/account/presentation/views/account_screen.dart';
-import 'package:homesta/features/cart/presentation/views/wishlist_screen.dart';
+import 'package:homesta/features/cart/presentation/views/cart_screen.dart';
 import 'package:homesta/features/categories/presentation/views/categories_screen.dart';
 import 'package:homesta/features/search/presentation/views/search_screen.dart';
 import 'package:homesta/features/home/presentation/views/home_screen.dart';
@@ -21,7 +21,7 @@ class _HomeViewState extends State<HomeView> {
     HomeScreen(),
     SearchScreen(),
     CategoriesScreen(),
-    WishlistScreen(),
+    CartScreen(),
     AccountScreen(),
   ];
 

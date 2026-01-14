@@ -1,8 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:homesta/core/di/service_locator.dart';
 import 'package:homesta/features/product/domain/entities/product_entitty.dart';
 import 'package:homesta/features/product/domain/usecases/get_all_product_use_case.dart';
-import 'package:homesta/features/product/domain/usecases/get_product_images_use_case.dart';
 
 import 'product_state.dart';
 
