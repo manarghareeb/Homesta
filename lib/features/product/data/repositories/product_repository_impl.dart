@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:homesta/core/api/api_consumer.dart';
 import 'package:homesta/core/error/error_model.dart';
 import 'package:homesta/core/error/expections.dart';
 import 'package:homesta/features/product/data/data_sources/remote_data_source/product_data_source.dart';
@@ -7,6 +8,8 @@ import 'package:homesta/features/product/domain/entities/params/add_review_param
 import 'package:homesta/features/product/domain/entities/product_entitty.dart';
 import 'package:homesta/features/product/domain/entities/review_entity.dart';
 import 'package:homesta/features/product/domain/repositories/product_repository.dart';
+import 'package:homesta/features/seller/product/data/models/product_imges_model.dart';
+import 'package:homesta/features/seller/product/domain/entitiy/product_image_entity.dart';
 
 class ProductRepositoryImpl implements ProductRepository {
   final ProductDataSource productDataSource;
@@ -70,4 +73,21 @@ class ProductRepositoryImpl implements ProductRepository {
       return left(e.errModel);
     }
   }
+
+  @override
+  Future<Either<ErrorModel, List<ProductImageEntity>>> getProductImage(int productId)async {
+  try {
+ final List<ProductImageModel> productImages=await productDataSource.getProductImages( productId);
+ return right(productImages);
+} on ServerException catch (e) {
+return Left(e.errModel);
+
+}
+on Exception catch (e) {
+return Left(ErrorModel(errorMessage: e.toString()));
+}
+  }
+
+
+  
 }

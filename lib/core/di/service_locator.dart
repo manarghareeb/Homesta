@@ -27,8 +27,10 @@ import 'package:homesta/features/product/data/repositories/product_repository_im
 import 'package:homesta/features/product/domain/repositories/product_repository.dart';
 import 'package:homesta/features/product/domain/usecases/add_review_use_case.dart';
 import 'package:homesta/features/product/domain/usecases/get_all_product_use_case.dart';
+import 'package:homesta/features/product/domain/usecases/get_product_images_use_case.dart';
 import 'package:homesta/features/product/domain/usecases/get_product_review_use_case.dart';
 import 'package:homesta/features/product/domain/usecases/get_products_by_category_use_case%20.dart';
+import 'package:homesta/features/product/presentation/cubits/get_product_images_cubit.dart/get_product_images_cubit.dart';
 import 'package:homesta/features/product/presentation/cubits/product_cubit.dart';
 import 'package:homesta/features/product/presentation/cubits/products_by_category_cubit/products_by_category_cubit.dart';
 import 'package:homesta/features/product/presentation/cubits/review_cubit/review_cubit.dart';
@@ -115,7 +117,7 @@ void initServiceLocator() {
   sl.registerLazySingleton(() => AddSubCategoryUseCase(sl()));
   sl.registerLazySingleton(() => UpdateSubCategoryUseCase(sl()));
   sl.registerLazySingleton(() => DeleteSubCategoryUseCase(sl()));
-
+  sl.registerLazySingleton(() => GetProductImagesUseCase(sl()));
 
     sl.registerLazySingleton(() => GetSallerProductUsecase(sallerProductRepo:  sl()));
 //saller product usecase
@@ -140,6 +142,7 @@ void initServiceLocator() {
   sl.registerFactory(() => PlaceOrderCubit(sl()));
   sl.registerFactory(() => TrackOrderDetailsCubit(sl()));
   sl.registerFactory(() => UserOrdersCubit(sl()));
+    sl.registerFactory(() => GetProductImagesCubit(sl()));
   //saller product cubit
   sl.registerFactory(() => SellerProductCubit(addProductUseCase: sl(), getSallerProductUsecase: sl()));
 //store cubit

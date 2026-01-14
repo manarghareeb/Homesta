@@ -4,6 +4,8 @@ import 'package:homesta/features/product/domain/entities/params/add_review_param
 
 import 'package:homesta/features/product/domain/entities/product_entitty.dart';
 import 'package:homesta/features/product/domain/entities/review_entity.dart';
+import 'package:homesta/features/seller/product/domain/entitiy/product_image_entity.dart';
+import 'package:homesta/features/seller/product/presentation/cubits/upload_image_cubit/upload_image_cubit.dart';
 
 abstract class ProductRepository {
   Future<Either<ErrorModel, List<ProductEntity>>> getAllProducts();
@@ -15,4 +17,5 @@ abstract class ProductRepository {
     required int categoryId,
     required int subCategoryId,
   });
+  Future<Either<ErrorModel, List<ProductImageEntity>>> getProductImage(int productId);
 }

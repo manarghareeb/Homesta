@@ -52,6 +52,7 @@ import 'package:homesta/features/product/presentation/cubits/review_cubit/review
 import 'package:homesta/features/product/presentation/views/product_details_view.dart';
 import 'package:homesta/features/seller/analytics/presentation/views/sales_analytics_screen.dart';
 import 'package:homesta/features/seller/company%20data/presentation/views/company_data_screen.dart';
+import 'package:homesta/features/seller/product/domain/entitiy/product_image_entity.dart';
 import 'package:homesta/features/seller/product/presentation/cubits/saller_product_cubit.dart';
 import 'package:homesta/features/seller/product/presentation/cubits/upload_image_cubit/upload_image_cubit.dart';
 import 'package:homesta/features/seller/product/presentation/views/product_form_screen.dart';
@@ -302,14 +303,18 @@ abstract class AppRouter {
         path: productDetailsScreen,
 
         builder: (context, state) {
-          final product = state.extra as ProductEntity;
+             final data = state.extra as Map<String, dynamic>;
+    final product = data['product'] as ProductEntity;
+    final images = data['images'] as List<ProductImageEntity>;
+
+
           print("product id ${product.productId}");
           return BlocProvider(
             create:
                 (context) =>
                     sl<ReviewsCubit>()
                       ..getReviews(productId: product.productId),
-            child: ProductDetailsView(productEntity: product),
+            child: ProductDetailsView(productEntity: product, images: images),
           );
         },
       ),
