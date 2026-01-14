@@ -60,13 +60,13 @@ class AccountScreen extends StatelessWidget {
                   GoRouter.of(context).push(AppRouter.editProfileScreen);
                 },
               ),
-              OptionTile(
+              /*OptionTile(
                 icon: Icons.payment,
                 label: 'Payment Account',
                 onTap: () {
                   GoRouter.of(context).push(AppRouter.paymentAccountScreen);
                 },
-              ),
+              ),*/
               OptionTile(
                 icon: Icons.list_alt,
                 label: 'My Order',
@@ -74,13 +74,13 @@ class AccountScreen extends StatelessWidget {
                   GoRouter.of(context).push(AppRouter.myOrderScreen);
                 },
               ),
-              OptionTile(
+              /*OptionTile(
                 icon: Icons.favorite_border,
                 label: 'My Collections',
                 onTap: () {
                   GoRouter.of(context).push(AppRouter.collectionsScreen);
                 },
-              ),
+              ),*/
               OptionTile(
                 icon: Icons.lock_outline,
                 label: 'Password Manager',

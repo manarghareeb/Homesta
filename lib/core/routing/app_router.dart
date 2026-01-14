@@ -42,7 +42,6 @@ import 'package:homesta/features/authentication/presentation/views/login_screen.
 import 'package:homesta/features/authentication/presentation/views/set_new_password_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/signup_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/verification_screen.dart';
-import 'package:homesta/features/cart/presentation/views/wishlist_screen.dart';
 import 'package:homesta/features/chat/presentation/views/chat_screen.dart';
 import 'package:homesta/features/order/presentation/views/order_flow_screen.dart';
 import 'package:homesta/features/home/presentation/views/home.dart';
@@ -338,10 +337,10 @@ abstract class AppRouter {
           );
         },
       ),
-      GoRoute(
+      /*GoRoute(
         path: wishlistScreen,
         builder: (context, state) => const WishlistScreen(),
-      ),
+      ),*/
       GoRoute(
         path: accountScreen,
         builder: (context, state) => const AccountScreen(),

@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:homesta/core/api/api_consumer.dart';
 import 'package:homesta/core/error/error_model.dart';
 import 'package:homesta/core/error/expections.dart';
 import 'package:homesta/features/product/data/data_sources/remote_data_source/product_data_source.dart';
