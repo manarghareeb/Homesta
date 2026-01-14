@@ -4,12 +4,17 @@ import 'package:go_router/go_router.dart';
 import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
+import 'package:homesta/features/order/data/models/order_details_response/order_details.dart';
+import 'package:homesta/features/order/utils/invoice_generator.dart';
+import 'package:pdf/pdf.dart';
+import 'package:printing/printing.dart';
 
 class OrderActionsSection extends StatelessWidget {
   final List<String> actions;
   final int orderId;
+  final OrderDetails order;
 
-  const OrderActionsSection({super.key, required this.actions, required this.orderId});
+  const OrderActionsSection({super.key, required this.actions, required this.orderId, required this.order});
 
   @override
   Widget build(BuildContext context) {
@@ -41,14 +46,18 @@ class OrderActionsSection extends StatelessWidget {
               ),
               padding: EdgeInsets.symmetric(vertical: 12.h),
             ),
-            onPressed: () {
+            onPressed: () async {
               if (action == "Track Order") {
                 GoRouter.of(context).push(
                   AppRouter.trackOrderDetails,
                   extra: orderId
                 );
               } else if (action == "Invoice") {
-                GoRouter.of(context).push(AppRouter.invoice);
+                final pdfData = await InvoiceGenerator.generateInvoice(order);
+                await Printing.layoutPdf(
+                  onLayout: (PdfPageFormat format) async => pdfData,
+                );
+                //GoRouter.of(context).push(AppRouter.invoice);
               } else if (action == "Cancel Order") {
                 GoRouter.of(context).push(AppRouter.cancelOrder);
               } else if (action == "Add Review") {

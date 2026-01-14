@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
+import 'package:homesta/features/order/data/models/order_details_response/order_details.dart';
 import 'package:homesta/features/order/presentation/cubit/order_details_cubit/order_details_cubit.dart';
 import 'package:homesta/features/order/presentation/cubit/order_details_cubit/order_details_state.dart';
 import 'package:homesta/features/order/presentation/widgets/order_actions_section.dart';
@@ -11,11 +12,12 @@ import 'package:homesta/features/order/presentation/widgets/order_item_widget.da
 class OrderDetailsSection extends StatelessWidget {
   final int orderId;
   final String orderStatus;
+  final OrderDetails order;
 
   const OrderDetailsSection({
     super.key,
     required this.orderId,
-    required this.orderStatus,
+    required this.orderStatus, required this.order,
   });
 
   List<String> buildActions(String status) {
@@ -53,7 +55,7 @@ class OrderDetailsSection extends StatelessWidget {
                   )),
               SizedBox(height: 16.h),
               Divider(height: 24.h, color: ColorManager.lightGreyColor),
-              OrderActionsSection(actions: actions, orderId: orderId,),
+              OrderActionsSection(actions: actions, orderId: orderId,order: order,),
             ],
           );
         } else if (state is TrackOrderDetailsError) {
