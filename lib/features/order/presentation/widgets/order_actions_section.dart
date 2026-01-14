@@ -7,8 +7,9 @@ import 'package:homesta/core/theming/styles.dart';
 
 class OrderActionsSection extends StatelessWidget {
   final List<String> actions;
+  final int orderId;
 
-  const OrderActionsSection({super.key, required this.actions});
+  const OrderActionsSection({super.key, required this.actions, required this.orderId});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,10 @@ class OrderActionsSection extends StatelessWidget {
             ),
             onPressed: () {
               if (action == "Track Order") {
-                GoRouter.of(context).push(AppRouter.trackOrder);
+                GoRouter.of(context).push(
+                  AppRouter.trackOrderDetails,
+                  extra: orderId
+                );
               } else if (action == "Invoice") {
                 GoRouter.of(context).push(AppRouter.invoice);
               } else if (action == "Cancel Order") {

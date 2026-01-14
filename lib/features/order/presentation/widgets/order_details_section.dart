@@ -53,7 +53,7 @@ class OrderDetailsSection extends StatelessWidget {
                   )),
               SizedBox(height: 16.h),
               Divider(height: 24.h, color: ColorManager.lightGreyColor),
-              OrderActionsSection(actions: actions),
+              OrderActionsSection(actions: actions, orderId: orderId,),
             ],
           );
         } else if (state is TrackOrderDetailsError) {

@@ -31,18 +31,20 @@ class ProductCubit extends Cubit<ProductState> {
       emit(ProductSuccess(allProducts));
       return;
     }
-
+    //final filtered =
+    //  allProducts.where((p) => categoryIds.contains(p.categoryId)).toList();
     final filtered =
-        allProducts.where((p) => categoryIds.contains(p.categoryId)).toList();
-
+        allProducts.where((p) {
+          return categoryIds.contains(p.categoryId) ||
+              categoryIds.contains(p.subCategoryId);
+        }).toList();
     emit(ProductSuccess(filtered));
   }
 
   void getProductsByCategories(List<int> categoryIds) {
     final allProducts =
         state is ProductSuccess
-            ? (state as ProductSuccess).products
-                .cast<ProductEntity>() 
+            ? (state as ProductSuccess).products.cast<ProductEntity>()
             : <ProductEntity>[];
 
     final filtered =
@@ -51,5 +53,69 @@ class ProductCubit extends Cubit<ProductState> {
     emit(ProductSuccess(filtered));
   }
 
+  void filterByPrice(double start, double end) async {
+    emit(ProductLoading());
 
+    final result = await getAllProductsUseCase();
+
+    result.fold((error) => emit(ProductFailure(error.errorMessage)), (
+      products,
+    ) {
+      final filtered =
+          products.where((p) => p.price >= start && p.price <= end).toList();
+
+      emit(ProductSuccess(filtered));
+    });
+  }
+
+  void filterByAvailability({
+    required bool inStock,
+    required bool outOfStock,
+  }) {
+    if (state is! ProductSuccess) return;
+
+    final currentProducts =
+        (state as ProductSuccess).products.cast<ProductEntity>();
+
+    final filtered = currentProducts.where((p) {
+      if (inStock && p.quantity > 0) return true;
+      if (outOfStock && p.quantity == 0) return true;
+      return false;
+    }).toList();
+
+    emit(ProductSuccess(filtered));
+  }
+
+  void applyFilters({
+    List<int>? categoryIds,
+    double? startPrice,
+    double? endPrice,
+    bool? inStock,
+    bool? outOfStock,
+  }) {
+    var filtered = List<ProductEntity>.from(allProducts);
+
+    if (categoryIds != null && categoryIds.isNotEmpty) {
+      filtered = filtered.where((p) {
+        return categoryIds.contains(p.categoryId) ||
+            categoryIds.contains(p.subCategoryId);
+      }).toList();
+    }
+
+    if (startPrice != null && endPrice != null) {
+      filtered = filtered
+          .where((p) => p.price >= startPrice && p.price <= endPrice)
+          .toList();
+    }
+
+    if (inStock != null || outOfStock != null) {
+      filtered = filtered.where((p) {
+        if (inStock == true && p.quantity > 0) return true;
+        if (outOfStock == true && p.quantity == 0) return true;
+        return false;
+      }).toList();
+    }
+
+    emit(ProductSuccess(filtered));
+  }
 }

@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
+import 'package:homesta/core/widgets/custom_button_widget.dart';
+import 'package:homesta/features/home/presentation/views/home.dart';
 import 'package:homesta/features/order/presentation/cubit/order_details_cubit/order_details_cubit.dart';
 import 'package:homesta/features/order/presentation/cubit/order_details_cubit/order_details_state.dart';
 import 'package:homesta/features/order/presentation/widgets/order_timeline.dart';
@@ -109,6 +111,19 @@ class TrackOrderDetailsScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+                  ),
+                  SizedBox(height: 16.h),
+                  CustomButtonWidget(
+                    buttonText: 'Back to Home',
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomeView(),
+                        ),
+                        (route) => false,
+                      );
+                    },
                   ),
                 ],
               ),

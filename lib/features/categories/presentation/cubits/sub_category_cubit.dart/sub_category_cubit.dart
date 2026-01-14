@@ -101,4 +101,18 @@ emit(SubCategorySuccess(result));
       },
     );
   }
+  Future<List<SubCategoryEntity>> fetchSubCategories(int id) async {
+  final result = await getSubCategoryUseCase(id);
+
+  return result.fold(
+    (error) {
+      // نرجّع قائمة فاضية لو فيه error
+      return <SubCategoryEntity>[];
+    },
+    (categories) {
+      return categories;
+    },
+  );
+}
+
 }

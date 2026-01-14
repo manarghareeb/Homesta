@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
+import 'package:homesta/features/categories/domain/entities/sub_category_entity.dart';
 import 'package:homesta/features/categories/presentation/cubits/category_cubit/category_cubit.dart';
 import 'package:homesta/features/categories/presentation/cubits/category_cubit/category_state.dart';
+import 'package:homesta/features/categories/presentation/cubits/sub_category_cubit.dart/sub_category_cubit.dart';
 import 'package:homesta/features/product/presentation/cubits/product_cubit.dart';
 import 'package:homesta/features/shop/presentation/widgets/filter_apply_button.dart';
 import 'package:homesta/features/shop/presentation/widgets/filter_checkbox_item.dart';
@@ -30,6 +32,10 @@ class _FilterDrawerState extends State<FilterDrawer> {
   late Set<int> localSelected;
   final Set<String> selectedColors = {};
   late List<String> selectedCategoryNames;
+  bool inStockSelected = false;
+  bool outOfStockSelected = false;
+  double? startPrice;
+  double? endPrice;
 
   final Map<String, Color> colors = const {
     'brown': Colors.brown,
@@ -101,64 +107,174 @@ class _FilterDrawerState extends State<FilterDrawer> {
                       BlocBuilder<CategoryCubit, CategoryState>(
                         builder: (context, state) {
                           if (state is CategoryLoading) {
-                            return const CircularProgressIndicator();
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
                           }
+
                           if (state is CategoryFailure) {
                             return Center(child: Text(state.message));
                           }
+
                           if (state is CategorySuccess) {
                             return FilterSection(
                               title: 'Category',
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: state.categories.length,
-                                itemBuilder: (context, index) {
-                                  final category = state.categories[index];
-                                  final isChecked = localSelected.contains(
-                                    category.categoryId,
-                                  );
-
-                                  return FilterCheckboxItem(
-                                    title: category.name,
-                                    isChecked: isChecked,
-                                    onTap: () {
-                                      setState(() {
-                                        if (isChecked) {
-                                          localSelected.remove(
-                                            category.categoryId,
-                                          );
-                                          selectedCategoryNames.remove(
-                                            category.name,
-                                          );
-                                        } else {
-                                          localSelected.add(
-                                            category.categoryId,
-                                          );
-                                          selectedCategoryNames.add(
-                                            category.name,
-                                          );
-                                        }
-                                      });
-                                      widget.onCategoryChanged(
-                                        {...localSelected},
-                                        [...selectedCategoryNames],
+                              child: Column(
+                                children:
+                                    state.categories.map((category) {
+                                      final isChecked = localSelected.contains(
+                                        category.categoryId,
                                       );
-                                      //widget.onCategoryChanged(localSelected, selectedCategoryNames);
-                                    },
-                                  );
-                                },
+
+                                      return ExpansionTile(
+                                        title: FilterCheckboxItem(
+                                          title: category.name,
+                                          isChecked: isChecked,
+                                          onTap: () {
+                                            setState(() {
+                                              if (isChecked) {
+                                                localSelected.remove(
+                                                  category.categoryId,
+                                                );
+                                                selectedCategoryNames.remove(
+                                                  category.name,
+                                                );
+                                              } else {
+                                                localSelected.add(
+                                                  category.categoryId,
+                                                );
+                                                selectedCategoryNames.add(
+                                                  category.name,
+                                                );
+                                              }
+                                            });
+
+                                            widget.onCategoryChanged(
+                                              {...localSelected},
+                                              [...selectedCategoryNames],
+                                            );
+                                          },
+                                        ),
+
+                                        children: [
+                                          FutureBuilder<
+                                            List<SubCategoryEntity>
+                                          >(
+                                            future: context
+                                                .read<SubCategoryCubit>()
+                                                .fetchSubCategories(
+                                                  category.categoryId,
+                                                ),
+                                            builder: (context, snapshot) {
+                                              if (snapshot.connectionState ==
+                                                  ConnectionState.waiting) {
+                                                return const Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child:
+                                                      CircularProgressIndicator(),
+                                                );
+                                              }
+
+                                              if (snapshot.hasError) {
+                                                return Padding(
+                                                  padding: const EdgeInsets.all(
+                                                    8.0,
+                                                  ),
+                                                  child: Text(
+                                                    'Error loading subcategories',
+                                                  ),
+                                                );
+                                              }
+
+                                              final subCategories =
+                                                  snapshot.data ?? [];
+
+                                              if (subCategories.isEmpty) {
+                                                return const Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: Text(
+                                                    'No subcategories available',
+                                                  ),
+                                                );
+                                              }
+
+                                              return Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children:
+                                                    subCategories.map((sub) {
+                                                      final isSubChecked =
+                                                          localSelected.contains(
+                                                            sub.subCategoryId,
+                                                          );
+
+                                                      return Padding(
+                                                        padding:
+                                                            const EdgeInsets.only(
+                                                              left: 24.0,
+                                                              bottom: 4.0,
+                                                            ),
+                                                        child: FilterCheckboxItem(
+                                                          title: sub.name,
+                                                          isChecked:
+                                                              isSubChecked,
+                                                          onTap: () {
+                                                            setState(() {
+                                                              if (isSubChecked) {
+                                                                localSelected
+                                                                    .remove(
+                                                                      sub.subCategoryId,
+                                                                    );
+                                                                selectedCategoryNames
+                                                                    .remove(
+                                                                      sub.name,
+                                                                    );
+                                                              } else {
+                                                                localSelected.add(
+                                                                  sub.subCategoryId,
+                                                                );
+                                                                selectedCategoryNames
+                                                                    .add(
+                                                                      sub.name,
+                                                                    );
+                                                              }
+                                                            });
+
+                                                            widget.onCategoryChanged(
+                                                              {
+                                                                ...localSelected,
+                                                              },
+                                                              [
+                                                                ...selectedCategoryNames,
+                                                              ],
+                                                            );
+                                                          },
+                                                        ),
+                                                      );
+                                                    }).toList(),
+                                              );
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    }).toList(),
                               ),
                             );
                           }
+
                           return const SizedBox();
                         },
                       ),
 
                       /// PRICE
-                      const FilterSection(
+                      FilterSection(
                         title: 'Price Range',
-                        child: FilterPriceSlider(),
+                        child: FilterPriceSlider(
+                          onPriceChanged: (start, end) {
+                            startPrice = start;
+                            endPrice = end;
+                          },
+                        ),
                       ),
 
                       /// COLORS
@@ -186,26 +302,6 @@ class _FilterDrawerState extends State<FilterDrawer> {
                                   },
                                 );
                               }).toList(),
-                          /*colors.entries.map((entry) {
-                                return BlocBuilder<
-                                  ProductFilterCubit,
-                                  ProductFilter
-                                >(
-                                  builder: (context, filterState) {
-                                    final isSelected = filterState.colors
-                                        .contains(entry.key);
-                                    return FilterColorItem(
-                                      color: entry.value,
-                                      isSelected: isSelected,
-                                      onTap: () {
-                                        context
-                                            .read<ProductFilterCubit>()
-                                            .toggleColor(entry.key);
-                                      },
-                                    );
-                                  },
-                                );
-                              }).toList(),*/
                         ),
                       ),
 
@@ -216,48 +312,23 @@ class _FilterDrawerState extends State<FilterDrawer> {
                           children: [
                             FilterCheckboxItem(
                               title: 'In Stock',
-                              isChecked: true,
-                              onTap: () {},
+                              isChecked: inStockSelected,
+                              onTap: () {
+                                setState(
+                                  () => inStockSelected = !inStockSelected,
+                                );
+                              },
                             ),
                             FilterCheckboxItem(
                               title: 'Out of Stock',
-                              isChecked: true,
-                              onTap: () {},
-                            ),
-                            /*BlocBuilder<ProductFilterCubit, ProductFilter>(
-                              builder: (context, filterState) {
-                                return FilterCheckboxItem(
-                                  title: 'In Stock',
-                                  isChecked: filterState.inStock == true,
-                                  onTap: () {
-                                    context
-                                        .read<ProductFilterCubit>()
-                                        .setAvailability(
-                                          filterState.inStock == true
-                                              ? null
-                                              : true,
-                                        );
-                                  },
+                              isChecked: outOfStockSelected,
+                              onTap: () {
+                                setState(
+                                  () =>
+                                      outOfStockSelected = !outOfStockSelected,
                                 );
                               },
                             ),
-                            BlocBuilder<ProductFilterCubit, ProductFilter>(
-                              builder: (context, filterState) {
-                                return FilterCheckboxItem(
-                                  title: 'Out of Stock',
-                                  isChecked: filterState.inStock == false,
-                                  onTap: () {
-                                    context
-                                        .read<ProductFilterCubit>()
-                                        .setAvailability(
-                                          filterState.inStock == false
-                                              ? null
-                                              : false,
-                                        );
-                                  },
-                                );
-                              },
-                            ),*/
                           ],
                         ),
                       ),
@@ -269,20 +340,16 @@ class _FilterDrawerState extends State<FilterDrawer> {
               /// APPLY BUTTON
               FilterApplyButton(
                 onPressed: () {
-                  print('++++++++++++++++++++++++++++++++++');
-                  print('selectedCategoryIds: $localSelected');
-                  print('selectedCategoryNames: $selectedCategoryNames');
-
-                  /*widget.onCategoryChanged(
-                    localSelected,
-                    selectedCategoryNames,
-                  );*/
                   widget.onCategoryChanged(
                     {...localSelected},
                     [...selectedCategoryNames],
                   );
-                  context.read<ProductCubit>().filterProductsByCategories(
-                    localSelected.toList(),
+                  context.read<ProductCubit>().applyFilters(
+                    categoryIds: localSelected.toList(),
+                    startPrice: startPrice,
+                    endPrice: endPrice,
+                    inStock: inStockSelected,
+                    outOfStock: outOfStockSelected,
                   );
                   Navigator.pop(context);
                 },
