@@ -101,11 +101,13 @@ class _AccountScreenState extends State<AccountScreen> {
                     label: 'Personal Data',
                     onTap: () => GoRouter.of(context).push(AppRouter.editProfileScreen),
                   ),
-                  OptionTile(
-                    icon: Icons.payment,
-                    label: 'Payment Account',
-                    onTap: () => GoRouter.of(context).push(AppRouter.paymentAccountScreen),
-                  ),
+                  // OptionTile(
+                  //   icon: Icons.payment,
+                  //   label: 'Payment Account',
+                  //   onTap: () {
+                  //     GoRouter.of(context).push(AppRouter.paymentAccountScreen);
+                  //   },
+                  // ),
                   OptionTile(
                     icon: Icons.list_alt,
                     label: 'My Order',
@@ -136,7 +138,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   ),
                 ],
               ),
-            ),
+           ),
           ),
         );
       },

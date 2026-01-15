@@ -16,10 +16,11 @@ class AdminSubCategoryScreen extends StatelessWidget {
     context.read<SubCategoryCubit>().getSubCategories(categoryId);
     return Scaffold(
       backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: true, // ✅ يخلي الصفحة تتحرك مع الكيبورد
       appBar: CustomAppBarWidget(text: 'Sub Category'),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-        child: Column(
+        child: ListView( // ✅ استبدلنا Column بـ ListView للسكرول الكامل
           children: [
             AddSubItemSection(
               managementTitle: 'Management SubCategory',
@@ -31,43 +32,45 @@ class AdminSubCategoryScreen extends StatelessWidget {
               categoryId: categoryId,
             ),
             SizedBox(height: 24),
-            Expanded(
-              child: BlocBuilder<SubCategoryCubit, SubCategoryState>(
-                builder: (context, state) {
-                  if (state is SubCategoryLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (state is SubCategorySuccess) {
-                    return GridView.builder(
-                      itemCount: state.categories.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 10.h,
-                        crossAxisSpacing: 10.w,
-                        childAspectRatio: 0.6.h,
-                      ),
-                      itemBuilder: (context, index) {
-                        final sub = state.categories[index];
-                        return GestureDetector(
-                          onTap: () {
-                            //GoRouter.of(context).push(AppRouter.adminSubCategoryScreen);
-                          },
-                          child: ItemSubCategoryCard(
-                            image: "http://homefinish.runasp.net/${sub.imagePath}",
-                            name: sub.name,
-                            id: sub.subCategoryId.toString(),
-                            price:'0',
-                            categoryId: categoryId,
-                          ),
-                        );
-                      },
-                    );
-                  } else if (state is SubCategoryFailure) {
-                    return Center(child: Text(state.message));
-                  } else {
-                    return const SizedBox.shrink();
-                  }
-                },
-              ),
+
+            BlocBuilder<SubCategoryCubit, SubCategoryState>(
+              builder: (context, state) {
+                if (state is SubCategoryLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is SubCategorySuccess) {
+                  return GridView.builder(
+                    shrinkWrap: true, // ✅ يخلي الشبكة تاخذ حجمها فقط
+                    physics: const NeverScrollableScrollPhysics(), // ✅ يمنع سكرول داخلي
+                    itemCount: state.categories.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 10.h,
+                      crossAxisSpacing: 10.w,
+                      childAspectRatio: 0.6.h,
+                    ),
+                    itemBuilder: (context, index) {
+                      final sub = state.categories[index];
+                      return GestureDetector(
+                        onTap: () {
+                          // ممكن تضيفي التنقل هنا
+                        },
+                        child: ItemSubCategoryCard(
+                          image: "http://homefinish.runasp.net/${sub.imagePath}",
+                          name: sub.name,
+                          id: sub.subCategoryId.toString(),
+                          price: '0',
+                          categoryId: categoryId,
+                          cubit: context.read<SubCategoryCubit>(),
+                        ),
+                      );
+                    },
+                  );
+                } else if (state is SubCategoryFailure) {
+                  return Center(child: Text(state.message));
+                } else {
+                  return const SizedBox.shrink();
+                }
+              },
             ),
           ],
         ),

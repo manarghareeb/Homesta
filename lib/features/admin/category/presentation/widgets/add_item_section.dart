@@ -48,123 +48,125 @@ class _AddItemSectionState extends State<AddCategorySection> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        /// العنوان وزر الإضافة
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(widget.managementTitle, style: TextStyles.font15BlackW500),
-                SizedBox(height: 8),
-                Text(widget.description, style: TextStyles.font12GreyColorW400),
-              ],
-            ),
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  isAdding = true;
-                });
-              },
-              child: Container(
-                padding: EdgeInsets.all(8.w),
-                decoration: BoxDecoration(
-                  color: ColorManager.primaryColor,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(Icons.add, color: Colors.white),
-                    SizedBox(width: 4),
-                    Text(
-                      widget.addButtonText,
-                      style: TextStyles.font14WhiteColorW400,
-                    ),
-                  ],
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom, // ✅ يرفع المحتوى فوق الكيبورد
+      ),
+      child: ListView(
+        shrinkWrap: true, // ✅ يخليها تاخذ حجمها فقط داخل الصفحة
+        physics: const NeverScrollableScrollPhysics(), // ✅ ما تعمل سكرول داخلي
+        children: [
+          /// العنوان وزر الإضافة
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(widget.managementTitle, style: TextStyles.font15BlackW500),
+                  SizedBox(height: 8),
+                  Text(widget.description, style: TextStyles.font12GreyColorW400),
+                ],
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    isAdding = true;
+                  });
+                },
+                child: Container(
+                  padding: EdgeInsets.all(8.w),
+                  decoration: BoxDecoration(
+                    color: ColorManager.primaryColor,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.add, color: Colors.white),
+                      SizedBox(width: 4),
+                      Text(widget.addButtonText,
+                          style: TextStyles.font14WhiteColorW400),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
 
-        /// الفورم
-        if (isAdding)
-          Container(
-            padding: EdgeInsets.all(16.w),
-            margin: EdgeInsets.symmetric(vertical: 24.h),
-            decoration: BoxDecoration(
-              color: ColorManager.soLightGreyColor,
-              borderRadius: BorderRadius.circular(12.r),
-              border: Border.all(color: ColorManager.soLightGreyColor),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TitleToTextField(title: widget.nameFieldTitle),
-                SizedBox(height: 8),
-                CustomTextFieldWidget(
-                  controller: nameController,
-                  hintText: widget.nameFieldHint,
-                  textInputType: TextInputType.name,
-                  title: widget.nameFieldHint,
-                ),
-                SizedBox(height: 16.h),
+          /// الفورم
+          if (isAdding)
+            Container(
+              padding: EdgeInsets.all(16.w),
+              margin: EdgeInsets.symmetric(vertical: 24.h),
+              decoration: BoxDecoration(
+                color: ColorManager.soLightGreyColor,
+                borderRadius: BorderRadius.circular(12.r),
+                border: Border.all(color: ColorManager.soLightGreyColor),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TitleToTextField(title: widget.nameFieldTitle),
+                  SizedBox(height: 8),
+                  CustomTextFieldWidget(
+                    controller: nameController,
+                    hintText: widget.nameFieldHint,
+                    textInputType: TextInputType.name,
+                    title: widget.nameFieldHint,
+                  ),
+                  SizedBox(height: 16.h),
 
-                TitleToTextField(title: widget.imageFieldTitle),
-                SizedBox(height: 8),
-                Row(
-                  children: [
-                    ElevatedButton(
-                      onPressed: _pickImage,
-                      child: const Text("Select Image"),
-                    ),
-                    SizedBox(width: 12),
-                    if (selectedImage != null)
-                      Text(
-                        "Image selected",
-                        style: TextStyles.font14GreyColorW400,
+                  TitleToTextField(title: widget.imageFieldTitle),
+                  SizedBox(height: 8),
+                  Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: _pickImage,
+                        child: const Text("Select Image"),
                       ),
-                  ],
-                ),
+                      SizedBox(width: 12),
+                      if (selectedImage != null)
+                        Text("Image selected",
+                            style: TextStyles.font14GreyColorW400),
+                    ],
+                  ),
 
-                SizedBox(height: 20.h),
+                  SizedBox(height: 20.h),
 
-                /// أزرار الحفظ والإلغاء
-                SaveAndDiscardButtons(
-                  saveOnPressed: () {
-                    if (nameController.text.isNotEmpty &&
-                        selectedImage != null) {
-                      context.read<CategoryCubit>().addCategory(
-                        nameController.text,
-                        selectedImage!.path,
-                      );
+                  SaveAndDiscardButtons(
+                    saveOnPressed: () {
+                      if (nameController.text.isNotEmpty &&
+                          selectedImage != null) {
+                        context.read<CategoryCubit>().addCategory(
+                          nameController.text,
+                          selectedImage!.path,
+                        );
+                        setState(() {
+                          isAdding = false;
+                          selectedImage = null;
+                          nameController.clear();
+                        });
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Please enter name and select image"),
+                          ),
+                        );
+                      }
+                    },
+                    discardOnPressed: () {
                       setState(() {
                         isAdding = false;
                         selectedImage = null;
                         nameController.clear();
                       });
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("Please enter name and select image"),
-                        ),
-                      );
-                    }
-                  },
-                  discardOnPressed: () {
-                    setState(() {
-                      isAdding = false;
-                      selectedImage = null;
-                      nameController.clear();
-                    });
-                  },
-                ),
-              ],
+                    },
+                  ),
+                ],
+              ),
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 }

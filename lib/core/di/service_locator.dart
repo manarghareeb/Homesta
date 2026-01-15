@@ -61,6 +61,8 @@ import '../../features/admin/domain/usecases/delete_category_use_case.dart';
 import '../../features/admin/domain/usecases/delete_sub_category_use_case.dart';
 import '../../features/admin/domain/usecases/update_category_use_case.dart';
 import '../../features/admin/domain/usecases/update_sub_category_use_case.dart';
+import '../../features/seller/profile/domain/use_cases/delete_store_use_case.dart';
+import '../../features/seller/profile/domain/use_cases/get_all_stores_use_case.dart';
 
 final sl = GetIt.instance;
 
@@ -137,6 +139,9 @@ void initServiceLocator() {
     sl.registerLazySingleton(() => CreateStoreUseCase(sl()));
     sl.registerLazySingleton( () => GetStoreUseCase(sl()));
   sl.registerLazySingleton(() => GetUserUseCase(sl<UserRepo>()));
+  sl.registerLazySingleton(() => GetAllStoresUseCase(sl()));
+  sl.registerLazySingleton(() => DeleteStoreUseCase(sl()));
+
   /// Cubits
   sl.registerFactory(
     () =>
@@ -157,7 +162,7 @@ void initServiceLocator() {
   //saller product cubit
   sl.registerFactory(() => SellerProductCubit(addProductUseCase: sl(), getSallerProductUsecase: sl()));
 //store cubit
-  sl.registerFactory(() => StoreCubit(createStoreUseCase: sl(),getStoreUseCase: sl()));
+  sl.registerFactory(() => StoreCubit(createStoreUseCase: sl(),getStoreUseCase: sl(), getAllStoresUseCase: sl(), deleteStoreUseCase: sl()));
   sl.registerFactory(()=>ProductImageCubit(sl()));
   // edit profile
   sl.registerFactory(() => EditProfileCubit(

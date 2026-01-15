@@ -213,20 +213,8 @@ abstract class AppRouter {
         builder: (context, state) => const AdminAccountScreen(),
       ),
       GoRoute(
-        path: AppRouter.adminDashboardScreen,
-        builder: (context, state) {
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => sl<ProductCubit>()..getAllProducts(),
-              ),
-              // BlocProvider(
-              //   create: (context) => sl<StoreCubit>()..getAllStores(),
-              // ),
-            ],
-            child: const DashboardScreen(),
-          );
-        },
+        path: adminDashboardScreen,
+        builder: (context, state) => const DashboardScreen(),
       ),
       GoRoute(
         path: AppRouter.adminProductScreen,

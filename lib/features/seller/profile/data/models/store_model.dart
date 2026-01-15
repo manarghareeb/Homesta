@@ -19,22 +19,22 @@ class StoreModel extends StoreEntity {
 
   factory StoreModel.fromJson(Map<String, dynamic> json) {
     return StoreModel(
-      storeId: json['storeId'],
-      name: json['name'],
-      phone: json['phone'],
-      email: json['email'],
-      address: json['address'],
-      workingHours: json['workingHours'],
-      hasWhatsapp: json['hasWhatsapp'],
-      hasSms: json['hasSms'],
-      sellerId: json['sellerId'],
-      sellerName: json['sellerName'],
-      totalProducts: json['totalProducts'],
+      storeId: json['storeId'] ?? 0,
+      name: json['name'] ?? '',
+      phone: json['phone'] ?? '',
+      email: json['email'] ?? '',
+      address: json['address'] ?? '',
+      workingHours: json['workingHours'] ?? '',
+      hasWhatsapp: json['hasWhatsapp'] ?? false,   // default false
+      hasSms: json['hasSms'] ?? false,             // default false
+      sellerId: json['sellerId'] ?? 0,
+      sellerName: json['sellerName'] ?? '',
+      totalProducts: json['totalProducts'] ?? 0,
       products: json['products'] != null
           ? (json['products'] as List)
-              .map((e) => ProductModel.fromJson(e))
-              .toList()
-          : null,
+          .map((e) => ProductModel.fromJson(e))
+          .toList()
+          : [],
     );
   }
 }

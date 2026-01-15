@@ -90,13 +90,16 @@ emit(SubCategorySuccess(result));
   Future<void> updateSubCategory(int id, String name, String imagePath, double price, int categoryId) async {
     emit(SubCategoryLoading());
     final result = await updateSubCategoryUseCase(id, name, imagePath, price);
+
     result.fold(
           (error) => emit(SubCategoryFailure(error.errorMessage)),
           (_) async {
         final subResult = await getSubCategoryUseCase(categoryId);
         subResult.fold(
               (error) => emit(SubCategoryFailure(error.errorMessage)),
-              (subCategories) => emit(SubCategorySuccess(subCategories)),
+              (subCategories) {
+            emit(SubCategorySuccess(subCategories));
+          },
         );
       },
     );
@@ -106,7 +109,6 @@ emit(SubCategorySuccess(result));
 
   return result.fold(
     (error) {
-      // نرجّع قائمة فاضية لو فيه error
       return <SubCategoryEntity>[];
     },
     (categories) {

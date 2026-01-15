@@ -14,6 +14,7 @@ class ItemSubCategoryCard extends StatelessWidget {
     required this.id,
     required this.price,
     required this.categoryId,
+    required this.cubit,
   });
 
   final String image;
@@ -21,6 +22,7 @@ class ItemSubCategoryCard extends StatelessWidget {
   final String id;
   final String price;
   final int categoryId;
+  final SubCategoryCubit cubit;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,14 @@ class ItemSubCategoryCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(name, style: TextStyles.font14deepGreyColorW400),
+                Expanded(
+                  child: Text(
+                    name,
+                    style: TextStyles.font14deepGreyColorW400,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
                 IconButton(
                   icon: Icon(Icons.delete_outline_outlined, color: ColorManager.redColor),
                   onPressed: () {
@@ -69,42 +78,39 @@ class ItemSubCategoryCard extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (context) {
-                        final TextEditingController nameController = TextEditingController();
-                        final TextEditingController priceController = TextEditingController();
+                        final TextEditingController nameController =
+                        TextEditingController(text: name);
+                        final TextEditingController priceController =
+                        TextEditingController(text: price);
                         File? newImage;
 
                         return AlertDialog(
-                          title: Text("Edit Sub Category"),
+                          title: const Text("Edit Sub Category"),
                           content: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               TextField(
                                 controller: nameController,
-                                decoration: InputDecoration(hintText: "Enter new name"),
-                              ),
-                              TextField(
-                                controller: priceController,
-                                decoration: InputDecoration(hintText: "Enter new price"),
-                                keyboardType: TextInputType.number,
+                                decoration: const InputDecoration(hintText: "Enter new name"),
                               ),
                               ElevatedButton(
                                 onPressed: () async {
-                                  final picked = await ImagePicker().pickImage(source: ImageSource.gallery);
+                                  final picked = await ImagePicker().pickImage(
+                                    source: ImageSource.gallery,
+                                  );
                                   if (picked != null) {
                                     newImage = File(picked.path);
                                   }
                                 },
-                                child: Text("Select new image"),
+                                child: const Text("Select new image"),
                               ),
                             ],
                           ),
                           actions: [
                             TextButton(
                               onPressed: () {
-                                if (nameController.text.isNotEmpty &&
-                                    priceController.text.isNotEmpty &&
-                                    newImage != null) {
-                                  context.read<SubCategoryCubit>().updateSubCategory(
+                                if (nameController.text.isNotEmpty) {
+                                  cubit.updateSubCategory(
                                     int.parse(id),
                                     nameController.text,
                                     newImage!.path,
@@ -114,7 +120,7 @@ class ItemSubCategoryCard extends StatelessWidget {
                                   Navigator.pop(context);
                                 }
                               },
-                              child: Text("Save"),
+                              child: const Text("Save"),
                             ),
                           ],
                         );
