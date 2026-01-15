@@ -15,3 +15,5 @@ class CartFailure extends CartState {
   final String error;
   CartFailure(this.error);
 }
+
+class CartCleared extends CartState {}

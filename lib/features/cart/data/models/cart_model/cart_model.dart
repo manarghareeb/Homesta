@@ -58,5 +58,31 @@ class CartModel {
         'createdAt': createdAt?.toIso8601String(),
         'isEmpty': isEmpty,
       };
+
+  CartModel copyWith({
+    int? cartId,
+    String? userId,
+    List<CartItem>? cartItems,
+    int? totalItems,
+    double? subTotal,
+    int? shipping,
+    int? tax,
+    double? totalPrice,
+    DateTime? createdAt,
+    bool? isEmpty,
+  }) {
+    return CartModel(
+      cartId: cartId ?? this.cartId,
+      userId: userId ?? this.userId,
+      cartItems: cartItems ?? this.cartItems,
+      totalItems: totalItems ?? this.totalItems,
+      subTotal: subTotal ?? this.subTotal,
+      shipping: shipping ?? this.shipping,
+      tax: tax ?? this.tax,
+      totalPrice: totalPrice ?? this.totalPrice,
+      createdAt: createdAt ?? this.createdAt,
+      isEmpty: isEmpty ?? this.isEmpty,
+    );
+  }
 }
 

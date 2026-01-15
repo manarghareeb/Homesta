@@ -8,4 +8,6 @@ abstract class CartRepo {
     required String colorId,
   });
   Future<CartModel> getCart();
+  Future<void> clearCart();
+  Future<void> removeItemFromCart(int cartItemId);
 }

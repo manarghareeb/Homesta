@@ -9,13 +9,15 @@ class CartItemWidget extends StatefulWidget {
   final String color;
   final String image;
   final double price;
+  final void Function() onPressedDeleted;
 
   const CartItemWidget({
     super.key,
     required this.name,
     required this.color,
     required this.image,
-    required this.price,
+    required this.price, 
+    required this.onPressedDeleted,
   });
 
   @override
@@ -86,7 +88,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                 padding: EdgeInsets.zero,
                 constraints: BoxConstraints(),
                 icon: Icon(Icons.delete, color: ColorManager.primaryColor),
-                onPressed: () {},
+                onPressed: widget.onPressedDeleted,
               ),
               SizedBox(height: 4.h),
               const QuantitySelectorSection(),
