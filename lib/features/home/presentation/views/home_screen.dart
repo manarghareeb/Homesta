@@ -13,7 +13,6 @@ import 'package:homesta/features/product/presentation/cubits/product_cubit.dart'
 
 import '../widgets/app_bar.dart';
 import '../widgets/home_hero_banner.dart';
-import '../widgets/home_categories.dart';
 import '../widgets/sales_promotions_widget.dart';
 import '../widgets/products_tabs_widget.dart';
 import '../widgets/flash_sale_widget.dart';
@@ -50,11 +49,11 @@ class HomeScreen extends StatelessWidget {
 
                   const HomeHeroBanner(),
                   SizedBox(height: 20.h),
-            const Text(
-              'Categories',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-            ),
-        
+                  const Text(
+                    'Categories',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+
                   HomeCategoriesBlocBuilder(),
                   SizedBox(height: 24.h),
 

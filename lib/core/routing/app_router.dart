@@ -316,13 +316,17 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: cartScreen,
+        builder: (context, state) => const CartScreen(),
+      ),
+      /*GoRoute(
+        path: cartScreen,
         builder: (context, state) {
           return BlocProvider(
             create: (context) => sl<CartCubit>()..getCartItems(),
             child: const CartScreen(),
           );
         },
-      ),
+      ),*/
       /*GoRoute(
         path: wishlistScreen,
         builder: (context, state) => const WishlistScreen(),

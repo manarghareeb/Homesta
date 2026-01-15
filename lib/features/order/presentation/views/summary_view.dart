@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:homesta/core/api/api_keys.dart';
 import 'package:homesta/core/cache/cache_helper.dart';
 import 'package:homesta/core/theming/colors.dart';
@@ -12,7 +11,6 @@ import 'package:homesta/features/order/data/models/payment_response/payment_resp
 import 'package:homesta/features/order/presentation/cubit/place_order_cubit/place_order_cubit.dart';
 import 'package:homesta/features/order/presentation/cubit/place_order_cubit/place_order_state.dart';
 import 'package:homesta/features/order/presentation/views/order_successfully_screen.dart';
-import '../../../../core/routing/app_router.dart';
 
 class SummaryView extends StatelessWidget {
   //final VoidCallback onNext;
@@ -149,7 +147,32 @@ class SummaryView extends StatelessWidget {
             ),
 
             SizedBox(height: 24.h),
-            Row(
+            SizedBox(
+              width: double.infinity,
+              child: TextButton(
+                      onPressed: () {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomeView(),
+                          ),
+                          (route) => false,
+                        );
+                      },
+                      style: TextButton.styleFrom(
+                        padding: EdgeInsets.symmetric(vertical: 14.h),
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(color: ColorManager.primaryColor),
+                          borderRadius: BorderRadius.circular(12.r),
+                        ),
+                      ),
+                      child: Text(
+                        'Back to home',
+                        style: TextStyles.font14PrimaryColorW400,
+                      ),
+                    ),
+            ),
+            /*Row(
               children: [
                 Expanded(
                   child: ElevatedButton(
@@ -195,7 +218,7 @@ class SummaryView extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
+            ),*/
           ],
         ),
       ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 import 'package:homesta/features/product/domain/entities/product_entitty.dart';
@@ -31,11 +33,13 @@ class ProductDetailsView extends StatelessWidget {
           text: 'Product Details',
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                GoRouter.of(context).push(AppRouter.cartScreen);
+              },
               icon: CircleAvatar(
                 backgroundColor: Colors.white,
                 child: const Icon(
-                  Icons.favorite_outline,
+                  Icons.shopping_cart_outlined,
                   color: ColorManager.primaryColor,
                 ),
               ),
