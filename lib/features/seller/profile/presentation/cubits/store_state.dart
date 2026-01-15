@@ -11,6 +11,11 @@ class StoreSuccess extends StoreState {
   StoreSuccess(this.storeEntity);
 }
 
+class StoresSuccess extends StoreState {
+  final List<StoreEntity> stores;
+  StoresSuccess(this.stores);
+}
+
 class StoreError extends StoreState {
   final String message;
   StoreError(this.message);
@@ -22,6 +27,8 @@ class GetStoreSuccess extends StoreState {
   final StoreEntity storeEntity;
   GetStoreSuccess(this.storeEntity);
 }
+
+class StoreDeletedSuccess extends StoreState {}
 
 class GetStoreError extends StoreState {
   final String message;

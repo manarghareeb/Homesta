@@ -22,6 +22,9 @@ import 'package:homesta/features/authentication/data/repositories/auth_repositor
 import 'package:homesta/features/authentication/presentation/cubit/auth/auth_cubit.dart';
 
 import 'features/account/presentation/cubit/edit_profile_cubit.dart';
+import 'features/order/presentation/cubit/user_orders_cubit/user_orders_cubit.dart';
+import 'features/product/presentation/cubits/product_cubit.dart';
+import 'features/seller/profile/presentation/cubits/store_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,6 +60,11 @@ void main() async {
                 (context) => CartCubit(CartRepoImpl(apiConsumer: apiConsumer)),
           ),
           BlocProvider<EditProfileCubit>( create: (context) => sl<EditProfileCubit>(),),
+          BlocProvider<ProductCubit>( create: (context) => sl<ProductCubit>()..getAllProducts(), ),
+          BlocProvider<StoreCubit>(
+            create: (context) => sl<StoreCubit>()..getAllStores(),
+          ),
+          BlocProvider<UserOrdersCubit>( create: (context) => sl<UserOrdersCubit>()..getUserOrders(), ),
         ],
         child: const MyApp(),
       ),

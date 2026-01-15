@@ -4,10 +4,13 @@ import 'package:homesta/core/api/end_ponits.dart';
 import 'package:homesta/features/seller/profile/data/models/store_model.dart';
 import 'package:homesta/features/seller/profile/domain/entites/params/create_store_params.dart';
 
+import '../models/all_store_response_model.dart';
+
 abstract class StoreDataSource {
 Future<StoreModel> createStore(CreateStoreParams params);
 Future<StoreModel> getStore(int id);
-
+Future<List<SimpleStoreModel>> getAllStores();
+Future<void> deleteStore(int id);
 
 }
 
@@ -28,5 +31,14 @@ final res= await apiConsumer.get("${EndPoint.getStore}/$id/products");
 
 return StoreModel.fromJson(res);
   }
-  
+
+  @override
+  Future<List<SimpleStoreModel>> getAllStores() async {
+    final res = await apiConsumer.get(EndPoint.deleteStore);
+    return (res as List).map((e) => SimpleStoreModel.fromJson(e)).toList();
+  }
+  @override
+  Future<void> deleteStore(int id) async {
+    await apiConsumer.delete("${EndPoint.deleteStore}/$id");
+  }
 }

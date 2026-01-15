@@ -31,7 +31,7 @@ class EndPoint {
   static String createPlaceOrder = 'api/Order/Create/Place';
   static String orderDetails = 'api/Order/OrderDetails';
   static String userOrders = 'api/Order/UserOrders';
-
+  static String deleteStore = "/api/Store";
   //saller endpoints
   static String getSallerProducts = "api/Store/";
   static String addProduct = "api/Product/Create";

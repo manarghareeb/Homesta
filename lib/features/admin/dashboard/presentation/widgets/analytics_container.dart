@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:homesta/core/theming/colors.dart';
-import 'package:homesta/features/seller/analytics/presentation/widgets/data_analytics.dart';
+
 
 class AnalyticsContainer extends StatelessWidget {
-  final DataAnalytics firstRowItem1;
-  final DataAnalytics firstRowItem2;
-  final DataAnalytics secondRowItem1;
-  final DataAnalytics? secondRowItem2;
+  final Widget firstRowItem1;
+  final Widget firstRowItem2;
+  final Widget secondRowItem1;
+  final Widget? secondRowItem2;
 
   const AnalyticsContainer({
     super.key,

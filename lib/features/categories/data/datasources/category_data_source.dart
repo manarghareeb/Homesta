@@ -103,10 +103,11 @@ class CategoryDataSourceImpl implements CategoryDataSource {
   Future<void> updateSubCategory(int id, String name, String imagePath, double price) async {
     final formData = FormData.fromMap({
       "Name": name,
-      "Image": await MultipartFile.fromFile(imagePath),
       "Price": price,
+      if (imagePath.isNotEmpty)
+        "Image": await MultipartFile.fromFile(imagePath),
     });
 
-    await api.patch( "${EndPoint.updateSubCategory}/$id", data: formData);
+    await api.patch("${EndPoint.updateSubCategory}/$id", data: formData);
   }
 }
