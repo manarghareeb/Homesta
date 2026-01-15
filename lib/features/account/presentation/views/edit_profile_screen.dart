@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dio/dio.dart';
-import 'package:homesta/core/theming/colors.dart';
+import 'package:homesta/features/account/presentation/widgets/selected_country.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
@@ -57,18 +57,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           zipCodeController.text = user.zipCode ?? "";
           selectedCountry = user.country;
           selectedGender = user.gender;
-          imageUrl = user.imagePath != null
-              ? "http://homefinish.runasp.net${user.imagePath}"
-              : null;
+          imageUrl =
+              user.imagePath != null
+                  ? "http://homefinish.runasp.net${user.imagePath}"
+                  : null;
           setState(() {});
         } else if (state is EditProfileSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text("Profile updated successfully")),
           );
         } else if (state is EditProfileFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.message)),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));
         }
       },
       builder: (context, state) {
@@ -82,7 +83,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   PhotoProfile(
-                    onImageSelected: (image) => setState(() => pickedImage = image),
+                    onImageSelected:
+                        (image) => setState(() => pickedImage = image),
                     initialImageUrl: imageUrl,
                   ),
                   SizedBox(height: 24.h),
@@ -127,37 +129,29 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       labelText: "Gender",
                       border: OutlineInputBorder(),
                     ),
-                    items: const ["MALE", "FEMALE"]
-                        .map((gender) => DropdownMenuItem(
-                      value: gender,
-                      child: Text(gender == "MALE" ? "Male" : "Female"),
-                    ))
-                        .toList(),
-                    onChanged: (value) => setState(() => selectedGender = value),
+                    items:
+                        const ["MALE", "FEMALE"]
+                            .map(
+                              (gender) => DropdownMenuItem(
+                                value: gender,
+                                child: Text(
+                                  gender == "MALE" ? "Male" : "Female",
+                                ),
+                              ),
+                            )
+                            .toList(),
+                    onChanged:
+                        (value) => setState(() => selectedGender = value),
                   ),
                   SizedBox(height: 16.h),
 
-                  DropdownButtonFormField<String>(
-                    dropdownColor: Colors.white,
-                    value: selectedCountry,
-                    decoration: const InputDecoration(
-                      labelText: "Country",
-                      border: OutlineInputBorder(),
-                    ),
-                    items: const [
-                      "Jordan",
-                      "Egypt",
-                      "Saudi Arabia",
-                      "United Arab Emirates",
-                      "USA",
-                      "UK",
-                      "Other",
-                    ].map((country) => DropdownMenuItem(
-                      value: country,
-                      child: Text(country),
-                    ))
-                        .toList(),
-                    onChanged: (value) => setState(() => selectedCountry = value),
+                  SelectedCountry(
+                    onCountrySelected: (country) {
+                      setState(() {
+                        selectedCountry = country;
+                      });
+                    },
+                    initialCountry: selectedCountry,
                   ),
                   SizedBox(height: 16.h),
 
@@ -186,11 +180,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
                   SizedBox(height: 32.h),
                   CustomButtonWidget(
-                    buttonText: state is EditProfileLoading ? "Saving..." : "Save Changes",
+                    buttonText:
+                        state is EditProfileLoading
+                            ? "Saving..."
+                            : "Save Changes",
                     onPressed: () async {
-                      final countryToSend = selectedCountry == "Other"
-                          ? customCountryController.text
-                          : (selectedCountry ?? "");
+                      final countryToSend =
+                          selectedCountry == "Other"
+                              ? customCountryController.text
+                              : (selectedCountry ?? "");
 
                       MultipartFile? imageFile;
                       if (pickedImage != null) {
@@ -207,14 +205,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         "PhoneNumber": phoneController.text,
                         "Birthdate": birthDateController.text,
                         "Gender": selectedGender ?? "",
-                        "Country": countryToSend,
+                        //"Country": countryToSend,
+                        "Country": selectedCountry ?? "",
                         "ZipCode": zipCodeController.text,
                         "Address": addressController.text,
                         if (imageFile != null) "ImageFile": imageFile,
                       });
 
                       final userId = CacheHelper().getData(key: ApiKeys.id);
-                      context.read<EditProfileCubit>().updateUser(formData, userId);
+                      context.read<EditProfileCubit>().updateUser(
+                        formData,
+                        userId,
+                      );
                     },
                   ),
                   SizedBox(height: 40.h),

@@ -12,7 +12,7 @@ final CategoryEntity categoryEntity;
     return  Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-      width: 140,
+      //width: 140,
       height: 200,
         decoration: BoxDecoration(
           color:  ColorManager.thirdColor,
@@ -22,7 +22,7 @@ final CategoryEntity categoryEntity;
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
           child: Row(
                  mainAxisSize: MainAxisSize.min,
             children: [
