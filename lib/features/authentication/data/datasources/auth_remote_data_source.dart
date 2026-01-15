@@ -74,12 +74,17 @@ class AuthRemoteDataSource {
   //reset password
   Future<ResetPasswordResponseModel> resetPassword({
     required String email,
+    required String code,
     required String newPassword,
   }) async {
     final response = await api.post(
       EndPoint.resetPassword,
-      data: {"email": email, "newPassword": newPassword},
+      data: {"email": email, "code": code, "newPassword": newPassword},
     );
+
+    if (response is String) {
+      return ResetPasswordResponseModel(message: response);
+    }
     return ResetPasswordResponseModel.fromJson(response);
   }
 

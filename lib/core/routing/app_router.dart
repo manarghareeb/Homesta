@@ -280,7 +280,7 @@ abstract class AppRouter {
         builder: (context, state) => const ForgetPasswordScreen(),
       ),
       GoRoute(
-        path: '/editProfileScreen',
+        path: editProfileScreen,
         builder: (context, state) {
           return BlocProvider(
             create: (_) => sl<EditProfileCubit>(), // إذا عندك service locator
@@ -407,14 +407,16 @@ abstract class AppRouter {
         builder: (context, state) {
           final data = state.extra as Map<String, dynamic>;
           final email = data["email"] as String;
-          return SetNewPasswordScreen(email: email);
+          final code = data["code"] as String;
+          return SetNewPasswordScreen(email: email, code: code);
         },
       ),
       GoRoute(
         path: AppRouter.verficationScreen,
         builder: (context, state) {
           final email = state.extra as String;
-          return VerificationScreen(email: email);
+          final code = state.extra as String;
+          return VerificationScreen(email: email, code: code);
         },
       ),
       GoRoute(

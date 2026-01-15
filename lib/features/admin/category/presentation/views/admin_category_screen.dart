@@ -41,7 +41,7 @@ class AdminCategoryScreen extends StatelessWidget {
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         mainAxisSpacing: 10.h,
-                        crossAxisSpacing: 10.w,
+                        crossAxisSpacing: 20.w,
                         childAspectRatio: 0.6.h,
                       ),
                       itemBuilder: (context, index) {

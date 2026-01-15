@@ -12,9 +12,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../cubit/auth/auth_cubit.dart';
 
 class VerificationScreen extends StatefulWidget {
-  const VerificationScreen({super.key, required this.email});
+  const VerificationScreen({super.key, required this.email, required this.code});
 
   final String email;
+  final String code;
+
+
 
   @override
   State<VerificationScreen> createState() => _VerificationScreenState();
@@ -135,7 +138,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     );
                     GoRouter.of(context).push(
                       AppRouter.setNewPasswordScreen,
-                      extra: {"email": widget.email.trim()},
+                      extra: {"email": widget.email.trim(),"code":currentCode.trim()},
                     );
                   } else if (state is AuthFailure) {
                     ScaffoldMessenger.of(

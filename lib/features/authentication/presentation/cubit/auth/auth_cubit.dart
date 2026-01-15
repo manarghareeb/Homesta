@@ -72,10 +72,10 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   //reset password
-  Future<void> resetPassword(String email, String newPassword) async {
+  Future<void> resetPassword(String email, String code, String newPassword) async {
     emit(AuthLoading());
     try {
-      final result = await repo.resetPassword(email, newPassword);
+      final result = await repo.resetPassword(email, code, newPassword);
       emit(ResetPasswordSuccess(result));
     } catch (e) {
       emit(AuthFailure(e.toString()));
