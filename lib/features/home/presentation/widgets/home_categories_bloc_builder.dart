@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:homesta/features/categories/domain/entities/category_entity.dart';
 import 'package:homesta/features/categories/presentation/cubits/category_cubit/category_cubit.dart';
 import 'package:homesta/features/categories/presentation/cubits/category_cubit/category_state.dart';
 import 'package:homesta/features/home/presentation/widgets/home_category_skeletonizer.dart';

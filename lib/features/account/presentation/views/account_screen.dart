@@ -36,8 +36,7 @@ class _AccountScreenState extends State<AccountScreen> {
         String? imageUrl;
 
         if (state is EditProfileLoaded) {
-          fullName =
-          "${state.user.firstName ?? ""} ${state.user.lastName ?? ""}";
+          fullName = "${state.user.firstName ?? ""} ${state.user.lastName ?? ""}";
           imageUrl = state.user.imagePath != null
               ? "http://homefinish.runasp.net${state.user.imagePath}"
               : null;
@@ -95,40 +94,32 @@ class _AccountScreenState extends State<AccountScreen> {
                   SizedBox(height: 16.h),
                   const Divider(),
                   SizedBox(height: 24.h),
+
+                  // Options Section
                   OptionTile(
                     icon: Icons.person_outline,
                     label: 'Personal Data',
-                    onTap: () {
-                      GoRouter.of(context).push(AppRouter.editProfileScreen);
-                    },
+                    onTap: () => GoRouter.of(context).push(AppRouter.editProfileScreen),
                   ),
                   OptionTile(
                     icon: Icons.payment,
                     label: 'Payment Account',
-                    onTap: () {
-                      GoRouter.of(context).push(AppRouter.paymentAccountScreen);
-                    },
+                    onTap: () => GoRouter.of(context).push(AppRouter.paymentAccountScreen),
                   ),
                   OptionTile(
                     icon: Icons.list_alt,
                     label: 'My Order',
-                    onTap: () {
-                      GoRouter.of(context).push(AppRouter.myOrderScreen);
-                    },
+                    onTap: () => GoRouter.of(context).push(AppRouter.myOrderScreen),
                   ),
                   OptionTile(
                     icon: Icons.favorite_border,
                     label: 'My Collections',
-                    onTap: () {
-                      GoRouter.of(context).push(AppRouter.collectionsScreen);
-                    },
+                    onTap: () => GoRouter.of(context).push(AppRouter.collectionsScreen),
                   ),
                   OptionTile(
                     icon: Icons.lock_outline,
                     label: 'Password Manager',
-                    onTap: () {
-                      GoRouter.of(context).push(AppRouter.passwordManager);
-                    },
+                    onTap: () => GoRouter.of(context).push(AppRouter.passwordManager),
                   ),
                   SizedBox(height: 8.h),
                   const Divider(),
@@ -136,75 +127,16 @@ class _AccountScreenState extends State<AccountScreen> {
                   OptionTile(
                     icon: Icons.settings_outlined,
                     label: 'Setting',
-                    onTap: () {
-                      GoRouter.of(context).push(AppRouter.settingScreen);
-                    },
+                    onTap: () => GoRouter.of(context).push(AppRouter.settingScreen),
                   ),
                   OptionTile(
                     icon: Icons.logout,
                     label: 'Log Out',
-                    onTap: () {
-                      GoRouter.of(context).push(AppRouter.logoutScreen);
-                    },
+                    onTap: () => GoRouter.of(context).push(AppRouter.logoutScreen),
                   ),
                 ],
               ),
-              SizedBox(height: 16.h),
-              const Divider(),
-              SizedBox(height: 24.h),
-              OptionTile(
-                icon: Icons.person_outline,
-                label: 'Personal Data',
-                onTap: () {
-                  GoRouter.of(context).push(AppRouter.editProfileScreen);
-                },
-              ),
-              /*OptionTile(
-                icon: Icons.payment,
-                label: 'Payment Account',
-                onTap: () {
-                  GoRouter.of(context).push(AppRouter.paymentAccountScreen);
-                },
-              ),*/
-              OptionTile(
-                icon: Icons.list_alt,
-                label: 'My Order',
-                onTap: () {
-                  GoRouter.of(context).push(AppRouter.myOrderScreen);
-                },
-              ),
-              /*OptionTile(
-                icon: Icons.favorite_border,
-                label: 'My Collections',
-                onTap: () {
-                  GoRouter.of(context).push(AppRouter.collectionsScreen);
-                },
-              ),*/
-              OptionTile(
-                icon: Icons.lock_outline,
-                label: 'Password Manager',
-                onTap: () {
-                  GoRouter.of(context).push(AppRouter.passwordManager);
-                },
-              ),
-              SizedBox(height: 8.h),
-              const Divider(),
-              SizedBox(height: 24.h),
-              OptionTile(
-                icon: Icons.settings_outlined,
-                label: 'Setting',
-                onTap: () {
-                  GoRouter.of(context).push(AppRouter.settingScreen);
-                },
-              ),
-              OptionTile(
-                icon: Icons.logout,
-                label: 'Log Out',
-                onTap: () {
-                  GoRouter.of(context).push(AppRouter.logoutScreen);
-                },
-              ),
-            ],
+            ),
           ),
         );
       },

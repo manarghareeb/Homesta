@@ -5,8 +5,9 @@ import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 
 class SelectedCountry extends StatefulWidget {
-  const SelectedCountry({super.key, this.onCountrySelected});
+  const SelectedCountry({super.key, this.onCountrySelected, this.initialCountry});
   final Function(String country)? onCountrySelected;
+  final String? initialCountry;
 
   @override
   State<SelectedCountry> createState() => _SelectedCountryState();
@@ -14,6 +15,23 @@ class SelectedCountry extends StatefulWidget {
 
 class _SelectedCountryState extends State<SelectedCountry> {
   String? selectedCountry;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedCountry = widget.initialCountry; 
+  }
+
+  @override
+  void didUpdateWidget(covariant SelectedCountry oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.initialCountry != widget.initialCountry) {
+      setState(() {
+        selectedCountry = widget.initialCountry;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -35,6 +53,11 @@ class _SelectedCountryState extends State<SelectedCountry> {
         TextFormField(
           style: TextStyles.font14GreyColorW400,
           readOnly: true,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          validator: (value) =>
+              (selectedCountry == null || selectedCountry!.isEmpty)
+                  ? 'Please select a country'
+                  : null,
           decoration: InputDecoration(
             suffixIcon: const Icon(Icons.arrow_drop_down),
             hintText: selectedCountry ?? 'Choose your country',
@@ -59,9 +82,10 @@ class _SelectedCountryState extends State<SelectedCountry> {
                 setState(() {
                   selectedCountry = country.name;
                 });
-                if (widget.onCountrySelected != null) {
+                /*if (widget.onCountrySelected != null) {
                   widget.onCountrySelected!(country.name);
-                }
+                }*/
+                widget.onCountrySelected?.call(country.name);
               },
             );
           },

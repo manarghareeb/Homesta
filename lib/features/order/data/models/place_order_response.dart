@@ -5,8 +5,12 @@ class PlaceOrderResponse {
   PlaceOrderResponse({required this.orderId, required this.message});
 
   factory PlaceOrderResponse.fromJson(Map<String, dynamic> json) {
+    final orderId = json['orderId'];
+    if (orderId == null) {
+      throw Exception("orderId is null in PlaceOrderResponse");
+    }
     return PlaceOrderResponse(
-      orderId: json['orderId'] as int,
+      orderId: orderId as int,
       message: json['message'] as String,
     );
   }
