@@ -7,17 +7,15 @@ class TrackOrderDetailsCubit extends Cubit<TrackOrderDetailsState> {
   TrackOrderDetailsCubit(this.repository) : super(TrackOrderDetailsInitial());
 
   Future<void> fetchOrder(int orderId) async {
-  emit(TrackOrderDetailsLoading());
-  final result = await repository.getOrderDetails(orderId);
-  result.fold(
-    (failure) {
-      emit(TrackOrderDetailsError(failure.errorMessage));
-    },
-    (order) {
-      emit(TrackOrderDetailsLoaded(order));
-    },
-  );
-}
-
-
+    emit(TrackOrderDetailsLoading());
+    final result = await repository.getOrderDetails(orderId);
+    result.fold(
+      (failure) {
+        emit(TrackOrderDetailsError(failure.errorMessage));
+      },
+      (order) {
+        emit(TrackOrderDetailsLoaded(order));
+      },
+    );
+  }
 }

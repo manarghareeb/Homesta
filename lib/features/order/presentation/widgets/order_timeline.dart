@@ -29,7 +29,6 @@ class OrderTimeline extends StatelessWidget {
         final step = steps[index];
         final bool isDone = steps.indexOf(currentStatus) > index || steps.indexOf(currentStatus) == index;
         final bool isLast = index == steps.length - 1;
-        final bool isCurrent = currentStatus == step;
         final iconMap = {
           'Pending': FontAwesomeIcons.clipboardList,
           'Processing': FontAwesomeIcons.clipboardList,

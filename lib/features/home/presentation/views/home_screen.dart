@@ -6,6 +6,8 @@ import 'package:homesta/core/di/service_locator.dart';
 import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/features/cart/presentation/cubit/add_item_to_cart_cubit/add_item_to_cart_cubit.dart';
+import 'package:homesta/features/categories/presentation/cubits/category_cubit/category_cubit.dart';
+import 'package:homesta/features/home/presentation/widgets/home_categories_bloc_builder.dart';
 import 'package:homesta/features/home/presentation/widgets/product_bloc_builder.dart';
 import 'package:homesta/features/product/presentation/cubits/product_cubit.dart';
 
@@ -24,8 +26,11 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<ProductCubit>()..getAllProducts(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => sl<ProductCubit>()..getAllProducts()),
+        BlocProvider(create: (context) => sl<CategoryCubit>()..getCategories()),
+      ],
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: const HomeAppBar(),
@@ -45,8 +50,12 @@ class HomeScreen extends StatelessWidget {
 
                   const HomeHeroBanner(),
                   SizedBox(height: 20.h),
-
-                  const HomeCategories(),
+            const Text(
+              'Categories',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            ),
+        
+                  HomeCategoriesBlocBuilder(),
                   SizedBox(height: 24.h),
 
                   const SalesPromotionsWidget(),
@@ -55,43 +64,6 @@ class HomeScreen extends StatelessWidget {
                   const ProductsTabsWidget(),
                   SizedBox(height: 16.h),
 
-                  // /// 🟢 Responsive Grid
-                  // GridView.builder(
-                  //   shrinkWrap: true,
-                  //   physics: const NeverScrollableScrollPhysics(),
-                  //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  //     crossAxisCount:
-                  //         isDesktop
-                  //             ? 4
-                  //             : isTablet
-                  //             ? 3
-                  //             : 2,
-                  //     crossAxisSpacing: 12.w,
-                  //     mainAxisSpacing: 12.h,
-                  //     childAspectRatio:
-                  //         isDesktop
-                  //             ? 0.75
-                  //             : isTablet
-                  //             ? 0.7
-                  //             : 0.62,
-                  //   ),
-                  //   itemCount: 4,
-                  //   itemBuilder: (context, index) {
-                  //     return const ProductCardWidget(
-                  //       imagePath: 'assets/images/chair.png',
-                  //       title: 'Wooden Sofa Chair',
-                  //       price: '\$80.00',
-                  //       oldPrice: '\$160.00',
-                  //       discount: '50% Off',
-                  //       rating: 4.9,
-                  //       showTimer: true,
-                  //     );
-                  //   },
-                  // ),
-                  /*BlocProvider(
-                    create: (context) => AddItemToCartCubit(context.read<CartRepo>()),
-                    child: const ProductBlocBuilder(),
-                  ),*/
                   BlocProvider(
                     create: (context) => sl<AddItemToCartCubit>(),
                     child: const ProductBlocBuilder(),

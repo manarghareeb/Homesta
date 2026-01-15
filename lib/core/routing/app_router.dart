@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:homesta/core/api/api_consumer.dart';
 import 'package:homesta/core/api/api_keys.dart';
 import 'package:homesta/core/cache/cache_helper.dart';
 import 'package:homesta/core/di/service_locator.dart';
@@ -16,8 +15,9 @@ import 'package:homesta/features/admin/product/presentation/views/admin_product_
 import 'package:homesta/features/admin/profile/presentation/views/admin_account_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/logout_screen.dart';
 import 'package:homesta/features/account/presentation/views/manage_address_screen.dart';
-import 'package:homesta/features/account/presentation/views/my_order_screen.dart';
-
+import 'package:homesta/features/cart/presentation/cubit/add_item_to_cart_cubit/add_item_to_cart_cubit.dart';
+import 'package:homesta/features/order/presentation/cubit/user_orders_cubit/user_orders_cubit.dart';
+import 'package:homesta/features/order/presentation/views/my_order_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/password_manager_screen.dart';
 import 'package:homesta/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart';
 import 'package:homesta/features/cart/presentation/views/empty_cart_screen.dart';
@@ -28,7 +28,6 @@ import 'package:homesta/features/chat/data/models/chat_message_model.dart';
 import 'package:homesta/features/chat/domain/repos/chat_repo.dart';
 import 'package:homesta/features/chat/presentation/cubit/chat/chat_cubit.dart';
 import 'package:homesta/features/chat/presentation/views/chat_message_screen.dart';
-import 'package:homesta/features/order/data/repos/order_repo_impl.dart';
 import 'package:homesta/features/order/presentation/cubit/order_details_cubit/order_details_cubit.dart';
 import 'package:homesta/features/order/presentation/cubit/payment_cubit/payment_cubit.dart';
 import 'package:homesta/features/order/presentation/cubit/place_order_cubit/place_order_cubit.dart';
@@ -44,7 +43,6 @@ import 'package:homesta/features/authentication/presentation/views/login_screen.
 import 'package:homesta/features/authentication/presentation/views/set_new_password_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/signup_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/verification_screen.dart';
-import 'package:homesta/features/cart/presentation/views/wishlist_screen.dart';
 import 'package:homesta/features/chat/presentation/views/chat_screen.dart';
 import 'package:homesta/features/order/presentation/views/order_flow_screen.dart';
 import 'package:homesta/features/home/presentation/views/home.dart';
@@ -54,6 +52,7 @@ import 'package:homesta/features/product/presentation/cubits/review_cubit/review
 import 'package:homesta/features/product/presentation/views/product_details_view.dart';
 import 'package:homesta/features/seller/analytics/presentation/views/sales_analytics_screen.dart';
 import 'package:homesta/features/seller/company%20data/presentation/views/company_data_screen.dart';
+import 'package:homesta/features/seller/product/domain/entitiy/product_image_entity.dart';
 import 'package:homesta/features/seller/product/presentation/cubits/saller_product_cubit.dart';
 import 'package:homesta/features/seller/product/presentation/cubits/upload_image_cubit/upload_image_cubit.dart';
 import 'package:homesta/features/seller/product/presentation/views/product_form_screen.dart';
@@ -61,7 +60,6 @@ import 'package:homesta/features/seller/product/presentation/views/product_scree
 import 'package:homesta/features/seller/profile/presentation/cubits/store_cubit.dart';
 import 'package:homesta/features/seller/profile/presentation/views/create_store_view.dart';
 import 'package:homesta/features/seller/profile/presentation/views/seller_account_screen.dart';
-import 'package:homesta/features/seller/profile/presentation/views/widgets/create_store_form.dart';
 import 'package:homesta/features/splash/presentation/splashscreen.dart';
 import '../../features/account/presentation/cubit/edit_profile_cubit.dart';
 import '../../features/account/presentation/views/account_screen.dart';
@@ -69,7 +67,6 @@ import '../../features/account/presentation/views/add_review.dart';
 import '../../features/account/presentation/views/invoice.dart';
 import '../../features/account/presentation/views/my_collections_screen.dart';
 import '../../features/cart/presentation/views/cart_screen.dart';
-import '../../features/categories/presentation/cubits/sub_category_cubit.dart/sub_category_cubit.dart';
 import '../../features/categories/presentation/views/SubCategoriesScreen.dart';
 import '../../features/notification/presentaion/views/notification_empty_screen.dart';
 import '../../features/order/presentation/views/seller_screen.dart';
@@ -177,8 +174,7 @@ abstract class AppRouter {
                 BlocProvider<SubCategoryCubit>(
                   create: (context) => sl<SubCategoryCubit>(),
                 ),
-                BlocProvider(
-                  create: (context)=>sl<ProductImageCubit>(),)
+                BlocProvider(create: (context) => sl<ProductImageCubit>()),
               ],
 
               child: const ProductFormScreen(),
@@ -291,7 +287,17 @@ abstract class AppRouter {
 
       GoRoute(
         path: myOrderScreen,
-        builder: (context, state) => const MyOrderScreen(),
+        builder: (context, state) {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (_) => sl<UserOrdersCubit>()..getUserOrders(),
+              ),
+              BlocProvider(create: (_) => sl<TrackOrderDetailsCubit>()),
+            ],
+            child: const MyOrderScreen(),
+          );
+        },
       ),
       GoRoute(
         path: helpCenterScreen,
@@ -301,14 +307,17 @@ abstract class AppRouter {
         path: productDetailsScreen,
 
         builder: (context, state) {
-          final product = state.extra as ProductEntity;
+          final data = state.extra as Map<String, dynamic>;
+          final product = data['product'] as ProductEntity;
+          final images = data['images'] as List<ProductImageEntity>;
+
           print("product id ${product.productId}");
           return BlocProvider(
             create:
                 (context) =>
                     sl<ReviewsCubit>()
                       ..getReviews(productId: product.productId),
-            child: ProductDetailsView(productEntity: product),
+            child: ProductDetailsView(productEntity: product, images: images),
           );
         },
       ),
@@ -320,22 +329,16 @@ abstract class AppRouter {
       GoRoute(
         path: cartScreen,
         builder: (context, state) {
-          //final product = state.extra as ProductEntity;
           return BlocProvider(
             create: (context) => sl<CartCubit>()..getCartItems(),
-            /*sl<AddItemToCartCubit>()..addItemToCart(
-                      productId: product.productId,
-                      colorId: 1,
-                      quantity: 1,
-                    ),*/
             child: const CartScreen(),
           );
         },
       ),
-      GoRoute(
+      /*GoRoute(
         path: wishlistScreen,
         builder: (context, state) => const WishlistScreen(),
-      ),
+      ),*/
       GoRoute(
         path: accountScreen,
         builder: (context, state) {
@@ -351,15 +354,17 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: filtersScreen,
-        builder:
-            (context, state) => /*MultiBlocProvider(
-              providers:[
-                BlocProvider(create: (_) => ProductFilterCubit()),
-                BlocProvider(create: (_) => ProductCubit(sl())),
-              ],
-              child:*/
-                const FiltersScreen(),
-        //),
+        builder: (context, state) {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (_) => sl<CategoryCubit>()..getCategories()),
+              BlocProvider(create: (_) => sl<SubCategoryCubit>()),
+              BlocProvider(create: (_) => sl<ProductCubit>()..getAllProducts()),
+              BlocProvider(create: (_) => sl<AddItemToCartCubit>()),
+            ],
+            child: const FiltersScreen(),
+          );
+        },
       ),
 
       GoRoute(
@@ -499,11 +504,9 @@ abstract class AppRouter {
         path: trackOrderDetails,
         builder: (context, state) {
           final orderId = state.extra as int;
-          //final orderRepo = OrderRepoImpl(apiConsumer: sl<ApiConsumer>());
           return BlocProvider(
             create:
                 (context) => sl<TrackOrderDetailsCubit>()..fetchOrder(orderId),
-                    //TrackOrderDetailsCubit(orderRepo)..fetchOrder(orderId),
             child: TrackOrderDetailsScreen(orderId: orderId),
           );
         },

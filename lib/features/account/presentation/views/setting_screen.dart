@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homesta/core/routing/app_router.dart';
-import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 import 'package:homesta/features/account/presentation/widgets/about_section_item.dart';
@@ -31,7 +30,7 @@ class _SettingScreenState extends State<SettingScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              OptionTile(
+              /*OptionTile(
                 icon: Icons.notifications_outlined,
                 label: 'Notifications',
                 onTap: () {},
@@ -87,7 +86,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 onTap: () {
                   GoRouter.of(context).push(AppRouter.customerSupportScreen);
                 },
-              ),
+              ),*/
               OptionTile(
                 icon: FontAwesomeIcons.comments,
                 label: 'FAQs',
@@ -95,13 +94,13 @@ class _SettingScreenState extends State<SettingScreen> {
                   GoRouter.of(context).push(AppRouter.fAQsScreen);
                 },
               ),
-              OptionTile(
+              /*OptionTile(
                 icon: FontAwesomeIcons.addressBook,
                 label: 'Contact Us',
                 onTap: () {
                   GoRouter.of(context).push(AppRouter.contactUsScreen);
                 },
-              ),
+              ),*/
               OptionTile(
                 icon: FontAwesomeIcons.circleQuestion,
                 label: 'Help Center',

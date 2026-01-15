@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homesta/core/routing/app_router.dart';
@@ -54,7 +54,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 24.h),
-              const ProductTitleWithRating(),
+            //  const ProductTitleWithRating(),
               SizedBox(height: 24.h),
               //   const ProductDescriptionSection(),
               SizedBox(height: 16.h),
@@ -105,3 +105,4 @@ class ProductDetailsScreen extends StatelessWidget {
     );
   }
 }
+*/

@@ -36,7 +36,7 @@ class ProductDescriptionSection extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
             children: [
-              TextSpan(text: '\$50.0', style: TextStyles.font14ThirdColorW400),
+              TextSpan(text: '\$$price', style: TextStyles.font14ThirdColorW400),
             ],
           ),
           textAlign: TextAlign.start,
