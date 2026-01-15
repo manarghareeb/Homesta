@@ -31,6 +31,8 @@ class EndPoint {
   static String createPlaceOrder = 'api/Order/Create/Place';
   static String orderDetails = 'api/Order/OrderDetails';
   static String userOrders = 'api/Order/UserOrders';
+  static String clearCart = 'api/Cart/clear';
+  static String removeItemFromCart = 'api/Cart/remove';
 
   //saller endpoints
   static String getSallerProducts = "api/Store/";
@@ -40,6 +42,4 @@ class EndPoint {
   static String createStore = "api/Store";
   static String getStore = "api/Store";
   static String uploadImges = "api/ProductImages/upload";
-
-
 }

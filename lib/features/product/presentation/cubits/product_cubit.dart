@@ -11,17 +11,20 @@ class ProductCubit extends Cubit<ProductState> {
   ProductCubit(this.getAllProductsUseCase) : super(ProductInitial());
 
   Future<void> getAllProducts() async {
+    if (isClosed) return;
     emit(ProductLoading());
 
     final result = await getAllProductsUseCase();
 
     result.fold(
       (failure) {
-        emit(ProductFailure(failure.errorMessage));
+        //emit(ProductFailure(failure.errorMessage));
+        if (!isClosed) emit(ProductFailure(failure.errorMessage));
       },
       (products) {
         allProducts = products;
-        emit(ProductSuccess(products));
+        //emit(ProductSuccess(products));
+        if (!isClosed) emit(ProductSuccess(products));
       },
     );
   }

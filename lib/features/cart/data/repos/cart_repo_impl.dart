@@ -51,7 +51,8 @@ class CartRepoImpl implements CartRepo {
       rethrow;*/
     }
   }
-
+  
+  @override
   Future<CartModel> getCart() async {
     try {
       final response = await apiConsumer.get(EndPoint.getCart);
@@ -61,6 +62,28 @@ class CartRepoImpl implements CartRepo {
         throw Exception(e.response?.data['message'] ?? 'Failed to fetch cart');
       }
       rethrow;
+    }
+  }
+
+  @override
+  Future<void> clearCart() async {
+    try {
+      await apiConsumer.delete(EndPoint.clearCart);
+    } on DioException catch (e) {
+      throw Exception(e.response?.data['message'] ?? 'Failed to clear cart');
+    } catch (e) {
+      throw Exception('Unexpected error: $e');
+    }
+  }
+
+  @override
+  Future<void> removeItemFromCart(int cartItemId) async {
+    try {
+      await apiConsumer.delete("${EndPoint.removeItemFromCart}/$cartItemId");
+    } on DioException catch (e) {
+      throw Exception(e.response?.data['message'] ?? 'Failed to remove item');
+    } catch (e) {
+      throw Exception('Unexpected error: $e');
     }
   }
 }
