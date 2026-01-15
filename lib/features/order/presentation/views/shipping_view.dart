@@ -6,6 +6,7 @@ import 'package:homesta/core/cache/cache_helper.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
+import 'package:homesta/core/widgets/custom_confirm_dialog.dart';
 import 'package:homesta/core/widgets/custom_text_field_widget.dart';
 import 'package:homesta/features/account/presentation/cubit/edit_profile_cubit.dart';
 import 'package:homesta/features/account/presentation/cubit/edit_profile_state.dart';
@@ -93,48 +94,11 @@ class _ShippingViewState extends State<ShippingView> {
       },
       if (userId != null) 'userId': userId,
     };
-
-    final confirmSave = await showDialog<bool>(
-      context: context,
-      builder:
-          (context) => AlertDialog(
-            backgroundColor: Colors.white,
-            title: const Text('Save Personal Data?'),
-            content: const Text(
-              'Do you want to save this shipping information in your personal data?',
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            actionsPadding: EdgeInsets.symmetric(
-              horizontal: 16.w,
-              vertical: 8.h,
-            ),
-            actions: [
-              OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: ColorManager.primaryColor),
-                  foregroundColor: ColorManager.primaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                onPressed: () => Navigator.of(context).pop(false),
-                child: const Text('No'),
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: ColorManager.primaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                onPressed: () => Navigator.of(context).pop(true),
-                child: Text('Yes', style: TextStyles.font14WhiteColorW400),
-              ),
-            ],
-          ),
-    );
+    final confirmSave = await showCustomConfirmDialog(
+    context: context,
+    title: 'Save Personal Data?',
+    content: 'Do you want to save this shipping information in your personal data?',
+  );
 
     if (confirmSave == true && userId != null) {
       final infoMap = Map<String, dynamic>.from(

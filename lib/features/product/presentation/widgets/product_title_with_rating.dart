@@ -11,8 +11,14 @@ final String rating;
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: TextStyles.font16BlackRegular),
+        Expanded(
+          child: Text(
+            title, 
+            style: TextStyles.font16BlackRegular, 
+            maxLines: 2, overflow: TextOverflow.ellipsis,),
+        ),
         Row(
           children: [
             Icon(Icons.star, color: ColorManager.yellowColor, size: 20.sp),

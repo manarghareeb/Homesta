@@ -13,6 +13,7 @@ class YourCardItem extends StatelessWidget {
     required this.price,
     //required this.quantity,
     required this.onPressedDelete,
+    required this.onQuantityChanged
   });
   final String image;
   final String name;
@@ -20,6 +21,7 @@ class YourCardItem extends StatelessWidget {
   final double price;
   //final double quantity;
   final Function() onPressedDelete;
+  final Function(int)? onQuantityChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +59,13 @@ class YourCardItem extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 12.h),
-                const CountContainer(),
+                CountContainer(
+                  onQuantityChanged: onQuantityChanged,
+                  padding: EdgeInsets.symmetric(
+                    vertical: 7.4.h,
+                    horizontal: 11.5.w,
+                  ),
+                ),
               ],
             ),
           ),
