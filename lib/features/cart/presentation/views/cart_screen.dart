@@ -7,6 +7,7 @@ import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
+import 'package:homesta/core/widgets/custom_confirm_dialog.dart';
 import 'package:homesta/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart';
 import 'package:homesta/features/cart/presentation/cubit/cart_cubit/cart_state.dart';
 import 'package:homesta/features/cart/presentation/views/empty_cart_screen.dart';
@@ -46,59 +47,22 @@ class CartScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       TextButton(
-  onPressed: () async {
-    final confirm = await showDialog<bool>(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16.r),
-        ),
-        title: const Text(
-          'Clear Cart',
-          style: TextStyle(fontWeight: FontWeight.w600),
-        ),
-        content: const Text(
-          'Are you sure you want to clear the cart?',
-        ),
-        actionsPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-        actions: [
-          OutlinedButton(
-            style: OutlinedButton.styleFrom(
-              side: BorderSide(color: ColorManager.primaryColor),
-              foregroundColor: ColorManager.primaryColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.r),
-              ),
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
-            ),
-            onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('No'),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: ColorManager.primaryColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.r),
-              ),
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
-            ),
-            onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('Yes', style: TextStyle(color: Colors.white)),
-          ),
-        ],
-      ),
-    );
+                        onPressed: () async {
+                          final confirm = await showCustomConfirmDialog(
+                            context: context,
+                            title: 'Clear Cart',
+                            content: 'Are you sure you want to clear the cart?',
+                          );
 
-    if (confirm == true) {
-      await context.read<CartCubit>().clearCart();
-    }
-  },
-  child: Text(
-    'Clear All Cart', 
-    style: TextStyles.font16PrimaryColorW400Underline,
-  ),
-),
+                          if (confirm == true) {
+                            await context.read<CartCubit>().clearCart();
+                          }
+                        },
+                        child: Text(
+                          'Clear All Cart',
+                          style: TextStyles.font16PrimaryColorW400Underline,
+                        ),
+                      ),
 
                       ListView.separated(
                         padding: EdgeInsets.symmetric(vertical: 16.h),
@@ -110,62 +74,27 @@ class CartScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final cartItem = cartItems[index];
                           return CartItemWidget(
-  onPressedDeleted: () async {
-  final confirm = await showDialog<bool>(
-    context: context,
-    builder: (context) => AlertDialog(
-      backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16.r),
-      ),
-      title: const Text(
-        'Remove Item',
-        style: TextStyle(fontWeight: FontWeight.w600),
-      ),
-      content: Text(
-        'Are you sure you want to remove ${cartItem.productName}?',
-      ),
-      actionsPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-      actions: [
-        OutlinedButton(
-          style: OutlinedButton.styleFrom(
-            side: BorderSide(color: ColorManager.primaryColor),
-            foregroundColor: ColorManager.primaryColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.r),
-            ),
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
-          ),
-          onPressed: () => Navigator.of(context).pop(false),
-          child: const Text('No'),
-        ),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: ColorManager.primaryColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.r),
-            ),
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
-          ),
-          onPressed: () => Navigator.of(context).pop(true),
-          child: const Text('Yes', style: TextStyle(color: Colors.white)),
-        ),
-      ],
-    ),
-  );
+                            onPressedDeleted: () async {
+                              final confirm = await showCustomConfirmDialog(
+                                context: context,
+                                title: 'Remove Item',
+                                content:
+                                    'Are you sure you want to remove ${cartItem.productName}?',
+                              );
 
-  if (confirm == true) {
-    await context.read<CartCubit>().removeItemFromCart(cartItem.cartItemId!);
-  }
-},
+                              if (confirm == true) {
+                                await context
+                                    .read<CartCubit>()
+                                    .removeItemFromCart(cartItem.cartItemId!);
+                              }
+                            },
 
-  name: cartItem.productName ?? 'Unknown Product',
-  color: (cartItem.productColors != null && cartItem.productColors!.isNotEmpty)
-      ? cartItem.productColors!.first
-      : 'Green',
-  image: 'assets/images/chair.png',
-  price: cartItem.unitPrice ?? 0,
-);
+                            name: cartItem.productName ?? 'Unknown Product',
+                            color: cartItem.productColor ?? '',
+                            image: 'assets/images/chair.png',
+                            price: cartItem.unitPrice ?? 0,
+                            quantity: cartItem.quantity ?? 1,
+                          );
                         },
                       ),
                       SizedBox(height: 16.h),

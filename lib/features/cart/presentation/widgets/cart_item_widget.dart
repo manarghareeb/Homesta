@@ -9,6 +9,7 @@ class CartItemWidget extends StatefulWidget {
   final String color;
   final String image;
   final double price;
+  final int quantity;
   final void Function() onPressedDeleted;
 
   const CartItemWidget({
@@ -16,8 +17,8 @@ class CartItemWidget extends StatefulWidget {
     required this.name,
     required this.color,
     required this.image,
-    required this.price, 
-    required this.onPressedDeleted,
+    required this.price,
+    required this.onPressedDeleted, required this.quantity,
   });
 
   @override
@@ -73,10 +74,34 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                     ],
                   ),
                 ),
-                Text(
+                RichText(
+                  text: TextSpan(
+                    text: 'Price : ',
+                    style: TextStyles.font14BlackColorW400,
+                    children: [
+                      TextSpan(
+                        text: '\$${widget.price.toStringAsFixed(0)}',
+                        style: TextStyles.font14PrimaryColorW400,
+                      ),
+                    ],
+                  ),
+                ),
+                RichText(
+                  text: TextSpan(
+                    text: 'Quantity : ',
+                    style: TextStyles.font14BlackColorW400,
+                    children: [
+                      TextSpan(
+                        text: '${widget.quantity}',
+                        style: TextStyles.font14PrimaryColorW400,
+                      ),
+                    ],
+                  ),
+                ),
+                /*Text(
                   '\$${widget.price.toStringAsFixed(0)}',
                   style: TextStyles.font14ThirdColorW400,
-                ),
+                ),*/
               ],
             ),
           ),
@@ -91,7 +116,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                 onPressed: widget.onPressedDeleted,
               ),
               SizedBox(height: 4.h),
-              const QuantitySelectorSection(),
+              //const QuantitySelectorSection(),
             ],
           ),
         ],

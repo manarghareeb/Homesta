@@ -90,22 +90,26 @@ class TrackOrderDetailsScreen extends StatelessWidget {
                               ),
                             ),
                             SizedBox(width: 16.w),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  item.productName,
-                                  style: TextStyles.font16BlackRegular,
-                                ),
-                                Text(
-                                  'Quantity: ${item.quantity}',
-                                  style: TextStyles.font14GreyColorW400,
-                                ),
-                                Text(
-                                  'Color: ${item.productColor}',
-                                  style: TextStyles.font14PrimaryColorW400,
-                                ),
-                              ],
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    item.productName,
+                                    style: TextStyles.font16BlackRegular,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  Text(
+                                    'Quantity: ${item.quantity}',
+                                    style: TextStyles.font14GreyColorW400,
+                                  ),
+                                  Text(
+                                    'Color: ${item.productColor}',
+                                    style: TextStyles.font14PrimaryColorW400,
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),

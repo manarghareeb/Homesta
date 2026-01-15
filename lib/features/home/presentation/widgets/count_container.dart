@@ -4,8 +4,9 @@ import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 
 class CountContainer extends StatefulWidget {
-  const CountContainer({super.key, this.padding});
+  const CountContainer({super.key, this.padding, this.onQuantityChanged});
   final EdgeInsetsGeometry? padding;
+  final Function(int)? onQuantityChanged;
 
   @override
   State<CountContainer> createState() => _CountContainerState();
@@ -13,6 +14,16 @@ class CountContainer extends StatefulWidget {
 
 class _CountContainerState extends State<CountContainer> {
   int quantity = 1;
+
+  void updateQuantity(int newQuantity) {
+    setState(() {
+      quantity = newQuantity;
+    });
+    if (widget.onQuantityChanged != null) {
+      widget.onQuantityChanged!(quantity);
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +41,7 @@ class _CountContainerState extends State<CountContainer> {
           InkWell(
             borderRadius: BorderRadius.circular(6.r),
             onTap: () {
-              if (quantity > 1) setState(() => quantity--);
+              if (quantity > 1) updateQuantity(quantity - 1);
             },
             child: SizedBox(
               width: 24.w,
@@ -54,7 +65,7 @@ class _CountContainerState extends State<CountContainer> {
 
           InkWell(
             borderRadius: BorderRadius.circular(6.r),
-            onTap: () => setState(() => quantity++),
+            onTap: () => updateQuantity(quantity + 1),
             child: SizedBox(
               width: 24.w,
               height: 24.w,

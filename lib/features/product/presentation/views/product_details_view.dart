@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
+import 'package:homesta/core/widgets/custom_button_widget.dart';
+import 'package:homesta/features/cart/presentation/cubit/add_item_to_cart_cubit/add_item_to_cart_cubit.dart';
+import 'package:homesta/features/cart/presentation/cubit/add_item_to_cart_cubit/add_item_to_cart_state.dart';
 import 'package:homesta/features/product/domain/entities/product_entitty.dart';
 import 'package:homesta/features/home/presentation/widgets/count_container.dart';
 import 'package:homesta/features/product/presentation/widgets/discription_tab.dart';
@@ -15,7 +19,7 @@ import 'package:homesta/features/product/presentation/widgets/select_color_secti
 import 'package:homesta/features/product/presentation/widgets/tap_bar_widget.dart';
 import 'package:homesta/features/seller/product/domain/entitiy/product_image_entity.dart';
 
-class ProductDetailsView extends StatelessWidget {
+class ProductDetailsView extends StatefulWidget {
   const ProductDetailsView({
     super.key,
     required this.productEntity,
@@ -23,6 +27,15 @@ class ProductDetailsView extends StatelessWidget {
   });
   final ProductEntity productEntity;
   final List<ProductImageEntity> images;
+
+  @override
+  State<ProductDetailsView> createState() => _ProductDetailsViewState();
+}
+
+class _ProductDetailsViewState extends State<ProductDetailsView> {
+  int selectedQuantity = 1;
+  String selectedColor = '';
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -31,20 +44,6 @@ class ProductDetailsView extends StatelessWidget {
         appBar: CustomAppBarWidget(
           backgroundColor: ColorManager.soLightGreyColor,
           text: 'Product Details',
-          actions: [
-            IconButton(
-              onPressed: () {
-                GoRouter.of(context).push(AppRouter.cartScreen);
-              },
-              icon: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: const Icon(
-                  Icons.shopping_cart_outlined,
-                  color: ColorManager.primaryColor,
-                ),
-              ),
-            ),
-          ],
         ),
         backgroundColor: ColorManager.soLightGreyColor,
         body: SingleChildScrollView(
@@ -54,44 +53,110 @@ class ProductDetailsView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ProductImageGallerySection(
-                  mainImage: images[0].imageUrl,
-                  thumbnails: images,
+                  mainImage: widget.images[0].imageUrl,
+                  thumbnails: widget.images,
                 ),
                 SizedBox(height: 24.h),
                 ProductTitleWithRating(
-                  title: productEntity.name,
-                  rating: productEntity.rating.toString(),
+                  title: widget.productEntity.name,
+                  rating: widget.productEntity.rating.toString(),
                 ),
                 SizedBox(height: 24.h),
                 ProductDescriptionSection(
-                  description: productEntity.description,
-                  price: productEntity.price.toString(),
+                  description: widget.productEntity.description,
+                  price: widget.productEntity.price.toString(),
                 ),
                 SizedBox(height: 16.h),
                 SelectColorSection(
-                  selectedColorName: 'Green',
+                  colorStrings:
+                      (widget.productEntity.colors as List<dynamic>?)
+                          ?.map((e) => e.toString())
+                          .toList() ??
+                      [],
+                  selectedColor: selectedColor,
                   onColorSelected: (color) {
-                    print('Selected color: $color');
+                    setState(() {
+                      selectedColor = color;
+                    });
                   },
                 ),
                 SizedBox(height: 16.h),
                 CountContainer(
+                  onQuantityChanged: (value) {
+                    setState(() {
+                      selectedQuantity = value;
+                    });
+                  },
                   padding: EdgeInsets.symmetric(
                     vertical: 7.4.h,
                     horizontal: 11.5.w,
                   ),
                 ),
+                SizedBox(height: 16.h),
+                BlocListener<AddItemToCartCubit, AddItemToCartState>(
+                  listener: (context, state) {
+                    if (state is AddItemToCartSuccess) {
+                      GoRouter.of(context).push(AppRouter.cartScreen);
+                    } else if (state is AddItemToCartFailure) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Failed to add to cart: ${state.error}',
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                  child: CustomButtonWidget(
+                    buttonText: 'Add to Cart',
+                    onPressed: () {
+                      if (selectedColor.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Please select a color'),
+                          ),
+                        );
+                        return;
+                      }
+
+                      final cubit = context.read<AddItemToCartCubit>();
+                      cubit.addItemToCart(
+                        productId: widget.productEntity.productId,
+                        quantity: selectedQuantity,
+                        colorId: selectedColor,
+                      );
+                    },
+                  ),
+                ),
+
+                /*CustomButtonWidget(
+                  buttonText: 'Add to Cart',
+                  onPressed: () {
+                    if (selectedColor.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Please select a color')),
+                      );
+                      return;
+                    }
+
+                    final cubit = context.read<AddItemToCartCubit>();
+                    cubit.addItemToCart(
+                      productId: widget.productEntity.productId,
+                      quantity: selectedQuantity,
+                      colorId: selectedColor,
+                    );
+                  },
+                ),*/
                 SizedBox(height: 8.h),
                 TapBarWidget(),
 
-                /// محتوى التابات
                 SizedBox(
                   height: 500.h,
                   child: TabBarView(
                     children: [
                       DiscriptionTab(),
 
-                      ReviewTab(productEntity: productEntity),
+                      ReviewTab(productEntity: widget.productEntity),
                     ],
                   ),
                 ),

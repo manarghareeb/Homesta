@@ -111,11 +111,11 @@ class _AccountScreenState extends State<AccountScreen> {
                     label: 'My Order',
                     onTap: () => GoRouter.of(context).push(AppRouter.myOrderScreen),
                   ),
-                  OptionTile(
+                  /*OptionTile(
                     icon: Icons.favorite_border,
                     label: 'My Collections',
                     onTap: () => GoRouter.of(context).push(AppRouter.collectionsScreen),
-                  ),
+                  ),*/
                   OptionTile(
                     icon: Icons.lock_outline,
                     label: 'Password Manager',

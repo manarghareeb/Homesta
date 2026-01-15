@@ -9,7 +9,6 @@ import 'package:homesta/features/categories/presentation/cubits/sub_category_cub
 import 'package:homesta/features/product/presentation/cubits/product_cubit.dart';
 import 'package:homesta/features/shop/presentation/widgets/filter_apply_button.dart';
 import 'package:homesta/features/shop/presentation/widgets/filter_checkbox_item.dart';
-import 'package:homesta/features/shop/presentation/widgets/filter_color_item.dart';
 import 'package:homesta/features/shop/presentation/widgets/filter_price_slider.dart';
 import 'package:homesta/features/shop/presentation/widgets/filter_section.dart';
 
@@ -278,7 +277,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                       ),
 
                       /// COLORS
-                      FilterSection(
+                      /*FilterSection(
                         title: 'Color',
                         child: Wrap(
                           spacing: 10,
@@ -303,7 +302,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                                 );
                               }).toList(),
                         ),
-                      ),
+                      ),*/
 
                       /// AVAILABILITY
                       FilterSection(

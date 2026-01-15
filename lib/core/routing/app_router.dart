@@ -303,7 +303,7 @@ abstract class AppRouter {
         path: helpCenterScreen,
         builder: (context, state) => const HelpCenterScreen(),
       ),
-      GoRoute(
+      /*GoRoute(
         path: productDetailsScreen,
 
         builder: (context, state) {
@@ -320,7 +320,33 @@ abstract class AppRouter {
             child: ProductDetailsView(productEntity: product, images: images),
           );
         },
+      ),*/
+      GoRoute(
+  path: productDetailsScreen,
+  builder: (context, state) {
+    final data = state.extra as Map<String, dynamic>;
+    final product = data['product'] as ProductEntity;
+    final images = data['images'] as List<ProductImageEntity>;
+
+    print("product id ${product.productId}");
+
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => sl<ReviewsCubit>()..getReviews(productId: product.productId),
+        ),
+        BlocProvider(
+          create: (context) => sl<AddItemToCartCubit>(),
+        ),
+      ],
+      child: ProductDetailsView(
+        productEntity: product,
+        images: images,
       ),
+    );
+  },
+),
+
       GoRoute(path: homeScreen, builder: (context, state) => const HomeView()),
       GoRoute(
         path: searchScreen,
