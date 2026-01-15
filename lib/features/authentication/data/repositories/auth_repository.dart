@@ -44,9 +44,10 @@ class AuthRepository {
   //reset password
   Future<ResetPasswordResponseModel> resetPassword(
     String email,
+    String code,
     String newPassword,
   ) {
-    return remote.resetPassword(email: email, newPassword: newPassword);
+    return remote.resetPassword(email: email, code: code, newPassword: newPassword);
   }
 
   //verification

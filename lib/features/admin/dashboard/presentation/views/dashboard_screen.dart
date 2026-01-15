@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 import 'package:homesta/features/admin/dashboard/presentation/widgets/analytics_container.dart';
 import 'package:homesta/features/seller/analytics/presentation/widgets/data_analytics.dart';
+
+import '../../../../seller/profile/presentation/cubits/store_cubit.dart';
+import '../../../../seller/profile/presentation/cubits/store_state.dart';
 
 
 class DashboardScreen extends StatelessWidget {
@@ -134,7 +138,7 @@ class DashboardScreen extends StatelessWidget {
                     //   builder: (context, state) {
                     //     if (state is StoreSuccess) {
                     //       return Column(
-                    //         children: state.stores.map((store) {
+                    //         children: state.storeEntity.map((store) {
                     //           return Row(
                     //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     //             children: [

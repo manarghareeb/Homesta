@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homesta/core/routing/app_router.dart';
@@ -8,84 +10,148 @@ import 'package:homesta/features/account/presentation/widgets/option_tile.dart';
 import 'package:homesta/features/account/presentation/widgets/photo_profile.dart';
 import 'package:image_picker/image_picker.dart';
 
-class AdminAccountScreen extends StatelessWidget {
+import '../../../../../core/api/api_keys.dart';
+import '../../../../../core/cache/cache_helper.dart';
+import '../../../../account/presentation/cubit/edit_profile_cubit.dart';
+import '../../../../account/presentation/cubit/edit_profile_state.dart';
+import '../../../../authentication/presentation/views/logout_screen.dart';
+
+class AdminAccountScreen extends StatefulWidget {
   const AdminAccountScreen({super.key});
 
   @override
+  State<AdminAccountScreen> createState() => _AdminAccountScreenState();
+}
+
+class _AdminAccountScreenState extends State<AdminAccountScreen> {
+  @override
+  void initState() {
+    super.initState();
+    final userId = CacheHelper().getData(key: ApiKeys.id);
+    context.read<EditProfileCubit>().loadUser(userId);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        surfaceTintColor: Colors.white,
-        backgroundColor: Colors.white,
-        title: Text(
-          'My Profile',
-          style: TextStyles.font18BlackW500.copyWith(fontSize: 20.sp),
-        ),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+    return BlocBuilder<EditProfileCubit, EditProfileState>(
+      builder: (context, state) {
+        String? fullName;
+        String? imageUrl;
+
+        if (state is EditProfileLoaded) {
+          fullName =
+          "${state.user.firstName ?? ""} ${state.user.lastName ?? ""}";
+          imageUrl = state.user.imagePath != null
+              ? "http://homefinish.runasp.net${state.user.imagePath}"
+              : null;
+        }
+
+        return Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            surfaceTintColor: Colors.white,
+            backgroundColor: Colors.white,
+            title: Text(
+              'My Profile',
+              style: TextStyles.font18BlackW500.copyWith(fontSize: 20.sp),
+            ),
+            centerTitle: true,
+          ),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  PhotoProfile(onImageSelected: (XFile? p1) {  },),
-                  SizedBox(width: 24.w),
-                  Column(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        'Admin',
-                        style: TextStyles.font16BlackRegular.copyWith(
-                          fontWeight: FontWeight.w500,
-                        ),
+                      PhotoProfile(
+                        initialImageUrl: imageUrl,
+                        onImageSelected: (XFile? image) async {
+                          if (image != null) {
+                            final userId = CacheHelper().getData(
+                                key: ApiKeys.id);
+                            final formData = FormData.fromMap({
+                              "ImageFile": await MultipartFile.fromFile(
+                                image.path,
+                                filename: image.name,
+                              ),
+                            });
+                            context.read<EditProfileCubit>().updateUser(
+                                formData, userId);
+                          }
+                        },
                       ),
-                      SizedBox(height: 6.h),
-                      Text('Admin', style: TextStyles.font14GreyColorW400),
+                      SizedBox(width: 24.w),
+                      Column(
+                        children: [
+                          Text(
+                            fullName ?? "",
+                            style: TextStyles.font16BlackRegular.copyWith(
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(height: 6.h),
+                        ],
+                      ),
                     ],
                   ),
+                  SizedBox(height: 16.h),
+                  const Divider(),
+                  SizedBox(height: 24.h),
+                  OptionTile(
+                    icon: Icons.person_outline,
+                    label: 'Personal Data',
+                    onTap: () {
+                      GoRouter.of(context).push(AppRouter.editProfileScreen);
+                    },
+                  ),
+                  OptionTile(
+                    icon: Icons.person_outline,
+                    label: 'Dashboard',
+                    onTap: () {
+                      GoRouter.of(context).push(AppRouter.adminDashboardScreen);
+                    },
+                  ),
+                  OptionTile(
+                    icon: Icons.production_quantity_limits_outlined,
+                    label: 'Product',
+                    onTap: () {
+                      GoRouter.of(context).push(AppRouter.adminProductScreen);
+                    },
+                  ),
+                  OptionTile(
+                    icon: Icons.analytics_outlined,
+                    label: 'Category',
+                    onTap: () {
+                      GoRouter.of(context).push(AppRouter.adminCategoryScreen);
+                    },
+                  ),
+                  SizedBox(height: 8.h),
+                  const Divider(),
+                  SizedBox(height: 24.h),
+                  OptionTile(
+                    icon: Icons.settings_outlined,
+                    label: 'Setting',
+                    onTap: () {},
+                  ),
+                  OptionTile(
+                      icon: Icons.logout, label: 'Log Out',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LogoutConfirmScreen(),
+                          ),
+                        );
+                      }),
                 ],
               ),
-              SizedBox(height: 16.h),
-              const Divider(),
-              SizedBox(height: 24.h),
-              OptionTile(
-                icon: Icons.person_outline,
-                label: 'Dashboard',
-                onTap: () {
-                  GoRouter.of(context).push(AppRouter.adminDashboardScreen);
-                },
-              ),
-              OptionTile(
-                icon: Icons.production_quantity_limits_outlined,
-                label: 'Product',
-                onTap: () {
-                  GoRouter.of(context).push(AppRouter.adminProductScreen);
-                },
-              ),
-              OptionTile(
-                icon: Icons.analytics_outlined,
-                label: 'Category',
-                onTap: () {
-                  GoRouter.of(context).push(AppRouter.adminCategoryScreen);
-                },
-              ),
-              SizedBox(height: 8.h),
-              const Divider(),
-              SizedBox(height: 24.h),
-              OptionTile(
-                icon: Icons.settings_outlined,
-                label: 'Setting',
-                onTap: () {},
-              ),
-              OptionTile(icon: Icons.logout, label: 'Log Out', onTap: () {}),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

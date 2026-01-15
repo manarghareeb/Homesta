@@ -39,7 +39,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   void initState() {
     super.initState();
     final userId = CacheHelper().getData(key: ApiKeys.id);
-    context.read<EditProfileCubit>().loadUser(userId); // تحميل بيانات المستخدم
+    context.read<EditProfileCubit>().loadUser(userId);
   }
 
   @override
