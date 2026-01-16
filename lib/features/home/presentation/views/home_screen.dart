@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
         appBar: const HomeAppBar(),
         body: LayoutBuilder(
           builder: (context, constraints) {
-            final isTablet = constraints.maxWidth >= 600;
+            //final isTablet = constraints.maxWidth >= 600;
             final isDesktop = constraints.maxWidth >= 1000;
 
             return SingleChildScrollView(

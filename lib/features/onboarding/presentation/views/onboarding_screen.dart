@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:homesta/core/cache/cache_helper.dart';
 import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
@@ -113,10 +114,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     width: 120.w,
                                     child: CustomButtonWidget(
                                       buttonText: pages[index]['button']!,
-                                      onPressed: () {
+                                      onPressed: () async {
+                                        await CacheHelper().saveData(
+                                          key: 'onboarding_seen',
+                                          value: true,
+                                        );
+                                        if (!mounted) return;
                                         GoRouter.of(
                                           context,
-                                        ).push(AppRouter.loginScreen);
+                                        ).go(AppRouter.loginScreen);
                                       },
                                       isPrimary: true,
                                     ),

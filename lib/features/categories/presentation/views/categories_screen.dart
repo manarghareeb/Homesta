@@ -71,6 +71,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         builder: (context) {
           return Scaffold(
             appBar: AppBar(
+              leading: Text(''),
               title: Text('Categories', style: TextStyles.font24BlackColorW500),
               centerTitle: true,
               backgroundColor: Colors.white,

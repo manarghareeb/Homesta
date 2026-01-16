@@ -1,11 +1,9 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/features/cart/presentation/widgets/product_image_with_badge_section.dart';
-import 'package:homesta/features/cart/presentation/widgets/product_overlay_actions.dart';
 import 'package:homesta/features/cart/presentation/widgets/product_price_and_cart_section.dart';
 import 'package:homesta/features/cart/presentation/widgets/product_title_and_rating_section.dart';
-import 'package:homesta/features/product/domain/entities/product_entitty.dart';
 
 class ProductItem extends StatefulWidget {
   final String name;
@@ -21,7 +19,6 @@ class ProductItem extends StatefulWidget {
     required this.discountPercent,
     required this.image,
     required this.rating,
-    required ProductEntity productEntity,
   });
 
   @override
@@ -33,7 +30,7 @@ class _ProductItemState extends State<ProductItem>
   late AnimationController controller;
   late Animation<Offset> slideAnimation;
   late Animation<double> opacityAnimation;
-  bool isVisible = false;
+  //bool isVisible = false;
 
   @override
   void initState() {
@@ -49,7 +46,7 @@ class _ProductItemState extends State<ProductItem>
     opacityAnimation = Tween<double>(begin: 0, end: 1).animate(controller);
   }
 
-  void toggleOverlay() {
+  /*void toggleOverlay() {
     setState(() {
       isVisible = !isVisible;
       if (isVisible) {
@@ -58,7 +55,7 @@ class _ProductItemState extends State<ProductItem>
         controller.reverse();
       }
     });
-  }
+  }*/
 
   @override
   void dispose() {
@@ -72,7 +69,7 @@ class _ProductItemState extends State<ProductItem>
         widget.price - (widget.price * widget.discountPercent / 100);
 
     return GestureDetector(
-      onTap: toggleOverlay,
+      //onTap: toggleOverlay,
       child: Stack(
         children: [
           Container(
@@ -111,7 +108,7 @@ class _ProductItemState extends State<ProductItem>
               ],
             ),
           ),
-          if (isVisible)
+          /*if (isVisible)
             SlideTransition(
               position: slideAnimation,
               child: FadeTransition(
@@ -122,9 +119,10 @@ class _ProductItemState extends State<ProductItem>
                   onDeletePressed: () {},
                 ),
               ),
-            ),
+            ),*/
         ],
       ),
     );
   }
 }
+*/

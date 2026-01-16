@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
+import 'package:homesta/core/theming/styles.dart';
+import 'package:homesta/core/widgets/custom_button_widget.dart';
 
 class HomeHeroBanner extends StatelessWidget {
   const HomeHeroBanner({super.key});
@@ -17,11 +19,14 @@ class HomeHeroBanner extends StatelessWidget {
           children: [
             /// Background
             Positioned.fill(
-              child: Image.asset('assets/images/chair.png', fit: BoxFit.cover),
+              child: Image.asset(
+                'assets/images/catrgories_image/livingroom.png',
+                fit: BoxFit.cover,
+              ),
             ),
 
             /// Overlay
-            Positioned.fill(
+            /*Positioned.fill(
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -34,12 +39,12 @@ class HomeHeroBanner extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
+            ),*/
 
             /// Content
             Positioned.fill(
               child: Padding(
-                padding: EdgeInsets.all(16.w),
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,7 +87,36 @@ class HomeHeroBanner extends StatelessWidget {
                     const SizedBox(height: 25),
 
                     /// BUTTONS (Responsive)
-                    Wrap(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: CustomButtonWidget(
+                            buttonText: 'Shop Now',
+                            onPressed: () {
+                              GoRouter.of(context).push(AppRouter.filtersScreen);
+                            },
+                          ),
+                        ),
+                        Expanded(
+                          child: TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'View All Product',
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: 'Outfit',
+                                  color: ColorManager.whihte,
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: Colors.white,
+                                ),
+                              ),
+                            ),
+                        ),
+                      ],
+                    ),
+                    /*Wrap(
                       spacing: 20.w,
                       runSpacing: 6,
                       children: [
@@ -103,12 +137,9 @@ class HomeHeroBanner extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
-                            child: const Text(
+                            child: Text(
                               'Shop Now   >',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
-                              ),
+                              style: TextStyles.font16WhiteW500,
                             ),
                           ),
                         ),
@@ -116,17 +147,21 @@ class HomeHeroBanner extends StatelessWidget {
                           height: 36,
                           child: TextButton(
                             onPressed: () {},
-                            child: const Text(
+                            child: Text(
                               'View All Product',
                               style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.white,
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w400,
+                                fontFamily: 'Outfit',
+                                color: ColorManager.whihte,
+                                decoration: TextDecoration.underline,
+                                decorationColor: Colors.white,
                               ),
                             ),
                           ),
                         ),
                       ],
-                    ),
+                    ),*/
                   ],
                 ),
               ),

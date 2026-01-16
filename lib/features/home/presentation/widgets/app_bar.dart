@@ -13,10 +13,10 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.white,
       surfaceTintColor: Colors.white,
       elevation: 0,
-
+      leading: Text(''),
       title: Row(
         children: [
-          Image.asset('assets/images/chair.png', height: 28.h),
+          Image.asset('assets/images/logo.png', height: 28,width: 28,),
 
           SizedBox(width: 8.w),
 
@@ -42,7 +42,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             color: ColorManager.lightGreyColor,
           ),
           onPressed: () {
-            context.push(AppRouter.emptyNotificationScreen);
+            context.push(AppRouter.cartScreen);
           },
         ),
         IconButton(

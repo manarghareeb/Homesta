@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:homesta/core/cache/cache_helper.dart';
 import 'package:homesta/core/theming/colors.dart';
 import '../../../core/routing/app_router.dart';
 
@@ -60,8 +61,14 @@ class _SplashScreenState extends State<SplashScreen>
 
     Future.delayed(const Duration(seconds: 4), () {
       if (!mounted) return;
-      _mainController.reverse().then((_) {
-        context.go(AppRouter.loginScreen);
+      _mainController.reverse().then((_) async {
+        final hasSeenOnboarding =
+            CacheHelper.sharedPreferences.getBool('onboarding_seen') ?? false;
+        if (hasSeenOnboarding) {
+          context.go(AppRouter.loginScreen);
+        } else {
+          context.go(AppRouter.onboardingRoute);
+        }
       });
     });
   }

@@ -6,7 +6,6 @@ import 'package:homesta/core/di/service_locator.dart';
 import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
-import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 import 'package:homesta/core/widgets/custom_confirm_dialog.dart';
 import 'package:homesta/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart';
 import 'package:homesta/features/cart/presentation/cubit/cart_cubit/cart_state.dart';
@@ -22,9 +21,12 @@ class CartScreen extends StatelessWidget {
       create: (context) => sl<CartCubit>()..getCartItems(),
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: const CustomAppBarWidget(
-          text: 'Cart',
+        appBar: AppBar(
+          leading: Text(''),
+          title: Text('Cart', style: TextStyles.font24BlackColorW500),
+          centerTitle: true,
           backgroundColor: Colors.white,
+          surfaceTintColor: Colors.white,
         ),
         body: BlocBuilder<CartCubit, CartState>(
           builder: (context, state) {

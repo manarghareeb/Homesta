@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/di/service_locator.dart';
-import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
-import 'package:homesta/features/categories/presentation/widgets/product_item_card.dart';
+import 'package:homesta/features/home/presentation/widgets/product_item.dart';
 import 'package:homesta/features/product/presentation/cubits/products_by_category_cubit/products_by_category_cubit.dart';
 import 'package:homesta/features/product/presentation/cubits/products_by_category_cubit/products_by_category_state.dart';
 
@@ -13,21 +12,17 @@ class CategorySectionScreen extends StatelessWidget {
     super.key,
     required this.categoryId,
     required this.subCategoryId,
-
-    //required this.title,
-    //required this.subCategory,
   });
 
   final int categoryId;
   final int subCategoryId;
 
-  //final List<bool> favorites = List.generate(10, (_) => false);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManager.soLightGreyColor,
+      backgroundColor: Colors.white,
       appBar: CustomAppBarWidget(
-        backgroundColor: ColorManager.soLightGreyColor,
+        backgroundColor: Colors.white,
         text: 'Products',
       ),
       body: BlocProvider(
@@ -60,7 +55,8 @@ class CategorySectionScreen extends StatelessWidget {
                   ),
                   itemBuilder: (context, index) {
                     final product = products[index];
-                    return GestureDetector(
+                    return ProductItem(productEntity: product);
+                    /*return GestureDetector(
                       onTap: () {
                         //GoRouter.of(context).push(AppRouter.productDetailsScreen);
                       },
@@ -69,7 +65,7 @@ class CategorySectionScreen extends StatelessWidget {
                         name: product.name,
                         price: product.price,
                       ),
-                    );
+                    );*/
                   },
                 ),
               );
