@@ -32,4 +32,17 @@ try {
  return Left(e.errModel);
 }
   }
+  
+  @override
+  Future<Either<ErrorModel, StoreEntity?>> myStore()async {
+try {
+ final store = await storeDataSource.myStore();
+ return Right(store);
+} on ServerException catch (e) {
+ return Left(e.errModel);
+}catch(e){
+  return Left(ErrorModel(errorMessage: e.toString()));
+  }
+
+  }
 }

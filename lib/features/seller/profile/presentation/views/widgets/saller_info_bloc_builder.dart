@@ -1,20 +1,19 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:homesta/features/seller/company%20data/presentation/widgets/company_details_card.dart';
-import 'package:homesta/features/seller/company%20data/presentation/widgets/skeletonizer_company_data.dart';
+import 'package:homesta/features/seller/profile/domain/entites/store_entiy.dart';
 import 'package:homesta/features/seller/profile/presentation/cubits/store_cubit.dart';
 import 'package:homesta/features/seller/profile/presentation/cubits/store_state.dart';
+import 'package:homesta/features/seller/profile/presentation/views/widgets/saller_info.dart';
 
-
-class GetStoreBlocBuilder extends StatelessWidget {
-  const GetStoreBlocBuilder({super.key});
+class SallerInfoBlocBuilder extends StatelessWidget {
+  const SallerInfoBlocBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<StoreCubit, StoreState>(
   builder: (context, state) {
     if (state is GetStoreLoading) {
-      return SkeletonizerCompanyData();
+      return SallerInfo(storeEntity: StoreEntity(storeId: 0, name: "name", phone: "phone", email: "email", address: "address", workingHours: "workingHours"),);
     }
 
     if (state is GetStoreError) {
@@ -22,8 +21,8 @@ class GetStoreBlocBuilder extends StatelessWidget {
     }
 
     if (state is GetStoreSuccess) {
-      return CompanyDetailsCard(
-        store: state.storeEntity,
+      return SallerInfo(
+        storeEntity: state.storeEntity,
       );
     }
 

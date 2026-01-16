@@ -3,8 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/widgets/custom_cached_network_image.dart';
+import 'package:homesta/features/product/presentation/cubits/get_product_images_cubit.dart/get_product_images_cubit.dart';
+import 'package:homesta/features/product/presentation/cubits/get_product_images_cubit.dart/get_ptoduct_image_state.dart';
 import 'package:homesta/features/search/presentation/views/cubit/cubit/search_cubit.dart';
 import 'package:homesta/features/search/presentation/widgets/search_empty_state.dart';
+import 'package:homesta/features/seller/product/domain/entitiy/product_image_entity.dart';
 
 class SearchBlocBuilder extends StatelessWidget {
   const SearchBlocBuilder({super.key});
@@ -31,9 +34,16 @@ class SearchBlocBuilder extends StatelessWidget {
                   final item = state.results[index];
                   return GestureDetector(
                     onTap: () {
-                      context.push(AppRouter.productDetailsScreen, extra: item);
+                final loadedImages = context.read<GetProductImagesCubit>().state is GetPtoductImageSuccess
+          ? (context.read<GetProductImagesCubit>().state as GetPtoductImageSuccess).products
+          : <ProductImageEntity>[];
+              context.push(AppRouter.productDetailsScreen, extra: {
+          'product': item,
+          'images': loadedImages,
+              },);
                     },
                     child: ListTile(
+                      leading: const Icon(Icons.access_time, size: 20),
                       title: Text(item.name),
                       subtitle: Text(item.description),
                     ),

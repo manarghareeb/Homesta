@@ -54,7 +54,7 @@ class ProductDetailsView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ProductImageGallerySection(
-                  mainImage: images[0].imageUrl,
+                  mainImage:images.isNotEmpty? images.first.imageUrl:"",
                   thumbnails: images,
                 ),
                 SizedBox(height: 24.h),

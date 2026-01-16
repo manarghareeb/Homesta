@@ -155,8 +155,14 @@ abstract class AppRouter {
       GoRoute(
         path: sellerAccountScreen,
         builder:
-            (context, state) => BlocProvider(
-              create: (context) => sl<SellerProductCubit>(),
+            (context, state) => MultiBlocProvider(
+              providers: [
+                BlocProvider(create: (context) => sl<SellerProductCubit>()),
+                BlocProvider(              create:
+                  (context) =>
+                      sl<StoreCubit>()
+                        ..getStore(CacheHelper().getData(key: ApiKeys.storeId))),
+              ],
               child: const SellerAccountScreen(),
             ),
       ),

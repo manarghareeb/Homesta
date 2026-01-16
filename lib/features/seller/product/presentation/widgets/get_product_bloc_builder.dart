@@ -36,8 +36,8 @@ class GetProductBlocBuilder extends StatelessWidget {
             itemCount: products.length,
             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 200,
-              mainAxisSpacing: 16,
-              crossAxisSpacing: 16,
+              mainAxisSpacing: 13,
+              crossAxisSpacing: 14,
               childAspectRatio: 0.53,
             ),
             itemBuilder: (context, index) {

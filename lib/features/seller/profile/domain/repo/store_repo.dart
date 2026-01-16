@@ -6,4 +6,5 @@ import 'package:homesta/features/seller/profile/domain/entites/store_entiy.dart'
 abstract class StoreRepo {
 Future<Either<ErrorModel, StoreEntity>> createStore(CreateStoreParams params);
 Future<Either<ErrorModel, StoreEntity>> getStore(int id);
+Future<Either<ErrorModel, StoreEntity?>> myStore();
 }

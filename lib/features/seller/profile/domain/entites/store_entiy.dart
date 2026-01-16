@@ -7,10 +7,10 @@ class StoreEntity {
   final String email;
   final String address;
   final String workingHours;
-  final bool hasWhatsapp;
-  final bool hasSms;
-  final String sellerId;
-  final String sellerName;
+  final bool? hasWhatsapp;
+  final bool? hasSms;
+  final String? sellerId;
+  final String? sellerName;
   final int? totalProducts;
   final List<ProductEntity>? products;
 
@@ -21,10 +21,10 @@ class StoreEntity {
     required this.email,
     required this.address,
     required this.workingHours,
-    required this.hasWhatsapp,
-    required this.hasSms,
-    required this.sellerId,
-    required this.sellerName,
+    this.hasWhatsapp,
+    this.hasSms,
+    this.sellerId,
+    this.sellerName,
     this.totalProducts,
     this.products,
   });

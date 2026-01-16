@@ -7,7 +7,7 @@ import 'package:homesta/features/seller/profile/domain/entites/params/create_sto
 abstract class StoreDataSource {
 Future<StoreModel> createStore(CreateStoreParams params);
 Future<StoreModel> getStore(int id);
-
+Future<StoreModel?> myStore();
 
 }
 
@@ -27,6 +27,14 @@ return StoreModel.fromJson(res);
 final res= await apiConsumer.get("${EndPoint.getStore}/$id/products");
 
 return StoreModel.fromJson(res);
+  }
+  
+  @override
+  Future<StoreModel?> myStore() async{
+final res= await apiConsumer.get("${EndPoint.myStores}");
+   if (res is List && res.isEmpty) return null;
+return StoreModel.fromJson(res[0]);
+  
   }
   
 }

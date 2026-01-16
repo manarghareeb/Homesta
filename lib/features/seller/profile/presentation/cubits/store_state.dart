@@ -27,3 +27,4 @@ class GetStoreError extends StoreState {
   final String message;
   GetStoreError(this.message);
 }
+

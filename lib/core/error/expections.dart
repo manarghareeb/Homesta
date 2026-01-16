@@ -76,6 +76,10 @@ void handleDioExceptions(DioException e) {
           throw ServerException(
             errModel: ErrorModel(errorMessage: ("302 exception")),
           );
+         case 307: // Server exception
+          throw ServerException(
+            errModel: ErrorModel(errorMessage: ("307 exception")),
+          );
       }
   }
 }

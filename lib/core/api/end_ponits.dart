@@ -40,6 +40,8 @@ class EndPoint {
   static String createStore = "api/Store";
   static String getStore = "api/Store";
   static String uploadImges = "api/ProductImages/upload";
+  static String myStores = "api/Store/my-stores";
+ 
 
 
 }
