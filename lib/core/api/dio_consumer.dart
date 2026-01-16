@@ -14,7 +14,7 @@ class DioConsumer extends ApiConsumer {
     dio.interceptors.add(CookieManager(cookieJar));
     dio.options.baseUrl = EndPoint.baseUrl;
     dio.options = BaseOptions(
-      baseUrl: EndPoint.baseUrl;
+      baseUrl: EndPoint.baseUrl,
       connectTimeout: const Duration(seconds: 10),
       receiveTimeout: const Duration(seconds: 20),
       sendTimeout: const Duration(seconds: 10),
