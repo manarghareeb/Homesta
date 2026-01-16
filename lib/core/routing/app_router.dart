@@ -71,6 +71,7 @@ import '../../features/cart/presentation/views/cart_screen.dart';
 import '../../features/categories/presentation/views/SubCategoriesScreen.dart';
 import '../../features/notification/presentaion/views/notification_empty_screen.dart';
 import '../../features/order/presentation/views/seller_screen.dart';
+import '../../features/product/presentation/cubits/get_product_images_cubit.dart/get_product_images_cubit.dart';
 import '../../features/product/presentation/cubits/product_cubit.dart';
 import '../../features/search/presentation/views/search_screen.dart';
 import '../../features/shop/presentation/view/shop_screen.dart';
@@ -230,8 +231,11 @@ abstract class AppRouter {
       GoRoute(
         path: AppRouter.adminProductScreen,
         builder: (context, state) {
-          return BlocProvider(
-            create: (context) => sl<ProductCubit>()..getAllProducts(),
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => sl<ProductCubit>()..getAllProducts()),
+              BlocProvider(create: (context) => sl<GetProductImagesCubit>()),
+            ],
             child: const AdminProductScreen(),
           );
         },
