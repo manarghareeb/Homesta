@@ -47,6 +47,7 @@ class _AccountScreenState extends State<AccountScreen> {
           appBar: AppBar(
             surfaceTintColor: Colors.white,
             backgroundColor: Colors.white,
+            leading: Text(''),
             title: Text(
               'My Profile',
               style: TextStyles.font18BlackW500.copyWith(fontSize: 20.sp),

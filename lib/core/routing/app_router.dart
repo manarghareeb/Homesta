@@ -16,6 +16,7 @@ import 'package:homesta/features/admin/profile/presentation/views/admin_account_
 import 'package:homesta/features/authentication/presentation/views/logout_screen.dart';
 import 'package:homesta/features/account/presentation/views/manage_address_screen.dart';
 import 'package:homesta/features/cart/presentation/cubit/add_item_to_cart_cubit/add_item_to_cart_cubit.dart';
+import 'package:homesta/features/onboarding/presentation/views/onboarding_screen.dart';
 import 'package:homesta/features/order/presentation/cubit/user_orders_cubit/user_orders_cubit.dart';
 import 'package:homesta/features/order/presentation/views/my_order_screen.dart';
 import 'package:homesta/features/authentication/presentation/views/password_manager_screen.dart';
@@ -136,11 +137,15 @@ abstract class AppRouter {
   static final adminSubCategoryScreen = '/adminSubCategoryScreen';
 
   static final route = GoRouter(
-    initialLocation: loginScreen,
+    initialLocation: splashScreen,
     routes: [
       GoRoute(
+        path: splashScreen,
+        builder: (context, state) => const SplashScreen(),
+      ),
+      GoRoute(
         path: onboardingRoute,
-        builder: (context, state) => const LoginScreen(),
+        builder: (context, state) => const OnboardingScreen(),
       ),
       // Seller Route
       GoRoute(
@@ -310,30 +315,28 @@ abstract class AppRouter {
         },
       ),*/
       GoRoute(
-  path: productDetailsScreen,
-  builder: (context, state) {
-    final data = state.extra as Map<String, dynamic>;
-    final product = data['product'] as ProductEntity;
-    final images = data['images'] as List<ProductImageEntity>;
+        path: productDetailsScreen,
+        builder: (context, state) {
+          final data = state.extra as Map<String, dynamic>;
+          final product = data['product'] as ProductEntity;
+          final images = data['images'] as List<ProductImageEntity>;
 
-    print("product id ${product.productId}");
+          print("product id ${product.productId}");
 
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => sl<ReviewsCubit>()..getReviews(productId: product.productId),
-        ),
-        BlocProvider(
-          create: (context) => sl<AddItemToCartCubit>(),
-        ),
-      ],
-      child: ProductDetailsView(
-        productEntity: product,
-        images: images,
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create:
+                    (context) =>
+                        sl<ReviewsCubit>()
+                          ..getReviews(productId: product.productId),
+              ),
+              BlocProvider(create: (context) => sl<AddItemToCartCubit>()),
+            ],
+            child: ProductDetailsView(productEntity: product, images: images),
+          );
+        },
       ),
-    );
-  },
-),
 
       GoRoute(path: homeScreen, builder: (context, state) => const HomeView()),
       GoRoute(
@@ -344,19 +347,6 @@ abstract class AppRouter {
         path: cartScreen,
         builder: (context, state) => const CartScreen(),
       ),
-      /*GoRoute(
-        path: cartScreen,
-        builder: (context, state) {
-          return BlocProvider(
-            create: (context) => sl<CartCubit>()..getCartItems(),
-            child: const CartScreen(),
-          );
-        },
-      ),*/
-      /*GoRoute(
-        path: wishlistScreen,
-        builder: (context, state) => const WishlistScreen(),
-      ),*/
       GoRoute(
         path: accountScreen,
         builder: (context, state) {

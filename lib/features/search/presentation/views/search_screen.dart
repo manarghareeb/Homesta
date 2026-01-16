@@ -6,8 +6,6 @@ import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/features/product/presentation/cubits/product_cubit.dart';
 import 'package:homesta/features/search/presentation/views/cubit/cubit/search_cubit.dart';
 import 'package:homesta/features/search/presentation/widgets/search_bloc_builder.dart';
-import 'package:homesta/features/search/presentation/widgets/search_empty_state.dart';
-import 'package:homesta/features/search/presentation/widgets/search_populated_state.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import '../../../../core/theming/styles.dart';
 
@@ -119,6 +117,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
       child: Scaffold(
         appBar: AppBar(
+          leading: Text(''),
           title: Text('Search', style: TextStyles.font24BlackColorW500),
           centerTitle: true,
           backgroundColor: Colors.white,
