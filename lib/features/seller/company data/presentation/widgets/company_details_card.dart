@@ -21,6 +21,13 @@ class CompanyDetailsCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 4,
+            offset: Offset(2, 4)
+          )
+        ]
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

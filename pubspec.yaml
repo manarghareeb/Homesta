@@ -80,6 +80,9 @@ flutter:
     - assets/images/help_center_images/
     - assets/images/onboarding_image/
     - assets/images/notification_icon_image/
+    - assets/images/sales_and_promotions_image/
+    - assets/images/deals_of_day_image/
+    - assets/images/flash_discount_image/
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

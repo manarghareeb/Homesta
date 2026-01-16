@@ -47,7 +47,7 @@ class TrendingSalesSection extends StatelessWidget {
               ),
               SizedBox(width: 12),
               TrendingSalesCard(
-                image: 'assets/images/chair.png',
+                image: 'assets/images/Frame 2147227395.png',
                 badgeText: 'Sale',
                 title: 'Dinning Room',
                 rating: 4.9,

@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:homesta/core/theming/colors.dart';
-import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
-import 'package:homesta/features/seller/company%20data/presentation/widgets/about_cart.dart';
-import 'package:homesta/features/seller/company%20data/presentation/widgets/detail_row.dart';
 import 'package:homesta/features/seller/company%20data/presentation/widgets/get_store_bloc_builder.dart';
-import 'package:homesta/features/seller/company%20data/presentation/widgets/mission_vision_cart.dart';
 
 class CompanyDataScreen extends StatelessWidget {
   const CompanyDataScreen({super.key});
@@ -23,7 +19,7 @@ class CompanyDataScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: Column(
             children: [
-              const AboutCard(),
+              /*const AboutCard(),
               const SizedBox(height: 24),
               Row(
                 children: [
@@ -44,12 +40,12 @@ class CompanyDataScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 24),*/
               //const CompanyDetails(),
              GetStoreBlocBuilder(),
               
               const SizedBox(height: 24),
-              SizedBox(
+              /*SizedBox(
                 width: double.infinity,
                 height: 48,
                 child: ElevatedButton.icon(
@@ -63,7 +59,7 @@ class CompanyDataScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
+              ),*/
             ],
           ),
         ),

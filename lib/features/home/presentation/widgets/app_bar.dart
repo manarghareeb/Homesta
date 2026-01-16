@@ -42,15 +42,15 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             color: ColorManager.lightGreyColor,
           ),
           onPressed: () {
-            context.push(AppRouter.cartScreen);
+            context.push(AppRouter.emptyNotificationScreen);
           },
         ),
-        IconButton(
+        /*IconButton(
           icon: Icon(Icons.favorite_border, color: ColorManager.lightGreyColor),
           onPressed: () {
-            context.push(AppRouter.notificationScreen);
+            context.push(AppRouter.);
           },
-        ),
+        ),*/
         SizedBox(width: 8.w),
       ],
     );

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:homesta/core/theming/styles.dart';
 
 class DiscriptionTab extends StatelessWidget {
-  const DiscriptionTab({super.key});
+  const DiscriptionTab({super.key, required this.description});
+  final String description;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,8 @@ class DiscriptionTab extends StatelessWidget {
         children: [
           SizedBox(height: 0),
           Text(
-            "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            description,
+            // "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
             style: TextStyles.font14GreyColorW400,
           ),
           /*DescriptionRow(

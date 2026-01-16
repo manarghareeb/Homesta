@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
 import '../../../../core/widgets/custom_button_widget.dart';
@@ -23,14 +25,24 @@ class DealsOfDayWidget extends StatelessWidget {
         SizedBox(height: 20.h),
 
         /// ===== Deals =====
-        _dealItem(image: 'assets/images/chair.png'),
+        DealItem(
+          image: 'assets/images/deals_of_day_image/Frame 1984080392.png',
+        ),
         SizedBox(height: 20.h),
-        _dealItem(image: 'assets/images/chair.png'),
+        DealItem(
+          image: 'assets/images/deals_of_day_image/Frame 1984080161.png',
+        ),
       ],
     );
   }
+}
 
-  Widget _dealItem({required String image}) {
+class DealItem extends StatelessWidget {
+  const DealItem({super.key, required this.image});
+  final String image;
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -85,7 +97,9 @@ class DealsOfDayWidget extends StatelessWidget {
 
               CustomButtonWidget(
                 buttonText: 'Shop Now →',
-                onPressed: () {},
+                onPressed: () {
+                  GoRouter.of(context).push(AppRouter.filtersScreen);
+                },
                 backgroundColor: ColorManager.thirdColor,
                 textColor: Colors.white,
                 height: 48.h,
@@ -99,7 +113,8 @@ class DealsOfDayWidget extends StatelessWidget {
         SizedBox(width: 14.w),
 
         /// ================= IMAGE CARD =================
-        Stack(
+        Image.asset(height: 170.h, width: 150.w, image),
+        /*Stack(
           children: [
             Container(
               height: 170.h,
@@ -138,7 +153,7 @@ class DealsOfDayWidget extends StatelessWidget {
               ),
             ),
           ],
-        ),
+        ),*/
       ],
     );
   }

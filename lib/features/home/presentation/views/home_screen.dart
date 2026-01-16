@@ -5,16 +5,11 @@ import 'package:go_router/go_router.dart';
 import 'package:homesta/core/di/service_locator.dart';
 import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
-import 'package:homesta/features/cart/presentation/cubit/add_item_to_cart_cubit/add_item_to_cart_cubit.dart';
 import 'package:homesta/features/categories/presentation/cubits/category_cubit/category_cubit.dart';
 import 'package:homesta/features/home/presentation/widgets/home_categories_bloc_builder.dart';
-import 'package:homesta/features/home/presentation/widgets/product_bloc_builder.dart';
-import 'package:homesta/features/product/presentation/cubits/product_cubit.dart';
-
 import '../widgets/app_bar.dart';
 import '../widgets/home_hero_banner.dart';
 import '../widgets/sales_promotions_widget.dart';
-import '../widgets/products_tabs_widget.dart';
 import '../widgets/flash_sale_widget.dart';
 import '../widgets/deals_of_the_day_widget.dart';
 import '../widgets/discount_banner_widget.dart';
@@ -58,15 +53,15 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(height: 24.h),
 
                   const SalesPromotionsWidget(),
-                  SizedBox(height: 24.h),
+                  //SizedBox(height: 24.h),
 
-                  const ProductsTabsWidget(),
-                  SizedBox(height: 16.h),
+                  //const ProductsTabsWidget(),
+                  //SizedBox(height: 16.h),
 
-                  BlocProvider(
+                  /*BlocProvider(
                     create: (context) => sl<AddItemToCartCubit>(),
                     child: const ProductBlocBuilder(),
-                  ),
+                  ),*/
                   SizedBox(height: 24.h),
 
                   const FlashSaleWidget(),
@@ -75,9 +70,14 @@ class HomeScreen extends StatelessWidget {
                   const DealsOfDayWidget(),
                   SizedBox(height: 24.h),
 
-                  const DiscountBannerWidget(),
+                  const DiscountBannerWidget(
+                    image: 'assets/images/flash_discount_image/Frame 2147227464.png',
+                  ),
                   SizedBox(height: 16.h),
-                  const DiscountBannerWidget(dark: true),
+                  const DiscountBannerWidget(
+                    dark: true,
+                    image: 'assets/images/flash_discount_image/Frame 2147228202.png',
+                  ),
 
                   SizedBox(height: 24.h),
 
