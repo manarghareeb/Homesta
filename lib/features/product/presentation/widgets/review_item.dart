@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/features/product/domain/entities/review_entity.dart';
 import 'package:homesta/features/product/presentation/widgets/rating_star.dart';
-import 'package:skeletonizer/skeletonizer.dart';
-import 'package:timeago/timeago.dart' as timeago;
 
 class ReviewItem extends StatelessWidget {
   const ReviewItem({super.key, required this.review});
@@ -17,31 +14,22 @@ class ReviewItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 5,
         children: [
-          Row(
+          Text(review.userName, style: TextStyles.font16BlackRegular),
+          /*Row(
             spacing: 5,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Skeleton.leaf(
-                child: CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/image 1.png'),
-                  radius: 30,
-                ),
-              ),
-              Text(review.userName, style: TextStyles.font16BlackRegular),
-              Spacer(),
-              SizedBox(
-                width: 111.w,
-                child: Text(
-                  timeago.format(review.reviewDate),
-                  style: TextStyles.font16GreyRegular,
-                ),
+              Text(
+                timeago.format(review.reviewDate),
+                style: TextStyles.font16GreyRegular,
               ),
             ],
-          ),
-          Text(review.comment, style: TextStyles.font14GreyColorW400),
+          ),*/
+          Text(review.comment, style: TextStyles.font15GreyColorW400),
           Row(
             children: [
               RatingStar(rating: review.rating.toDouble()),
+              SizedBox(width: 4,),
               Text(
                 review.rating.toString(),
                 style: TextStyles.font16BlackRegular,

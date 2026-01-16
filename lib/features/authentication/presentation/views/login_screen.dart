@@ -111,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Enter your password';
-                                } 
+                                }
                                 // else if (value.length < 8) {
                                 //   return 'Password must be at least 8 characters';
                                 // }
@@ -129,12 +129,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       BlocConsumer<AuthCubit, AuthState>(
                         listener: (context, state) async {
-                              if (state is AuthSellerNeedsStore) {
-      context.push(AppRouter.crateStoreScreen);
-    } else if (state is AuthSellerHasStore) {
-      context.push(AppRouter.sellerAccountScreen);
-    } 
-                    else      if (state is AuthSuccess) {
+                          if (state is AuthSellerNeedsStore) {
+                            context.push(AppRouter.crateStoreScreen);
+                          } else if (state is AuthSellerHasStore) {
+                            context.push(AppRouter.sellerAccountScreen);
+                          } else if (state is AuthSuccess) {
                             // حفظ البيانات الأساسية
                             await CacheHelper().saveData(
                               key: ApiKeys.token,
@@ -149,20 +148,24 @@ class _LoginScreenState extends State<LoginScreen> {
                               value: state.user.user.email,
                             );
 
-
                             final roles = state.user.user.roles;
 
                             if (roles.contains("Admin")) {
-                              GoRouter.of(context).push(AppRouter.adminAccountScreen);
+                              GoRouter.of(
+                                context,
+                              ).push(AppRouter.adminAccountScreen);
                             } else if (roles.contains("Seller")) {
-                              BlocProvider.of<AuthCubit>(context).checkSallerHaseStore();
-                            
+                              BlocProvider.of<AuthCubit>(
+                                context,
+                              ).checkSallerHaseStore();
                             } else if (roles.contains("User")) {
                               GoRouter.of(context).push(AppRouter.homeScreen);
                             } else {
                               // fallback
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text("No valid role assigned")),
+                                const SnackBar(
+                                  content: Text("No valid role assigned"),
+                                ),
                               );
                             }
                             //GoRouter.of(context).push(AppRouter.crateStoreScreen);

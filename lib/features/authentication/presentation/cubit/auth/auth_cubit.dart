@@ -33,8 +33,10 @@ class AuthCubit extends Cubit<AuthState> {
       );
       emit(AuthSuccess(result));
     } on ServerException catch (e) {
+      print(e.errModel.errorMessage);
+      print('---------------');
       emit(AuthFailure(e.errModel.errorMessage));
-    }
+    } 
   }
 
   //signUp

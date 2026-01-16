@@ -7,8 +7,13 @@ class ErrorModel {
   ErrorModel({this.status, required this.errorMessage});
   factory ErrorModel.fromJson(Map<String, dynamic> jsonData) {
     return ErrorModel(
-      status: jsonData[ApiKeys.status] ?? 0,
-      errorMessage: jsonData[ApiKeys.errorMessage] ?? "something went wrong",
+      status: jsonData[ApiKeys.status] ?? jsonData['status'] ?? 0,
+      //errorMessage: jsonData[ApiKeys.errorMessage] ?? "something went wrong",
+      errorMessage: jsonData[ApiKeys.errorMessage] ??
+          jsonData['errorMessage'] ??
+          jsonData['message'] ?? 
+          jsonData['error'] ?? 
+          "Something went wrong",
     );
   }
 }
