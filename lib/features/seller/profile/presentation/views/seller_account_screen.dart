@@ -5,6 +5,8 @@ import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/features/account/presentation/widgets/option_tile.dart';
 import 'package:homesta/features/account/presentation/widgets/photo_profile.dart';
+import 'package:homesta/features/seller/profile/presentation/views/widgets/saller_info.dart';
+import 'package:homesta/features/seller/profile/presentation/views/widgets/saller_info_bloc_builder.dart';
 import 'package:image_picker/image_picker.dart';
 
 class SellerAccountScreen extends StatelessWidget {
@@ -29,25 +31,7 @@ class SellerAccountScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  PhotoProfile(onImageSelected: (XFile? p1) {  },),
-                  SizedBox(width: 24.w),
-                  Column(
-                    children: [
-                      Text(
-                        'CasaLux',
-                        style: TextStyles.font16BlackRegular.copyWith(
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      SizedBox(height: 6.h),
-                      Text('Company', style: TextStyles.font14GreyColorW400),
-                    ],
-                  ),
-                ],
-              ),
+SallerInfoBlocBuilder(),
               SizedBox(height: 16.h),
               const Divider(),
               SizedBox(height: 24.h),

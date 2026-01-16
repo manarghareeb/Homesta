@@ -10,4 +10,5 @@ Future<Either<ErrorModel, StoreEntity>> createStore(CreateStoreParams params);
 Future<Either<ErrorModel, StoreEntity>> getStore(int id);
 Future<Either<ErrorModel, List<SimpleStoreModel>>> getAllStores();
 Future<Either<ErrorModel, Unit>> deleteStore(int id);
+Future<Either<ErrorModel, StoreEntity?>> myStore();
 }

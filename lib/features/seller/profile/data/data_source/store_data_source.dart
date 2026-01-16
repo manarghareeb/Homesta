@@ -11,6 +11,7 @@ Future<StoreModel> createStore(CreateStoreParams params);
 Future<StoreModel> getStore(int id);
 Future<List<SimpleStoreModel>> getAllStores();
 Future<void> deleteStore(int id);
+Future<StoreModel?> myStore();
 
 }
 
@@ -41,4 +42,14 @@ return StoreModel.fromJson(res);
   Future<void> deleteStore(int id) async {
     await apiConsumer.delete("${EndPoint.deleteStore}/$id");
   }
-}
+
+  
+  @override
+  Future<StoreModel?> myStore() async{
+final res= await apiConsumer.get("${EndPoint.myStores}");
+   if (res is List && res.isEmpty) return null;
+return StoreModel.fromJson(res[0]);
+  
+  }}
+  
+

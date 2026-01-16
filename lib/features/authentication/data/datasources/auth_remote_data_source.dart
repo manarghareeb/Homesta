@@ -22,6 +22,7 @@ class AuthRemoteDataSource {
       EndPoint.signIn,
       data: {"email": email, "password": password},
     );
+    
     return LoginResponseModel.fromJson(response);
   }
 

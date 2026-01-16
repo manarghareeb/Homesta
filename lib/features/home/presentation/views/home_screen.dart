@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => sl<ProductCubit>()..getAllProducts()),
+       // BlocProvider(create: (context) => sl<ProductCubit>()..getAllProducts()),
         BlocProvider(create: (context) => sl<CategoryCubit>()..getCategories()),
       ],
       child: Scaffold(

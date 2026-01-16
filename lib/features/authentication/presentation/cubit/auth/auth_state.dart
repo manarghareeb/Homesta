@@ -58,3 +58,14 @@ class AuthFailure extends AuthState {
   final String error;
   AuthFailure(this.error);
 }
+
+
+class AuthSellerNeedsStore extends AuthState {}
+class AuthSellerHasStore extends AuthState {
+  final int storeId;
+  AuthSellerHasStore(this.storeId);
+}
+class MyStoreFauiler extends AuthState {
+  final String error;
+  MyStoreFauiler(this.error);
+}

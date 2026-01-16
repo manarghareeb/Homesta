@@ -20,6 +20,8 @@ import 'package:homesta/features/chat/domain/repos/chat_repo.dart';
 import 'package:homesta/features/authentication/data/datasources/auth_remote_data_source.dart';
 import 'package:homesta/features/authentication/data/repositories/auth_repository.dart';
 import 'package:homesta/features/authentication/presentation/cubit/auth/auth_cubit.dart';
+import 'package:homesta/features/product/presentation/cubits/product_cubit.dart';
+import 'package:homesta/features/seller/profile/domain/use_cases/my_store_use_case.dart';
 
 import 'features/account/presentation/cubit/edit_profile_cubit.dart';
 import 'features/order/presentation/cubit/user_orders_cubit/user_orders_cubit.dart';
@@ -49,7 +51,8 @@ void main() async {
       ],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider<AuthCubit>(create: (context) => AuthCubit(authRepo)),
+            BlocProvider(create: (context) => sl<ProductCubit>()..getAllProducts()),
+          BlocProvider<AuthCubit>(create: (context) => AuthCubit(authRepo,myStoreUseCase:  sl<MyStoreUseCase>())),
           BlocProvider<AddItemToCartCubit>(
             create:
                 (context) =>

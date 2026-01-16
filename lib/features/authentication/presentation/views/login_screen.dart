@@ -129,7 +129,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       BlocConsumer<AuthCubit, AuthState>(
                         listener: (context, state) async {
-                          if (state is AuthSuccess) {
+                              if (state is AuthSellerNeedsStore) {
+      context.push(AppRouter.crateStoreScreen);
+    } else if (state is AuthSellerHasStore) {
+      context.push(AppRouter.sellerAccountScreen);
+    } 
+                    else      if (state is AuthSuccess) {
                             // حفظ البيانات الأساسية
                             await CacheHelper().saveData(
                               key: ApiKeys.token,
@@ -150,13 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             if (roles.contains("Admin")) {
                               GoRouter.of(context).push(AppRouter.adminAccountScreen);
                             } else if (roles.contains("Seller")) {
-                              final isStoreCreated = await CacheHelper().getData(key: ApiKeys.storeId);
-                              if(isStoreCreated==null){
-                              context.push(AppRouter.crateStoreScreen);
-                              }
-                              else{
-                                  GoRouter.of(context).push(AppRouter.sellerAccountScreen);
-                              }
+                              BlocProvider.of<AuthCubit>(context).checkSallerHaseStore();
                             
                             } else if (roles.contains("User")) {
                               GoRouter.of(context).push(AppRouter.homeScreen);
@@ -199,7 +198,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(height: 16.h),
 
                       AuthNavigationText(
-                        text: 'Don’t have an account?',
+                        text: 'Don’t have an accaount?',
                         textButton: ' Sign Up',
                         onTap: () {
                           GoRouter.of(context).push(AppRouter.signUpScreen);

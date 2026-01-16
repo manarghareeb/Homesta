@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/di/service_locator.dart';
 import 'package:homesta/core/theming/colors.dart';
+import 'package:homesta/features/product/presentation/cubits/get_product_images_cubit.dart/get_product_images_cubit.dart';
 import 'package:homesta/features/product/presentation/cubits/product_cubit.dart';
 import 'package:homesta/features/search/presentation/views/cubit/cubit/search_cubit.dart';
 import 'package:homesta/features/search/presentation/widgets/search_bloc_builder.dart';
@@ -111,8 +112,9 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => sl<ProductCubit>()..getAllProducts()),
+       // BlocProvider(create: (context) => sl<ProductCubit>()..getAllProducts()),
         BlocProvider(create: (context) => SearchCubit()),
+        BlocProvider(create: (context)=>sl<GetProductImagesCubit>())
       ],
 
       child: Scaffold(

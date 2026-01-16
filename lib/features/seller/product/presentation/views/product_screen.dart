@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 import 'package:homesta/features/seller/product/data/models/product_seller_model.dart';
 import 'package:homesta/features/seller/product/presentation/widgets/get_product_bloc_builder.dart';
-import 'package:homesta/features/seller/product/presentation/widgets/product_cart.dart';
 
 class ProductScreen extends StatelessWidget {
   const ProductScreen({super.key});

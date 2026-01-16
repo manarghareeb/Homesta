@@ -28,10 +28,13 @@ class ProductDataSourceImp implements ProductDataSource {
    List<ProductImageModel> productImages = [];
 
     final response = await api.get("${EndPoint.getProductImages}/$productId");
-    for (var product in response["images"]) {
-      productImages.add(ProductImageModel.fromJson(product));
-    }
-    return productImages;
+   final imagesJson = response['images'] as List<dynamic>? ?? [];
+
+   productImages = imagesJson
+      .map((json) => ProductImageModel.fromJson(json))
+      .toList();
+
+  return productImages;
   
   }
 }

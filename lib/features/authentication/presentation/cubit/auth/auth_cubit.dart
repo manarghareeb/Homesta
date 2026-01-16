@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:homesta/core/api/api_keys.dart';
 import 'package:homesta/core/error/expections.dart';
+import 'package:homesta/features/seller/profile/domain/use_cases/my_store_use_case.dart';
 import '../../../../../core/cache/cache_helper.dart';
 import '../../../data/models/change_password__response_model.dart';
 import '../../../data/models/forget_response_model.dart';
@@ -16,8 +17,9 @@ part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final AuthRepository repo;
+  final MyStoreUseCase myStoreUseCase;
 
-  AuthCubit(this.repo) : super(AuthInitial());
+  AuthCubit(this.repo, {required this.myStoreUseCase}) : super(AuthInitial());
   //logIn
   Future<void> login(String email, String password) async {
     emit(AuthLoading());
@@ -72,7 +74,11 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   //reset password
-  Future<void> resetPassword(String email, String code, String newPassword) async {
+  Future<void> resetPassword(
+    String email,
+    String code,
+    String newPassword,
+  ) async {
     emit(AuthLoading());
     try {
       final result = await repo.resetPassword(email, code, newPassword);
@@ -129,10 +135,32 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       final result = await repo.logout();
       await CacheHelper().removeData(key: ApiKeys.token);
-
+      await CacheHelper().removeData(key: ApiKeys.userId);
+      // await CacheHelper().removeData(key: ApiKeys.storeId);
       emit(LogoutSuccess(result));
     } catch (error) {
       emit(AuthFailure(error.toString()));
     }
+  }
+
+  checkSallerHaseStore() async {
+    emit(AuthLoading());
+
+    final result = await myStoreUseCase();
+
+    result.fold((error) => emit(AuthFailure(error.errorMessage)), (
+      store,
+    ) async {
+      if (store == null) {
+        emit(AuthSellerNeedsStore());
+      } else {
+        await CacheHelper().saveData(
+          key: ApiKeys.storeId,
+          value: store.storeId,
+        );
+
+        emit(AuthSellerHasStore(store.storeId));
+      }
+    });
   }
 }

@@ -3,6 +3,7 @@ import 'package:homesta/features/seller/profile/domain/entites/params/create_sto
 import 'package:homesta/features/seller/profile/domain/use_cases/create_store_use_case.dart';
 import 'package:homesta/features/seller/profile/domain/use_cases/get_store_use_case.dart';
 import 'package:homesta/features/seller/profile/domain/use_cases/get_all_stores_use_case.dart';
+import 'package:homesta/features/seller/profile/domain/use_cases/my_store_use_case.dart';
 import 'package:homesta/features/seller/profile/presentation/cubits/store_state.dart';
 
 import '../../domain/use_cases/delete_store_use_case.dart';
@@ -18,7 +19,10 @@ class StoreCubit extends Cubit<StoreState> {
     required this.getStoreUseCase,
     required this.getAllStoresUseCase,
     required this.deleteStoreUseCase,
+    required this.myStoreUseCase
   }) : super(StoreInitial());
+
+  final MyStoreUseCase myStoreUseCase;
 
 
   Future<void> createStore(CreateStoreParams params) async {
@@ -77,3 +81,5 @@ class StoreCubit extends Cubit<StoreState> {
     );
   }
 }
+
+
