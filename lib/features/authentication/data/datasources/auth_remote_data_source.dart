@@ -1,5 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:homesta/core/api/api_consumer.dart';
 import 'package:homesta/core/api/end_ponits.dart';
+import 'package:homesta/core/error/error_model.dart';
+import 'package:homesta/core/error/expections.dart';
 import '../models/change_password__response_model.dart';
 import '../models/forget_response_model.dart';
 import '../models/login_response_model.dart';
@@ -18,12 +21,30 @@ class AuthRemoteDataSource {
     required String email,
     required String password,
   }) async {
-    final response = await api.post(
-      EndPoint.signIn,
-      data: {"email": email, "password": password},
-    );
-    
-    return LoginResponseModel.fromJson(response);
+    try {
+      final response = await api.post(
+        EndPoint.signIn,
+        data: {"email": email, "password": password},
+      );
+
+      if (response != null &&
+        response['token'] != null &&
+        response['user'] != null) {
+      return LoginResponseModel.fromJson(response);
+    } else {
+      throw ServerException(
+        errModel: ErrorModel(
+          status: response?['status'] ?? 401,
+          errorMessage: response?['message'] ??
+              response?['errorMessage'] ??
+              "Something went wrong",
+        ),
+      );
+    }
+    } on DioException catch (e) {
+      handleDioExceptions(e);
+      throw Exception("Unexpected error");
+    }
   }
 
   //SignUp
@@ -35,7 +56,6 @@ class AuthRemoteDataSource {
     required bool agreeTerms,
     //
     required List<Map<String, dynamic>> roles,
-
   }) async {
     final response = await api.post(
       EndPoint.signUp,
@@ -44,12 +64,12 @@ class AuthRemoteDataSource {
         "firstName": firstName,
         "lastName": lastName,
         "password": password,
+
         // "roles": [
         //   {"id": "1", "roleName": "Admin", "isSelected": true},
         //  // {"id": "2", "roleName": "User", "isSelected": false},
         //  // {"id": "3", "roleName": "Seller", "isSelected": true},
         // ],
-
         "roles": roles,
 
         "agreeTerms": agreeTerms,

@@ -120,6 +120,7 @@ class _AddReviewSectionState extends State<AddReviewSection> {
                       storeId: widget.productEntity.storeId,
                       rating: _rating,
                       comment: reviewController.text.trim(),
+                      reviewDate: DateTime.now(),
                     ),
                   );
                 },
