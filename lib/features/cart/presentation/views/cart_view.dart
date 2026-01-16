@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:homesta/core/di/service_locator.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
 import 'package:homesta/core/widgets/custom_confirm_dialog.dart';
@@ -8,6 +9,7 @@ import 'package:homesta/features/cart/presentation/cubit/cart_cubit/cart_cubit.d
 import 'package:homesta/features/cart/presentation/cubit/cart_cubit/cart_state.dart';
 import 'package:homesta/features/cart/presentation/widgets/cart_item_widget.dart';
 import 'package:homesta/features/order/presentation/widgets/order_summary_in_checkout.dart';
+import 'package:homesta/features/product/presentation/cubits/get_product_images_cubit.dart/get_product_images_cubit.dart';
 
 class CartView extends StatefulWidget {
   final VoidCallback onNext;
@@ -46,28 +48,32 @@ class _CartViewState extends State<CartView> {
                           //Divider(color: ColorManager.lightGreyColor),
                   itemBuilder: (context, index) {
                     final cartItem = cartItems[index];
-                    return CartItemWidget(
-                            onPressedDeleted: () async {
-                              final confirm = await showCustomConfirmDialog(
-                                context: context,
-                                title: 'Remove Item',
-                                content:
-                                    'Are you sure you want to remove ${cartItem.productName}?',
-                              );
-
-                              if (confirm == true) {
-                                await context
-                                    .read<CartCubit>()
-                                    .removeItemFromCart(cartItem.cartItemId!);
-                              }
-                            },
-
-                            name: cartItem.productName ?? 'Unknown Product',
-                            color: cartItem.productColor ?? '',
-                            image: 'assets/images/chair.png',
-                            price: cartItem.unitPrice ?? 0,
-                            quantity: cartItem.quantity ?? 1,
-                          );
+                    return BlocProvider(
+                     create: (context) => sl<GetProductImagesCubit>()..getProductImages(cartItem.productId??0),
+                      child: CartItemWidget(
+                        id: cartItem.productId ?? 0,
+                              onPressedDeleted: () async {
+                                final confirm = await showCustomConfirmDialog(
+                                  context: context,
+                                  title: 'Remove Item',
+                                  content:
+                                      'Are you sure you want to remove ${cartItem.productName}?',
+                                );
+                      
+                                if (confirm == true) {
+                                  await context
+                                      .read<CartCubit>()
+                                      .removeItemFromCart(cartItem.cartItemId!);
+                                }
+                              },
+                      
+                              name: cartItem.productName ?? 'Unknown Product',
+                              color: cartItem.productColor ?? '',
+                              image: 'assets/images/chair.png',
+                              price: cartItem.unitPrice ?? 0,
+                              quantity: cartItem.quantity ?? 1,
+                            ),
+                    );
                     /*return YourCardItem(
                       image: 'assets/images/image 1.png',
                       name: cartItem.productName ?? '',

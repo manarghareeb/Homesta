@@ -8,8 +8,8 @@ import 'package:homesta/features/product/presentation/cubits/get_product_images_
 import 'package:skeletonizer/skeletonizer.dart';
 
 class CustomProductImage extends StatelessWidget {
-  const CustomProductImage({super.key, required this.productEntity});
-final ProductEntity productEntity;
+  const CustomProductImage({super.key, required this.id});
+final int id;
   @override
   Widget build(BuildContext context) {
     return ClipRRect(

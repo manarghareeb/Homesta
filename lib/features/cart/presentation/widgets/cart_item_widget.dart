@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
+import 'package:homesta/core/widgets/custom_product_image.dart';
 
 class CartItemWidget extends StatefulWidget {
   final String name;
@@ -10,6 +11,7 @@ class CartItemWidget extends StatefulWidget {
   final double price;
   final int quantity;
   final void Function() onPressedDeleted;
+ final int id;
 
   const CartItemWidget({
     super.key,
@@ -17,6 +19,7 @@ class CartItemWidget extends StatefulWidget {
     required this.color,
     required this.image,
     required this.price,
+    required this.id,
     required this.onPressedDeleted, required this.quantity,
   });
 
@@ -52,7 +55,8 @@ class _CartItemWidgetState extends State<CartItemWidget> {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15.r),
-              child: Image.asset(widget.image, fit: BoxFit.cover),
+              child: CustomProductImage(id: widget.id)
+              //Image.asset(widget.image, fit: BoxFit.cover),
             ),
           ),
           SizedBox(width: 16.w),

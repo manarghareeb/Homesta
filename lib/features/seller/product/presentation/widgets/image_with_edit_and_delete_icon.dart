@@ -13,7 +13,7 @@ class ImageWithAddAndDeleteIcon extends StatelessWidget {
     return Expanded(
       child: Stack(
         children: [
-          CustomProductImage(productEntity: productEntity,),
+          CustomProductImage(id: productEntity.productId,),
           // Positioned(
           //   top: 25,
           //   right: 15,
