@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:homesta/core/di/service_locator.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/features/order/data/models/order_details_response/order_details.dart';
@@ -8,6 +9,7 @@ import 'package:homesta/features/order/presentation/cubit/order_details_cubit/or
 import 'package:homesta/features/order/presentation/cubit/order_details_cubit/order_details_state.dart';
 import 'package:homesta/features/order/presentation/widgets/order_actions_section.dart';
 import 'package:homesta/features/order/presentation/widgets/order_item_widget.dart';
+import 'package:homesta/features/product/presentation/cubits/get_product_images_cubit.dart/get_product_images_cubit.dart';
 
 class OrderDetailsSection extends StatelessWidget {
   final int orderId;
@@ -51,7 +53,13 @@ class OrderDetailsSection extends StatelessWidget {
               SizedBox(height: 16.h),
               ...items.map((item) => Padding(
                     padding: EdgeInsets.symmetric(vertical: 4.h),
-                    child: OrderItemWidget(item: item),
+                    child: BlocProvider(
+                      create: (context) => sl<GetProductImagesCubit>()..getProductImages(item.productId ),
+                      child: Builder(
+                        builder: (context) {
+                          return OrderItemWidget(item: item);
+                        }
+                      )),
                   )),
               SizedBox(height: 16.h),
               Divider(height: 24.h, color: ColorManager.lightGreyColor),

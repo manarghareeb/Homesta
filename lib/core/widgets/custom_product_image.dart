@@ -8,8 +8,10 @@ import 'package:homesta/features/product/presentation/cubits/get_product_images_
 import 'package:skeletonizer/skeletonizer.dart';
 
 class CustomProductImage extends StatelessWidget {
-  const CustomProductImage({super.key, required this.id});
+  const CustomProductImage({super.key, required this.id,  this.hight,  this.width});
 final int id;
+final double? hight;
+final double ?width;
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -21,8 +23,8 @@ final int id;
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(14.r),
                   child: Container(
-                    width: double.infinity,
-                    height: double.infinity,
+                    width:width?? double.infinity,
+                    height:hight?? double.infinity,
                     color: Colors.grey.shade300,
                   ),
                 ),
@@ -33,6 +35,8 @@ final int id;
               return Image.asset(
                 "assets/images/catrgories_image/bedroom.png",
                 fit: BoxFit.cover,
+                width: width,
+                height: hight,
               );
             }
 
@@ -46,12 +50,14 @@ final int id;
                 );
               }
 
-              return CustomCachedNetworkImage(imagePath: images.first.imageUrl);
+              return CustomCachedNetworkImage(imagePath: images.first.imageUrl,width: width,height: hight,);
             }
 
             return Image.asset(
               "assets/images/catrgories_image/bedroom.png",
               fit: BoxFit.cover,
+              width: width,
+              height: hight,
             );
           },
         ),

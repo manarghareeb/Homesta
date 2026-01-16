@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homesta/core/theming/styles.dart';
+import 'package:homesta/core/widgets/custom_product_image.dart';
 import 'package:homesta/features/order/data/models/payment_response/order_item.dart';
 
 class OrderItemWidget extends StatelessWidget {
@@ -17,12 +18,13 @@ class OrderItemWidget extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(10.r),
-            child: Image.asset(
-              'assets/images/image 1.png',
-              width: 68.w,
-              height: 70.w,
-              fit: BoxFit.cover,
-            ),
+            child: CustomProductImage(id: item.productId,width: 68.w,hight: 70.w,)
+            //  Image.asset(
+            //   'assets/images/image 1.png',
+            //   width: 68.w,
+            //   height: 70.w,
+            //   fit: BoxFit.cover,
+            // ),
           ),
           SizedBox(width: 12.w),
           Expanded(
