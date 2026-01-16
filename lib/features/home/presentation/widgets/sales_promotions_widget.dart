@@ -80,7 +80,7 @@ class SalesPromotionsWidget extends StatelessWidget {
                     ),
 
                     Image.asset(
-                      'assets/images/chair.png',
+                      'assets/images/sales_and_promotions_image/Frame 1984080150.png',
                       width: 60.w,
                       fit: BoxFit.contain,
                     ),
@@ -98,13 +98,13 @@ class SalesPromotionsWidget extends StatelessWidget {
                   _smallPromoCard(
                     title: '750+ Items',
                     subtitle: 'Free Delivery\nOn Order Above \$300',
-                    image: 'assets/images/chair.png',
+                    image: 'assets/images/sales_and_promotions_image/Frame 1984080148.png',
                   ),
                   SizedBox(height: 6.h),
                   _smallPromoCard(
                     title: '450+ Items',
                     subtitle: 'Buy 1 Get 1 Free',
-                    image: 'assets/images/chair.png',
+                    image: 'assets/images/sales_and_promotions_image/Frame 1984080149.png',
                   ),
                 ],
               ),

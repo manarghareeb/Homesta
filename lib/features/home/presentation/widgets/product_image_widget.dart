@@ -78,6 +78,7 @@ class ProductImageWidget extends StatelessWidget {
           ),
 
           /// Discount
+          if (productEntity.discount > 0)
           Positioned(
             top: 6,
             left: 6,

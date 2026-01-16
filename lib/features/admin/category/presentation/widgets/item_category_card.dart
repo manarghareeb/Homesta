@@ -48,7 +48,7 @@ class ItemCategoryCard extends StatelessWidget {
                     child: Text(
                       name,
                       style: TextStyles.font14deepGreyColorW400,
-                      maxLines: 1,
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -66,7 +66,7 @@ class ItemCategoryCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(id, style: TextStyles.font14deepGreyColorW400),
+                  Text('ID: $id', style: TextStyles.font14deepGreyColorW400),
                   IconButton(
                     icon: Icon(Icons.edit_outlined, color: ColorManager.primaryColor),
                     onPressed: () {

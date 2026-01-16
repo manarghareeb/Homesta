@@ -11,7 +11,6 @@ import 'package:homesta/features/cart/presentation/cubit/add_item_to_cart_cubit/
 import 'package:homesta/features/product/domain/entities/product_entitty.dart';
 import 'package:homesta/features/home/presentation/widgets/count_container.dart';
 import 'package:homesta/features/product/presentation/widgets/discription_tab.dart';
-import 'package:homesta/features/product/presentation/widgets/product_description_section.dart';
 import 'package:homesta/features/product/presentation/widgets/product_image_galary_section.dart';
 import 'package:homesta/features/product/presentation/widgets/product_title_with_rating.dart';
 import 'package:homesta/features/product/presentation/widgets/review_tab.dart';
@@ -53,18 +52,16 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ProductImageGallerySection(
-                  mainImage: widget.images[0].imageUrl,
+                  mainImage:
+                      widget.images.isNotEmpty
+                          ? widget.images.first.imageUrl
+                          : "assets/images/catrgories_image/bedroom.png",
                   thumbnails: widget.images,
                 ),
                 SizedBox(height: 24.h),
                 ProductTitleWithRating(
                   title: widget.productEntity.name,
                   rating: widget.productEntity.rating.toString(),
-                ),
-                SizedBox(height: 24.h),
-                ProductDescriptionSection(
-                  description: widget.productEntity.description,
-                  price: widget.productEntity.price.toString(),
                 ),
                 SizedBox(height: 16.h),
                 SelectColorSection(
@@ -129,24 +126,6 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                   ),
                 ),
 
-                /*CustomButtonWidget(
-                  buttonText: 'Add to Cart',
-                  onPressed: () {
-                    if (selectedColor.isEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Please select a color')),
-                      );
-                      return;
-                    }
-
-                    final cubit = context.read<AddItemToCartCubit>();
-                    cubit.addItemToCart(
-                      productId: widget.productEntity.productId,
-                      quantity: selectedQuantity,
-                      colorId: selectedColor,
-                    );
-                  },
-                ),*/
                 SizedBox(height: 8.h),
                 TapBarWidget(),
 
@@ -154,7 +133,9 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                   height: 500.h,
                   child: TabBarView(
                     children: [
-                      DiscriptionTab(),
+                      DiscriptionTab(
+                        description: widget.productEntity.description,
+                      ),
 
                       ReviewTab(productEntity: widget.productEntity),
                     ],

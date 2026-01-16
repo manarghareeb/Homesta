@@ -112,7 +112,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-       // BlocProvider(create: (context) => sl<ProductCubit>()..getAllProducts()),
+        BlocProvider(create: (context) => sl<ProductCubit>()..getAllProducts()),
         BlocProvider(create: (context) => SearchCubit()),
         BlocProvider(create: (context)=>sl<GetProductImagesCubit>())
       ],
@@ -135,8 +135,8 @@ class _SearchScreenState extends State<SearchScreen> {
                   TextField(
                     controller: _searchController,
                     onChanged: (value) {
-                      final res =
-                          BlocProvider.of<ProductCubit>(context).allProducts;
+                      final res = context.read<ProductCubit>().allProducts;
+                      //final res = BlocProvider.of<ProductCubit>(context).allProducts;
                       context.read<SearchCubit>().search(res, value);
                     },
                     decoration: InputDecoration(
@@ -168,7 +168,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   //           ? const SearchPopulatedState()
                   //           : const SearchEmptyState(),
                   // ),
-                  SearchBlocBuilder(),
+                  const SearchBlocBuilder(),
                 ],
               ),
             );

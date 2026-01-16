@@ -6,8 +6,9 @@ import '../../../../core/widgets/custom_button_widget.dart';
 
 class DiscountBannerWidget extends StatelessWidget {
   final bool dark;
+  final String image;
 
-  const DiscountBannerWidget({super.key, this.dark = false});
+  const DiscountBannerWidget({super.key, this.dark = false, required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +60,7 @@ class DiscountBannerWidget extends StatelessWidget {
               ],
             ),
           ),
-          Image.asset('assets/images/chair.png', height: 120.h),
+          Image.asset(image, height: 120.h),
         ],
       ),
     );

@@ -50,7 +50,10 @@ class _AddItemSectionState extends State<AddCategorySection> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        bottom: MediaQuery.of(context).viewInsets.bottom, // ✅ يرفع المحتوى فوق الكيبورد
+        bottom:
+            MediaQuery.of(
+              context,
+            ).viewInsets.bottom, // ✅ يرفع المحتوى فوق الكيبورد
       ),
       child: ListView(
         shrinkWrap: true, // ✅ يخليها تاخذ حجمها فقط داخل الصفحة
@@ -63,9 +66,15 @@ class _AddItemSectionState extends State<AddCategorySection> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(widget.managementTitle, style: TextStyles.font15BlackW500),
+                  Text(
+                    widget.managementTitle,
+                    style: TextStyles.font15BlackW500,
+                  ),
                   SizedBox(height: 8),
-                  Text(widget.description, style: TextStyles.font12GreyColorW400),
+                  Text(
+                    widget.description,
+                    style: TextStyles.font12GreyColorW400,
+                  ),
                 ],
               ),
               GestureDetector(
@@ -84,8 +93,10 @@ class _AddItemSectionState extends State<AddCategorySection> {
                     children: [
                       const Icon(Icons.add, color: Colors.white),
                       SizedBox(width: 4),
-                      Text(widget.addButtonText,
-                          style: TextStyles.font14WhiteColorW400),
+                      Text(
+                        widget.addButtonText,
+                        style: TextStyles.font14WhiteColorW400,
+                      ),
                     ],
                   ),
                 ),
@@ -118,18 +129,29 @@ class _AddItemSectionState extends State<AddCategorySection> {
 
                   TitleToTextField(title: widget.imageFieldTitle),
                   SizedBox(height: 8),
-                  Row(
-                    children: [
-                      ElevatedButton(
-                        onPressed: _pickImage,
-                        child: const Text("Select Image"),
+                  Container(
+                    width: double.infinity,
+                    height: 200,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(
+                        color: ColorManager.lightGreyColor,
+                      )
+                    ),
+                    child: TextButton(
+                      onPressed: _pickImage,
+                      child: Text(
+                        "Select Image", 
+                        style: TextStyles.font14BlackColorW400,
                       ),
-                      SizedBox(width: 12),
-                      if (selectedImage != null)
-                        Text("Image selected",
-                            style: TextStyles.font14GreyColorW400),
-                    ],
+                    ),
                   ),
+                  SizedBox(width: 12),
+                  if (selectedImage != null)
+                    Text(
+                      "Image selected",
+                      style: TextStyles.font14GreyColorW400,
+                    ),
 
                   SizedBox(height: 20.h),
 

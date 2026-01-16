@@ -25,7 +25,6 @@ import 'package:homesta/features/seller/profile/domain/use_cases/my_store_use_ca
 
 import 'features/account/presentation/cubit/edit_profile_cubit.dart';
 import 'features/order/presentation/cubit/user_orders_cubit/user_orders_cubit.dart';
-import 'features/product/presentation/cubits/product_cubit.dart';
 import 'features/seller/profile/presentation/cubits/store_cubit.dart';
 
 void main() async {

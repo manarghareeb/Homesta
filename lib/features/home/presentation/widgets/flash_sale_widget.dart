@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:homesta/core/routing/app_router.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
 
@@ -29,7 +31,7 @@ class FlashSaleWidget extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.r),
               image: const DecorationImage(
-                image: AssetImage('assets/images/chair.png'),
+                image: AssetImage('assets/images/catrgories_image/bedroom.png'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -74,8 +76,10 @@ class FlashSaleWidget extends StatelessWidget {
           SizedBox(height: 22.h),
 
           CustomButtonWidget(
-            buttonText: 'Shop Now →',
-            onPressed: () {},
+            buttonText: 'Shop Now  →',
+            onPressed: () {
+              GoRouter.of(context).push(AppRouter.filtersScreen);
+            },
             backgroundColor: ColorManager.primaryColor,
             textColor: Colors.white,
             height: 58.h,

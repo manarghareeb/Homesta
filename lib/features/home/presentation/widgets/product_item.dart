@@ -91,18 +91,34 @@ class ProductItem extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                          Text(
-                            "${(productEntity.price * productEntity.discount) / 100} EGP",
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(width: 6.w),
-                          Text(
-                            productEntity.price.toString(),
-                            style: const TextStyle(
-                              color: Colors.grey,
-                              decoration: TextDecoration.lineThrough,
+                          if (productEntity.discount > 0) ...[
+                            Expanded(
+                              child: Text(
+                                "${(productEntity.price * (1 - productEntity.discount / 100)).toStringAsFixed(2)} EGP",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ),
-                          ),
+                            SizedBox(width: 6.w),
+                            Text(
+                              "${productEntity.price}",
+                              style: const TextStyle(
+                                color: Colors.grey,
+                                decoration: TextDecoration.lineThrough,
+                              ),
+                            ),
+                          ] else ...[
+                            Expanded(
+                              child: Text(
+                                "${productEntity.price} EGP",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
                         ],
                       ),
                     ),

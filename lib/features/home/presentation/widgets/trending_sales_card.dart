@@ -26,7 +26,7 @@ class TrendingSalesCard extends StatelessWidget {
       width: 170.w,
       height: 240.h, // ✅ ثبات الارتفاع
       child: Container(
-        padding: EdgeInsets.all(10.w),
+        //padding: EdgeInsets.all(10.w),
         decoration: BoxDecoration(
           color: ColorManager.soLightGreyColor,
           borderRadius: BorderRadius.circular(15.r),
@@ -42,12 +42,15 @@ class TrendingSalesCard extends StatelessWidget {
               flex: 5,
               child: Stack(
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(15.r),
-                    child: Image.asset(
-                      image,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
+                  SizedBox(
+                    width: double.infinity,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15.r),
+                      child: Image.asset(
+                        image,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
 
@@ -89,50 +92,63 @@ class TrendingSalesCard extends StatelessWidget {
             SizedBox(height: 6.h),
 
             /// TITLE
-            Text(
-              title,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontWeight: FontWeight.w600),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                  /// RATING
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.star,
+                        color: ColorManager.yellowColor,
+                        size: 14,
+                      ),
+                      SizedBox(width: 4.w),
+                      Text(
+                        rating.toString(),
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
 
             SizedBox(height: 4.h),
-
-            /// RATING
-            Row(
-              children: [
-                const Icon(
-                  Icons.star,
-                  color: ColorManager.yellowColor,
-                  size: 14,
-                ),
-                SizedBox(width: 4.w),
-                Text(rating.toString(), style: const TextStyle(fontSize: 12)),
-              ],
-            ),
 
             SizedBox(height: 4.h),
 
             /// PRICE ROW
-            Row(
-              children: [
-                Text(
-                  price,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                if (oldPrice != null) ...[
-                  SizedBox(width: 6.w),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
                   Text(
-                    oldPrice!,
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      decoration: TextDecoration.lineThrough,
-                    ),
+                    price,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
+                  if (oldPrice != null) ...[
+                    SizedBox(width: 6.w),
+                    Text(
+                      oldPrice!,
+                      style: const TextStyle(
+                        color: Colors.grey,
+                        decoration: TextDecoration.lineThrough,
+                      ),
+                    ),
+                  ],
+                  const Spacer(),
+                  const Icon(Icons.shopping_cart_outlined, size: 18),
                 ],
-                const Spacer(),
-                const Icon(Icons.shopping_cart_outlined, size: 18),
-              ],
+              ),
             ),
           ],
         ),
