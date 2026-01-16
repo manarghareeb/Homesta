@@ -39,9 +39,9 @@ class ProductCardAdmin extends StatelessWidget {
                   if (state.products.isNotEmpty) {
                     return Image.network(
                       "${EndPoint.baseUrl}${state.products.first.imageUrl}",
-                      height: 150.h,
+                     height: 160.h,
                       width: 150.w,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                     );
                   } else {
                     return const SizedBox(
