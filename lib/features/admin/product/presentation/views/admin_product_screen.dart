@@ -4,6 +4,8 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 import 'package:homesta/features/admin/product/presentation/views/product_cart_admin.dart';
+import '../../../../../core/di/service_locator.dart';
+import '../../../../product/presentation/cubits/get_product_images_cubit.dart/get_product_images_cubit.dart';
 import '../../../../product/presentation/cubits/product_cubit.dart';
 import '../../../../product/presentation/cubits/product_state.dart';
 
@@ -30,10 +32,15 @@ class AdminProductScreen extends StatelessWidget {
               crossAxisSpacing: 16,
               itemCount: state.products.length,
               itemBuilder: (context, index) {
-                return ProductCardAdmin(product: state.products[index]);
+                final product = state.products[index];
+                return BlocProvider(
+                  create: (context) => sl<GetProductImagesCubit>()..getProductImages(product.productId),
+                  child: ProductCardAdmin(product: product),
+                );
               },
             );
-          } else if (state is ProductFailure) {
+          }
+          else if (state is ProductFailure) {
             return Center(child: Text(state.message));
           } else {
             return const SizedBox.shrink();
