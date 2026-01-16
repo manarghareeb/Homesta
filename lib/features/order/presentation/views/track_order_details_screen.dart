@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:homesta/core/di/service_locator.dart';
 import 'package:homesta/core/theming/colors.dart';
 import 'package:homesta/core/theming/styles.dart';
 import 'package:homesta/core/widgets/custom_app_bar_widget.dart';
 import 'package:homesta/core/widgets/custom_button_widget.dart';
+import 'package:homesta/core/widgets/custom_product_image.dart';
 import 'package:homesta/features/home/presentation/views/home.dart';
 import 'package:homesta/features/order/presentation/cubit/order_details_cubit/order_details_cubit.dart';
 import 'package:homesta/features/order/presentation/cubit/order_details_cubit/order_details_state.dart';
 import 'package:homesta/features/order/presentation/widgets/order_timeline.dart';
+import 'package:homesta/features/product/presentation/cubits/get_product_images_cubit.dart/get_product_images_cubit.dart';
 
 class TrackOrderDetailsScreen extends StatelessWidget {
   final int orderId;
@@ -54,64 +57,68 @@ class TrackOrderDetailsScreen extends StatelessWidget {
                   ...order.items.map(
                     (item) => Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15.r),
-                          boxShadow: [
-                            BoxShadow(
-                              color: ColorManager.blackColor.withOpacity(0.25),
-                              offset: Offset(0, 2),
-                              blurRadius: 8,
-                            ),
-                          ],
-                        ),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 16.w,
-                          vertical: 16.h,
-                        ),
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 70.w,
-                              height: 70.h,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15.r),
-                                border: Border.all(
-                                  color: ColorManager.thirdColor,
+                      child: BlocProvider(
+                        create: (context) => sl<GetProductImagesCubit>()..getProductImages(item.productId),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15.r),
+                            boxShadow: [
+                              BoxShadow(
+                                color: ColorManager.blackColor.withOpacity(0.25),
+                                offset: Offset(0, 2),
+                                blurRadius: 8,
+                              ),
+                            ],
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 16.w,
+                            vertical: 16.h,
+                          ),
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 70.w,
+                                height: 70.h,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15.r),
+                                  border: Border.all(
+                                    color: ColorManager.thirdColor,
+                                  ),
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(15.r),
+                                  child:CustomProductImage(id: item.productId)
+                                  //  Image.asset(
+                                  //   'assets/images/chair.png',
+                                  //   fit: BoxFit.cover,
+                                  // ),
                                 ),
                               ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(15.r),
-                                child: Image.asset(
-                                  'assets/images/chair.png',
-                                  fit: BoxFit.cover,
+                              SizedBox(width: 16.w),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      item.productName,
+                                      style: TextStyles.font16BlackRegular,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Text(
+                                      'Quantity: ${item.quantity}',
+                                      style: TextStyles.font14GreyColorW400,
+                                    ),
+                                    Text(
+                                      'Color: ${item.productColor}',
+                                      style: TextStyles.font14PrimaryColorW400,
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ),
-                            SizedBox(width: 16.w),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    item.productName,
-                                    style: TextStyles.font16BlackRegular,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  Text(
-                                    'Quantity: ${item.quantity}',
-                                    style: TextStyles.font14GreyColorW400,
-                                  ),
-                                  Text(
-                                    'Color: ${item.productColor}',
-                                    style: TextStyles.font14PrimaryColorW400,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
